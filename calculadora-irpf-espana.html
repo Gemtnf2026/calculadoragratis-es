@@ -1,353 +1,212 @@
 <!DOCTYPE html>
-<html lang="es" data-theme="light">
+<html lang="es">
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title id="title">Calculadora IRPF España — Estima el Impuesto sobre la Renta | CalculadoraGratis.es</title>
-<meta name="description" content="Calcula el IRPF sobre tu salario con tramos actualizados, mínimo personal y familiar, tipo medio y tipo marginal. Estimación orientativa para trabajadores por cuenta ajena.">
-<meta name="keywords" content="calculadora IRPF España, calcular impuesto renta, tramos IRPF, tipo marginal IRPF, declaracion renta calculadora">
+
+<title>Calculadora IRPF España — estimación del impuesto sobre la renta</title>
+
+<meta name="description" content="Calcula el IRPF en España sobre tu salario. Estima impuestos, salario neto, tipo medio y retención mensual.">
+
 <link rel="canonical" href="https://www.calculadoragratis.es/calculadora-irpf-espana.html">
-<meta property="og:title" content="Calculadora IRPF España — Estima el Impuesto sobre la Renta | CalculadoraGratis.es">
-<meta property="og:description" content="Calcula el IRPF sobre tu salario con tramos actualizados, mínimo personal y familiar, tipo medio y tipo marginal. Estimación orientativa para trabajadores por cuenta ajena.">
-<meta property="og:type" content="website">
-<meta property="og:locale" content="es_ES">
+
 <meta name="robots" content="index,follow">
+
+<link rel="stylesheet" href="style.css">
+
 <link rel="preconnect" href="https://api.fontshare.com">
 <link href="https://api.fontshare.com/v2/css?f[]=satoshi@400,500,700,800&display=swap" rel="stylesheet">
-<style>
-:root,[data-theme=light]{
-  --bg:#f7f6f2;--sur:#f9f8f5;--sur2:#fbfbf9;--surO:#f3f0ec;--surD:#e6e4df;
-  --div:#dcd9d5;--bor:#d4d1ca;--txt:#28251d;--mut:#7a7974;--fnt:#bab9b4;
-  --inv:#f9f8f4;--pri:#01696f;--prh:#0c4e54;--war:#964219;--suc:#437a22;
-  --rsm:.375rem;--rmd:.5rem;--rlg:.75rem;--rxl:1rem;--rfl:9999px;
-  --shsm:0 1px 2px oklch(.2 .01 80/.06);--shmd:0 4px 12px oklch(.2 .01 80/.08);
-  --shlg:0 12px 32px oklch(.2 .01 80/.12);
-  --s1:.25rem;--s2:.5rem;--s3:.75rem;--s4:1rem;--s5:1.25rem;--s6:1.5rem;
-  --s8:2rem;--s10:2.5rem;--s12:3rem;--s16:4rem;
-  --txs:clamp(.75rem,.7rem + .25vw,.875rem);
-  --tsm:clamp(.875rem,.8rem + .35vw,1rem);
-  --tba:clamp(1rem,.95rem + .25vw,1.125rem);
-  --tlg:clamp(1.125rem,1rem + .75vw,1.5rem);
-  --txl:clamp(1.5rem,1.2rem + 1.25vw,2.25rem);
-  --t2x:clamp(2rem,1.2rem + 2.5vw,3.5rem);
-  --cdef:960px;--cwid:1200px;
-  --fb:'Satoshi','Inter',sans-serif;
-  --tr:180ms cubic-bezier(.16,1,.3,1);
-}
-[data-theme=dark]{
-  --bg:#171614;--sur:#1c1b19;--sur2:#201f1d;--surO:#1d1c1a;--surD:#2d2c2a;
-  --div:#262523;--bor:#393836;--txt:#cdccca;--mut:#797876;--fnt:#5a5957;
-  --inv:#2b2a28;--pri:#4f98a3;--prh:#227f8b;--war:#bb653b;--suc:#6daa45;
-  --shsm:0 1px 2px oklch(0 0 0/.2);--shmd:0 4px 12px oklch(0 0 0/.3);
-}
-@media(prefers-color-scheme:dark){:root:not([data-theme]){
-  --bg:#171614;--sur:#1c1b19;--sur2:#201f1d;--surO:#1d1c1a;--div:#262523;
-  --bor:#393836;--txt:#cdccca;--mut:#797876;--fnt:#5a5957;--inv:#2b2a28;
-  --pri:#4f98a3;--prh:#227f8b;--war:#bb653b;--suc:#6daa45;
-}}
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth;scroll-padding-top:var(--s16);-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
-body{min-height:100dvh;font-family:var(--fb);font-size:var(--tba);color:var(--txt);background:var(--bg);line-height:1.6}
-img,svg{display:block;max-width:100%;height:auto}
-input,button,select,textarea{font:inherit;color:inherit}
-h1,h2,h3,h4{text-wrap:balance;line-height:1.15}
-p,li{text-wrap:pretty;max-width:72ch}
-a{color:var(--pri);text-decoration:none}
-a:hover{color:var(--prh);text-decoration:underline}
-button{cursor:pointer;background:none;border:none}
-table{border-collapse:collapse;width:100%}
-:focus-visible{outline:2px solid var(--pri);outline-offset:3px;border-radius:var(--rsm)}
-.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border-width:0}
-/* Layout */
-.wrap{max-width:var(--cdef);margin-inline:auto;padding-inline:var(--s4)}
-/* Header */
-.site-header{background:var(--sur);border-bottom:1px solid var(--div);position:sticky;top:0;z-index:100;backdrop-filter:blur(8px)}
-.hdr{display:flex;align-items:center;gap:var(--s4);padding:var(--s3) var(--s4);max-width:var(--cwid);margin:auto}
-.logo{display:flex;align-items:center;gap:var(--s2);font-size:var(--tlg);font-weight:800;color:var(--txt);text-decoration:none}
-.logo svg{color:var(--pri)}
-.bk{font-size:var(--tsm);color:var(--mut);text-decoration:none;white-space:nowrap}
-.bk:hover{color:var(--pri);text-decoration:none}
-.sp{flex:1}
-.tog{width:40px;height:40px;border-radius:var(--rfl);display:grid;place-items:center;color:var(--mut);border:1px solid var(--bor);transition:color var(--tr),background var(--tr)}
-.tog:hover{color:var(--pri);background:var(--surO)}
-/* Hero */
-.hero{padding:clamp(var(--s8),6vw,var(--s16)) 0;background:var(--sur);border-bottom:1px solid var(--div)}
-.badge{display:inline-block;font-size:var(--tsm);background:color-mix(in oklab,var(--pri) 12%,var(--sur));color:var(--pri);padding:var(--s1) var(--s3);border-radius:var(--rfl);margin-bottom:var(--s4)}
-.hero h1{font-size:var(--t2x);font-weight:800;margin-bottom:var(--s4)}
-.hero h1 em{font-style:normal;color:var(--pri)}
-.hero p{font-size:var(--tlg);color:var(--mut);max-width:60ch}
-/* Calc layout */
-.cs{padding:var(--s8) 0}
-.cgrid{display:grid;gap:var(--s6);grid-template-columns:1fr 1fr}
-@media(max-width:768px){.cgrid{grid-template-columns:1fr}}
-.ccard{background:var(--sur);border:1px solid var(--bor);border-radius:var(--rxl);padding:var(--s6);box-shadow:var(--shsm)}
-.ccard h2{font-size:var(--tlg);font-weight:700;margin-bottom:var(--s5)}
-.fg{margin-bottom:var(--s4)}
-.fg label{display:block;font-size:var(--txs);font-weight:700;color:var(--mut);margin-bottom:var(--s1);text-transform:uppercase;letter-spacing:.05em}
-.fg input,.fg select{width:100%;padding:var(--s3) var(--s4);border:1px solid var(--bor);border-radius:var(--rmd);background:var(--bg);font-size:var(--tba);transition:border-color var(--tr),box-shadow var(--tr)}
-.fg input:focus,.fg select:focus{border-color:var(--pri);box-shadow:0 0 0 3px color-mix(in oklab,var(--pri) 20%,transparent);outline:none}
-.btn{padding:var(--s3) var(--s6);border-radius:var(--rmd);font-size:var(--tsm);font-weight:700;transition:background var(--tr),box-shadow var(--tr)}
-.bp{background:var(--pri);color:#fff}
-.bp:hover{background:var(--prh);box-shadow:var(--shmd)}
-.bfw{width:100%;margin-top:var(--s2)}
-/* Result */
-.rb{margin-top:var(--s6);padding:var(--s5);background:color-mix(in oklab,var(--pri) 8%,var(--sur));border-radius:var(--rlg);border:1px solid color-mix(in oklab,var(--pri) 30%,transparent);display:none}
-.rb.on{display:block}
-.rl{font-size:var(--txs);color:var(--mut);text-transform:uppercase;letter-spacing:.06em;margin-bottom:var(--s1)}
-.rv{font-size:var(--txl);font-weight:800;color:var(--pri);font-variant-numeric:tabular-nums}
-.rd{margin-top:var(--s4);display:flex;flex-direction:column;gap:var(--s2);font-size:var(--tsm)}
-/* Table */
-.rtbl th,.rtbl td{padding:var(--s2) var(--s3);text-align:right;font-size:var(--txs);border-bottom:1px solid var(--div)}
-.rtbl th{text-transform:uppercase;letter-spacing:.04em;font-weight:700;color:var(--mut)}
-.rtbl th:first-child,.rtbl td:first-child{text-align:left}
-.rtbl tbody tr:hover{background:var(--surO)}
-/* Content */
-.cnt{padding:var(--s8) 0;border-top:1px solid var(--div)}
-.cnt h2{font-size:var(--txl);font-weight:700;margin-bottom:var(--s4);margin-top:var(--s8)}
-.cnt h2:first-child{margin-top:0}
-.cnt h3{font-size:var(--tlg);font-weight:600;margin-top:var(--s6);margin-bottom:var(--s3)}
-.cnt p{margin-bottom:var(--s4);color:var(--mut);line-height:1.75}
-.cnt ul,.cnt ol{margin-left:var(--s6);margin-bottom:var(--s4)}
-.cnt li{margin-bottom:var(--s2);color:var(--mut)}
-/* Boxes */
-.fml{background:var(--sur2);border:1px solid var(--bor);border-radius:var(--rlg);padding:var(--s5);margin:var(--s5) 0;font-family:monospace;font-size:var(--tsm);line-height:1.9}
-.ex{background:color-mix(in oklab,var(--suc) 8%,var(--sur));border:1px solid color-mix(in oklab,var(--suc) 25%,transparent);border-radius:var(--rlg);padding:var(--s5);margin:var(--s5) 0}
-.ext{font-weight:700;margin-bottom:var(--s2);color:var(--suc)}
-.ex p{color:var(--txt);margin-bottom:var(--s2)}
-.warn{background:color-mix(in oklab,var(--war) 8%,var(--sur));border:1px solid color-mix(in oklab,var(--war) 25%,transparent);border-radius:var(--rlg);padding:var(--s4);margin:var(--s4) 0;font-size:var(--tsm);color:var(--mut)}
-/* Ads */
-.ad{background:var(--surO);border:1px dashed var(--bor);border-radius:var(--rmd);display:flex;align-items:center;justify-content:center;color:var(--fnt);font-size:var(--txs);text-transform:uppercase;letter-spacing:.08em;margin:var(--s6) 0}
-.ad-t{height:90px;max-width:728px;margin-inline:auto}
-.ad-m{height:250px;max-width:300px;margin-inline:auto}
-.ad-b{height:90px;max-width:728px;margin-inline:auto}
-/* FAQ */
-.faq{padding:var(--s8) 0;border-top:1px solid var(--div)}
-.faq h2{font-size:var(--txl);font-weight:700;margin-bottom:var(--s6)}
-.fi{border:1px solid var(--bor);border-radius:var(--rlg);margin-bottom:var(--s3);overflow:hidden}
-.fq{width:100%;text-align:left;padding:var(--s4) var(--s5);font-size:var(--tba);font-weight:600;display:flex;justify-content:space-between;align-items:center;background:var(--sur);transition:background var(--tr)}
-.fq:hover{background:var(--surO)}
-.fa{padding:0 var(--s5);max-height:0;overflow:hidden;transition:max-height .35s ease,padding .35s ease}
-.fa.on{max-height:600px;padding:var(--s3) var(--s5) var(--s4)}
-.fa p{color:var(--mut)}
-.fchv{transition:transform .3s;flex-shrink:0;color:var(--fnt)}
-.fchv.on{transform:rotate(180deg)}
-/* Related */
-.rel{background:var(--sur);border-top:1px solid var(--div);padding:var(--s8) 0}
-.rel h2{font-size:var(--tlg);font-weight:700;margin-bottom:var(--s5)}
-.rgrid{display:grid;gap:var(--s3);grid-template-columns:repeat(auto-fill,minmax(min(190px,100%),1fr))}
-.rc{display:flex;align-items:center;gap:var(--s3);padding:var(--s4);background:var(--sur2);border:1px solid var(--bor);border-radius:var(--rlg);color:var(--txt);text-decoration:none;transition:box-shadow var(--tr),background var(--tr)}
-.rc:hover{box-shadow:var(--shmd);background:var(--surO);text-decoration:none}
-.re{font-size:1.4rem}
-.rn{font-size:var(--tsm);font-weight:600}
-/* Index listing */
-.ctit{font-size:var(--txl);font-weight:700;margin:var(--s10) 0 var(--s5);display:flex;align-items:center;gap:var(--s3)}
-.grid-cards{display:grid;gap:var(--s4);grid-template-columns:repeat(auto-fill,minmax(min(260px,100%),1fr))}
-.lc{display:flex;flex-direction:column;gap:var(--s2);padding:var(--s5);background:var(--sur);border:1px solid var(--bor);border-radius:var(--rxl);color:var(--txt);text-decoration:none;transition:box-shadow var(--tr),transform var(--tr)}
-.lc:hover{box-shadow:var(--shmd);transform:translateY(-2px);text-decoration:none}
-.le{font-size:1.75rem}
-.lt{font-size:var(--tba);font-weight:700}
-.ld{font-size:var(--tsm);color:var(--mut);flex:1}
-.la{font-size:var(--tsm);font-weight:600;color:var(--pri)}
-/* Footer */
-.ft{padding:var(--s8) var(--s4);text-align:center;color:var(--fnt);font-size:var(--tsm);border-top:1px solid var(--div);margin-top:var(--s8)}
-/* Single col calc */
-.csin{max-width:600px;margin:0 auto;padding:var(--s8) 0}
-</style>
+
+<!-- ADSENSE -->
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=TU_ID"
+crossorigin="anonymous"></script>
+
 </head>
+
 <body>
-<a class="sr-only" href="#main">Saltar al contenido principal</a>
+
 <header class="site-header">
   <div class="hdr">
-    <a href="index.html" class="logo" aria-label="CalculadoraGratis.es - Inicio"><svg aria-hidden="true" width="30" height="30" viewBox="0 0 32 32" fill="none"><rect x="2" y="2" width="28" height="28" rx="6" stroke="currentColor" stroke-width="2"/><rect x="6" y="7" width="5" height="4" rx="1" fill="currentColor" opacity=".7"/><rect x="13" y="7" width="5" height="4" rx="1" fill="currentColor" opacity=".7"/><rect x="20" y="7" width="6" height="4" rx="1" fill="currentColor"/><rect x="6" y="14" width="5" height="4" rx="1" fill="currentColor" opacity=".6"/><rect x="13" y="14" width="5" height="4" rx="1" fill="currentColor" opacity=".5"/><rect x="20" y="14" width="6" height="4" rx="1" fill="currentColor" opacity=".35"/><rect x="6" y="21" width="5" height="4" rx="1" fill="currentColor"/><rect x="13" y="21" width="13" height="4" rx="1" fill="currentColor" opacity=".5"/></svg> CalculadoraGratis.es</a>
-    <a href="index.html" class="bk">← Todas las calculadoras</a>
+    <a href="index.html" class="logo">CalculadoraGratis.es</a>
     <span class="sp"></span>
-    <button class="tog" data-ttog aria-label="Cambiar entre modo claro y oscuro">
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
-    </button>
   </div>
 </header>
 
-<main id="main">
-<section class="hero"><div class="wrap">
-  <span class="badge" id="badge">Financiera · Estimación IRPF</span>
-  <h1 id="titleh1">Calculadora de <em>IRPF España</em> 2026</h1>
-  <p>Estima el IRPF a pagar sobre tus rendimientos del trabajo. Aplica las deducciones básicas, el mínimo personal y familiar y las tablas de tramos vigentes en 2026.</p>
-</div></section>
+<main>
 
-<div class="ad ad-t" role="complementary" aria-label="Publicidad">📢 Espacio publicitario Google AdSense (728×90)</div>
+<section class="hero wrap">
+  <span class="badge">Finanzas · IRPF</span>
+  <h1>Calculadora de IRPF en España</h1>
+  <p>Estima cuánto pagarás de IRPF, tu salario neto y la retención mensual.</p>
+</section>
 
-<section class="cs"><div class="wrap csin">
+<div class="ad ad-t wrap">
+<ins class="adsbygoogle"
+style="display:block"
+data-ad-client="TU_ID"
+data-ad-slot="111"
+data-ad-format="auto"></ins>
+</div>
+
+<section class="cs wrap">
+
 <div class="ccard">
-  <h2>Datos del contribuyente</h2>
-  <div class="fg"><label for="irsal">Salario bruto anual (€)</label><input type="number" id="irsal" value="35000" min="0" step="500"></div>
-  <div class="fg"><label for="irstipo">Tipo de contrato / situación</label>
-    <select id="irstipo">
-      <option value="general" selected>Trabajador por cuenta ajena</option>
-      <option value="autonomo">Autónomo (estimación directa)</option>
-    </select>
-  </div>
-  <div class="fg"><label for="irhij">Hijos menores de 25 años</label>
-    <select id="irhij">
-      <option value="0" selected>Sin hijos</option>
-      <option value="1">1 hijo</option>
-      <option value="2">2 hijos</option>
-      <option value="3">3 hijos</option>
-      <option value="4">4 o más hijos</option>
-    </select>
-  </div>
-  <div class="fg"><label for="iredad">Situación personal</label>
-    <select id="iredad">
-      <option value="0" selected>Menor de 65 años</option>
-      <option value="1">Entre 65 y 75 años (+1.150 €)</option>
-      <option value="2">Mayor de 75 años (+1.400 €)</option>
-    </select>
-  </div>
-  <button class="btn bp bfw" onclick="calcIRPF()">Estimar IRPF</button>
-  <div class="rb" id="irres">
-    <div class="rl">Cuota íntegra estatal + autonómica (estimada)</div>
-    <div class="rv" id="ircuota"></div>
-    <div class="rd">
-      <div>📋 Base imponible general: <strong id="irbase"></strong></div>
-      <div>💶 Tipo medio efectivo: <strong id="irtmed"></strong></div>
-      <div>💵 Tipo marginal: <strong id="irtmar"></strong></div>
-      <div>🏦 Retención mensual aprox.: <strong id="irret"></strong></div>
-    </div>
-  </div>
+
+<h2>Datos del contribuyente</h2>
+
+<div class="fg">
+<label>Salario bruto anual (€)</label>
+<input type="number" id="salario" value="35000">
 </div>
-</div></section>
 
-<div class="ad ad-m" role="complementary" aria-label="Publicidad">📢 Espacio publicitario Google AdSense (300×250)</div>
+<div class="fg">
+<label>Hijos</label>
+<select id="hijos">
+<option value="0">0</option>
+<option value="1">1</option>
+<option value="2">2</option>
+<option value="3">3</option>
+<option value="4">4+</option>
+</select>
+</div>
 
-<section class="cnt"><div class="wrap">
-<h2>¿Cómo funciona el IRPF en España?</h2>
-<p>El <strong>Impuesto sobre la Renta de las Personas Físicas (IRPF)</strong> es un tributo personal, progresivo y directo que grava la renta obtenida por las personas físicas residentes en España. Su progresividad significa que, a mayor renta, mayor es el tipo impositivo aplicado. La declaración de la Renta se presenta habitualmente entre abril y junio del año siguiente al ejercicio fiscal.</p>
+<div class="fg">
+<label>Edad</label>
+<select id="edad">
+<option value="0">Menor de 65</option>
+<option value="1">65-75</option>
+<option value="2">+75</option>
+</select>
+</div>
 
-<h3>Tramos del IRPF (escala estatal + autonómica media)</h3>
+<button class="btn bp bfw" onclick="calc()">Calcular IRPF</button>
+
+<div class="rb" id="resultado"></div>
+
+</div>
+
+</section>
+
+<div class="ad ad-m wrap">
+<ins class="adsbygoogle"
+style="display:block"
+data-ad-client="TU_ID"
+data-ad-slot="222"
+data-ad-format="auto"></ins>
+</div>
+
+<section class="cnt wrap">
+
+<h2>¿Cuánto se paga de IRPF en España?</h2>
+
+<p>El IRPF es un impuesto progresivo: cuanto más ganas, mayor porcentaje pagas. No todo el salario tributa al mismo tipo, sino por tramos.</p>
+
+<h2>¿Cómo calcular el IRPF?</h2>
+
+<p>Para calcular el IRPF se tienen en cuenta el salario bruto, las cotizaciones a la Seguridad Social, las reducciones aplicables y el mínimo personal y familiar.</p>
+
+<h2>Tramos orientativos</h2>
+
 <div class="fml">
-  Hasta 12.450 €        →  19%<br>
-  De 12.450 a 20.200 €  →  24%<br>
-  De 20.200 a 35.200 €  →  30%<br>
-  De 35.200 a 60.000 €  →  37%<br>
-  De 60.000 a 300.000 € →  45%<br>
-  Más de 300.000 €      →  47%<br><br>
-  Nota: La escala autonómica varía según la comunidad autónoma.
+Hasta 12.450 € → 19%<br>
+12.450 - 20.200 € → 24%<br>
+20.200 - 35.200 € → 30%<br>
+35.200 - 60.000 € → 37%<br>
+60.000 - 300.000 € → 45%<br>
+Más de 300.000 € → 47%
 </div>
 
-<h3>Ejemplo: salario bruto de 35.000 € soltero sin hijos</h3>
-<div class="ex">
-  <div class="ext">📌 Bruto anual: 35.000 € | Soltero | Sin hijos | Madrid (referencia)</div>
-  <p><strong>Reducción por rendimientos del trabajo:</strong> −2.000 € → Rendimiento neto: 33.000 €</p>
-  <p><strong>Mínimo personal:</strong> −5.550 € → Base liquidable: 27.450 €</p>
-  <p><strong>Cálculo por tramos:</strong></p>
-  <p>12.450 × 19% = 2.365,50 € | 7.750 × 24% = 1.860 € | 7.250 × 30% = 2.175 €</p>
-  <p><strong>Cuota estimada: ~6.400 €</strong> | Tipo medio: ~18,3% | Tipo marginal: 30%</p>
+<p>También puedes usar nuestra 
+<a href="calculadora-hipoteca.html">calculadora de hipoteca</a> 
+o la 
+<a href="calculadora-prestamo.html">calculadora de préstamo</a>.</p>
+
+</section>
+
+<div class="ad ad-b wrap">
+<ins class="adsbygoogle"
+style="display:block"
+data-ad-client="TU_ID"
+data-ad-slot="333"
+data-ad-format="auto"></ins>
 </div>
 
-<h2>Conceptos clave del IRPF que debes conocer</h2>
-<p>El <strong>rendimiento neto del trabajo</strong> se obtiene restando al salario bruto la Seguridad Social del trabajador (~6,35% para contingencias comunes) y la reducción legal por rendimientos del trabajo (entre 2.000 y 5.565 € según el nivel de renta, actualizado en 2023 para rentas inferiores a 19.747,50 €). A este rendimiento neto se le resta el mínimo personal y familiar para obtener la base liquidable, que es lo que realmente tributa.</p>
-
-<h3>El mínimo personal y familiar en 2026</h3>
-<p>El mínimo personal es de <strong>5.550 € para menores de 65 años</strong>, aumenta a 6.700 € entre 65 y 75 años, y a 8.100 € para mayores de 75 años. Por cada hijo menor de 25 años, se aplica un mínimo adicional: 2.400 € por el primero, 2.700 € por el segundo, 4.000 € por el tercero y 4.500 € por el cuarto y siguientes. Estos mínimos reducen la cuota final, no la base imponible.</p>
-
-<h3>Comunidades con mayor y menor presión fiscal</h3>
-<p>La parte autonómica del IRPF puede diferir notablemente. La Comunidad de Madrid aplica tipos menores (deflactación de la tarifa, deducciones adicionales), mientras que Cataluña y País Vasco tienen escalas propias con tipos más elevados para rentas altas. En Canarias, existen bonificaciones aplicables en ciertos casos. Por ello, los resultados de esta calculadora son una <strong>estimación basada en la escala estatal y autonómica media nacional</strong>.</p>
-
-<div class="warn">⚠️ <strong>Importante:</strong> Esta calculadora ofrece una estimación orientativa del IRPF para rendimientos del trabajo. No contempla: otras fuentes de renta (alquileres, dividendos, plusvalías), deducciones autonómicas específicas, aportaciones a planes de pensiones, hipoteca deducible, ni situaciones de discapacidad. Para una declaración correcta, consulta a un asesor fiscal o utiliza el borrador de la Agencia Tributaria.</div>
-</div></section>
-
-<div class="fi"><button class="fq">¿Cuándo estoy obligado a presentar la declaración de la Renta? <svg class="fchv" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m6 9 6 6 6-6"/></svg></button><div class="fa"><p>En 2026 (ejercicio 2023) están obligados a declarar todos los contribuyentes con rendimientos del trabajo superiores a 22.000 € anuales con un único pagador, o a 15.000 € si hay dos o más pagadores y el segundo supera los 1.500 €. También deben declarar quienes obtengan rendimientos del capital mobiliario o ganancias patrimoniales superiores a 1.600 €.</p></div></div>
-<div class="fi"><button class="fq">¿Qué es el tipo marginal y para qué sirve? <svg class="fchv" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m6 9 6 6 6-6"/></svg></button><div class="fa"><p>El tipo marginal es el porcentaje que se aplica a la última parte de tu renta, es decir, el tipo del tramo en el que te encuentras. Es importante porque indica cuánto pagarás de IRPF por cada euro adicional que ganes. Sin embargo, el tipo que refleja tu carga fiscal real es el tipo medio efectivo, que relaciona el impuesto total pagado con tu renta total.</p></div></div>
-<div class="fi"><button class="fq">¿Cómo funciona la retención del IRPF en nómina? <svg class="fchv" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m6 9 6 6 6-6"/></svg></button><div class="fa"><p>Tu empresa está obligada a practicarte una retención mensual a cuenta del IRPF, de forma que cuando presentes la declaración, el resultado sea lo más cercano posible a cero (sin ni pagar ni que te devuelvan). Si la retención fue inferior al impuesto real, saldrá 'a pagar'; si fue superior, 'a devolver'. Puedes solicitar una retención mayor voluntariamente comunicándoselo a Recursos Humanos.</p></div></div>
-
-<section class="rel"><div class="wrap"><h2>Calculadoras relacionadas</h2><div class="rgrid"><a href="calculadora-hipoteca.html" class="rc"><span class="re">🏠</span><span class="rn">Calculadora hipoteca</span></a><a href="calculadora-prestamo.html" class="rc"><span class="re">💳</span><span class="rn">Calculadora préstamo</span></a><a href="calculadora-iva.html" class="rc"><span class="re">🧮</span><span class="rn">Calculadora IVA</span></a><a href="calculadora-interes-compuesto.html" class="rc"><span class="re">📈</span><span class="rn">Interés compuesto</span></a></div></div></section>
-</main>
 <footer class="ft">
-  <p>© <span id="year"></span> <strong>CalculadoraGratis.es</strong> — Calculadoras gratuitas en español de España.
-  <a href="index.html">Inicio</a> &nbsp;·&nbsp;
-  <small>Los resultados son orientativos y no constituyen asesoramiento financiero, fiscal ni sanitario.</small></p>
+<p>© <span id="year"></span> CalculadoraGratis.es</p>
 </footer>
-<script>
-(function(){
-  var t=document.querySelector('[data-ttog]'),r=document.documentElement;
-  var d=matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light';
-  r.setAttribute('data-theme',d);
-  if(t)t.addEventListener('click',function(){
-    d=d==='dark'?'light':'dark';r.setAttribute('data-theme',d);
-    t.innerHTML=d==='dark'?'<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>':'<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>';
-  });
-})();
-document.addEventListener('DOMContentLoaded',function(){
-  document.querySelectorAll('.fq').forEach(function(b){
-    b.addEventListener('click',function(){
-      var a=b.nextElementSibling,c=b.querySelector('.fchv');
-      var o=a.classList.contains('on');
-      document.querySelectorAll('.fa.on').forEach(function(x){x.classList.remove('on');var cv=x.previousElementSibling.querySelector('.fchv');if(cv)cv.classList.remove('on');});
-      if(!o){a.classList.add('on');if(c)c.classList.add('on');}
-    });
-  });
-});
 
-function fmt(n){return n.toLocaleString('es-ES',{minimumFractionDigits:2,maximumFractionDigits:2});}
-function calcIRPF(){
-  var bruto=parseFloat(document.getElementById('irsal').value)||0;
-  var hijos=parseInt(document.getElementById('irhij').value)||0;
-  var edad=parseInt(document.getElementById('iredad').value)||0;
-  if(bruto<=0){alert('Introduce un salario válido.');return;}
-  var ss=bruto*0.0635;
-  var rendNeto=bruto-ss;
-  var redTrab=2000;
-  if(rendNeto<=16825) redTrab=Math.min(6498, 6498-(Math.max(0,rendNeto-13115))*1.14);
-  redTrab=Math.max(2000,Math.min(6498,redTrab));
-  var rendNet2=rendNeto-redTrab;
-  var minPer=5550;
-  if(edad===1) minPer=6700;
-  if(edad===2) minPer=8100;
-  var mh=[0,2400,5100,9100,13600];
-  var minFam=minPer+(mh[Math.min(hijos,4)]||0);
-  var baseLiq=Math.max(0,rendNet2);
-  var starts=[0,12450,20200,35200,60000,300000];
-  var tipos=[.19,.24,.30,.37,.45,.47];
-  function cuotaTramos(base){
-    var c=0;
-    for(var i=0;i<tipos.length;i++){
-      if(base<=starts[i]) break;
-      var lim=i+1<starts.length?starts[i+1]:9e9;
-      c+=(Math.min(base,lim)-starts[i])*tipos[i];
-    }
-    return c;
-  }
-  var cuota=Math.max(0,cuotaTramos(baseLiq)-cuotaTramos(minFam));
-  var tmed=bruto>0?cuota/bruto*100:0;
-  var tmarg=19;
-  if(baseLiq>300000) tmarg=47;
-  else if(baseLiq>60000) tmarg=45;
-  else if(baseLiq>35200) tmarg=37;
-  else if(baseLiq>20200) tmarg=30;
-  else if(baseLiq>12450) tmarg=24;
-  document.getElementById('ircuota').textContent=fmt(cuota)+' €';
-  document.getElementById('irbase').textContent=fmt(baseLiq)+' €';
-  document.getElementById('irtmed').textContent=fmt(tmed)+' %';
-  document.getElementById('irtmar').textContent=tmarg+' %';
-  document.getElementById('irret').textContent=fmt(cuota/12)+' €/mes';
-  document.getElementById('irres').classList.add('on');
+<script>
+
+document.getElementById("year").textContent = new Date().getFullYear();
+
+function fmt(n){
+  return n.toLocaleString("es-ES",{minimumFractionDigits:2,maximumFractionDigits:2});
 }
 
-// Año automático dinámico
-document.addEventListener('DOMContentLoaded', function(){
-  const year = new Date().getFullYear();
+function calc(){
 
-  document.title = `Calculadora IRPF España ${year} — Estima el Impuesto sobre la Renta`;
+  let bruto = parseFloat(document.getElementById("salario").value);
+  let hijos = parseInt(document.getElementById("hijos").value);
+  let edad = parseInt(document.getElementById("edad").value);
 
-  const badge = document.getElementById('badge');
-  if(badge){ badge.textContent = `Financiera · Estimación IRPF ${year}`; }
+  let ss = bruto * 0.0635;
+  let base = bruto - ss;
 
-  const h1 = document.getElementById('titleh1');
-  if(h1){ h1.innerHTML = `Calculadora de <em>IRPF España</em> ${year}`; }
+  let minPersonal = 5550;
+  if(edad==1) minPersonal=6700;
+  if(edad==2) minPersonal=8100;
 
-  const fy = document.getElementById('year');
-  if(fy){ fy.textContent = year; }
-});
+  let minHijos=[0,2400,5100,9100,13600];
+  let minTotal=minPersonal+(minHijos[hijos]||0);
+
+  let tramos=[12450,20200,35200,60000,300000];
+  let tipos=[0.19,0.24,0.30,0.37,0.45,0.47];
+
+  let cuota=0;
+  let baseCalc=Math.max(0,base);
+
+  let prev=0;
+  for(let i=0;i<tipos.length;i++){
+    let limite=tramos[i]||9999999;
+    if(baseCalc>prev){
+      let tramo=Math.min(baseCalc,limite)-prev;
+      cuota+=tramo*tipos[i];
+      prev=limite;
+    }
+  }
+
+  cuota = Math.max(0, cuota - (minTotal*0.19));
+
+  let neto = bruto - cuota;
+  let tipoMedio = (cuota/bruto)*100;
+
+  document.getElementById("resultado").innerHTML =
+    "<b>IRPF anual:</b> "+fmt(cuota)+" €<br>" +
+    "<b>Salario neto:</b> "+fmt(neto)+" €<br>" +
+    "<b>Tipo medio:</b> "+fmt(tipoMedio)+" %<br>" +
+    "<b>Retención mensual:</b> "+fmt(cuota/12)+" €<br><br>" +
+    "<a class='btn' href='calculadora-hipoteca.html'>Calcular hipoteca →</a>";
+
+  document.getElementById("resultado").classList.add("on");
+}
 
 </script>
+
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "FAQPage",
+ "mainEntity": [{
+   "@type": "Question",
+   "name": "¿Cómo calcular el IRPF?",
+   "acceptedAnswer": {
+     "@type": "Answer",
+     "text": "Se calcula aplicando tramos progresivos al salario tras deducciones."
+   }
+ }]
+}
+</script>
+
 </body>
 </html>
