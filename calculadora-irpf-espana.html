@@ -3,12 +3,12 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Calculadora IRPF España 2024 — Estima el Impuesto sobre la Renta | CalculadoraGratis.es</title>
-<meta name="description" content="Calcula el IRPF 2024 sobre tu salario con tramos actualizados, mínimo personal y familiar, tipo medio y tipo marginal. Estimación orientativa para trabajadores por cuenta ajena.">
-<meta name="keywords" content="calculadora IRPF España 2024, calcular impuesto renta, tramos IRPF 2024, tipo marginal IRPF, declaracion renta calculadora">
+<title id="title">Calculadora IRPF España — Estima el Impuesto sobre la Renta | CalculadoraGratis.es</title>
+<meta name="description" content="Calcula el IRPF sobre tu salario con tramos actualizados, mínimo personal y familiar, tipo medio y tipo marginal. Estimación orientativa para trabajadores por cuenta ajena.">
+<meta name="keywords" content="calculadora IRPF España, calcular impuesto renta, tramos IRPF, tipo marginal IRPF, declaracion renta calculadora">
 <link rel="canonical" href="https://www.calculadoragratis.es/calculadora-irpf-espana.html">
-<meta property="og:title" content="Calculadora IRPF España 2024 — Estima el Impuesto sobre la Renta | CalculadoraGratis.es">
-<meta property="og:description" content="Calcula el IRPF 2024 sobre tu salario con tramos actualizados, mínimo personal y familiar, tipo medio y tipo marginal. Estimación orientativa para trabajadores por cuenta ajena.">
+<meta property="og:title" content="Calculadora IRPF España — Estima el Impuesto sobre la Renta | CalculadoraGratis.es">
+<meta property="og:description" content="Calcula el IRPF sobre tu salario con tramos actualizados, mínimo personal y familiar, tipo medio y tipo marginal. Estimación orientativa para trabajadores por cuenta ajena.">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="es_ES">
 <meta name="robots" content="index,follow">
@@ -169,8 +169,8 @@ table{border-collapse:collapse;width:100%}
 
 <main id="main">
 <section class="hero"><div class="wrap">
-  <span class="badge">Financiera · Estimación IRPF 2024</span>
-  <h1>Calculadora de <em>IRPF España</em> 2024</h1>
+  <span class="badge" id="badge">Financiera · Estimación IRPF</span>
+  <h1 id="titleh1">Calculadora de <em>IRPF España</em> 2024</h1>
   <p>Estima el IRPF a pagar sobre tus rendimientos del trabajo. Aplica las deducciones básicas, el mínimo personal y familiar y las tablas de tramos vigentes en 2024.</p>
 </div></section>
 
@@ -222,7 +222,7 @@ table{border-collapse:collapse;width:100%}
 <h2>¿Cómo funciona el IRPF en España?</h2>
 <p>El <strong>Impuesto sobre la Renta de las Personas Físicas (IRPF)</strong> es un tributo personal, progresivo y directo que grava la renta obtenida por las personas físicas residentes en España. Su progresividad significa que, a mayor renta, mayor es el tipo impositivo aplicado. La declaración de la Renta se presenta habitualmente entre abril y junio del año siguiente al ejercicio fiscal.</p>
 
-<h3>Tramos del IRPF 2024 (escala estatal + autonómica media)</h3>
+<h3>Tramos del IRPF (escala estatal + autonómica media)</h3>
 <div class="fml">
   Hasta 12.450 €        →  19%<br>
   De 12.450 a 20.200 €  →  24%<br>
@@ -262,7 +262,7 @@ table{border-collapse:collapse;width:100%}
 <section class="rel"><div class="wrap"><h2>Calculadoras relacionadas</h2><div class="rgrid"><a href="calculadora-hipoteca.html" class="rc"><span class="re">🏠</span><span class="rn">Calculadora hipoteca</span></a><a href="calculadora-prestamo.html" class="rc"><span class="re">💳</span><span class="rn">Calculadora préstamo</span></a><a href="calculadora-iva.html" class="rc"><span class="re">🧮</span><span class="rn">Calculadora IVA</span></a><a href="calculadora-interes-compuesto.html" class="rc"><span class="re">📈</span><span class="rn">Interés compuesto</span></a></div></div></section>
 </main>
 <footer class="ft">
-  <p>© 2024 <strong>CalculadoraGratis.es</strong> — Calculadoras gratuitas en español de España.
+  <p>© <span id="year"></span> <strong>CalculadoraGratis.es</strong> — Calculadoras gratuitas en español de España.
   <a href="index.html">Inicio</a> &nbsp;·&nbsp;
   <small>Los resultados son orientativos y no constituyen asesoramiento financiero, fiscal ni sanitario.</small></p>
 </footer>
@@ -331,6 +331,23 @@ function calcIRPF(){
   document.getElementById('irret').textContent=fmt(cuota/12)+' €/mes';
   document.getElementById('irres').classList.add('on');
 }
+
+// Año automático dinámico
+document.addEventListener('DOMContentLoaded', function(){
+  const year = new Date().getFullYear();
+
+  document.title = `Calculadora IRPF España ${year} — Estima el Impuesto sobre la Renta`;
+
+  const badge = document.getElementById('badge');
+  if(badge){ badge.textContent = `Financiera · Estimación IRPF ${year}`; }
+
+  const h1 = document.getElementById('titleh1');
+  if(h1){ h1.innerHTML = `Calculadora de <em>IRPF España</em> ${year}`; }
+
+  const fy = document.getElementById('year');
+  if(fy){ fy.textContent = year; }
+});
+
 </script>
 </body>
 </html>
