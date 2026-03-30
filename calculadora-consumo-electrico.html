@@ -1,263 +1,196 @@
 <!DOCTYPE html>
-<html lang="es" data-theme="light">
+<html lang="es">
 <head>
+
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Calculadora de Consumo Eléctrico — Coste de Electrodomésticos | CalculadoraGratis.es</title>
-<meta name="description" content="Calcula cuánto cuesta al día, mes y año cualquier electrodoméstico según su potencia y horas de uso. Tabla de consumos típicos incluida.">
-<meta name="keywords" content="calculadora consumo electrico, coste electrodomesticos electricidad, calcular factura electrica, kWh precio España, ahorro energetico">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>Calculadora de consumo eléctrico — coste de luz por electrodoméstico</title>
+
+<meta name="description" content="Calcula el consumo eléctrico de tus electrodomésticos y cuánto pagarás en tu factura de luz. Ahorra energía con cálculos precisos.">
+
 <link rel="canonical" href="https://www.calculadoragratis.es/calculadora-consumo-electrico.html">
-<meta property="og:title" content="Calculadora de Consumo Eléctrico — Coste de Electrodomésticos | CalculadoraGratis.es">
-<meta property="og:description" content="Calcula cuánto cuesta al día, mes y año cualquier electrodoméstico según su potencia y horas de uso. Tabla de consumos típicos incluida.">
-<meta property="og:type" content="website">
-<meta property="og:locale" content="es_ES">
+
 <meta name="robots" content="index,follow">
+
+<link rel="stylesheet" href="style.css">
+
 <link rel="preconnect" href="https://api.fontshare.com">
 <link href="https://api.fontshare.com/v2/css?f[]=satoshi@400,500,700,800&display=swap" rel="stylesheet">
-<style>
-:root,[data-theme=light]{
-  --bg:#f7f6f2;--sur:#f9f8f5;--sur2:#fbfbf9;--surO:#f3f0ec;--surD:#e6e4df;
-  --div:#dcd9d5;--bor:#d4d1ca;--txt:#28251d;--mut:#7a7974;--fnt:#bab9b4;
-  --inv:#f9f8f4;--pri:#01696f;--prh:#0c4e54;--war:#964219;--suc:#437a22;
-  --rsm:.375rem;--rmd:.5rem;--rlg:.75rem;--rxl:1rem;--rfl:9999px;
-  --shsm:0 1px 2px oklch(.2 .01 80/.06);--shmd:0 4px 12px oklch(.2 .01 80/.08);
-  --shlg:0 12px 32px oklch(.2 .01 80/.12);
-  --s1:.25rem;--s2:.5rem;--s3:.75rem;--s4:1rem;--s5:1.25rem;--s6:1.5rem;
-  --s8:2rem;--s10:2.5rem;--s12:3rem;--s16:4rem;
-  --txs:clamp(.75rem,.7rem + .25vw,.875rem);--tsm:clamp(.875rem,.8rem + .35vw,1rem);
-  --tba:clamp(1rem,.95rem + .25vw,1.125rem);--tlg:clamp(1.125rem,1rem + .75vw,1.5rem);
-  --txl:clamp(1.5rem,1.2rem + 1.25vw,2.25rem);--t2x:clamp(2rem,1.2rem + 2.5vw,3.5rem);
-  --cdef:960px;--cwid:1200px;--fb:'Satoshi','Inter',sans-serif;--tr:180ms cubic-bezier(.16,1,.3,1);
-}
-[data-theme=dark]{
-  --bg:#171614;--sur:#1c1b19;--sur2:#201f1d;--surO:#1d1c1a;--surD:#2d2c2a;
-  --div:#262523;--bor:#393836;--txt:#cdccca;--mut:#797876;--fnt:#5a5957;
-  --inv:#2b2a28;--pri:#4f98a3;--prh:#227f8b;--war:#bb653b;--suc:#6daa45;
-  --shsm:0 1px 2px oklch(0 0 0/.2);--shmd:0 4px 12px oklch(0 0 0/.3);
-}
-@media(prefers-color-scheme:dark){:root:not([data-theme]){
-  --bg:#171614;--sur:#1c1b19;--sur2:#201f1d;--surO:#1d1c1a;--div:#262523;
-  --bor:#393836;--txt:#cdccca;--mut:#797876;--fnt:#5a5957;--inv:#2b2a28;
-  --pri:#4f98a3;--prh:#227f8b;--war:#bb653b;--suc:#6daa45;
-}}
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth;scroll-padding-top:var(--s16);-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
-body{min-height:100dvh;font-family:var(--fb);font-size:var(--tba);color:var(--txt);background:var(--bg);line-height:1.6}
-img,svg{display:block;max-width:100%;height:auto}
-input,button,select,textarea{font:inherit;color:inherit}
-h1,h2,h3,h4{text-wrap:balance;line-height:1.15}
-p,li{text-wrap:pretty;max-width:72ch}
-a{color:var(--pri);text-decoration:none}a:hover{color:var(--prh);text-decoration:underline}
-button{cursor:pointer;background:none;border:none}
-table{border-collapse:collapse;width:100%}
-:focus-visible{outline:2px solid var(--pri);outline-offset:3px;border-radius:var(--rsm)}
-.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border-width:0}
-.wrap{max-width:var(--cdef);margin-inline:auto;padding-inline:var(--s4)}
-.site-header{background:var(--sur);border-bottom:1px solid var(--div);position:sticky;top:0;z-index:100;backdrop-filter:blur(8px)}
-.hdr{display:flex;align-items:center;gap:var(--s4);padding:var(--s3) var(--s4);max-width:var(--cwid);margin:auto}
-.logo{display:flex;align-items:center;gap:var(--s2);font-size:var(--tlg);font-weight:800;color:var(--txt);text-decoration:none}
-.logo svg{color:var(--pri)}.bk{font-size:var(--tsm);color:var(--mut);text-decoration:none;white-space:nowrap}
-.bk:hover{color:var(--pri)}.sp{flex:1}
-.tog{width:40px;height:40px;border-radius:var(--rfl);display:grid;place-items:center;color:var(--mut);border:1px solid var(--bor);transition:color var(--tr),background var(--tr)}
-.tog:hover{color:var(--pri);background:var(--surO)}
-.hero{padding:clamp(var(--s8),6vw,var(--s16)) 0;background:var(--sur);border-bottom:1px solid var(--div)}
-.badge{display:inline-block;font-size:var(--tsm);background:color-mix(in oklab,var(--pri) 12%,var(--sur));color:var(--pri);padding:var(--s1) var(--s3);border-radius:var(--rfl);margin-bottom:var(--s4)}
-.hero h1{font-size:var(--t2x);font-weight:800;margin-bottom:var(--s4)}
-.hero h1 em{font-style:normal;color:var(--pri)}
-.hero p{font-size:var(--tlg);color:var(--mut);max-width:60ch}
-.cs{padding:var(--s8) 0}
-.cgrid{display:grid;gap:var(--s6);grid-template-columns:1fr 1fr}
-@media(max-width:768px){.cgrid{grid-template-columns:1fr}}
-.ccard{background:var(--sur);border:1px solid var(--bor);border-radius:var(--rxl);padding:var(--s6);box-shadow:var(--shsm)}
-.ccard h2{font-size:var(--tlg);font-weight:700;margin-bottom:var(--s5)}
-.fg{margin-bottom:var(--s4)}
-.fg label{display:block;font-size:var(--txs);font-weight:700;color:var(--mut);margin-bottom:var(--s1);text-transform:uppercase;letter-spacing:.05em}
-.fg input,.fg select{width:100%;padding:var(--s3) var(--s4);border:1px solid var(--bor);border-radius:var(--rmd);background:var(--bg);font-size:var(--tba);transition:border-color var(--tr),box-shadow var(--tr)}
-.fg input:focus,.fg select:focus{border-color:var(--pri);box-shadow:0 0 0 3px color-mix(in oklab,var(--pri) 20%,transparent);outline:none}
-.btn{padding:var(--s3) var(--s6);border-radius:var(--rmd);font-size:var(--tsm);font-weight:700;transition:background var(--tr),box-shadow var(--tr)}
-.bp{background:var(--pri);color:#fff}.bp:hover{background:var(--prh);box-shadow:var(--shmd)}.bfw{width:100%;margin-top:var(--s2)}
-.rb{margin-top:var(--s6);padding:var(--s5);background:color-mix(in oklab,var(--pri) 8%,var(--sur));border-radius:var(--rlg);border:1px solid color-mix(in oklab,var(--pri) 30%,transparent);display:none}
-.rb.on{display:block}
-.rl{font-size:var(--txs);color:var(--mut);text-transform:uppercase;letter-spacing:.06em;margin-bottom:var(--s1)}
-.rv{font-size:var(--txl);font-weight:800;color:var(--pri);font-variant-numeric:tabular-nums}
-.rd{margin-top:var(--s4);display:flex;flex-direction:column;gap:var(--s2);font-size:var(--tsm)}
-.rtbl th,.rtbl td{padding:var(--s2) var(--s3);text-align:right;font-size:var(--txs);border-bottom:1px solid var(--div)}
-.rtbl th{text-transform:uppercase;letter-spacing:.04em;font-weight:700;color:var(--mut)}
-.rtbl th:first-child,.rtbl td:first-child{text-align:left}
-.rtbl tbody tr:hover{background:var(--surO)}
-.cnt{padding:var(--s8) 0;border-top:1px solid var(--div)}
-.cnt h2{font-size:var(--txl);font-weight:700;margin-bottom:var(--s4);margin-top:var(--s8)}
-.cnt h2:first-child{margin-top:0}
-.cnt h3{font-size:var(--tlg);font-weight:600;margin-top:var(--s6);margin-bottom:var(--s3)}
-.cnt p{margin-bottom:var(--s4);color:var(--mut);line-height:1.75}
-.cnt ul,.cnt ol{margin-left:var(--s6);margin-bottom:var(--s4)}
-.cnt li{margin-bottom:var(--s2);color:var(--mut)}
-.fml{background:var(--sur2);border:1px solid var(--bor);border-radius:var(--rlg);padding:var(--s5);margin:var(--s5) 0;font-family:monospace;font-size:var(--tsm);line-height:1.9}
-.ex{background:color-mix(in oklab,var(--suc) 8%,var(--sur));border:1px solid color-mix(in oklab,var(--suc) 25%,transparent);border-radius:var(--rlg);padding:var(--s5);margin:var(--s5) 0}
-.ext{font-weight:700;margin-bottom:var(--s2);color:var(--suc)}
-.ex p{color:var(--txt);margin-bottom:var(--s2)}
-.warn{background:color-mix(in oklab,var(--war) 8%,var(--sur));border:1px solid color-mix(in oklab,var(--war) 25%,transparent);border-radius:var(--rlg);padding:var(--s4);margin:var(--s4) 0;font-size:var(--tsm);color:var(--mut)}
-.ad{background:var(--surO);border:1px dashed var(--bor);border-radius:var(--rmd);display:flex;align-items:center;justify-content:center;color:var(--fnt);font-size:var(--txs);text-transform:uppercase;letter-spacing:.08em;margin:var(--s6) 0}
-.ad-t{height:90px;max-width:728px;margin-inline:auto}
-.ad-m{height:250px;max-width:300px;margin-inline:auto}
-.ad-b{height:90px;max-width:728px;margin-inline:auto}
-.faq{padding:var(--s8) 0;border-top:1px solid var(--div)}
-.faq h2{font-size:var(--txl);font-weight:700;margin-bottom:var(--s6)}
-.fi{border:1px solid var(--bor);border-radius:var(--rlg);margin-bottom:var(--s3);overflow:hidden}
-.fq{width:100%;text-align:left;padding:var(--s4) var(--s5);font-size:var(--tba);font-weight:600;display:flex;justify-content:space-between;align-items:center;background:var(--sur);transition:background var(--tr)}
-.fq:hover{background:var(--surO)}
-.fa{padding:0 var(--s5);max-height:0;overflow:hidden;transition:max-height .35s ease,padding .35s ease}
-.fa.on{max-height:600px;padding:var(--s3) var(--s5) var(--s4)}
-.fa p{color:var(--mut)}
-.fchv{transition:transform .3s;flex-shrink:0;color:var(--fnt)}.fchv.on{transform:rotate(180deg)}
-.rel{background:var(--sur);border-top:1px solid var(--div);padding:var(--s8) 0}
-.rel h2{font-size:var(--tlg);font-weight:700;margin-bottom:var(--s5)}
-.rgrid{display:grid;gap:var(--s3);grid-template-columns:repeat(auto-fill,minmax(min(190px,100%),1fr))}
-.rc{display:flex;align-items:center;gap:var(--s3);padding:var(--s4);background:var(--sur2);border:1px solid var(--bor);border-radius:var(--rlg);color:var(--txt);text-decoration:none;transition:box-shadow var(--tr),background var(--tr)}
-.rc:hover{box-shadow:var(--shmd);background:var(--surO);text-decoration:none}
-.re{font-size:1.4rem}.rn{font-size:var(--tsm);font-weight:600}
-.ft{padding:var(--s8) var(--s4);text-align:center;color:var(--fnt);font-size:var(--tsm);border-top:1px solid var(--div);margin-top:var(--s8)}
-.csin{max-width:600px;margin:0 auto;padding:var(--s8) 0}
-</style>
+
+<!-- ADSENSE -->
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=TU_ID"
+crossorigin="anonymous"></script>
+
 </head>
+
 <body>
-<a class="sr-only" href="#main">Saltar al contenido principal</a>
+
 <header class="site-header">
   <div class="hdr">
-    <a href="index.html" class="logo" aria-label="CalculadoraGratis.es - Inicio"><svg aria-hidden="true" width="30" height="30" viewBox="0 0 32 32" fill="none"><rect x="2" y="2" width="28" height="28" rx="6" stroke="currentColor" stroke-width="2"/><rect x="6" y="7" width="5" height="4" rx="1" fill="currentColor" opacity=".7"/><rect x="13" y="7" width="5" height="4" rx="1" fill="currentColor" opacity=".7"/><rect x="20" y="7" width="6" height="4" rx="1" fill="currentColor"/><rect x="6" y="14" width="5" height="4" rx="1" fill="currentColor" opacity=".6"/><rect x="13" y="14" width="5" height="4" rx="1" fill="currentColor" opacity=".5"/><rect x="20" y="14" width="6" height="4" rx="1" fill="currentColor" opacity=".35"/><rect x="6" y="21" width="5" height="4" rx="1" fill="currentColor"/><rect x="13" y="21" width="13" height="4" rx="1" fill="currentColor" opacity=".5"/></svg> CalculadoraGratis.es</a>
-    <a href="index.html" class="bk">← Todas las calculadoras</a>
-    <span class="sp"></span>
-    <button class="tog" data-ttog aria-label="Cambiar entre modo claro y oscuro">
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
-    </button>
+    <a href="index.html" class="logo">CalculadoraGratis.es</a>
   </div>
 </header>
 
-<main id="main">
-<section class="hero"><div class="wrap">
-  <span class="badge">Hogar · Ahorra en tu factura</span>
-  <h1>Calculadora de <em>Consumo Eléctrico</em></h1>
-  <p>Calcula cuánto consumen tus electrodomésticos y el coste real en tu factura. Ideal para detectar qué aparatos disparan tu gasto eléctrico.</p>
-</div></section>
-<div class="ad ad-t" role="complementary" aria-label="Publicidad">📢 Espacio publicitario Google AdSense (728×90)</div>
-<section class="cs"><div class="wrap">
+<section class="hero wrap">
+  <span class="badge">Hogar · Energía</span>
+  <h1>Calculadora de consumo eléctrico</h1>
+  <p>Descubre cuánto consumen tus electrodomésticos y cuánto pagas en la factura de luz.</p>
+</section>
+
+<!-- ANUNCIO TOP -->
+<div class="ad ad-t wrap">
+  <ins class="adsbygoogle"
+   style="display:block"
+   data-ad-client="TU_ID"
+   data-ad-slot="111"
+   data-ad-format="auto"></ins>
+</div>
+
+<section class="cs wrap">
+
 <div class="cgrid">
-<div class="ccard">
-  <h2>Datos del electrodoméstico</h2>
-  <div class="fg"><label for="eap">Nombre del aparato (opcional)</label><input type="text" id="eap" placeholder="Ej: Nevera, TV, lavadora…"></div>
-  <div class="fg"><label for="epot">Potencia (vatios)</label><input type="number" id="epot" value="1000" min="1" step="10"></div>
-  <div class="fg"><label for="ehd">Horas de uso al día</label><input type="number" id="ehd" value="8" min="0.1" step="0.5" max="24"></div>
-  <div class="fg"><label for="epre">Precio del kWh (€)</label><input type="number" id="epre" value="0.18" min="0.001" step="0.001"></div>
-  <button class="btn bp bfw" onclick="calcElec()">Calcular coste</button>
-  <div class="rb" id="eres">
-    <div class="rl">Coste diario</div>
-    <div class="rv" id="edia"></div>
-    <div class="rd">
-      <div>📅 Coste semanal: <strong id="esem"></strong></div>
-      <div>📆 Coste mensual: <strong id="emes"></strong></div>
-      <div>🗓️ Coste anual: <strong id="eany"></strong></div>
-      <div>⚡ Consumo anual: <strong id="ekwh"></strong></div>
-    </div>
-  </div>
-</div>
-<div class="ccard">
-  <h2>Referencia: consumo típico de electrodomésticos</h2>
-  <table class="rtbl">
-    <thead><tr><th>Electrodoméstico</th><th>Potencia</th><th>Uso típico</th></tr></thead>
-    <tbody>
-      <tr><td>Nevera (A+)</td><td>150 W</td><td>24h/día</td></tr>
-      <tr><td>Televisor 50"</td><td>120 W</td><td>4h/día</td></tr>
-      <tr><td>Lavadora (60°)</td><td>2.000 W</td><td>1h/uso</td></tr>
-      <tr><td>Lavavajillas</td><td>1.500 W</td><td>1,5h/uso</td></tr>
-      <tr><td>Horno eléctrico</td><td>2.200 W</td><td>1h/uso</td></tr>
-      <tr><td>Aire acondicionado</td><td>1.200 W</td><td>6h/día</td></tr>
-      <tr><td>Ordenador portátil</td><td>65 W</td><td>8h/día</td></tr>
-      <tr><td>Bombilla LED</td><td>10 W</td><td>5h/día</td></tr>
-      <tr><td>Calefactor eléctrico</td><td>2.000 W</td><td>4h/día</td></tr>
-      <tr><td>Secadora</td><td>2.500 W</td><td>1h/uso</td></tr>
-    </tbody>
-  </table>
-</div>
-</div></div></section>
-<div class="ad ad-m" role="complementary" aria-label="Publicidad">📢 Espacio publicitario Google AdSense (300×250)</div>
-<section class="cnt"><div class="wrap">
-<h2>¿Cómo se calcula el consumo eléctrico?</h2>
-<p>El consumo eléctrico de cualquier aparato se mide en <strong>kilovatios hora (kWh)</strong>. Un kilovatio hora equivale a consumir 1.000 W durante una hora. La factura eléctrica cobra en función de los kWh consumidos, multiplicados por el precio del kWh pactado o el precio del mercado libre. El precio medio en España para el consumidor doméstico estuvo en torno a 0,17-0,21 €/kWh en 2024, dependiendo de la comercializadora y la tarifa.</p>
 
-<h3>Fórmula del consumo y el coste</h3>
+<div class="ccard">
+
+<h2>Datos del consumo</h2>
+
+<div class="fg">
+<label>Potencia (W)</label>
+<input id="potencia" type="number" value="1000">
+</div>
+
+<div class="fg">
+<label>Horas al día</label>
+<input id="horas" type="number" value="3">
+</div>
+
+<div class="fg">
+<label>Precio kWh (€)</label>
+<input id="precio" type="number" value="0.20">
+</div>
+
+<button class="btn bp bfw" onclick="calc()">Calcular consumo</button>
+
+<div class="rb" id="resultado"></div>
+
+</div>
+
+</div>
+</section>
+
+<!-- ANUNCIO MEDIO -->
+<div class="ad ad-m wrap">
+  <ins class="adsbygoogle"
+   style="display:block"
+   data-ad-client="TU_ID"
+   data-ad-slot="222"
+   data-ad-format="auto"></ins>
+</div>
+
+<section class="cnt wrap">
+
+<h2>¿Cómo calcular el consumo eléctrico?</h2>
+
+<p>El consumo eléctrico se mide en kWh (kilovatios hora) y depende de la potencia del aparato y del tiempo de uso.</p>
+
 <div class="fml">
-  Consumo diario (kWh) = Potencia (W) × Horas/día ÷ 1.000<br>
-  Coste diario (€) = Consumo diario × Precio kWh<br>
-  Coste mensual (€) = Coste diario × 30<br>
-  Coste anual (€) = Coste diario × 365
+Consumo = (Potencia × horas) / 1000
 </div>
 
-<h3>Ejemplo: aire acondicionado en verano</h3>
-<div class="ex">
-  <div class="ext">📌 Aire acondicionado de 1.200 W · 6 horas/día · precio 0,19 €/kWh</div>
-  <p><strong>Consumo diario:</strong> 1.200 × 6 / 1.000 = 7,2 kWh/día</p>
-  <p><strong>Coste diario:</strong> 7,2 × 0,19 = <strong>1,37 €/día</strong></p>
-  <p><strong>Coste mensual:</strong> 1,37 × 30 = <strong>41,04 €/mes</strong></p>
-  <p>Si lo usas 4 meses en verano: <strong>164 € al año</strong> solo en el aire acondicionado.</p>
+<h2>Ejemplo práctico</h2>
+
+<p>Un electrodoméstico de 1000W usado 3 horas al día consume 3 kWh diarios.</p>
+
+<h2>Cómo ahorrar en la factura de luz</h2>
+
+<ul>
+<li>Usar electrodomésticos eficientes</li>
+<li>Reducir horas de uso innecesarias</li>
+<li>Optimizar tarifas eléctricas</li>
+</ul>
+
+<p>También puedes usar nuestra 
+<a href="calculadora-gasto-gasolina.html">calculadora de gasto en gasolina</a> 
+o la 
+<a href="calculadora-hipoteca.html">calculadora de hipoteca</a> 
+para analizar otros gastos importantes.</p>
+
+</section>
+
+<!-- ANUNCIO BOTTOM -->
+<div class="ad ad-b wrap">
+  <ins class="adsbygoogle"
+   style="display:block"
+   data-ad-client="TU_ID"
+   data-ad-slot="333"
+   data-ad-format="auto"></ins>
 </div>
 
-<h2>Cómo reducir el consumo eléctrico en casa</h2>
-<p>El <strong>consumo en stand-by</strong> (modo espera) supone entre el 7% y el 10% de la factura eléctrica doméstica media. Una televisión en stand-by consume entre 1 y 3 W constantemente; una consola, entre 5 y 15 W; un router, entre 8 y 12 W. Desconectar los aparatos completamente o usar regletas con interruptor puede ahorrar entre 30 y 60 € anuales.</p>
-<p>Los <strong>electrodomésticos de clase A o superior</strong> (A+, A++, A+++ según la antigua escala, o A según la nueva etiqueta energética de 2021) pueden consumir hasta un 60% menos que los de clase D o inferior. Cambiar una nevera antigua de clase C por una moderna de clase A puede suponer un ahorro de 50-80 € anuales en electricidad.</p>
+<section class="faq wrap">
 
-<h3>Tarifas eléctricas y franjas horarias (2.0TD)</h3>
-<p>La tarifa doméstica estándar en España es la <strong>2.0TD</strong>, que divide el consumo en tres períodos: punta (más caro), llano y valle (más barato). El período valle va aproximadamente de 00:00 a 08:00 horas en días laborables, y todo el fin de semana y festivos. Usar la lavadora, el lavavajillas o el cargador del vehículo eléctrico en horario valle puede suponer un ahorro del 30-40% en esos consumos.</p>
-<div class="warn">⚠️ <strong>Nota:</strong> El precio del kWh varía según la comercializadora, la tarifa contratada (mercado regulado PVPC o mercado libre) y el período horario. Usa el precio de tu última factura para obtener el resultado más preciso.</div>
-</div></section>
-<section class="faq"><div class="wrap">
-  <h2>Preguntas frecuentes sobre consumo eléctrico</h2>
-  <div class="fi"><button class="fq">¿Cuánto consume una nevera al año? <svg class="fchv" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m6 9 6 6 6-6"/></svg></button><div class="fa"><p>Una nevera moderna de clase energética A con capacidad media (300-350 litros) consume aproximadamente 150-200 kWh al año, lo que equivale a unos 27-36 € anuales al precio medio de 0,18 €/kWh. Los modelos más antiguos de clase C o D pueden consumir el doble o el triple, llegando a 400-600 kWh/año.</p></div></div>
-  <div class="fi"><button class="fq">¿Vale la pena instalar placas solares para autoconsumo? <svg class="fchv" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m6 9 6 6 6-6"/></svg></button><div class="fa"><p>Depende del consumo anual del hogar, la orientación del tejado y la inversión inicial. Una instalación de 3 kWp puede generar 3.500-4.500 kWh anuales en España, cubriendo entre el 40% y el 70% del consumo medio de un hogar. El período de retorno de la inversión suele ser de 6-10 años, con una vida útil de los paneles de 25-30 años.</p></div></div>
-  <div class="fi"><button class="fq">¿Cómo sé el precio del kWh que estoy pagando? <svg class="fchv" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m6 9 6 6 6-6"/></svg></button><div class="fa"><p>Consulta tu última factura eléctrica. En el desglose de 'término de energía' encontrarás el precio por kWh de cada período (punta, llano, valle). Si tienes PVPC (precio voluntario al pequeño consumidor), el precio varía cada hora según el mercado mayorista. Si tienes tarifa fija en el mercado libre, el precio es constante según tu contrato.</p></div></div>
-</div></section>
-<section class="rel"><div class="wrap"><h2>Calculadoras relacionadas</h2><div class="rgrid"><a href="calculadora-gasto-gasolina.html" class="rc"><span class="re">⛽</span><span class="rn">Gasto gasolina</span></a><a href="calculadora-alquiler-vs-compra.html" class="rc"><span class="re">🏘️</span><span class="rn">Alquiler vs compra</span></a><a href="calculadora-iva.html" class="rc"><span class="re">🧮</span><span class="rn">Calculadora IVA</span></a><a href="calculadora-porcentajes.html" class="rc"><span class="re">💯</span><span class="rn">Calculadora porcentajes</span></a></div></div></section>
-</main>
+<h2>Preguntas frecuentes</h2>
+
+<div class="fi">
+<button class="fq">¿Qué es un kWh?</button>
+<div class="fa"><p>Es la unidad de medida del consumo eléctrico.</p></div>
+</div>
+
+<div class="fi">
+<button class="fq">¿Cómo reducir el consumo?</button>
+<div class="fa"><p>Usando electrodomésticos eficientes y reduciendo el uso innecesario.</p></div>
+</div>
+
+</section>
+
 <footer class="ft">
-  <p>© 2024 <strong>CalculadoraGratis.es</strong> — Calculadoras gratuitas en español de España.
-  <a href="index.html">Inicio</a> &nbsp;·&nbsp;
-  <small>Los resultados son orientativos y no constituyen asesoramiento financiero, fiscal ni sanitario.</small></p>
+<p>© <span id="year"></span> CalculadoraGratis.es</p>
 </footer>
+
 <script>
-(function(){
-  var t=document.querySelector('[data-ttog]'),r=document.documentElement;
-  var d=matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light';
-  r.setAttribute('data-theme',d);
-  if(t)t.addEventListener('click',function(){
-    d=d==='dark'?'light':'dark';r.setAttribute('data-theme',d);
-    t.innerHTML=d==='dark'?'<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>':'<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>';
-  });
-})();
-document.addEventListener('DOMContentLoaded',function(){
-  document.querySelectorAll('.fq').forEach(function(b){
-    b.addEventListener('click',function(){
-      var a=b.nextElementSibling,c=b.querySelector('.fchv');
-      var o=a.classList.contains('on');
-      document.querySelectorAll('.fa.on').forEach(function(x){x.classList.remove('on');var cv=x.previousElementSibling.querySelector('.fchv');if(cv)cv.classList.remove('on');});
-      if(!o){a.classList.add('on');if(c)c.classList.add('on');}
-    });
-  });
+
+document.getElementById("year").textContent = new Date().getFullYear();
+
+function calc(){
+
+  let potencia = parseFloat(document.getElementById("potencia").value);
+  let horas = parseFloat(document.getElementById("horas").value);
+  let precio = parseFloat(document.getElementById("precio").value);
+
+  let consumo = (potencia * horas) / 1000;
+  let coste = consumo * precio;
+
+  document.getElementById("resultado").innerHTML =
+    "<b>Consumo diario:</b> "+consumo.toFixed(2)+" kWh<br>" +
+    "<b>Coste diario:</b> "+coste.toFixed(2)+" €";
+
+  document.getElementById("resultado").classList.add("on");
+}
+
+// FAQ toggle
+document.querySelectorAll(".fq").forEach(btn=>{
+  btn.onclick=()=>{
+    btn.nextElementSibling.classList.toggle("on");
+  }
 });
 
-function fmt(n){return n.toLocaleString('es-ES',{minimumFractionDigits:2,maximumFractionDigits:2});}
-function calcElec(){
-  var W=parseFloat(document.getElementById('epot').value)||0;
-  var h=parseFloat(document.getElementById('ehd').value)||0;
-  var p=parseFloat(document.getElementById('epre').value)||0;
-  if(W<=0||h<=0||p<=0){alert('Introduce valores válidos.');return;}
-  var kwhD=W*h/1000;
-  var dia=kwhD*p, sem=dia*7, mes=dia*30, any=dia*365, kwhA=kwhD*365;
-  document.getElementById('edia').textContent=fmt(dia)+' €';
-  document.getElementById('esem').textContent=fmt(sem)+' €';
-  document.getElementById('emes').textContent=fmt(mes)+' €';
-  document.getElementById('eany').textContent=fmt(any)+' €';
-  document.getElementById('ekwh').textContent=fmt(kwhA)+' kWh';
-  document.getElementById('eres').classList.add('on');
+</script>
+
+<!-- SCHEMA -->
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "FAQPage",
+ "mainEntity": [{
+   "@type": "Question",
+   "name": "¿Cómo calcular el consumo eléctrico?",
+   "acceptedAnswer": {
+     "@type": "Answer",
+     "text": "Multiplicando la potencia por las horas y dividiendo entre 1000."
+   }
+ }]
 }
 </script>
+
 </body>
 </html>
