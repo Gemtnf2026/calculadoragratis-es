@@ -5,9 +5,9 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<title>Calculadora de consumo eléctrico — coste de luz por electrodoméstico</title>
+<title>Calculadora de consumo eléctrico — coste de luz por kWh</title>
 
-<meta name="description" content="Calcula el consumo eléctrico de tus electrodomésticos y cuánto pagarás en tu factura de luz. Ahorra energía con cálculos precisos.">
+<meta name="description" content="Calcula el consumo eléctrico diario, mensual y anual de tus electrodomésticos y cuánto pagas en tu factura de luz.">
 
 <link rel="canonical" href="https://www.calculadoragratis.es/calculadora-consumo-electrico.html">
 
@@ -35,25 +35,24 @@ crossorigin="anonymous"></script>
 <section class="hero wrap">
   <span class="badge">Hogar · Energía</span>
   <h1>Calculadora de consumo eléctrico</h1>
-  <p>Descubre cuánto consumen tus electrodomésticos y cuánto pagas en la factura de luz.</p>
+  <p>Calcula cuánto consumes y cuánto pagas de luz al día, mes y año.</p>
 </section>
 
-<!-- ANUNCIO TOP -->
+<!-- ANUNCIO -->
 <div class="ad ad-t wrap">
-  <ins class="adsbygoogle"
-   style="display:block"
-   data-ad-client="TU_ID"
-   data-ad-slot="111"
-   data-ad-format="auto"></ins>
+<ins class="adsbygoogle"
+style="display:block"
+data-ad-client="TU_ID"
+data-ad-slot="111"
+data-ad-format="auto"></ins>
 </div>
 
 <section class="cs wrap">
-
 <div class="cgrid">
 
 <div class="ccard">
 
-<h2>Datos del consumo</h2>
+<h2>Datos del electrodoméstico</h2>
 
 <div class="fg">
 <label>Potencia (W)</label>
@@ -70,7 +69,7 @@ crossorigin="anonymous"></script>
 <input id="precio" type="number" value="0.20">
 </div>
 
-<button class="btn bp bfw" onclick="calc()">Calcular consumo</button>
+<button class="btn bp bfw" onclick="calc()">Calcular</button>
 
 <div class="rb" id="resultado"></div>
 
@@ -79,52 +78,53 @@ crossorigin="anonymous"></script>
 </div>
 </section>
 
-<!-- ANUNCIO MEDIO -->
 <div class="ad ad-m wrap">
-  <ins class="adsbygoogle"
-   style="display:block"
-   data-ad-client="TU_ID"
-   data-ad-slot="222"
-   data-ad-format="auto"></ins>
+<ins class="adsbygoogle"
+style="display:block"
+data-ad-client="TU_ID"
+data-ad-slot="222"
+data-ad-format="auto"></ins>
 </div>
 
 <section class="cnt wrap">
 
 <h2>¿Cómo calcular el consumo eléctrico?</h2>
 
-<p>El consumo eléctrico se mide en kWh (kilovatios hora) y depende de la potencia del aparato y del tiempo de uso.</p>
+<p>El consumo eléctrico se mide en kilovatios hora (kWh) y depende de la potencia del aparato y del tiempo de uso.</p>
 
 <div class="fml">
 Consumo = (Potencia × horas) / 1000
 </div>
 
+<h2>¿Cuánto cuesta la electricidad?</h2>
+
+<p>El coste depende del precio del kWh contratado. Cuanto mayor sea el consumo y el precio, mayor será la factura.</p>
+
 <h2>Ejemplo práctico</h2>
 
-<p>Un electrodoméstico de 1000W usado 3 horas al día consume 3 kWh diarios.</p>
+<p>Un aparato de 1000W usado 3 horas al día consume 3 kWh diarios.</p>
 
-<h2>Cómo ahorrar en la factura de luz</h2>
+<h2>Consejos para ahorrar</h2>
 
 <ul>
 <li>Usar electrodomésticos eficientes</li>
-<li>Reducir horas de uso innecesarias</li>
+<li>Reducir consumo innecesario</li>
 <li>Optimizar tarifas eléctricas</li>
 </ul>
 
 <p>También puedes usar nuestra 
-<a href="calculadora-gasto-gasolina.html">calculadora de gasto en gasolina</a> 
+<a href="calculadora-gasto-gasolina.html">calculadora de gasolina</a> 
 o la 
-<a href="calculadora-hipoteca.html">calculadora de hipoteca</a> 
-para analizar otros gastos importantes.</p>
+<a href="calculadora-hipoteca.html">calculadora de hipoteca</a>.</p>
 
 </section>
 
-<!-- ANUNCIO BOTTOM -->
 <div class="ad ad-b wrap">
-  <ins class="adsbygoogle"
-   style="display:block"
-   data-ad-client="TU_ID"
-   data-ad-slot="333"
-   data-ad-format="auto"></ins>
+<ins class="adsbygoogle"
+style="display:block"
+data-ad-client="TU_ID"
+data-ad-slot="333"
+data-ad-format="auto"></ins>
 </div>
 
 <section class="faq wrap">
@@ -137,8 +137,8 @@ para analizar otros gastos importantes.</p>
 </div>
 
 <div class="fi">
-<button class="fq">¿Cómo reducir el consumo?</button>
-<div class="fa"><p>Usando electrodomésticos eficientes y reduciendo el uso innecesario.</p></div>
+<button class="fq">¿Cómo ahorrar luz?</button>
+<div class="fa"><p>Reduciendo consumo y mejorando eficiencia energética.</p></div>
 </div>
 
 </section>
@@ -153,21 +153,30 @@ document.getElementById("year").textContent = new Date().getFullYear();
 
 function calc(){
 
-  let potencia = parseFloat(document.getElementById("potencia").value);
-  let horas = parseFloat(document.getElementById("horas").value);
+  let p = parseFloat(document.getElementById("potencia").value);
+  let h = parseFloat(document.getElementById("horas").value);
   let precio = parseFloat(document.getElementById("precio").value);
 
-  let consumo = (potencia * horas) / 1000;
-  let coste = consumo * precio;
+  let consumo = (p*h)/1000;
+
+  let mensual = consumo * 30;
+  let anual = consumo * 365;
+
+  let costeDia = consumo * precio;
+  let costeMes = mensual * precio;
+  let costeAnual = anual * precio;
 
   document.getElementById("resultado").innerHTML =
     "<b>Consumo diario:</b> "+consumo.toFixed(2)+" kWh<br>" +
-    "<b>Coste diario:</b> "+coste.toFixed(2)+" €";
+    "<b>Coste diario:</b> "+costeDia.toFixed(2)+" €<br><br>" +
+    "<b>Consumo mensual:</b> "+mensual.toFixed(2)+" kWh<br>" +
+    "<b>Coste mensual:</b> "+costeMes.toFixed(2)+" €<br><br>" +
+    "<b>Consumo anual:</b> "+anual.toFixed(2)+" kWh<br>" +
+    "<b>Coste anual:</b> "+costeAnual.toFixed(2)+" €";
 
   document.getElementById("resultado").classList.add("on");
 }
 
-// FAQ toggle
 document.querySelectorAll(".fq").forEach(btn=>{
   btn.onclick=()=>{
     btn.nextElementSibling.classList.toggle("on");
@@ -176,7 +185,6 @@ document.querySelectorAll(".fq").forEach(btn=>{
 
 </script>
 
-<!-- SCHEMA -->
 <script type="application/ld+json">
 {
  "@context": "https://schema.org",
