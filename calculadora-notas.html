@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="light">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Calculadora de Notas y Media Académica | CalculadoraGratis.es</title>
+<meta name="description" content="Calcula tu media académica, la media ponderada por créditos y la nota que necesitas en el examen final para aprobar o alcanzar tu objetivo.">
+<meta name="keywords" content="calculadora notas, media notas, calcular media academica, nota necesaria para aprobar, media ponderada asignaturas">
+<link rel="canonical" href="https://www.calculadoragratis.es/calculadora-notas.html">
+<meta property="og:title" content="Calculadora de Notas y Media Académica | CalculadoraGratis.es">
+<meta property="og:description" content="Calcula tu media académica, la media ponderada por créditos y la nota que necesitas en el examen final para aprobar o alcanzar tu objetivo.">
+<meta property="og:type" content="website"><meta property="og:locale" content="es_ES">
+<meta name="robots" content="index,follow">
+<link rel="preconnect" href="https://api.fontshare.com">
+<link href="https://api.fontshare.com/v2/css?f[]=satoshi@400,500,700,800&display=swap" rel="stylesheet">
+<style>
+:root,[data-theme=light]{
+  --bg:#f7f6f2;--sur:#f9f8f5;--sur2:#fbfbf9;--surO:#f3f0ec;--surD:#e6e4df;
+  --div:#dcd9d5;--bor:#d4d1ca;--txt:#28251d;--mut:#7a7974;--fnt:#bab9b4;
+  --inv:#f9f8f4;--pri:#01696f;--prh:#0c4e54;--war:#964219;--suc:#437a22;
+  --rsm:.375rem;--rmd:.5rem;--rlg:.75rem;--rxl:1rem;--rfl:9999px;
+  --shsm:0 1px 2px oklch(.2 .01 80/.06);--shmd:0 4px 12px oklch(.2 .01 80/.08);
+  --s1:.25rem;--s2:.5rem;--s3:.75rem;--s4:1rem;--s5:1.25rem;--s6:1.5rem;
+  --s8:2rem;--s10:2.5rem;--s12:3rem;--s16:4rem;
+  --txs:clamp(.75rem,.7rem + .25vw,.875rem);--tsm:clamp(.875rem,.8rem + .35vw,1rem);
+  --tba:clamp(1rem,.95rem + .25vw,1.125rem);--tlg:clamp(1.125rem,1rem + .75vw,1.5rem);
+  --txl:clamp(1.5rem,1.2rem + 1.25vw,2.25rem);--t2x:clamp(2rem,1.2rem + 2.5vw,3.5rem);
+  --cdef:960px;--cwid:1200px;--fb:'Satoshi','Inter',sans-serif;--tr:180ms cubic-bezier(.16,1,.3,1);
+}
+[data-theme=dark]{
+  --bg:#171614;--sur:#1c1b19;--sur2:#201f1d;--surO:#1d1c1a;
+  --div:#262523;--bor:#393836;--txt:#cdccca;--mut:#797876;--fnt:#5a5957;
+  --inv:#2b2a28;--pri:#4f98a3;--prh:#227f8b;--war:#bb653b;--suc:#6daa45;
+  --shsm:0 1px 2px oklch(0 0 0/.2);--shmd:0 4px 12px oklch(0 0 0/.3);
+}
+@media(prefers-color-scheme:dark){:root:not([data-theme]){
+  --bg:#171614;--sur:#1c1b19;--sur2:#201f1d;--surO:#1d1c1a;--div:#262523;
+  --bor:#393836;--txt:#cdccca;--mut:#797876;--fnt:#5a5957;--inv:#2b2a28;
+  --pri:#4f98a3;--prh:#227f8b;--war:#bb653b;--suc:#6daa45;
+}}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;scroll-padding-top:var(--s16);-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+body{min-height:100dvh;font-family:var(--fb);font-size:var(--tba);color:var(--txt);background:var(--bg);line-height:1.6}
+img,svg{display:block;max-width:100%;height:auto}
+input,button,select,textarea{font:inherit;color:inherit}
+h1,h2,h3,h4{text-wrap:balance;line-height:1.15}
+p,li{text-wrap:pretty;max-width:72ch}
+a{color:var(--pri);text-decoration:none}a:hover{color:var(--prh);text-decoration:underline}
+button{cursor:pointer;background:none;border:none}
+table{border-collapse:collapse;width:100%}
+:focus-visible{outline:2px solid var(--pri);outline-offset:3px;border-radius:var(--rsm)}
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border-width:0}
+.wrap{max-width:var(--cdef);margin-inline:auto;padding-inline:var(--s4)}
+.site-header{background:var(--sur);border-bottom:1px solid var(--div);position:sticky;top:0;z-index:100;backdrop-filter:blur(8px)}
+.hdr{display:flex;align-items:center;gap:var(--s4);padding:var(--s3) var(--s4);max-width:var(--cwid);margin:auto}
+.logo{display:flex;align-items:center;gap:var(--s2);font-size:var(--tlg);font-weight:800;color:var(--txt);text-decoration:none}
+.logo svg{color:var(--pri)}.bk{font-size:var(--tsm);color:var(--mut);text-decoration:none;white-space:nowrap}
+.bk:hover{color:var(--pri)}.sp{flex:1}
+.tog{width:40px;height:40px;border-radius:var(--rfl);display:grid;place-items:center;color:var(--mut);border:1px solid var(--bor);transition:color var(--tr),background var(--tr)}
+.tog:hover{color:var(--pri);background:var(--surO)}
+.hero{padding:clamp(var(--s8),6vw,var(--s16)) 0;background:var(--sur);border-bottom:1px solid var(--div)}
+.badge{display:inline-block;font-size:var(--tsm);background:color-mix(in oklab,var(--pri) 12%,var(--sur));color:var(--pri);padding:var(--s1) var(--s3);border-radius:var(--rfl);margin-bottom:var(--s4)}
+.hero h1{font-size:var(--t2x);font-weight:800;margin-bottom:var(--s4)}
+.hero h1 em{font-style:normal;color:var(--pri)}
+.hero p{font-size:var(--tlg);color:var(--mut);max-width:60ch}
+.cs{padding:var(--s8) 0}
+.cgrid{display:grid;gap:var(--s6);grid-template-columns:1fr 1fr}
+@media(max-width:768px){.cgrid{grid-template-columns:1fr}}
+.ccard{background:var(--sur);border:1px solid var(--bor);border-radius:var(--rxl);padding:var(--s6);box-shadow:var(--shsm)}
+.ccard h2{font-size:var(--tlg);font-weight:700;margin-bottom:var(--s5)}
+.fg{margin-bottom:var(--s4)}
+.fg label{display:block;font-size:var(--txs);font-weight:700;color:var(--mut);margin-bottom:var(--s1);text-transform:uppercase;letter-spacing:.05em}
+.fg input,.fg select{width:100%;padding:var(--s3) var(--s4);border:1px solid var(--bor);border-radius:var(--rmd);background:var(--bg);font-size:var(--tba);transition:border-color var(--tr),box-shadow var(--tr)}
+.fg input:focus,.fg select:focus{border-color:var(--pri);box-shadow:0 0 0 3px color-mix(in oklab,var(--pri) 20%,transparent);outline:none}
+.btn{padding:var(--s3) var(--s6);border-radius:var(--rmd);font-size:var(--tsm);font-weight:700;transition:background var(--tr),box-shadow var(--tr)}
+.bp{background:var(--pri);color:#fff}.bp:hover{background:var(--prh);box-shadow:var(--shmd)}.bfw{width:100%;margin-top:var(--s2)}
+.bs{background:var(--sur2);color:var(--pri);border:1px solid var(--bor)}.bs:hover{background:var(--surO)}
+.rb{margin-top:var(--s6);padding:var(--s5);background:color-mix(in oklab,var(--pri) 8%,var(--sur));border-radius:var(--rlg);border:1px solid color-mix(in oklab,var(--pri) 30%,transparent);display:none}
+.rb.on{display:block}
+.rl{font-size:var(--txs);color:var(--mut);text-transform:uppercase;letter-spacing:.06em;margin-bottom:var(--s1)}
+.rv{font-size:var(--txl);font-weight:800;color:var(--pri);font-variant-numeric:tabular-nums}
+.rd{margin-top:var(--s4);display:flex;flex-direction:column;gap:var(--s2);font-size:var(--tsm)}
+.rtbl th,.rtbl td{padding:var(--s2) var(--s3);text-align:right;font-size:var(--txs);border-bottom:1px solid var(--div)}
+.rtbl th{text-transform:uppercase;letter-spacing:.04em;font-weight:700;color:var(--mut)}
+.rtbl th:first-child,.rtbl td:first-child{text-align:left}
+.rtbl tbody tr:hover{background:var(--surO)}
+.cnt{padding:var(--s8) 0;border-top:1px solid var(--div)}
+.cnt h2{font-size:var(--txl);font-weight:700;margin-bottom:var(--s4);margin-top:var(--s8)}
+.cnt h2:first-child{margin-top:0}
+.cnt h3{font-size:var(--tlg);font-weight:600;margin-top:var(--s6);margin-bottom:var(--s3)}
+.cnt p{margin-bottom:var(--s4);color:var(--mut);line-height:1.75}
+.cnt ul,.cnt ol{margin-left:var(--s6);margin-bottom:var(--s4)}
+.cnt li{margin-bottom:var(--s2);color:var(--mut)}
+.fml{background:var(--sur2);border:1px solid var(--bor);border-radius:var(--rlg);padding:var(--s5);margin:var(--s5) 0;font-family:monospace;font-size:var(--tsm);line-height:1.9}
+.ex{background:color-mix(in oklab,var(--suc) 8%,var(--sur));border:1px solid color-mix(in oklab,var(--suc) 25%,transparent);border-radius:var(--rlg);padding:var(--s5);margin:var(--s5) 0}
+.ext{font-weight:700;margin-bottom:var(--s2);color:var(--suc)}.ex p{color:var(--txt);margin-bottom:var(--s2)}
+.warn{background:color-mix(in oklab,var(--war) 8%,var(--sur));border:1px solid color-mix(in oklab,var(--war) 25%,transparent);border-radius:var(--rlg);padding:var(--s4);margin:var(--s4) 0;font-size:var(--tsm);color:var(--mut)}
+.imc-bar{height:18px;border-radius:var(--rfl);overflow:hidden;display:flex;margin:var(--s3) 0}
+.imc-seg{flex:1;height:100%}
+.imc-mark{position:relative;height:28px;margin-top:var(--s1)}
+.imc-ptr{position:absolute;top:0;width:3px;height:18px;background:var(--txt);border-radius:2px;transform:translateX(-50%);transition:left .5s ease}
+.ad{background:var(--surO);border:1px dashed var(--bor);border-radius:var(--rmd);display:flex;align-items:center;justify-content:center;color:var(--fnt);font-size:var(--txs);text-transform:uppercase;letter-spacing:.08em;margin:var(--s6) 0}
+.ad-t{height:90px;max-width:728px;margin-inline:auto}
+.ad-m{height:250px;max-width:300px;margin-inline:auto}
+.ad-b{height:90px;max-width:728px;margin-inline:auto}
+.faq{padding:var(--s8) 0;border-top:1px solid var(--div)}
+.faq h2{font-size:var(--txl);font-weight:700;margin-bottom:var(--s6)}
+.fi{border:1px solid var(--bor);border-radius:var(--rlg);margin-bottom:var(--s3);overflow:hidden}
+.fq{width:100%;text-align:left;padding:var(--s4) var(--s5);font-size:var(--tba);font-weight:600;display:flex;justify-content:space-between;align-items:center;background:var(--sur);transition:background var(--tr)}
+.fq:hover{background:var(--surO)}
+.fa{padding:0 var(--s5);max-height:0;overflow:hidden;transition:max-height .35s ease,padding .35s ease}
+.fa.on{max-height:600px;padding:var(--s3) var(--s5) var(--s4)}.fa p{color:var(--mut)}
+.fchv{transition:transform .3s;flex-shrink:0;color:var(--fnt)}.fchv.on{transform:rotate(180deg)}
+.rel{background:var(--sur);border-top:1px solid var(--div);padding:var(--s8) 0}
+.rel h2{font-size:var(--tlg);font-weight:700;margin-bottom:var(--s5)}
+.rgrid{display:grid;gap:var(--s3);grid-template-columns:repeat(auto-fill,minmax(min(190px,100%),1fr))}
+.rc{display:flex;align-items:center;gap:var(--s3);padding:var(--s4);background:var(--sur2);border:1px solid var(--bor);border-radius:var(--rlg);color:var(--txt);text-decoration:none;transition:box-shadow var(--tr),background var(--tr)}
+.rc:hover{box-shadow:var(--shmd);background:var(--surO);text-decoration:none}
+.re{font-size:1.4rem}.rn{font-size:var(--tsm);font-weight:600}
+.ft{padding:var(--s8) var(--s4);text-align:center;color:var(--fnt);font-size:var(--tsm);border-top:1px solid var(--div);margin-top:var(--s8)}
+.csin{max-width:600px;margin:0 auto;padding:var(--s8) 0}
+/* Notas rows */
+.nota-row{display:grid;grid-template-columns:1fr 80px 36px;gap:var(--s2);align-items:center;margin-bottom:var(--s2)}
+.nota-row input{padding:var(--s2) var(--s3)}
+.nota-del{color:var(--mut);font-size:1.1rem;padding:var(--s1);border-radius:var(--rmd);transition:color var(--tr),background var(--tr)}
+.nota-del:hover{color:#c0392b;background:color-mix(in oklab,#c0392b 10%,var(--sur))}
+</style>
+</head>
+<body>
+<a class="sr-only" href="#main">Saltar al contenido principal</a>
+<header class="site-header"><div class="hdr">
+  <a href="index.html" class="logo" aria-label="CalculadoraGratis.es"><svg aria-hidden="true" width="30" height="30" viewBox="0 0 32 32" fill="none"><rect x="2" y="2" width="28" height="28" rx="6" stroke="currentColor" stroke-width="2"/><rect x="6" y="7" width="5" height="4" rx="1" fill="currentColor" opacity=".7"/><rect x="13" y="7" width="5" height="4" rx="1" fill="currentColor" opacity=".7"/><rect x="20" y="7" width="6" height="4" rx="1" fill="currentColor"/><rect x="6" y="14" width="5" height="4" rx="1" fill="currentColor" opacity=".6"/><rect x="13" y="14" width="5" height="4" rx="1" fill="currentColor" opacity=".5"/><rect x="20" y="14" width="6" height="4" rx="1" fill="currentColor" opacity=".35"/><rect x="6" y="21" width="5" height="4" rx="1" fill="currentColor"/><rect x="13" y="21" width="13" height="4" rx="1" fill="currentColor" opacity=".5"/></svg> CalculadoraGratis.es</a>
+  <a href="index.html" class="bk">← Todas las calculadoras</a>
+  <span class="sp"></span>
+  <button class="tog" data-ttog aria-label="Cambiar modo claro/oscuro">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+  </button>
+</div></header>
+<main id="main">
+<section class="hero"><div class="wrap">
+  <span class="badge">Educación · Media ponderada</span>
+  <h1>Calculadora de <em>Notas</em></h1>
+  <p>Calcula tu media académica, la nota media ponderada con créditos o porcentajes, y descubre qué nota necesitas en el examen final para superar la asignatura.</p>
+</div></section>
+<div class="ad ad-t" role="complementary" aria-label="Publicidad">📢 Espacio publicitario Google AdSense (728×90)</div>
+<section class="cs"><div class="wrap">
+<div class="cgrid">
+<!-- MEDIA SIMPLE -->
+<div class="ccard">
+  <h2>Media simple de notas</h2>
+  <div id="notas_cont">
+    <div class="nota-row"><input type="text" placeholder="Asignatura (opcional)" oninput="calcNota()"><input type="number" placeholder="Nota" min="0" max="10" step="0.01" oninput="calcNota()"><button class="nota-del" onclick="delNota(this)" title="Eliminar">✕</button></div>
+    <div class="nota-row"><input type="text" placeholder="Asignatura (opcional)"><input type="number" placeholder="Nota" min="0" max="10" step="0.01" oninput="calcNota()"><button class="nota-del" onclick="delNota(this)" title="Eliminar">✕</button></div>
+    <div class="nota-row"><input type="text" placeholder="Asignatura (opcional)"><input type="number" placeholder="Nota" min="0" max="10" step="0.01" oninput="calcNota()"><button class="nota-del" onclick="delNota(this)" title="Eliminar">✕</button></div>
+  </div>
+  <button class="btn bs bfw" onclick="addNota()" style="margin-top:var(--s3)">+ Añadir asignatura</button>
+  <div class="rb on" id="rmedia" style="margin-top:var(--s4)">
+    <div class="rl">Media académica</div>
+    <div class="rv" id="rv_media">—</div>
+    <div class="rd" id="rd_media"></div>
+  </div>
+</div>
+<!-- NOTA NECESARIA -->
+<div class="ccard">
+  <h2>Nota necesaria en el final</h2>
+  <p style="font-size:var(--tsm);color:var(--mut);margin-bottom:var(--s4)">¿Qué nota necesito en el examen final para aprobar o sacar la nota que quiero?</p>
+  <div class="fg"><label for="nf_actual">Nota actual (antes del final)</label><input type="number" id="nf_actual" placeholder="Ej: 5.2" min="0" max="10" step="0.01"></div>
+  <div class="fg"><label for="nf_pesoact">Peso de la nota actual (%)</label><input type="number" id="nf_pesoact" placeholder="Ej: 60" min="1" max="99"></div>
+  <div class="fg"><label for="nf_pesofin">Peso del examen final (%)</label><input type="number" id="nf_pesofin" placeholder="Ej: 40" min="1" max="99"></div>
+  <div class="fg"><label for="nf_obj">Nota objetivo final</label><input type="number" id="nf_obj" placeholder="Ej: 5 (aprobar)" min="0" max="10" step="0.01" value="5"></div>
+  <button class="btn bp bfw" onclick="calcNecesaria()">Calcular nota necesaria</button>
+  <div class="rb" id="rnec">
+    <div class="rl">Necesitas sacar en el final</div>
+    <div class="rv" id="rv_nec"></div>
+    <div class="rd" id="rd_nec"></div>
+  </div>
+</div>
+</div>
+</div></section>
+<div class="ad ad-m" role="complementary" aria-label="Publicidad">📢 Espacio publicitario Google AdSense (300×250)</div>
+<section class="cnt"><div class="wrap">
+<h2>Cómo se calcula la media académica</h2>
+<p>La media académica es el promedio de todas las notas obtenidas en las asignaturas de un curso o titulación. En España, el sistema de calificación va del 0 al 10, con las siguientes denominaciones oficiales según el Real Decreto 1125/2003:</p>
+<table class="rtbl"><thead><tr><th>Nota numérica</th><th>Calificación</th><th>Calificación en inglés</th></tr></thead>
+<tbody>
+<tr><td>0,0 – 4,9</td><td>Suspenso</td><td>Fail</td></tr>
+<tr><td>5,0 – 6,9</td><td>Aprobado</td><td>Pass</td></tr>
+<tr><td>7,0 – 8,9</td><td>Notable</td><td>Merit</td></tr>
+<tr><td>9,0 – 10,0</td><td>Sobresaliente</td><td>Distinction</td></tr>
+<tr><td>10,0 (Máxima)</td><td>Matrícula de Honor</td><td>Distinction with Honours</td></tr>
+</tbody></table>
+<h3>Media ponderada: cuando las asignaturas tienen diferente peso</h3>
+<div class="fml">Media ponderada = Σ(Nota × Peso) ÷ Σ(Peso)<br><br>Ejemplo: Matemáticas (7,5 — 6 créditos) + Historia (8 — 4 créditos)<br>= (7,5×6 + 8×4) ÷ (6+4) = (45 + 32) ÷ 10 = <strong>7,7</strong></div>
+<h3>¿Cómo se calcula la nota de acceso a la universidad (Selectividad/EVAU)?</h3>
+<p>La nota de acceso a la universidad española (NMB) se calcula como: <strong>60% de la nota media del Bachillerato + 40% de la nota de la EVAU</strong>. Esta nota puede llegar como máximo a 10, aunque con las asignaturas de fase específica puede alcanzar hasta 14. Cada comunidad autónoma aplica sus propios parámetros de ponderación para las materias de fase específica.</p>
+</div></section>
+<section class="faq"><div class="wrap">
+  <h2>Preguntas frecuentes sobre cálculo de notas</h2>
+  <div class="fi"><button class="fq">¿Cómo se calcula la nota media del expediente universitario? <svg class="fchv" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m6 9 6 6 6-6"/></svg></button><div class="fa"><p>La nota media del expediente universitario se calcula como la media ponderada de todas las asignaturas superadas, multiplicando la nota de cada asignatura por sus créditos ECTS. Las asignaturas no superadas (suspensos) no se incluyen en el cálculo, pero algunos programas de máster o becas (como las FPU) sí penalizan los suspensos según su reglamento específico. La fórmula es: Σ(nota × créditos) ÷ Σ(créditos superados).</p></div></div>
+  <div class="fi"><button class="fq">¿Qué nota media necesito para una beca del Ministerio de Educación? <svg class="fchv" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m6 9 6 6 6-6"/></svg></button><div class="fa"><p>Para las becas generales del Ministerio de Educación y FP en España (curso 2024-25), el umbral de rendimiento académico varía según el tipo de estudios y el número de créditos matriculados. En grado universitario, generalmente se exige haber superado un porcentaje mínimo de los créditos matriculados el año anterior. Para becas de excelencia y contratos predoctorales FPU, se exige habitualmente una nota media de expediente de 7,0 o superior.</p></div></div>
+  <div class="fi"><button class="fq">¿Cómo se redondean las notas en la universidad española? <svg class="fchv" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m6 9 6 6 6-6"/></svg></button><div class="fa"><p>Según el Real Decreto 1125/2003, las calificaciones numéricas se expresan con un decimal. El redondeo sigue la norma matemática estándar: si el segundo decimal es 5 o más, se redondea hacia arriba. Sin embargo, la decisión de redondear una nota de 4,9 a 5,0 (suspenso a aprobado) es potestad del docente y no existe obligación legal de hacerlo, aunque algunas universidades tienen normativas específicas al respecto.</p></div></div>
+</div></section>
+<section class="rel"><div class="wrap"><h2>Calculadoras relacionadas</h2><div class="rgrid"><a href="calculadora-regla-de-tres.html" class="rc"><span class="re">📐</span><span class="rn">Regla de tres</span></a><a href="calculadora-porcentajes.html" class="rc"><span class="re">💯</span><span class="rn">Calculadora porcentajes</span></a><a href="calculadora-edad.html" class="rc"><span class="re">🎂</span><span class="rn">Calculadora de edad</span></a><a href="calculadora-imc.html" class="rc"><span class="re">⚖️</span><span class="rn">Calculadora IMC</span></a></div></div></section>
+</main>
+<footer class="ft"><p>© 2024 <strong>CalculadoraGratis.es</strong> — Calculadoras gratuitas en español de España. <a href="index.html">Inicio</a> &nbsp;·&nbsp; <small>Resultados orientativos, no constituyen asesoramiento profesional.</small></p></footer>
+<script>
+(function(){
+  var t=document.querySelector('[data-ttog]'),r=document.documentElement;
+  var d=matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light';
+  r.setAttribute('data-theme',d);
+  if(t)t.addEventListener('click',function(){
+    d=d==='dark'?'light':'dark';r.setAttribute('data-theme',d);
+    t.innerHTML=d==='dark'?'<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>':'<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>';
+  });
+})();
+document.addEventListener('DOMContentLoaded',function(){
+  document.querySelectorAll('.fq').forEach(function(b){
+    b.addEventListener('click',function(){
+      var a=b.nextElementSibling,c=b.querySelector('.fchv');
+      var o=a.classList.contains('on');
+      document.querySelectorAll('.fa.on').forEach(function(x){x.classList.remove('on');var cv=x.previousElementSibling.querySelector('.fchv');if(cv)cv.classList.remove('on');});
+      if(!o){a.classList.add('on');if(c)c.classList.add('on');}
+    });
+  });
+});
+
+function calcNota(){
+  var rows=document.querySelectorAll('#notas_cont .nota-row');
+  var sum=0,cnt=0,items=[];
+  rows.forEach(function(r){
+    var inputs=r.querySelectorAll('input');
+    var nombre=inputs[0].value.trim()||'Asignatura '+(cnt+1);
+    var nota=parseFloat(inputs[1].value);
+    if(!isNaN(nota)&&nota>=0&&nota<=10){sum+=nota;cnt++;items.push(nombre+': '+nota.toFixed(2));}
+  });
+  if(cnt===0){document.getElementById('rv_media').textContent='—';document.getElementById('rd_media').innerHTML='';return;}
+  var media=sum/cnt;
+  var cal=media<5?'Suspenso':media<7?'Aprobado':media<9?'Notable':media<10?'Sobresaliente':'Matrícula de Honor';
+  var col=media<5?'#c0392b':media<7?'#e67e22':media<9?'#f39c12':media<10?'#2ecc71':'#01696f';
+  document.getElementById('rv_media').textContent=media.toFixed(2)+' — '+cal;
+  document.getElementById('rv_media').style.color=col;
+  document.getElementById('rd_media').innerHTML='<div>📊 Asignaturas contadas: <strong>'+cnt+'</strong></div><div>➕ Suma de notas: <strong>'+sum.toFixed(2)+'</strong></div>';
+}
+function addNota(){
+  var c=document.getElementById('notas_cont');
+  var d=document.createElement('div');d.className='nota-row';
+  d.innerHTML='<input type="text" placeholder="Asignatura (opcional)"><input type="number" placeholder="Nota" min="0" max="10" step="0.01" oninput="calcNota()"><button class="nota-del" onclick="delNota(this)" title="Eliminar">✕</button>';
+  c.appendChild(d);
+}
+function delNota(btn){
+  var rows=document.querySelectorAll('#notas_cont .nota-row');
+  if(rows.length<=1){alert('Debe quedar al menos una fila.');return;}
+  btn.closest('.nota-row').remove();calcNota();
+}
+function calcNecesaria(){
+  var act=parseFloat(document.getElementById('nf_actual').value);
+  var pa=parseFloat(document.getElementById('nf_pesoact').value);
+  var pf=parseFloat(document.getElementById('nf_pesofin').value);
+  var obj=parseFloat(document.getElementById('nf_obj').value);
+  if(isNaN(act)||isNaN(pa)||isNaN(pf)||isNaN(obj)){alert('Rellena todos los campos.');return;}
+  if(pa+pf!==100){alert('Los porcentajes de nota actual y examen final deben sumar 100%.');return;}
+  // obj = act*(pa/100) + x*(pf/100)  →  x = (obj - act*(pa/100)) / (pf/100)
+  var x=(obj - act*(pa/100))/(pf/100);
+  var msg;
+  if(x<=0){msg='¡Ya tienes asegurada la nota objetivo aunque saques 0 en el final! 🎉';}
+  else if(x>10){msg='⚠️ Aunque saques un 10 en el final, no alcanzarás el objetivo. Nota máxima posible: '+(act*(pa/100)+10*(pf/100)).toFixed(2)+'.';}
+  else{msg='Necesitas sacar al menos un <strong>'+x.toFixed(2)+'</strong> en el examen final.';}
+  document.getElementById('rv_nec').textContent=x>0&&x<=10?x.toFixed(2):(x<=0?'0 (ya lo tienes)':'Imposible');
+  document.getElementById('rd_nec').innerHTML='<div>'+msg+'</div>';
+  document.getElementById('rnec').classList.add('on');
+}
+</script>
+</body></html>

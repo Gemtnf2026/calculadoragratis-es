@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Calculadora de Hipoteca 2024 — Cuota Mensual y Tabla de Amortización | CalculadoraGratis.es</title>
+<meta name="description" content="Calcula la cuota mensual de tu hipoteca con la fórmula oficial de amortización francesa. Tabla de amortización completa, total de intereses y ejemplos reales.">
+<meta name="keywords" content="calculadora hipoteca, cuota mensual hipoteca, tabla amortización hipoteca, calculadora préstamo hipotecario, hipoteca fija variable España">
+<link rel="canonical" href="https://www.calculadoragratis.es/calculadora-hipoteca.html">
+<meta property="og:title" content="Calculadora de Hipoteca 2024 — Cuota Mensual y Tabla de Amortización | CalculadoraGratis.es">
+<meta property="og:description" content="Calcula la cuota mensual de tu hipoteca con la fórmula oficial de amortización francesa. Tabla de amortización completa, total de intereses y ejemplos reales.">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="es_ES">
+<meta name="robots" content="index,follow">
+<link rel="preconnect" href="https://api.fontshare.com">
+<link href="https://api.fontshare.com/v2/css?f[]=satoshi@400,500,700,800&display=swap" rel="stylesheet">
+<style>
+:root,[data-theme=light]{
+  --bg:#f7f6f2;--sur:#f9f8f5;--sur2:#fbfbf9;--surO:#f3f0ec;--surD:#e6e4df;
+  --div:#dcd9d5;--bor:#d4d1ca;--txt:#28251d;--mut:#7a7974;--fnt:#bab9b4;
+  --inv:#f9f8f4;--pri:#01696f;--prh:#0c4e54;--war:#964219;--suc:#437a22;
+  --rsm:.375rem;--rmd:.5rem;--rlg:.75rem;--rxl:1rem;--rfl:9999px;
+  --shsm:0 1px 2px oklch(.2 .01 80/.06);--shmd:0 4px 12px oklch(.2 .01 80/.08);
+  --shlg:0 12px 32px oklch(.2 .01 80/.12);
+  --s1:.25rem;--s2:.5rem;--s3:.75rem;--s4:1rem;--s5:1.25rem;--s6:1.5rem;
+  --s8:2rem;--s10:2.5rem;--s12:3rem;--s16:4rem;
+  --txs:clamp(.75rem,.7rem + .25vw,.875rem);
+  --tsm:clamp(.875rem,.8rem + .35vw,1rem);
+  --tba:clamp(1rem,.95rem + .25vw,1.125rem);
+  --tlg:clamp(1.125rem,1rem + .75vw,1.5rem);
+  --txl:clamp(1.5rem,1.2rem + 1.25vw,2.25rem);
+  --t2x:clamp(2rem,1.2rem + 2.5vw,3.5rem);
+  --cdef:960px;--cwid:1200px;
+  --fb:'Satoshi','Inter',sans-serif;
+  --tr:180ms cubic-bezier(.16,1,.3,1);
+}
+[data-theme=dark]{
+  --bg:#171614;--sur:#1c1b19;--sur2:#201f1d;--surO:#1d1c1a;--surD:#2d2c2a;
+  --div:#262523;--bor:#393836;--txt:#cdccca;--mut:#797876;--fnt:#5a5957;
+  --inv:#2b2a28;--pri:#4f98a3;--prh:#227f8b;--war:#bb653b;--suc:#6daa45;
+  --shsm:0 1px 2px oklch(0 0 0/.2);--shmd:0 4px 12px oklch(0 0 0/.3);
+}
+@media(prefers-color-scheme:dark){:root:not([data-theme]){
+  --bg:#171614;--sur:#1c1b19;--sur2:#201f1d;--surO:#1d1c1a;--div:#262523;
+  --bor:#393836;--txt:#cdccca;--mut:#797876;--fnt:#5a5957;--inv:#2b2a28;
+  --pri:#4f98a3;--prh:#227f8b;--war:#bb653b;--suc:#6daa45;
+}}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;scroll-padding-top:var(--s16);-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+body{min-height:100dvh;font-family:var(--fb);font-size:var(--tba);color:var(--txt);background:var(--bg);line-height:1.6}
+img,svg{display:block;max-width:100%;height:auto}
+input,button,select,textarea{font:inherit;color:inherit}
+h1,h2,h3,h4{text-wrap:balance;line-height:1.15}
+p,li{text-wrap:pretty;max-width:72ch}
+a{color:var(--pri);text-decoration:none}
+a:hover{color:var(--prh);text-decoration:underline}
+button{cursor:pointer;background:none;border:none}
+table{border-collapse:collapse;width:100%}
+:focus-visible{outline:2px solid var(--pri);outline-offset:3px;border-radius:var(--rsm)}
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border-width:0}
+/* Layout */
+.wrap{max-width:var(--cdef);margin-inline:auto;padding-inline:var(--s4)}
+/* Header */
+.site-header{background:var(--sur);border-bottom:1px solid var(--div);position:sticky;top:0;z-index:100;backdrop-filter:blur(8px)}
+.hdr{display:flex;align-items:center;gap:var(--s4);padding:var(--s3) var(--s4);max-width:var(--cwid);margin:auto}
+.logo{display:flex;align-items:center;gap:var(--s2);font-size:var(--tlg);font-weight:800;color:var(--txt);text-decoration:none}
+.logo svg{color:var(--pri)}
+.bk{font-size:var(--tsm);color:var(--mut);text-decoration:none;white-space:nowrap}
+.bk:hover{color:var(--pri);text-decoration:none}
+.sp{flex:1}
+.tog{width:40px;height:40px;border-radius:var(--rfl);display:grid;place-items:center;color:var(--mut);border:1px solid var(--bor);transition:color var(--tr),background var(--tr)}
+.tog:hover{color:var(--pri);background:var(--surO)}
+/* Hero */
+.hero{padding:clamp(var(--s8),6vw,var(--s16)) 0;background:var(--sur);border-bottom:1px solid var(--div)}
+.badge{display:inline-block;font-size:var(--tsm);background:color-mix(in oklab,var(--pri) 12%,var(--sur));color:var(--pri);padding:var(--s1) var(--s3);border-radius:var(--rfl);margin-bottom:var(--s4)}
+.hero h1{font-size:var(--t2x);font-weight:800;margin-bottom:var(--s4)}
+.hero h1 em{font-style:normal;color:var(--pri)}
+.hero p{font-size:var(--tlg);color:var(--mut);max-width:60ch}
+/* Calc layout */
+.cs{padding:var(--s8) 0}
+.cgrid{display:grid;gap:var(--s6);grid-template-columns:1fr 1fr}
+@media(max-width:768px){.cgrid{grid-template-columns:1fr}}
+.ccard{background:var(--sur);border:1px solid var(--bor);border-radius:var(--rxl);padding:var(--s6);box-shadow:var(--shsm)}
+.ccard h2{font-size:var(--tlg);font-weight:700;margin-bottom:var(--s5)}
+.fg{margin-bottom:var(--s4)}
+.fg label{display:block;font-size:var(--txs);font-weight:700;color:var(--mut);margin-bottom:var(--s1);text-transform:uppercase;letter-spacing:.05em}
+.fg input,.fg select{width:100%;padding:var(--s3) var(--s4);border:1px solid var(--bor);border-radius:var(--rmd);background:var(--bg);font-size:var(--tba);transition:border-color var(--tr),box-shadow var(--tr)}
+.fg input:focus,.fg select:focus{border-color:var(--pri);box-shadow:0 0 0 3px color-mix(in oklab,var(--pri) 20%,transparent);outline:none}
+.btn{padding:var(--s3) var(--s6);border-radius:var(--rmd);font-size:var(--tsm);font-weight:700;transition:background var(--tr),box-shadow var(--tr)}
+.bp{background:var(--pri);color:#fff}
+.bp:hover{background:var(--prh);box-shadow:var(--shmd)}
+.bfw{width:100%;margin-top:var(--s2)}
+/* Result */
+.rb{margin-top:var(--s6);padding:var(--s5);background:color-mix(in oklab,var(--pri) 8%,var(--sur));border-radius:var(--rlg);border:1px solid color-mix(in oklab,var(--pri) 30%,transparent);display:none}
+.rb.on{display:block}
+.rl{font-size:var(--txs);color:var(--mut);text-transform:uppercase;letter-spacing:.06em;margin-bottom:var(--s1)}
+.rv{font-size:var(--txl);font-weight:800;color:var(--pri);font-variant-numeric:tabular-nums}
+.rd{margin-top:var(--s4);display:flex;flex-direction:column;gap:var(--s2);font-size:var(--tsm)}
+/* Table */
+.rtbl th,.rtbl td{padding:var(--s2) var(--s3);text-align:right;font-size:var(--txs);border-bottom:1px solid var(--div)}
+.rtbl th{text-transform:uppercase;letter-spacing:.04em;font-weight:700;color:var(--mut)}
+.rtbl th:first-child,.rtbl td:first-child{text-align:left}
+.rtbl tbody tr:hover{background:var(--surO)}
+/* Content */
+.cnt{padding:var(--s8) 0;border-top:1px solid var(--div)}
+.cnt h2{font-size:var(--txl);font-weight:700;margin-bottom:var(--s4);margin-top:var(--s8)}
+.cnt h2:first-child{margin-top:0}
+.cnt h3{font-size:var(--tlg);font-weight:600;margin-top:var(--s6);margin-bottom:var(--s3)}
+.cnt p{margin-bottom:var(--s4);color:var(--mut);line-height:1.75}
+.cnt ul,.cnt ol{margin-left:var(--s6);margin-bottom:var(--s4)}
+.cnt li{margin-bottom:var(--s2);color:var(--mut)}
+/* Boxes */
+.fml{background:var(--sur2);border:1px solid var(--bor);border-radius:var(--rlg);padding:var(--s5);margin:var(--s5) 0;font-family:monospace;font-size:var(--tsm);line-height:1.9}
+.ex{background:color-mix(in oklab,var(--suc) 8%,var(--sur));border:1px solid color-mix(in oklab,var(--suc) 25%,transparent);border-radius:var(--rlg);padding:var(--s5);margin:var(--s5) 0}
+.ext{font-weight:700;margin-bottom:var(--s2);color:var(--suc)}
+.ex p{color:var(--txt);margin-bottom:var(--s2)}
+.warn{background:color-mix(in oklab,var(--war) 8%,var(--sur));border:1px solid color-mix(in oklab,var(--war) 25%,transparent);border-radius:var(--rlg);padding:var(--s4);margin:var(--s4) 0;font-size:var(--tsm);color:var(--mut)}
+/* Ads */
+.ad{background:var(--surO);border:1px dashed var(--bor);border-radius:var(--rmd);display:flex;align-items:center;justify-content:center;color:var(--fnt);font-size:var(--txs);text-transform:uppercase;letter-spacing:.08em;margin:var(--s6) 0}
+.ad-t{height:90px;max-width:728px;margin-inline:auto}
+.ad-m{height:250px;max-width:300px;margin-inline:auto}
+.ad-b{height:90px;max-width:728px;margin-inline:auto}
+/* FAQ */
+.faq{padding:var(--s8) 0;border-top:1px solid var(--div)}
+.faq h2{font-size:var(--txl);font-weight:700;margin-bottom:var(--s6)}
+.fi{border:1px solid var(--bor);border-radius:var(--rlg);margin-bottom:var(--s3);overflow:hidden}
+.fq{width:100%;text-align:left;padding:var(--s4) var(--s5);font-size:var(--tba);font-weight:600;display:flex;justify-content:space-between;align-items:center;background:var(--sur);transition:background var(--tr)}
+.fq:hover{background:var(--surO)}
+.fa{padding:0 var(--s5);max-height:0;overflow:hidden;transition:max-height .35s ease,padding .35s ease}
+.fa.on{max-height:600px;padding:var(--s3) var(--s5) var(--s4)}
+.fa p{color:var(--mut)}
+.fchv{transition:transform .3s;flex-shrink:0;color:var(--fnt)}
+.fchv.on{transform:rotate(180deg)}
+/* Related */
+.rel{background:var(--sur);border-top:1px solid var(--div);padding:var(--s8) 0}
+.rel h2{font-size:var(--tlg);font-weight:700;margin-bottom:var(--s5)}
+.rgrid{display:grid;gap:var(--s3);grid-template-columns:repeat(auto-fill,minmax(min(190px,100%),1fr))}
+.rc{display:flex;align-items:center;gap:var(--s3);padding:var(--s4);background:var(--sur2);border:1px solid var(--bor);border-radius:var(--rlg);color:var(--txt);text-decoration:none;transition:box-shadow var(--tr),background var(--tr)}
+.rc:hover{box-shadow:var(--shmd);background:var(--surO);text-decoration:none}
+.re{font-size:1.4rem}
+.rn{font-size:var(--tsm);font-weight:600}
+/* Index listing */
+.ctit{font-size:var(--txl);font-weight:700;margin:var(--s10) 0 var(--s5);display:flex;align-items:center;gap:var(--s3)}
+.grid-cards{display:grid;gap:var(--s4);grid-template-columns:repeat(auto-fill,minmax(min(260px,100%),1fr))}
+.lc{display:flex;flex-direction:column;gap:var(--s2);padding:var(--s5);background:var(--sur);border:1px solid var(--bor);border-radius:var(--rxl);color:var(--txt);text-decoration:none;transition:box-shadow var(--tr),transform var(--tr)}
+.lc:hover{box-shadow:var(--shmd);transform:translateY(-2px);text-decoration:none}
+.le{font-size:1.75rem}
+.lt{font-size:var(--tba);font-weight:700}
+.ld{font-size:var(--tsm);color:var(--mut);flex:1}
+.la{font-size:var(--tsm);font-weight:600;color:var(--pri)}
+/* Footer */
+.ft{padding:var(--s8) var(--s4);text-align:center;color:var(--fnt);font-size:var(--tsm);border-top:1px solid var(--div);margin-top:var(--s8)}
+/* Single col calc */
+.csin{max-width:600px;margin:0 auto;padding:var(--s8) 0}
+</style>
+</head>
+<body>
+<a class="sr-only" href="#main">Saltar al contenido principal</a>
+<header class="site-header">
+  <div class="hdr">
+    <a href="index.html" class="logo" aria-label="CalculadoraGratis.es - Inicio"><svg aria-hidden="true" width="30" height="30" viewBox="0 0 32 32" fill="none"><rect x="2" y="2" width="28" height="28" rx="6" stroke="currentColor" stroke-width="2"/><rect x="6" y="7" width="5" height="4" rx="1" fill="currentColor" opacity=".7"/><rect x="13" y="7" width="5" height="4" rx="1" fill="currentColor" opacity=".7"/><rect x="20" y="7" width="6" height="4" rx="1" fill="currentColor"/><rect x="6" y="14" width="5" height="4" rx="1" fill="currentColor" opacity=".6"/><rect x="13" y="14" width="5" height="4" rx="1" fill="currentColor" opacity=".5"/><rect x="20" y="14" width="6" height="4" rx="1" fill="currentColor" opacity=".35"/><rect x="6" y="21" width="5" height="4" rx="1" fill="currentColor"/><rect x="13" y="21" width="13" height="4" rx="1" fill="currentColor" opacity=".5"/></svg> CalculadoraGratis.es</a>
+    <a href="index.html" class="bk">← Todas las calculadoras</a>
+    <span class="sp"></span>
+    <button class="tog" data-ttog aria-label="Cambiar entre modo claro y oscuro">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+    </button>
+  </div>
+</header>
+
+<main id="main">
+<section class="hero"><div class="wrap">
+  <span class="badge">Financiera · Actualizada 2024</span>
+  <h1>Calculadora de <em>Hipoteca</em></h1>
+  <p>Calcula tu cuota mensual, el total de intereses y la tabla de amortización completa en segundos. Fórmula oficial de cuota fija (sistema francés).</p>
+</div></section>
+
+<div class="ad ad-t" role="complementary" aria-label="Publicidad">📢 Espacio publicitario Google AdSense (728×90)</div>
+
+<section class="cs"><div class="wrap">
+<div class="cgrid">
+
+<div class="ccard">
+  <h2>Introduce los datos</h2>
+  <div class="fg"><label for="cap">Capital prestado (€)</label><input type="number" id="cap" value="200000" min="1000" step="1000"></div>
+  <div class="fg"><label for="tae">Tipo de interés anual (%)</label><input type="number" id="tae" value="3.5" min="0.01" step="0.01"></div>
+  <div class="fg"><label for="pla">Plazo (años)</label><input type="number" id="pla" value="30" min="1" max="40"></div>
+  <button class="btn bp bfw" onclick="calcHip()">Calcular hipoteca</button>
+  <div class="rb" id="hres">
+    <div class="rl">Cuota mensual</div>
+    <div class="rv" id="hcuo"></div>
+    <div class="rd">
+      <div>💰 Total pagado: <strong id="htot"></strong></div>
+      <div>📊 Total intereses: <strong id="hint"></strong></div>
+    </div>
+  </div>
+</div>
+
+<div class="ccard" id="htbl-wrap" style="display:none;overflow:auto;max-height:480px">
+  <h2>Tabla de amortización anual</h2>
+  <table class="rtbl"><thead><tr><th>Año</th><th>Cuota anual</th><th>Amortizado</th><th>Intereses</th><th>Pendiente</th></tr></thead>
+  <tbody id="htbl"></tbody></table>
+</div>
+
+</div>
+</div></section>
+
+<div class="ad ad-m" role="complementary" aria-label="Publicidad">📢 Espacio publicitario Google AdSense (300×250)</div>
+
+<section class="cnt"><div class="wrap">
+<h2>¿Cómo funciona la calculadora de hipoteca?</h2>
+<p>Esta calculadora aplica el <strong>sistema de amortización francés</strong>, que es el más utilizado en España por los bancos y cajas. La cuota mensual es constante durante toda la vida del préstamo, aunque al principio pagas más intereses y al final más capital. Es importante entender este mecanismo antes de firmar cualquier hipoteca.</p>
+
+<h3>La fórmula de la cuota mensual</h3>
+<div class="fml">
+  C = K × [ r × (1+r)^n ] / [ (1+r)^n − 1 ]<br><br>
+  Donde:<br>
+  C = cuota mensual<br>
+  K = capital prestado (€)<br>
+  r = tipo de interés mensual = TIN anual / 12 / 100<br>
+  n = número total de cuotas = años × 12
+</div>
+
+<h3>Ejemplo real paso a paso</h3>
+<div class="ex">
+  <div class="ext">📌 Hipoteca de 200.000 € a 30 años al 3,50% TIN</div>
+  <p><strong>r mensual</strong> = 3,50 / 12 / 100 = 0,002917</p>
+  <p><strong>n cuotas</strong> = 30 × 12 = 360</p>
+  <p><strong>C</strong> = 200.000 × [0,002917 × (1,002917)^360] / [(1,002917)^360 − 1]</p>
+  <p><strong>Resultado: 898,09 €/mes</strong> | Total pagado: 323.313 € | Intereses: 123.313 €</p>
+</div>
+
+<h2>Factores clave al pedir una hipoteca en España</h2>
+<p>En España, la Ley 5/2019 reguladora de los contratos de crédito inmobiliario protege al consumidor estableciendo que el banco debe entregarle la <strong>FEIN</strong> (Ficha Europea de Información Normalizada) al menos diez días hábiles antes de la firma. Esta ficha incluye el TAE, que incorpora todos los gastos asociados y es el indicador real del coste total.</p>
+<p>Las hipotecas en España pueden ser a <strong>tipo fijo</strong> (cuota estable toda la vida), a <strong>tipo variable</strong> (revisada semestral o anualmente según el Euríbor) o a <strong>tipo mixto</strong> (fija los primeros años y variable después). La calculadora trabaja con tipo fijo; si tienes una hipoteca variable, usa el TIN actual para una estimación orientativa.</p>
+
+<h3>¿Qué no incluye esta calculadora?</h3>
+<p>La cuota calculada corresponde al capital más los intereses. No incluye el seguro de hogar (obligatorio) ni el seguro de vida vinculado (frecuente), las comisiones de apertura o amortización anticipada, ni el coste de tasación. Suma entre 50 y 150 €/mes adicionales como estimación conservadora de estos gastos.</p>
+
+<h3>Gastos de formalización de la hipoteca</h3>
+<p>Desde la ley de 2019, el banco asume los gastos de gestoría, notaría y registro. El comprador solo paga la tasación (entre 300 y 700 €) y el IAJD (Impuesto de Actos Jurídicos Documentados) en algunas comunidades autónomas. La exención del IAJD para el comprador de vivienda habitual varía por comunidad; en Canarias, por ejemplo, el tipo está bonificado para ciertos supuestos.</p>
+
+<h2>Hipoteca fija vs. variable en 2024</h2>
+<p>Con el Euríbor estabilizándose en la banda del 3,5-4% tras la escalada de 2022-2023, la diferencia de coste entre hipoteca fija y variable se ha estrechado. Las hipotecas fijas a 25-30 años están siendo ofrecidas por los grandes bancos entre el 3,2% y el 3,9% TIN. Una hipoteca variable con diferencial de 0,5% + Euríbor actual implicaría un tipo similar o ligeramente superior, pero con el riesgo de fluctuación futura.</p>
+
+<div class="warn">⚠️ <strong>Aviso:</strong> Los resultados son orientativos. El tipo de interés real, las comisiones y los gastos vinculados pueden variar significativamente entre entidades. Consulta siempre la FEIN y la FIAE que debe facilitarte el banco antes de comprometerte.</div>
+</div></section>
+
+<div class="fi"><button class="fq">¿Qué diferencia hay entre TIN y TAE? <svg class="fchv" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m6 9 6 6 6-6"/></svg></button><div class="fa"><p>El <strong>TIN</strong> (Tipo de Interés Nominal) es el tipo puro que se aplica al capital pendiente para calcular los intereses. El <strong>TAE</strong> (Tasa Anual Equivalente) incluye además las comisiones y otros gastos, expresados como porcentaje anual. Por ley, los bancos están obligados a informar del TAE, que es el indicador que debes comparar entre ofertas.</p></div></div>
+<div class="fi"><button class="fq">¿Conviene amortizar anticipadamente la hipoteca? <svg class="fchv" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m6 9 6 6 6-6"/></svg></button><div class="fa"><p>Amortizar anticipadamente reduce el capital pendiente y, por tanto, los intereses futuros. En España, desde 2019, la comisión por amortización anticipada en hipotecas variables está limitada al 0,25% los tres primeros años y al 0,15% entre el 4º y 5º año. Para las hipotecas fijas el límite es del 2% los primeros diez años y el 1,5% después. Compara el ahorro en intereses con el coste de la comisión y la rentabilidad alternativa de ese dinero.</p></div></div>
+<div class="fi"><button class="fq">¿Cómo afecta el plazo al coste total? <svg class="fchv" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m6 9 6 6 6-6"/></svg></button><div class="fa"><p>A mayor plazo, menor cuota mensual pero mucho mayor gasto total en intereses. Por ejemplo, una hipoteca de 200.000 € al 3,5% pagada en 20 años tiene una cuota de 1.159 € y un coste total de 278.195 €. El mismo préstamo a 30 años baja la cuota a 898 € pero el coste sube a 323.313 €. La diferencia es de más de 45.000 € adicionales en intereses.</p></div></div>
+
+<section class="rel"><div class="wrap"><h2>Calculadoras relacionadas</h2><div class="rgrid"><a href="calculadora-interes-compuesto.html" class="rc"><span class="re">📈</span><span class="rn">Interés compuesto</span></a><a href="calculadora-prestamo.html" class="rc"><span class="re">💳</span><span class="rn">Calculadora préstamo</span></a><a href="calculadora-alquiler-vs-compra.html" class="rc"><span class="re">🏘️</span><span class="rn">Alquiler vs compra</span></a><a href="calculadora-irpf-espana.html" class="rc"><span class="re">🧾</span><span class="rn">IRPF 2024</span></a></div></div></section>
+</main>
+<footer class="ft">
+  <p>© 2024 <strong>CalculadoraGratis.es</strong> — Calculadoras gratuitas en español de España.
+  <a href="index.html">Inicio</a> &nbsp;·&nbsp;
+  <small>Los resultados son orientativos y no constituyen asesoramiento financiero, fiscal ni sanitario.</small></p>
+</footer>
+<script>
+(function(){
+  var t=document.querySelector('[data-ttog]'),r=document.documentElement;
+  var d=matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light';
+  r.setAttribute('data-theme',d);
+  if(t)t.addEventListener('click',function(){
+    d=d==='dark'?'light':'dark';r.setAttribute('data-theme',d);
+    t.innerHTML=d==='dark'?'<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>':'<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>';
+  });
+})();
+document.addEventListener('DOMContentLoaded',function(){
+  document.querySelectorAll('.fq').forEach(function(b){
+    b.addEventListener('click',function(){
+      var a=b.nextElementSibling,c=b.querySelector('.fchv');
+      var o=a.classList.contains('on');
+      document.querySelectorAll('.fa.on').forEach(function(x){x.classList.remove('on');var cv=x.previousElementSibling.querySelector('.fchv');if(cv)cv.classList.remove('on');});
+      if(!o){a.classList.add('on');if(c)c.classList.add('on');}
+    });
+  });
+});
+
+function fmt(n){return n.toLocaleString('es-ES',{minimumFractionDigits:2,maximumFractionDigits:2});}
+function calcHip(){
+  var K=parseFloat(document.getElementById('cap').value)||0;
+  var aTin=parseFloat(document.getElementById('tae').value)||0;
+  var years=parseInt(document.getElementById('pla').value)||0;
+  if(K<=0||aTin<=0||years<=0){alert('Por favor introduce valores válidos.');return;}
+  var r=aTin/100/12, n=years*12;
+  var C=K*(r*Math.pow(1+r,n))/(Math.pow(1+r,n)-1);
+  var tot=C*n, int=tot-K;
+  document.getElementById('hcuo').textContent=fmt(C)+' €';
+  document.getElementById('htot').textContent=fmt(tot)+' €';
+  document.getElementById('hint').textContent=fmt(int)+' €';
+  document.getElementById('hres').classList.add('on');
+  // annual table
+  var pend=K, tbody='';
+  for(var y=1;y<=years;y++){
+    var anC=0,anI=0,anA=0;
+    for(var m=0;m<12;m++){var i=pend*r;var a=C-i;pend-=a;anC+=C;anI+=i;anA+=a;}
+    if(pend<0)pend=0;
+    tbody+=`<tr><td>${y}</td><td>${fmt(anC)} €</td><td>${fmt(anA)} €</td><td>${fmt(anI)} €</td><td>${fmt(pend)} €</td></tr>`;
+  }
+  document.getElementById('htbl').innerHTML=tbody;
+  document.getElementById('htbl-wrap').style.display='';
+}
+</script>
+</body>
+</html>
