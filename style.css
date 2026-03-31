@@ -508,3 +508,15 @@ body{
 .cnt li {
   margin-bottom: 8px;
 }
+/* UNIFICAR TODO EL TEXTO SEO */
+.cnt {
+  font-size: 16px;
+}
+
+.cnt p {
+  font-size: 16px;
+}
+
+.cnt h2 {
+  font-size: 22px;
+}
