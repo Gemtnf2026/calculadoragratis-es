@@ -218,11 +218,8 @@ button:hover{
 
 /* ===== CONTENIDO SEO ===== */
 .cnt{
-  max-width:780px;
+  max-width:1200px;
   margin:3rem auto;
-  font-size:16px;
-  line-height:1.65;
-  color:#374151;
 }
 
 .cnt h2{
