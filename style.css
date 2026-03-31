@@ -186,7 +186,7 @@ input:focus{
 }
 
 /* BUTTON */
-button{
+button:not(.fq){
   width:100%;
   margin-top:1rem;
   padding:1rem;
