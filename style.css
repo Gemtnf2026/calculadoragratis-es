@@ -3,35 +3,18 @@
   --div:#dcd9d5;--bor:#d4d1ca;--txt:#28251d;--mut:#7a7974;--fnt:#bab9b4;
   --inv:#f9f8f4;--pri:#01696f;--prh:#0c4e54;--war:#964219;--suc:#437a22;
   --rsm:.375rem;--rmd:.5rem;--rlg:.75rem;--rxl:1rem;--rfl:9999px;
-  --shsm:0 1px 2px oklch(.2 .01 80/.06);--shmd:0 4px 12px oklch(.2 .01 80/.08);
-  --shlg:0 12px 32px oklch(.2 .01 80/.12);
   --s1:.25rem;--s2:.5rem;--s3:.75rem;--s4:1rem;--s5:1.25rem;--s6:1.5rem;
   --s8:2rem;--s10:2.5rem;--s12:3rem;--s16:4rem;
-  --txs:clamp(.75rem,.7rem + .25vw,.875rem);
-  --tsm:clamp(.875rem,.8rem + .35vw,1rem);
   --tba:clamp(1rem,.95rem + .25vw,1.125rem);
   --tlg:clamp(1.125rem,1rem + .75vw,1.5rem);
   --txl:clamp(1.5rem,1.2rem + 1.25vw,2.25rem);
   --t2x:clamp(2rem,1.2rem + 2.5vw,3.5rem);
-  --cdef:960px;--cwid:1200px;
-  --fb:'Satoshi','Inter',sans-serif;
-  --tr:180ms cubic-bezier(.16,1,.3,1);
-}
-
-[data-theme=dark]{
-  --bg:#171614;--sur:#1c1b19;--sur2:#201f1d;--surO:#1d1c1a;--surD:#2d2c2a;
-  --div:#262523;--bor:#393836;--txt:#cdccca;--mut:#797876;--fnt:#5a5957;
-  --inv:#2b2a28;--pri:#4f98a3;--prh:#227f8b;--war:#bb653b;--suc:#6daa45;
+  --fb:'Satoshi','Segoe UI Emoji','Apple Color Emoji','Noto Color Emoji',sans-serif;
 }
 
 *,
 *::before,
 *::after{box-sizing:border-box;margin:0;padding:0}
-
-html{
-  scroll-behavior:smooth;
-  -webkit-font-smoothing:antialiased;
-}
 
 body{
   min-height:100vh;
@@ -55,7 +38,6 @@ body{
   border-bottom:1px solid var(--div);
   position:sticky;
   top:0;
-  z-index:100;
 }
 
 .hdr{
@@ -71,13 +53,6 @@ body{
   text-decoration:none;
   color:var(--txt);
 }
-
-.bk{
-  font-size:0.9rem;
-  color:var(--mut);
-}
-
-.sp{flex:1}
 
 /* Hero */
 .hero{
@@ -96,7 +71,7 @@ body{
 }
 
 .hero h1{
-  font-size:2rem;
+  font-size:var(--t2x);
   margin-top:1rem;
 }
 
@@ -164,46 +139,64 @@ button:hover{
   color:var(--mut);
 }
 
-/* FAQ */
-.fi{
-  border:1px solid var(--bor);
-  border-radius:0.5rem;
+/* LINKS (quita azul feo) */
+a{
+  text-decoration:none;
+  color:var(--pri);
+}
+
+a:hover{
+  color:var(--prh);
+}
+
+/* GRID CARDS (INDEX PRO) */
+.grid-cards{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+  gap:1rem;
   margin-top:1rem;
 }
 
-.fq{
+/* CARD */
+.lc{
+  display:flex;
+  flex-direction:column;
+  gap:0.5rem;
   padding:1rem;
-  width:100%;
-  text-align:left;
-  font-weight:600;
-}
-
-.fa{
-  padding:1rem;
-  display:none;
-}
-
-.fa.on{
-  display:block;
-}
-
-/* Related */
-.rel{
-  padding:2rem 0;
-}
-
-.rgrid{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(150px,1fr));
-  gap:1rem;
-}
-
-.rc{
-  padding:1rem;
-  background:var(--sur2);
-  border-radius:0.5rem;
-  text-decoration:none;
+  background:var(--sur);
+  border:1px solid var(--bor);
+  border-radius:0.75rem;
   color:var(--txt);
+  transition:all 0.2s ease;
+}
+
+.lc:hover{
+  transform:translateY(-3px);
+  box-shadow:0 4px 12px rgba(0,0,0,0.08);
+  background:var(--sur2);
+}
+
+/* ICON */
+.le{
+  font-size:1.5rem;
+}
+
+/* TITLE */
+.lt{
+  font-weight:700;
+}
+
+/* DESC */
+.ld{
+  font-size:0.9rem;
+  color:var(--mut);
+}
+
+/* CTA */
+.la{
+  font-size:0.85rem;
+  color:var(--pri);
+  font-weight:600;
 }
 
 /* Footer */
