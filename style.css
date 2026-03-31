@@ -329,3 +329,16 @@ button:hover{
     font-size:1.8rem;
   }
 }
+/* Tablet */
+@media (max-width: 1024px){
+  .grid-cards{
+    grid-template-columns:repeat(2,1fr);
+  }
+}
+
+/* Móvil */
+@media (max-width: 640px){
+  .grid-cards{
+    grid-template-columns:1fr;
+  }
+}
