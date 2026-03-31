@@ -232,3 +232,99 @@ a{
     display:none;
   }
 }
+/* ===== ESTILO LOVABLE GLOBAL ===== */
+
+/* HERO MÁS GRANDE */
+.hero{
+  text-align:center;
+  padding:4rem 1rem 2rem;
+}
+
+.hero h1{
+  font-size:clamp(2.2rem,4vw,3rem);
+  font-weight:800;
+  margin-bottom:1rem;
+}
+
+.hero p{
+  max-width:600px;
+  margin:auto;
+  color:#6b7280;
+}
+
+/* CAJA PRINCIPAL (FORMULARIO) */
+.ccard{
+  max-width:700px;
+  margin:2rem auto;
+  background:#fff;
+  border-radius:16px;
+  padding:2rem;
+  border:1px solid #e5e7eb;
+  box-shadow:0 10px 30px rgba(0,0,0,0.06);
+}
+
+/* INPUTS MÁS BONITOS */
+input, select{
+  border-radius:12px;
+  padding:1rem;
+  border:1px solid #e5e7eb;
+  font-size:1rem;
+  transition:all 0.2s ease;
+}
+
+input:focus{
+  border-color:#1d8ea1;
+  outline:none;
+  box-shadow:0 0 0 3px rgba(29,142,161,0.1);
+}
+
+/* BOTÓN PRINCIPAL (TODOS LOS BUTTON) */
+button{
+  width:100%;
+  border-radius:14px;
+  padding:1rem;
+  font-size:1rem;
+  font-weight:600;
+  background:#1d8ea1;
+  color:#fff;
+  transition:all 0.2s ease;
+}
+
+button:hover{
+  background:#176d7c;
+  transform:translateY(-1px);
+}
+
+/* RESULTADO MÁS VISUAL */
+.rb{
+  background:#ecfdf5;
+  border-left:4px solid #1d8ea1;
+  font-weight:600;
+}
+
+/* FAQ MÁS LIMPIO (quita botones feos) */
+.fq{
+  background:#f3f4f6;
+  border:none;
+  border-radius:10px;
+  padding:0.8rem;
+  width:100%;
+  text-align:left;
+  font-weight:600;
+  color:#111827;
+}
+
+.fa{
+  padding:0.5rem 0.5rem 1rem;
+  color:#6b7280;
+}
+
+/* ADS BOX MÁS LIMPIO */
+.ad{
+  background:#f9fafb;
+  border:1px dashed #e5e7eb;
+  border-radius:12px;
+  padding:1rem;
+  text-align:center;
+  color:#6b7280;
+}
