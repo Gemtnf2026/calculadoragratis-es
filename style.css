@@ -459,3 +459,31 @@ body{
     padding:1rem;
   }
 }
+/* ===== BLOQUE CONFIANZA ===== */
+.trust{
+  margin-top:3rem;
+}
+
+.trust h2{
+  font-size:1.5rem;
+  margin-bottom:1rem;
+}
+
+.trust-list{
+  list-style:none;
+  display:flex;
+  flex-direction:column;
+  gap:0.6rem;
+  color:#4b5563;
+}
+
+/* ===== DISCLAIMER ===== */
+.disclaimer{
+  margin-top:2rem;
+  background:#fff8e1;
+  border:1px solid #facc15;
+  border-radius:12px;
+  padding:1rem;
+  font-size:0.9rem;
+  color:#92400e;
+}
