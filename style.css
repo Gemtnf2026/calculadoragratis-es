@@ -254,13 +254,20 @@ button:hover{
 
 /* ===== FAQ ===== */
 .fq{
-  background:#f3f4f6;
-  border:none;
-  border-radius:10px;
-  padding:0.8rem;
+  background:#f9fafb;
+  border:1px solid #e5e7eb;
+  border-radius:12px;
+  padding:14px 16px;
   width:100%;
   text-align:left;
   font-weight:600;
+  color:#111827;
+  cursor:pointer;
+  transition:all 0.2s ease;
+}
+
+.fq:hover{
+  background:#f3f4f6;
 }
 
 .fa{
