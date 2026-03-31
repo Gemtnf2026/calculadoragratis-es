@@ -210,3 +210,81 @@ a:hover{
 @media(max-width:768px){
   .hero h1{font-size:1.5rem}
 }
+/* NAV */
+.nav{
+  margin-left:auto;
+  display:flex;
+  gap:1rem;
+}
+
+.nav a{
+  font-size:0.9rem;
+  color:var(--mut);
+  text-decoration:none;
+}
+
+.nav a:hover{
+  color:var(--pri);
+}
+
+/* HERO */
+.hero{
+  text-align:center;
+  padding:4rem 1rem;
+}
+
+.badge{
+  display:inline-block;
+  background:var(--pri);
+  color:#fff;
+  padding:0.3rem 0.8rem;
+  border-radius:20px;
+  font-size:0.8rem;
+  margin-bottom:1rem;
+}
+
+/* GRID TARJETAS */
+.grid-cards{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+  gap:1rem;
+}
+
+/* TARJETAS */
+.lc{
+  background:#fff;
+  border:1px solid #ddd;
+  border-radius:12px;
+  padding:1.2rem;
+  display:flex;
+  flex-direction:column;
+  gap:0.5rem;
+  text-decoration:none;
+  color:inherit;
+  transition:all 0.2s ease;
+}
+
+.lc:hover{
+  transform:translateY(-5px);
+  box-shadow:0 10px 25px rgba(0,0,0,0.1);
+}
+
+/* TEXTO TARJETAS */
+.le{
+  font-size:1.5rem;
+}
+
+.lt{
+  font-weight:600;
+}
+
+.ld{
+  font-size:0.9rem;
+  color:var(--mut);
+}
+
+.la{
+  margin-top:auto;
+  font-size:0.9rem;
+  color:var(--pri);
+}
