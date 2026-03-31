@@ -328,3 +328,27 @@ button:hover{
   text-align:center;
   color:#6b7280;
 }
+/* ===== HERO AZUL TIPO LOVABLE ===== */
+.hero-top{
+  background:linear-gradient(135deg,#1d8ea1,#1a7c8d);
+  color:#fff;
+  text-align:center;
+  padding:4rem 1rem;
+}
+
+.hero-top h1{
+  font-size:clamp(2rem,4vw,3rem);
+  font-weight:800;
+  margin-bottom:1rem;
+}
+
+.hero-sub{
+  font-size:1.2rem;
+  opacity:0.9;
+  margin-bottom:0.5rem;
+}
+
+.hero-mini{
+  font-size:0.95rem;
+  opacity:0.7;
+}
