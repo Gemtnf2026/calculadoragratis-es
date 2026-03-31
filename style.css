@@ -487,3 +487,24 @@ body{
   font-size:0.9rem;
   color:#92400e;
 }
+.cnt h2 {
+  margin-top: 40px;
+  margin-bottom: 10px;
+  font-size: 24px;
+}
+
+.cnt p {
+  margin-bottom: 18px;
+  line-height: 1.6;
+  color: #444;
+}
+
+.cnt ul {
+  margin-top: 10px;
+  margin-bottom: 25px;
+  padding-left: 20px;
+}
+
+.cnt li {
+  margin-bottom: 8px;
+}
