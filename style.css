@@ -293,8 +293,9 @@ button:not(.fq):hover,
 
 /* ===== FAQ ===== */
 .fq {
-  background: #f8f7ff;
-  border: 1px solid #e2e2f0;
+  background: #ffffff;
+  border: 1px solid #c4b5fd;
+  border-left: 4px solid var(--primary);
   border-radius: 12px;
   padding: 14px 16px;
   width: 100%;
@@ -306,7 +307,10 @@ button:not(.fq):hover,
 }
 
 .fq:hover {
-  background: #f0eeff;
+  background: linear-gradient(90deg, #1e3ab8, #0e6b8a);
+  color: #fff;
+  border-color: #1e3ab8;
+  border-left-color: #fff;
 }
 
 .fa {
