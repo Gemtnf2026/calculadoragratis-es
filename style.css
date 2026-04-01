@@ -303,7 +303,10 @@ button:not(.fq):hover,
   font-weight: 600;
   color: #1a1a2e;
   cursor: pointer;
-  transition: all 0.2s ease;
+  transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+  font-size: 1rem;
+  font-family: var(--font);
+  margin-bottom: 8px;
 }
 
 .fq:hover {
@@ -316,6 +319,11 @@ button:not(.fq):hover,
 .fa {
   padding: 0.5rem 0.5rem 1rem;
   color: #6b6b8a;
+  display: none;
+}
+
+.fa.on {
+  display: block;
 }
 
 /* ===== ADS ===== */
