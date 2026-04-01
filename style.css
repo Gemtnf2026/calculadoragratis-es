@@ -311,11 +311,50 @@ button:hover{
 
 /* ===== FOOTER ===== */
 .ft{
-  text-align:center;
-  padding:3rem 1rem;
-  color:var(--muted);
+  margin-top: 3rem;
+  padding: 2rem 0 3rem;
+  border-top: 1px solid var(--border);
+  background: #fff;
+  color: var(--muted);
 }
 
+.footer-inner{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.9rem;
+  text-align: center;
+}
+
+.footer-copy{
+  font-size: 0.95rem;
+  color: var(--muted);
+}
+
+.footer-links{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.9rem 1.2rem;
+}
+
+.footer-links a{
+  color: var(--muted);
+  text-decoration: none;
+  font-size: 0.95rem;
+  font-weight: 500;
+}
+
+.footer-links a:hover{
+  color: var(--primary);
+}
+
+@media (max-width: 640px){
+  .footer-links{
+    flex-direction: column;
+    gap: 0.7rem;
+  }
+}
 /* ===== RESPONSIVE ===== */
 @media(max-width:768px){
 
