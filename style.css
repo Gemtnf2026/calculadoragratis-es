@@ -54,9 +54,14 @@ img {
   position: sticky;
   top: 0;
   background: #fff;
-  border-bottom: 6px solid transparent;
-  border-image: linear-gradient(90deg, #f7931e, #e8317a, #c026d3, #7b2ff7) 1;
   z-index: 1000;
+}
+
+.site-header::after {
+  content: '';
+  display: block;
+  height: 6px;
+  background: linear-gradient(90deg, #f7931e, #e8317a, #c026d3, #7b2ff7);
 }
 
 .hdr {
@@ -105,7 +110,7 @@ img {
 }
 
 .hero-top {
-  background: linear-gradient(135deg, #7b2ff7 0%, #4a6cf7 50%, #38b6d8 100%);
+  background: linear-gradient(135deg, #4a18b8 0%, #1e3ab8 55%, #0e6b8a 100%);
   color: #fff;
   text-align: center;
   padding: 5rem 1.5rem;
@@ -121,6 +126,7 @@ img {
 .hero-top h1 {
   font-size: clamp(2.2rem, 4vw, 3.2rem);
   font-weight: 800;
+  color: #fff;
 }
 
 .hero-sub {
