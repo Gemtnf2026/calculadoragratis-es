@@ -1,0 +1,22 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Sobre nosotros | CalculadoraGratis.es</title>
+  <meta name="description" content="Conoce CalculadoraGratis.es y el objetivo de nuestras calculadoras online.">
+</head>
+<body>
+  <main>
+    <h1>Sobre nosotros</h1>
+    <p>CalculadoraGratis.es es un proyecto creado para ofrecer calculadoras online gratuitas, rápidas y fáciles de usar en español.</p>
+    <h2>Qué hacemos</h2>
+    <p>Publicamos herramientas útiles para finanzas, matemáticas, salud y tareas cotidianas, con explicaciones claras y resultados inmediatos.</p>
+    <h2>Nuestro objetivo</h2>
+    <p>Queremos ayudar a cualquier persona que necesite hacer un cálculo rápido sin complicaciones ni registro previo.</p>
+    <h2>Importante</h2>
+    <p>Los resultados que muestran nuestras calculadoras son orientativos y pueden variar según cada caso concreto.</p>
+  </main>
+</body>
+</html>
