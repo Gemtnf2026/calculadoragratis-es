@@ -1,214 +1,252 @@
+
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
 
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 
-<title>Calculadora IRPF España 2025: salario neto y retenciones</title>
+<title>Calculadora de hipoteca — cuota mensual y simulador</title>
 
-<meta name="description" content="Calcula tu IRPF en España en segundos. Descubre tu salario neto, cuánto pagarás y la retención mensual con esta calculadora actualizada.">
+<meta name="description" content="Calcula la cuota de tu hipoteca, intereses y total a pagar. Simulador hipotecario con amortización francesa en España.">
 
-<link rel="canonical" href="https://www.tudominio.com/calculadora-irpf">
+<link rel="canonical" href="https://gemtnf2026.github.io/calculadoragratis-es/calculadora-hipoteca.html">
+
 <meta name="robots" content="index,follow">
+
+<link rel="stylesheet" href="style.css">
+
+<link rel="preconnect" href="https://api.fontshare.com">
+<link href="https://api.fontshare.com/v2/css?f[]=satoshi@400,500,700,800&display=swap" rel="stylesheet">
 
 <!-- ADSENSE -->
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=TU_ID"
 crossorigin="anonymous"></script>
 
-<link rel="stylesheet" href="style.css">
+<!-- SCHEMA FAQ -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "¿Qué hipoteca es mejor?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Depende del tipo de interés y de tu estabilidad financiera. Una hipoteca fija ofrece seguridad en la cuota mensual, mientras que la variable puede ser más barata a corto plazo pero con más riesgo."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "¿Cuánto puedo pedir de hipoteca?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Normalmente los bancos financian hasta el 80% del valor de tasación de la vivienda. El 20% restante más los gastos de compraventa (notaría, impuestos) deben pagarse con ahorros propios."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "¿Se puede amortizar la hipoteca antes?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Sí, la amortización anticipada puede reducir significativamente los intereses totales. Puedes amortizar capital reduciendo la cuota mensual o acortando el plazo del préstamo."
+      }
+    }
+  ]
+}
+</script>
 
 </head>
 
 <body>
 
-<div class="wrap">
+<header class="site-header">
+  <div class="hdr wrap">
+    <a href="index.html" class="logo">
+      🧮 CalculadoraGratis
+    </a>
+    <nav class="nav">
+      <a href="index.html#finanzas">Finanzas</a>
+      <a href="index.html#matematicas">Matemáticas</a>
+      <a href="index.html#utiles">Útiles</a>
+    </nav>
+  </div>
+</header>
 
-<h1>Calculadora IRPF España 2025</h1>
-<p class="center">
-Calcula tu salario neto, retención mensual y cuánto pagarás de IRPF en segundos.
-</p>
+<section class="hero wrap">
+  <span class="badge">Finanzas · Vivienda</span>
+  <h1>Calculadora de hipoteca</h1>
+  <p>Simula tu hipoteca y descubre cuánto pagarás al mes, en intereses y en total.</p>
+</section>
 
-<!-- CALCULADORA -->
-<div class="card">
-
-<h2>Datos del contribuyente</h2>
-
-<label>Salario bruto anual (€)</label>
-<input type="number" id="salario" value="35000">
-
-<label>Hijos</label>
-<select id="hijos">
-<option value="0">0</option>
-<option value="1">1</option>
-<option value="2">2</option>
-<option value="3">3</option>
-<option value="4">4+</option>
-</select>
-
-<label>Edad</label>
-<select id="edad">
-<option value="0">Menor de 65</option>
-<option value="1">65-75</option>
-<option value="2">+75</option>
-</select>
-
-<button onclick="calc()">Calcular IRPF</button>
-
-<div class="disclaimer">
-⚠️ Cálculo orientativo basado en tramos generales del IRPF en España. No incluye diferencias autonómicas ni deducciones específicas.
+<!-- ANUNCIO ARRIBA -->
+<div class="ad ad-t wrap">
+  <ins class="adsbygoogle"
+   style="display:block"
+   data-ad-client="TU_ID"
+   data-ad-slot="111"
+   data-ad-format="auto"></ins>
 </div>
 
-<div class="result" id="resultado"></div>
+<section class="cs wrap">
+<div class="cgrid">
+<div class="ccard">
 
+<h2>Datos de la hipoteca</h2>
+
+<div class="fg">
+<label>Importe (€)</label>
+<input id="capital" type="number" value="200000">
 </div>
 
-<!-- ANUNCIO -->
-<div class="ad">
-ANUNCIO ADSENSE
+<div class="fg">
+<label>Interés anual (%)</label>
+<input id="interes" type="number" value="3">
 </div>
 
-<!-- SEO -->
-<h2>¿Cómo funciona el IRPF en España?</h2>
-<p>
-El IRPF (Impuesto sobre la Renta de las Personas Físicas) es un impuesto progresivo. Esto significa que no todo tu salario tributa al mismo porcentaje, sino que se divide en tramos. Cada tramo aplica un tipo distinto, por lo que el resultado final es un tipo efectivo inferior al tipo marginal.
-</p>
+<div class="fg">
+<label>Años</label>
+<input id="años" type="number" value="25">
+</div>
 
-<h2>¿Cuánto IRPF se paga según el salario?</h2>
-<p>
-El porcentaje de IRPF varía según los ingresos. A continuación puedes ver una estimación orientativa:
-</p>
+<button class="btn bp bfw" onclick="calc()">Calcular hipoteca</button>
 
+<div class="rb" id="resultado"></div>
+
+</div>
+</div>
+</section>
+
+<!-- ANUNCIO MEDIO -->
+<div class="ad ad-m wrap">
+  <ins class="adsbygoogle"
+   style="display:block"
+   data-ad-client="TU_ID"
+   data-ad-slot="222"
+   data-ad-format="auto"></ins>
+</div>
+
+<section class="cnt wrap">
+
+<h2>¿Cómo calcular la cuota de una hipoteca?</h2>
+<p>La cuota mensual se calcula mediante el sistema de amortización francés, utilizado en la mayoría de hipotecas en España. Este sistema mantiene una cuota fija durante toda la vida del préstamo.</p>
+
+<div class="fml">
+Cuota = (capital × interés) / (1 - (1 + interés)^-n)
+</div>
+
+<h2>¿Cuánto se paga realmente?</h2>
+<p>Aunque la cuota mensual sea fija, el coste total de la hipoteca puede ser mucho mayor debido a los intereses acumulados a lo largo del tiempo.</p>
+
+<h2>Ejemplo práctico</h2>
+<p>Para una hipoteca de 200.000€ al 3% a 25 años:</p>
 <ul>
-<li>20.000 € → aproximadamente 15%</li>
-<li>30.000 € → aproximadamente 18% – 20%</li>
-<li>40.000 € → aproximadamente 22%</li>
-<li>60.000 € → aproximadamente 30%</li>
+<li>Cuota mensual aproximada: 948€</li>
+<li>Total pagado: más de 280.000€</li>
+<li>Intereses: más de 80.000€</li>
 </ul>
 
-<!-- ANUNCIO -->
-<div class="ad">
-ANUNCIO ADSENSE
-</div>
-
-<h2>¿Cuánto me quitan de IRPF en la nómina?</h2>
-<p>
-La retención del IRPF en la nómina depende del salario, la edad y la situación familiar. En general, cuanto mayor es el salario, mayor es el porcentaje retenido. Esta calculadora permite obtener una estimación rápida del importe que se descuenta mensualmente.
-</p>
-
-<h2>Tramos IRPF España 2025</h2>
-<p>
-Hasta 12.450 € → 19%<br>
-12.450 - 20.200 € → 24%<br>
-20.200 - 35.200 € → 30%<br>
-35.200 - 60.000 € → 37%<br>
-60.000 - 300.000 € → 45%<br>
-Más de 300.000 € → 47%
-</p>
-
-<!-- ANUNCIO -->
-<div class="ad">
-ANUNCIO ADSENSE
-</div>
-
-<h2>Otras calculadoras útiles</h2>
+<h2>Factores que influyen</h2>
 <ul>
-<li><a href="#">Calculadora de hipoteca</a></li>
-<li><a href="#">Calculadora de préstamo</a></li>
-<li><a href="#">Calculadora sueldo neto</a></li>
+<li>Tipo de interés (fijo o variable)</li>
+<li>Duración del préstamo</li>
+<li>Capital financiado</li>
 </ul>
 
+<p>También puedes usar nuestra
+<a href="calculadora-prestamo.html">calculadora de préstamo</a>
+o la
+<a href="calculadora-alquiler-vs-compra.html">comparativa alquilar o comprar</a>
+para tomar mejores decisiones financieras.</p>
+
+</section>
+
+<section class="trust wrap">
+<h2>¿Por qué usar esta calculadora de hipoteca?</h2>
+<ul class="trust-list">
+<li>✅ Simulación real con sistema francés</li>
+<li>✅ Cálculo inmediato sin registro</li>
+<li>✅ Adaptado a hipotecas en España</li>
+<li>✅ Resultados claros: cuota, intereses y total</li>
+<li>✅ Funciona en móvil y ordenador</li>
+</ul>
+</section>
+
+<!-- ANUNCIO ABAJO -->
+<div class="ad ad-b wrap">
+  <ins class="adsbygoogle"
+   style="display:block"
+   data-ad-client="TU_ID"
+   data-ad-slot="333"
+   data-ad-format="auto"></ins>
 </div>
+
+<section class="faq wrap">
+<h2>Preguntas frecuentes</h2>
+
+<div class="fi">
+<button class="fq">¿Qué hipoteca es mejor?</button>
+<div class="fa"><p>Depende del tipo de interés y de tu estabilidad financiera.</p></div>
+</div>
+
+<div class="fi">
+<button class="fq">¿Cuánto puedo pedir?</button>
+<div class="fa"><p>Normalmente hasta el 80% del valor de la vivienda.</p></div>
+</div>
+
+<div class="fi">
+<button class="fq">¿Se puede amortizar antes?</button>
+<div class="fa"><p>Sí, y puede reducir significativamente los intereses totales.</p></div>
+</div>
+
+</section>
+
+<section class="disclaimer wrap">
+<p>
+⚠️ <strong>Aviso:</strong> Esta calculadora ofrece resultados orientativos.
+Las condiciones reales pueden variar según el banco, comisiones y seguros asociados.
+</p>
+</section>
+
+<footer class="ft">
+<p>© <span id="year"></span> CalculadoraGratis.es</p>
+</footer>
 
 <script>
 
-function fmt(n){
-  return n.toLocaleString("es-ES",{minimumFractionDigits:2,maximumFractionDigits:2});
-}
+// año automático
+document.getElementById("year").textContent = new Date().getFullYear();
 
+// cálculo hipoteca
 function calc(){
+  let c = parseFloat(document.getElementById("capital").value);
+  let i = parseFloat(document.getElementById("interes").value)/100/12;
+  let n = parseFloat(document.getElementById("años").value)*12;
 
-let bruto = parseFloat(document.getElementById("salario").value);
-let hijos = parseInt(document.getElementById("hijos").value);
-let edad = parseInt(document.getElementById("edad").value);
+  let cuota = (c*i)/(1-Math.pow(1+i,-n));
+  let total = cuota * n;
+  let intereses = total - c;
 
-let ss = bruto * 0.0635;
-let base = bruto - ss;
+  document.getElementById("resultado").innerHTML =
+    "<b>Cuota mensual:</b> "+cuota.toFixed(2)+" €<br>" +
+    "<b>Total pagado:</b> "+total.toFixed(2)+" €<br>" +
+    "<b>Intereses:</b> "+intereses.toFixed(2)+" €<br><br>" +
+    "<a class='btn' href='calculadora-prestamo.html'>Comparar con préstamo →</a>";
 
-let minPersonal = 5550;
-if(edad==1) minPersonal=6700;
-if(edad==2) minPersonal=8100;
+  document.getElementById("resultado").classList.add("on");
+}
 
-let minHijos=[0,2400,5100,9100,13600];
-let minTotal=minPersonal+(minHijos[hijos]||0);
-
-let tramos=[12450,20200,35200,60000,300000];
-let tipos=[0.19,0.24,0.30,0.37,0.45,0.47];
-
-let cuota=0;
-let baseCalc=Math.max(0,base);
-
-let prev=0;
-for(let i=0;i<tipos.length;i++){
-  let limite=tramos[i]||9999999;
-  if(baseCalc>prev){
-    let tramo=Math.min(baseCalc,limite)-prev;
-    cuota+=tramo*tipos[i];
-    prev=limite;
+// FAQ
+document.querySelectorAll(".fq").forEach(btn=>{
+  btn.onclick=()=>{
+    btn.nextElementSibling.classList.toggle("on");
   }
-}
-
-cuota = Math.max(0, cuota - (minTotal*0.19));
-
-let neto = bruto - cuota - ss;
-let tipoMedio = (cuota/bruto)*100;
-
-document.getElementById("resultado").innerHTML = `
-<h3>Resultado del cálculo</h3>
-
-<b>Salario bruto:</b> ${fmt(bruto)} €<br>
-<b>Seguridad Social:</b> ${fmt(ss)} €<br>
-<b>IRPF estimado:</b> ${fmt(cuota)} €<br>
-
-<hr>
-
-<b style="font-size:20px">Salario neto: ${fmt(neto)} €</b><br>
-
-Tipo efectivo: ${fmt(tipoMedio)} %<br>
-Retención mensual: ${fmt(cuota/12)} €
-`;
-
-document.getElementById("resultado").style.display="block";
-
-}
+});
 
 </script>
 
-<!-- FAQ SCHEMA -->
-<script type="application/ld+json">
-{
- "@context":"https://schema.org",
- "@type":"FAQPage",
- "mainEntity":[
-  {
-   "@type":"Question",
-   "name":"¿Cómo calcular el IRPF en España?",
-   "acceptedAnswer":{
-    "@type":"Answer",
-    "text":"Se calcula aplicando tramos progresivos al salario tras deducciones."
-   }
-  },
-  {
-   "@type":"Question",
-   "name":"¿Cuánto IRPF pago?",
-   "acceptedAnswer":{
-    "@type":"Answer",
-    "text":"Depende del salario, edad y situación familiar."
-   }
-  }
- ]
-}
-</script>
-
+<script src="seo.js"></script>
 </body>
 </html>
