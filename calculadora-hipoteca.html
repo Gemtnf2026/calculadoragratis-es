@@ -9,7 +9,7 @@
 
 <meta name="description" content="Calcula la cuota de tu hipoteca, intereses y total a pagar. Simulador hipotecario con amortización francesa en España.">
 
-<link rel="canonical" href="https://www.calculadoragratis.es/calculadora-hipoteca.html">
+<link rel="canonical" href="https://gemtnf2026.github.io/calculadoragratis-es/calculadora-hipoteca.html">
 
 <meta name="robots" content="index,follow">
 
@@ -21,6 +21,8 @@
 <!-- ADSENSE -->
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=TU_ID"
 crossorigin="anonymous"></script>
+
+<!-- SCHEMA FAQ -->
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -53,36 +55,21 @@ crossorigin="anonymous"></script>
   ]
 }
 </script>
-```
 
----
-
-## Cómo queda en Google 👇
-
-En lugar de un resultado normal, aparecería así:
-```
-Calculadora de hipoteca — cuota mensual y simulador
-gemtnf2026.github.io › calculadora-hipoteca
-▼ ¿Qué hipoteca es mejor?
-▼ ¿Cuánto puedo pedir de hipoteca?
-▼ ¿Se puede amortizar antes?
 </head>
 
 <body>
 
 <header class="site-header">
   <div class="hdr wrap">
-
     <a href="index.html" class="logo">
       🧮 CalculadoraGratis
     </a>
-
     <nav class="nav">
       <a href="index.html#finanzas">Finanzas</a>
       <a href="index.html#matematicas">Matemáticas</a>
       <a href="index.html#utiles">Útiles</a>
     </nav>
-
   </div>
 </header>
 
@@ -102,9 +89,7 @@ gemtnf2026.github.io › calculadora-hipoteca
 </div>
 
 <section class="cs wrap">
-
 <div class="cgrid">
-
 <div class="ccard">
 
 <h2>Datos de la hipoteca</h2>
@@ -129,7 +114,6 @@ gemtnf2026.github.io › calculadora-hipoteca
 <div class="rb" id="resultado"></div>
 
 </div>
-
 </div>
 </section>
 
@@ -145,7 +129,6 @@ gemtnf2026.github.io › calculadora-hipoteca
 <section class="cnt wrap">
 
 <h2>¿Cómo calcular la cuota de una hipoteca?</h2>
-
 <p>La cuota mensual se calcula mediante el sistema de amortización francés, utilizado en la mayoría de hipotecas en España. Este sistema mantiene una cuota fija durante toda la vida del préstamo.</p>
 
 <div class="fml">
@@ -153,13 +136,10 @@ Cuota = (capital × interés) / (1 - (1 + interés)^-n)
 </div>
 
 <h2>¿Cuánto se paga realmente?</h2>
-
 <p>Aunque la cuota mensual sea fija, el coste total de la hipoteca puede ser mucho mayor debido a los intereses acumulados a lo largo del tiempo.</p>
 
 <h2>Ejemplo práctico</h2>
-
 <p>Para una hipoteca de 200.000€ al 3% a 25 años:</p>
-
 <ul>
 <li>Cuota mensual aproximada: 948€</li>
 <li>Total pagado: más de 280.000€</li>
@@ -167,19 +147,29 @@ Cuota = (capital × interés) / (1 - (1 + interés)^-n)
 </ul>
 
 <h2>Factores que influyen</h2>
-
 <ul>
 <li>Tipo de interés (fijo o variable)</li>
 <li>Duración del préstamo</li>
 <li>Capital financiado</li>
 </ul>
 
-<p>También puedes usar nuestra 
-<a href="calculadora-prestamo.html">calculadora de préstamo</a> 
-o la 
-<a href="calculadora-alquiler-vs-compra.html">comparativa alquilar o comprar</a> 
+<p>También puedes usar nuestra
+<a href="calculadora-prestamo.html">calculadora de préstamo</a>
+o la
+<a href="calculadora-alquiler-vs-compra.html">comparativa alquilar o comprar</a>
 para tomar mejores decisiones financieras.</p>
 
+</section>
+
+<section class="trust wrap">
+<h2>¿Por qué usar esta calculadora de hipoteca?</h2>
+<ul class="trust-list">
+<li>✅ Simulación real con sistema francés</li>
+<li>✅ Cálculo inmediato sin registro</li>
+<li>✅ Adaptado a hipotecas en España</li>
+<li>✅ Resultados claros: cuota, intereses y total</li>
+<li>✅ Funciona en móvil y ordenador</li>
+</ul>
 </section>
 
 <!-- ANUNCIO ABAJO -->
@@ -192,7 +182,6 @@ para tomar mejores decisiones financieras.</p>
 </div>
 
 <section class="faq wrap">
-
 <h2>Preguntas frecuentes</h2>
 
 <div class="fi">
@@ -212,6 +201,13 @@ para tomar mejores decisiones financieras.</p>
 
 </section>
 
+<section class="disclaimer wrap">
+<p>
+⚠️ <strong>Aviso:</strong> Esta calculadora ofrece resultados orientativos.
+Las condiciones reales pueden variar según el banco, comisiones y seguros asociados.
+</p>
+</section>
+
 <footer class="ft">
 <p>© <span id="year"></span> CalculadoraGratis.es</p>
 </footer>
@@ -223,7 +219,6 @@ document.getElementById("year").textContent = new Date().getFullYear();
 
 // cálculo hipoteca
 function calc(){
-
   let c = parseFloat(document.getElementById("capital").value);
   let i = parseFloat(document.getElementById("interes").value)/100/12;
   let n = parseFloat(document.getElementById("años").value)*12;
@@ -240,28 +235,7 @@ function calc(){
 
   document.getElementById("resultado").classList.add("on");
 }
-<section class="trust wrap">
 
-<h2>¿Por qué usar esta calculadora de hipoteca?</h2>
-
-<ul class="trust-list">
-<li>✅ Simulación real con sistema francés</li>
-<li>✅ Cálculo inmediato sin registro</li>
-<li>✅ Adaptado a hipotecas en España</li>
-<li>✅ Resultados claros: cuota, intereses y total</li>
-<li>✅ Funciona en móvil y ordenador</li>
-</ul>
-
-</section>
-
-<section class="disclaimer wrap">
-
-<p>
-⚠️ <strong>Aviso:</strong> Esta calculadora ofrece resultados orientativos.
-Las condiciones reales pueden variar según el banco, comisiones y seguros asociados.
-</p>
-
-</section>
 // FAQ
 document.querySelectorAll(".fq").forEach(btn=>{
   btn.onclick=()=>{
@@ -271,21 +245,6 @@ document.querySelectorAll(".fq").forEach(btn=>{
 
 </script>
 
-<!-- SCHEMA -->
-<script type="application/ld+json">
-{
- "@context": "https://schema.org",
- "@type": "FAQPage",
- "mainEntity": [{
-   "@type": "Question",
-   "name": "¿Cómo calcular la cuota de una hipoteca?",
-   "acceptedAnswer": {
-     "@type": "Answer",
-     "text": "Se utiliza la fórmula de amortización francesa basada en capital, interés y plazo."
-   }
- }]
-}
-</script>
 <script src="seo.js"></script>
 </body>
 </html>
