@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Contacto | CalculadoraGratis.es</title>
+  <meta name="description" content="Página de contacto de CalculadoraGratis.es.">
+</head>
+<body>
+  <main>
+    <h1>Contacto</h1>
+    <p>Si tienes una duda, detectas un error en una calculadora o quieres proponernos una nueva herramienta, puedes escribirnos.</p>
+    <h2>Email</h2>
+    <p><strong>tuemail@tudominio.com</strong></p>
+    <h2>Mensaje</h2>
+    <p>Intenta incluir el nombre de la calculadora, el problema que has visto y, si puedes, una captura o ejemplo. Así podremos ayudarte más rápido.</p>
+    <p>Respondemos lo antes posible.</p>
+  </main>
+</body>
+</html>
