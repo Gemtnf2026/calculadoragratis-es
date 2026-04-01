@@ -1,14 +1,14 @@
 /* ===== VARIABLES ===== */
 :root {
-  --bg: #f6f7fb;
+  --bg: #f5f5fa;
   --card: #ffffff;
-  --border: #e5e7eb;
-  --text: #111827;
-  --muted: #6b7280;
-  --primary: #1d8ea1;
-  --primary-hover: #176d7c;
+  --border: #e2e2f0;
+  --text: #1a1a2e;
+  --muted: #6b6b8a;
+  --primary: #6c47ff;
+  --primary-hover: #5535e0;
   --radius: 14px;
-  --shadow: 0 10px 30px rgba(0, 0, 0, 0.06);
+  --shadow: 0 10px 30px rgba(108, 71, 255, 0.08);
   --font: 'Inter', system-ui, sans-serif;
 }
 
@@ -54,7 +54,8 @@ img {
   position: sticky;
   top: 0;
   background: #fff;
-  border-bottom: 1px solid var(--border);
+  border-bottom: 6px solid transparent;
+  border-image: linear-gradient(90deg, #f7931e, #e8317a, #c026d3, #7b2ff7) 1;
   z-index: 1000;
 }
 
@@ -104,7 +105,7 @@ img {
 }
 
 .hero-top {
-  background: linear-gradient(135deg, #1d8ea1, #0f766e);
+  background: linear-gradient(135deg, #7b2ff7 0%, #4a6cf7 50%, #38b6d8 100%);
   color: #fff;
   text-align: center;
   padding: 5rem 1.5rem;
@@ -157,7 +158,8 @@ img {
 
 .lc:hover {
   transform: translateY(-4px);
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 10px 30px rgba(108, 71, 255, 0.12);
+  border-color: #c4b5fd;
 }
 
 .lt {
@@ -208,7 +210,7 @@ input:focus,
 select:focus {
   border-color: var(--primary);
   outline: none;
-  box-shadow: 0 0 0 3px rgba(29, 142, 161, 0.1);
+  box-shadow: 0 0 0 3px rgba(108, 71, 255, 0.12);
 }
 
 /* ===== BUTTONS ===== */
@@ -220,7 +222,7 @@ button:not(.fq),
   padding: 1rem;
   border: none;
   border-radius: 14px;
-  background: var(--primary);
+  background: linear-gradient(135deg, #7b2ff7, #4a6cf7);
   color: #fff;
   font-weight: 600;
   cursor: pointer;
@@ -230,14 +232,14 @@ button:not(.fq),
 
 button:not(.fq):hover,
 .btn:hover {
-  background: var(--primary-hover);
+  background: linear-gradient(135deg, #6920e0, #3a5ce0);
 }
 
 /* ===== RESULT ===== */
 .rb {
   margin-top: 1rem;
   padding: 1rem;
-  background: #ecfdf5;
+  background: #ede9ff;
   border-left: 4px solid var(--primary);
   border-radius: 10px;
   display: none;
@@ -258,7 +260,7 @@ button:not(.fq):hover,
   font-size: 22px;
   margin-top: 35px;
   margin-bottom: 10px;
-  color: #111827;
+  color: #1a1a2e;
 }
 
 .cnt p {
@@ -276,7 +278,7 @@ button:not(.fq):hover,
 
 .fml {
   font-size: 15px;
-  background: #f3f4f6;
+  background: #f0eeff;
   padding: 12px;
   border-radius: 10px;
   margin: 15px 0;
@@ -285,30 +287,30 @@ button:not(.fq):hover,
 
 /* ===== FAQ ===== */
 .fq {
-  background: #f9fafb;
-  border: 1px solid #e5e7eb;
+  background: #f8f7ff;
+  border: 1px solid #e2e2f0;
   border-radius: 12px;
   padding: 14px 16px;
   width: 100%;
   text-align: left;
   font-weight: 600;
-  color: #111827;
+  color: #1a1a2e;
   cursor: pointer;
   transition: all 0.2s ease;
 }
 
 .fq:hover {
-  background: #f3f4f6;
+  background: #f0eeff;
 }
 
 .fa {
   padding: 0.5rem 0.5rem 1rem;
-  color: #6b7280;
+  color: #6b6b8a;
 }
 
 /* ===== ADS ===== */
 .ad {
-  background: #f9fafb;
+  background: #f8f7ff;
   border: 1px dashed var(--border);
   border-radius: 12px;
   padding: 1rem;
