@@ -204,21 +204,24 @@
 </section>
 
 <section class="disclaimer wrap">
-
-  <p>
-    ⚠️ <strong>Aviso:</strong> Los resultados de estas calculadoras son orientativos y pueden no ser exactos.
-    No constituyen asesoramiento financiero, legal o profesional. 
-    Para decisiones importantes, consulta con un especialista.
-  </p>
-
+  <p><strong>Aviso:</strong> ...</p>
 </section>
+
 <footer class="ft">
-<p>© <span id="year"></span> CalculadoraGratis.es</p>
+  <div class="wrap footer-inner">
+    <p class="footer-copy"><span id="year"></span> CalculadoraGratis.es</p>
+
+    <nav class="footer-links" aria-label="Enlaces legales">
+      <a href="sobre-nosotros.html">Sobre nosotros</a>
+      <a href="privacidad.html">Privacidad</a>
+      <a href="cookies.html">Cookies</a>
+      <a href="contacto.html">Contacto</a>
+    </nav>
+  </div>
 </footer>
 
 <script>
-document.getElementById("year").textContent = new Date().getFullYear();
+  document.getElementById("year").textContent = new Date().getFullYear();
 </script>
-
 </body>
 </html>
