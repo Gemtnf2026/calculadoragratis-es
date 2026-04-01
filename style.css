@@ -21,7 +21,10 @@
   padding: 0;
 }
 
-/* ===== BASE ===== */
+html {
+  scroll-behavior: smooth;
+}
+
 body {
   font-family: var(--font);
   background: var(--bg);
@@ -32,6 +35,11 @@ body {
 
 a {
   color: inherit;
+}
+
+img {
+  max-width: 100%;
+  display: block;
 }
 
 /* ===== CONTAINER ===== */
@@ -71,7 +79,7 @@ a {
 .nav a {
   text-decoration: none;
   color: var(--muted);
-  font-size: 0.9rem;
+  font-size: 0.95rem;
   font-weight: 500;
 }
 
@@ -79,7 +87,7 @@ a {
   color: var(--primary);
 }
 
-/* ===== HERO NORMAL ===== */
+/* ===== HERO ===== */
 .hero {
   text-align: center;
   padding: 4rem 1rem 2rem;
@@ -95,7 +103,6 @@ a {
   color: var(--muted);
 }
 
-/* ===== HERO AZUL ===== */
 .hero-top {
   background: linear-gradient(135deg, #1d8ea1, #0f766e);
   color: #fff;
@@ -159,7 +166,8 @@ a {
 
 .ld {
   color: var(--muted);
-  font-size: 0.9rem;
+  font-size: 0.95rem;
+  line-height: 1.5;
 }
 
 .la {
@@ -180,6 +188,10 @@ a {
   box-shadow: var(--shadow);
 }
 
+.fg {
+  margin-bottom: 1rem;
+}
+
 /* ===== INPUTS ===== */
 input,
 select {
@@ -189,6 +201,7 @@ select {
   border: 1px solid var(--border);
   margin-top: 0.5rem;
   font-size: 1rem;
+  background: #fff;
 }
 
 input:focus,
@@ -198,7 +211,7 @@ select:focus {
   box-shadow: 0 0 0 3px rgba(29, 142, 161, 0.1);
 }
 
-/* ===== BUTTON ===== */
+/* ===== BUTTONS ===== */
 button:not(.fq),
 .btn {
   display: inline-block;
@@ -220,7 +233,7 @@ button:not(.fq):hover,
   background: var(--primary-hover);
 }
 
-/* ===== RESULTADO ===== */
+/* ===== RESULT ===== */
 .rb {
   margin-top: 1rem;
   padding: 1rem;
@@ -234,7 +247,7 @@ button:not(.fq):hover,
   display: block;
 }
 
-/* ===== CONTENIDO SEO ===== */
+/* ===== SEO CONTENT ===== */
 .cnt {
   max-width: 1200px;
   margin: 3rem auto;
@@ -261,7 +274,6 @@ button:not(.fq):hover,
   margin-bottom: 8px;
 }
 
-/* ===== FORMULA ===== */
 .fml {
   font-size: 15px;
   background: #f3f4f6;
@@ -342,7 +354,7 @@ main h1 {
 }
 
 main h2 {
-  font-size: 1.9rem;
+  font-size: 1.8rem;
   margin-top: 2.2rem;
   margin-bottom: 0.8rem;
 }
@@ -424,13 +436,11 @@ main p {
   }
 
   .lt {
-    font-weight: 700;
     font-size: 1.1rem;
     line-height: 1.3;
   }
 
   .ld {
-    color: var(--muted);
     font-size: 0.95rem;
     line-height: 1.5;
   }
