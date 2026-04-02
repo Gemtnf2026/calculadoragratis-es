@@ -62,29 +62,13 @@ body {
 }
 
 /* ===== HERO ===== */
-.hero {
+.hero,
+.hero-top {
   text-align: center;
   padding: 3rem 1rem 1.5rem;
 }
 
-/* ===== 🔥 LAYOUT PRINCIPAL (FIX CLAVE) ===== */
-.calc-layout {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 24px;
-  max-width: 960px;
-  margin: 0 auto 2rem;
-  padding: 0 24px;
-}
-.calc-irpf {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(320px, 520px));
-  justify-content: center;
-  gap: 32px;
-  max-width: 1100px;
-  padding: 0 16px;
-  align-items: start;
-}
+/* ===== GRID HOME ===== */
 .grid-cards {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -103,6 +87,69 @@ body {
     grid-template-columns: 1fr;
   }
 }
+
+/* ===== CARDS HOME ===== */
+.lc {
+  display: block;
+  background: var(--card);
+  border-radius: 16px;
+  padding: 20px;
+  border: 1px solid var(--border);
+  text-decoration: none;
+  color: var(--text);
+  transition: all 0.2s ease;
+  box-shadow: var(--shadow);
+}
+
+.lc:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 30px rgba(108, 71, 255, 0.15);
+}
+
+.le {
+  font-size: 1.6rem;
+  display: block;
+  margin-bottom: 8px;
+}
+
+.lt {
+  font-weight: 700;
+  display: block;
+  margin-bottom: 6px;
+}
+
+.ld {
+  font-size: 0.9rem;
+  color: var(--muted);
+  display: block;
+  margin-bottom: 10px;
+}
+
+.la {
+  color: var(--primary);
+  font-weight: 600;
+}
+
+/* ===== LAYOUT CALCULADORA ===== */
+.calc-layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  max-width: 960px;
+  margin: 0 auto 2rem;
+  padding: 0 24px;
+}
+
+.calc-irpf {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 520px));
+  justify-content: center;
+  gap: 32px;
+  max-width: 1100px;
+  padding: 0 16px;
+  align-items: start;
+}
+
 /* ===== CARDS ===== */
 .ccard {
   background: var(--card);
@@ -170,7 +217,7 @@ button:not(.fq):hover {
   }
 }
 
-/* ===== SEO / TEXT ===== */
+/* ===== TEXTO SEO ===== */
 .cnt {
   max-width: 900px;
   margin: 3rem auto;
@@ -193,6 +240,7 @@ button:not(.fq):hover {
   }
 
   .calc-layout {
+    grid-template-columns: 1fr;
     gap: 20px;
     padding: 0 12px;
   }
