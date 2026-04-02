@@ -70,11 +70,18 @@ body {
 /* ===== 🔥 LAYOUT PRINCIPAL (FIX CLAVE) ===== */
 .calc-layout {
   display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  max-width: 960px;
+  margin: 0 auto 2rem;
+  padding: 0 24px;
+}
+.calc-irpf {
+  display: grid;
   grid-template-columns: repeat(auto-fit, minmax(320px, 520px));
   justify-content: center;
   gap: 32px;
   max-width: 1100px;
-  margin: 0 auto 2rem;
   padding: 0 16px;
   align-items: start;
 }
