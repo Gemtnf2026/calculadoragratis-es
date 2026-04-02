@@ -1,258 +1,566 @@
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
-
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-
-<title>Calculadora IRPF España 2026 — Estima tu salario neto y retenciones</title>
-
-<meta name="description" content="Calcula el IRPF en España sobre tu salario bruto. Estima impuestos, salario neto, tipo medio y retención mensual de forma gratuita y al instante.">
-
+<title>Calculadora IRPF España 2026 — Salario neto, retenciones y tramos al instante</title>
+<meta name="description" content="Calcula tu IRPF 2026 en España: salario neto, retención mensual, tipo medio y desglose por tramos según tu comunidad autónoma. Gratis, rápido y sin registro.">
 <link rel="canonical" href="https://www.calculadoragratis.es/calculadora-irpf-espana.html">
-
 <meta name="robots" content="index,follow">
-
 <link rel="stylesheet" href="style.css">
-
 <link rel="preconnect" href="https://api.fontshare.com">
 <link href="https://api.fontshare.com/v2/css?f[]=satoshi@400,500,700,800&display=swap" rel="stylesheet">
-
-<!-- ADSENSE -->
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=TU_ID"
-crossorigin="anonymous"></script>
-
-
-<!-- Open Graph -->
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=TU_ID" crossorigin="anonymous"></script>
 <meta property="og:title" content="Calculadora IRPF España 2026 | CalculadoraGratis">
-<meta property="og:description" content="Calcula el IRPF en España sobre tu salario. Estima impuestos, salario neto, tipo medio y retención mensual.">
+<meta property="og:description" content="Calcula tu IRPF, salario neto, retención mensual y desglose por tramos según tu comunidad autónoma.">
 <meta property="og:url" content="https://www.calculadoragratis.es/calculadora-irpf-espana.html">
-<meta property="og:image" content="https://www.calculadoragratis.es/preview.png">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="es_ES">
 <meta property="og:site_name" content="CalculadoraGratis.es">
-
+<style>
+.badge{display:inline-block;background:rgba(108,71,255,.1);color:#6c47ff;font-size:.78rem;font-weight:700;padding:4px 12px;border-radius:20px;margin-bottom:.8rem;text-transform:uppercase;letter-spacing:.06em}
+.breadcrumb{font-size:.82rem;color:#6b6b8a;padding:.5rem 0 0}
+.breadcrumb a{color:#6c47ff;text-decoration:none}
+.hero.wrap{padding-top:2.5rem;padding-bottom:1rem}
+.hero h1{font-size:clamp(1.8rem,3.5vw,2.5rem);font-weight:800;margin-bottom:.5rem}
+.hero p{color:#6b6b8a;font-size:1.05rem}
+.calc-layout{display:grid;grid-template-columns:1fr 1fr;gap:24px;max-width:960px;margin:0 auto 2rem;padding:0 24px}
+@media(max-width:768px){.calc-layout{grid-template-columns:1fr}}
+.ccard{background:#fff;border-radius:18px;padding:2rem;border:1px solid #e2e2f0;box-shadow:0 8px 28px rgba(108,71,255,.07)}
+.ccard h2{font-size:1.05rem;font-weight:700;margin-bottom:1.4rem;color:#1a1a2e}
+.fg{margin-bottom:1rem}
+.fg label{display:block;font-size:.85rem;font-weight:600;color:#555;margin-bottom:5px}
+.fg input,.fg select{width:100%;padding:.85rem 1rem;border-radius:10px;border:1.5px solid #e2e2f0;font-size:.98rem;background:#fafafa;transition:border-color .2s;font-family:inherit;color:#1a1a2e}
+.fg input:focus,.fg select:focus{border-color:#6c47ff;outline:none;background:#fff;box-shadow:0 0 0 3px rgba(108,71,255,.1)}
+.btn-calc{width:100%;margin-top:.5rem;padding:1rem;border:none;border-radius:12px;background:linear-gradient(135deg,#7b2ff7,#4a6cf7);color:#fff;font-weight:700;font-size:1rem;cursor:pointer;font-family:inherit;transition:opacity .2s}
+.btn-calc:hover{opacity:.9}
+.result-panel{display:none}
+.result-panel.on{display:block}
+.result-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:1.2rem}
+@media(max-width:480px){.result-grid{grid-template-columns:1fr}}
+.res-box{background:#f5f3ff;border-radius:12px;padding:1rem 1.2rem;border-left:3px solid #6c47ff}
+.res-box.green{background:#f0fdf4;border-left-color:#16a34a}
+.res-box.orange{background:#fff7ed;border-left-color:#f97316}
+.res-box.blue{background:#eff6ff;border-left-color:#3b82f6}
+.res-label{font-size:.75rem;font-weight:700;color:#6b6b8a;text-transform:uppercase;letter-spacing:.04em;margin-bottom:4px}
+.res-value{font-size:1.3rem;font-weight:800;color:#1a1a2e}
+.res-sub{font-size:.78rem;color:#6b6b8a;margin-top:2px}
+.tramos-title{font-size:.88rem;font-weight:700;color:#1a1a2e;margin:1.2rem 0 8px}
+.tramo-row{display:flex;justify-content:space-between;align-items:center;padding:7px 10px;border-radius:8px;font-size:.83rem;margin-bottom:4px;background:#f8f7ff}
+.tramo-row:nth-child(even){background:#f0f0ff}
+.tramo-label{color:#555}
+.tramo-val{font-weight:700;color:#6c47ff}
+.cta-link{display:block;margin-top:1.2rem;padding:.75rem;background:linear-gradient(135deg,#7b2ff7,#4a6cf7);color:#fff;border-radius:10px;text-align:center;font-weight:700;font-size:.92rem;text-decoration:none}
+.cta-link:hover{opacity:.9}
+.tramos-table{width:100%;border-collapse:collapse;font-size:.9rem;margin:1rem 0}
+.tramos-table th{background:#f5f3ff;color:#1a1a2e;font-weight:700;padding:10px 12px;text-align:left;border-bottom:2px solid #e2e2f0}
+.tramos-table td{padding:10px 12px;border-bottom:1px solid #f0f0f5;color:#333}
+.tramos-table tr:last-child td{border-bottom:none}
+.tramos-table tr:hover td{background:#faf8ff}
+.fq{background:#fff;border:1px solid #c4b5fd;border-left:4px solid #6c47ff;border-radius:12px;padding:14px 16px;width:100%;text-align:left;font-weight:600;color:#1a1a2e;cursor:pointer;transition:background .2s,color .2s;font-size:.97rem;font-family:inherit;margin-bottom:8px}
+.fq:hover{background:linear-gradient(90deg,#3a5bd9,#2a9bb8);color:#fff;border-color:#3a5bd9;border-left-color:#fff}
+.fa{padding:.5rem .5rem 1rem;color:#6b6b8a;display:none;font-size:.95rem;line-height:1.6}
+.fa.on{display:block}
+.info-box{background:#fffbeb;border:1px solid #fbbf24;border-radius:12px;padding:1rem 1.2rem;font-size:.92rem;color:#92400e;margin:1rem 0}
+.bar-wrap{margin-top:12px}
+.bar-row{display:flex;gap:4px;margin:6px 0 4px;height:14px;border-radius:6px;overflow:hidden}
+.bar-neto{background:#16a34a;transition:width .5s}
+.bar-ss{background:#f97316;transition:width .5s}
+.bar-irpf{background:#6c47ff;transition:width .5s}
+.bar-legend{display:flex;gap:12px;font-size:.75rem;color:#6b6b8a}
+</style>
 </head>
-
 <body>
 
 <header class="site-header">
   <div class="hdr wrap">
-
-    <a href="index.html" class="logo">
-      🧮 CalculadoraGratis
+    <a href="index.html" class="logo" aria-label="Inicio">
+      <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="vertical-align:middle;margin-right:8px"><rect x="4" y="2" width="24" height="28" rx="3"/><rect x="8" y="6" width="16" height="6" rx="1.5" stroke-width="1.5" fill="currentColor" fill-opacity="0.15"/><circle cx="10" cy="18" r="1.5" fill="currentColor" stroke="none"/><circle cx="16" cy="18" r="1.5" fill="currentColor" stroke="none"/><circle cx="22" cy="18" r="1.5" fill="currentColor" stroke="none"/><circle cx="10" cy="24" r="1.5" fill="currentColor" stroke="none"/><circle cx="16" cy="24" r="1.5" fill="currentColor" stroke="none"/><circle cx="22" cy="24" r="1.5" fill="currentColor" stroke="none"/></svg>CalculadoraGratis
     </a>
-
-    <nav class="nav">
+    <nav class="nav" aria-label="Navegación principal">
       <a href="index.html#finanzas">Finanzas</a>
       <a href="index.html#matematicas">Matemáticas</a>
       <a href="index.html#utiles">Útiles</a>
     </nav>
-
   </div>
 </header>
 
-<main>
-
 <section class="hero wrap">
-  <span class="badge">Finanzas · IRPF</span>
-  <h1>Calculadora de IRPF en España</h1>
-  <p>Estima cuánto pagarás de IRPF, tu salario neto y la retención mensual.</p>
+  <p class="breadcrumb"><a href="index.html">Inicio</a> › <a href="index.html#finanzas">Finanzas</a> › Calculadora IRPF</p>
+  <span class="badge">💰 Finanzas · IRPF 2026</span>
+  <h1>Calculadora IRPF España 2026</h1>
+  <p>Calcula tu salario neto, retención mensual y desglose exacto por tramos según tu comunidad autónoma.</p>
 </section>
 
-<!-- NUEVO CONTENIDO SEO -->
+<div class="ad wrap" style="max-width:960px;margin:0 auto 1rem;">
+  <ins class="adsbygoogle" style="display:block" data-ad-client="TU_ID" data-ad-slot="111" data-ad-format="auto" data-full-width-responsive="true"></ins>
+</div>
+
+<div class="calc-layout">
+
+  <!-- FORMULARIO -->
+  <div class="ccard">
+    <h2>📝 Introduce tus datos</h2>
+
+    <div class="fg">
+      <label for="salario">Salario bruto anual (€)</label>
+      <input type="number" id="salario" value="35000" min="0" max="999999" step="100">
+    </div>
+
+    <div class="fg">
+      <label for="ccaa">Comunidad autónoma</label>
+      <select id="ccaa">
+        <option value="madrid">Madrid</option>
+        <option value="cataluna">Cataluña</option>
+        <option value="andalucia">Andalucía</option>
+        <option value="valencia">Comunitat Valenciana</option>
+        <option value="castilla">Castilla y León / La Mancha</option>
+        <option value="galicia">Galicia</option>
+        <option value="aragon">Aragón</option>
+        <option value="murcia">Murcia</option>
+        <option value="canarias">Canarias</option>
+        <option value="baleares">Illes Balears</option>
+        <option value="media">Resto / Media nacional</option>
+      </select>
+    </div>
+
+    <div class="fg">
+      <label for="hijos">Hijos a cargo (menores 25 años)</label>
+      <select id="hijos">
+        <option value="0">Sin hijos</option>
+        <option value="1">1 hijo</option>
+        <option value="2">2 hijos</option>
+        <option value="3">3 hijos</option>
+        <option value="4">4 o más hijos</option>
+      </select>
+    </div>
+
+    <div class="fg">
+      <label for="edad">Edad</label>
+      <select id="edad">
+        <option value="0">Menor de 65 años</option>
+        <option value="1">65 a 74 años (+1.150 €)</option>
+        <option value="2">75 años o más (+2.550 €)</option>
+      </select>
+    </div>
+
+    <div class="fg">
+      <label for="discapacidad">Discapacidad reconocida</label>
+      <select id="discapacidad">
+        <option value="0">Sin discapacidad</option>
+        <option value="1">Entre 33% y 65% (+3.000 €)</option>
+        <option value="2">65% o superior (+9.000 €)</option>
+      </select>
+    </div>
+
+    <div class="fg">
+      <label for="pagas">Número de pagas al año</label>
+      <select id="pagas">
+        <option value="12">12 pagas</option>
+        <option value="14">14 pagas (con pagas extra)</option>
+      </select>
+    </div>
+
+    <button class="btn-calc" onclick="calcIRPF()">🧮 Calcular IRPF 2026</button>
+  </div>
+
+  <!-- RESULTADOS -->
+  <div class="ccard">
+    <h2>📊 Tu resultado</h2>
+
+    <div id="resultado-vacio" style="text-align:center;padding:2.5rem 0;color:#bbb;">
+      <div style="font-size:3rem;margin-bottom:.75rem;">🧾</div>
+      <p style="font-size:.9rem;line-height:1.6;">Introduce tus datos y pulsa<br><strong style="color:#6c47ff">Calcular IRPF 2026</strong><br>para ver tu resultado.</p>
+    </div>
+
+    <div class="result-panel" id="result-panel">
+
+      <div class="result-grid">
+        <div class="res-box green">
+          <div class="res-label">Salario neto anual</div>
+          <div class="res-value" id="r-neto-anual">—</div>
+          <div class="res-sub">Lo que cobras realmente</div>
+        </div>
+        <div class="res-box blue">
+          <div class="res-label">Neto por paga</div>
+          <div class="res-value" id="r-neto-mes">—</div>
+          <div class="res-sub" id="r-pagas-label">En 12 pagas</div>
+        </div>
+        <div class="res-box">
+          <div class="res-label">IRPF anual total</div>
+          <div class="res-value" id="r-irpf">—</div>
+          <div class="res-sub" id="r-tipo-medio">Tipo efectivo: —</div>
+        </div>
+        <div class="res-box orange">
+          <div class="res-label">Retención mensual</div>
+          <div class="res-value" id="r-retencion-mes">—</div>
+          <div class="res-sub" id="r-tipo-retencion">% s/ bruto</div>
+        </div>
+      </div>
+
+      <!-- Barra distribución -->
+      <div class="bar-wrap">
+        <div style="font-size:.8rem;font-weight:600;color:#555;margin-bottom:5px;">Distribución de tu salario bruto</div>
+        <div class="bar-row">
+          <div class="bar-neto" id="bar-neto" style="width:70%"></div>
+          <div class="bar-ss"   id="bar-ss"   style="width:6%"></div>
+          <div class="bar-irpf" id="bar-irpf" style="width:24%"></div>
+        </div>
+        <div class="bar-legend">
+          <span>🟢 Neto</span>
+          <span>🟠 S.Social (<span id="bar-ss-pct">—</span>%)</span>
+          <span>🟣 IRPF (<span id="bar-irpf-pct">—</span>%)</span>
+        </div>
+      </div>
+
+      <!-- SS desglose -->
+      <div class="tramos-title">Cotizaciones Seguridad Social (6,35%)</div>
+      <div class="tramo-row"><span class="tramo-label">Contingencias comunes (4,70%)</span><span class="tramo-val" id="r-ss-cc">—</span></div>
+      <div class="tramo-row"><span class="tramo-label">Desempleo (1,55%)</span><span class="tramo-val" id="r-ss-d">—</span></div>
+      <div class="tramo-row"><span class="tramo-label">Formación + MEI (0,10%)</span><span class="tramo-val" id="r-ss-mei">—</span></div>
+      <div class="tramo-row" style="background:#fff7ed;"><span class="tramo-label"><strong>Total Seguridad Social</strong></span><span class="tramo-val" id="r-ss-total">—</span></div>
+
+      <!-- Mínimos -->
+      <div class="tramos-title">Mínimos personales y familiares</div>
+      <div class="tramo-row"><span class="tramo-label">Mínimo del contribuyente</span><span class="tramo-val" id="r-min-personal">—</span></div>
+      <div class="tramo-row" id="row-min-hijos" style="display:none"><span class="tramo-label">Mínimo por descendientes</span><span class="tramo-val" id="r-min-hijos">—</span></div>
+      <div class="tramo-row" id="row-min-disc" style="display:none"><span class="tramo-label">Mínimo por discapacidad</span><span class="tramo-val" id="r-min-disc">—</span></div>
+      <div class="tramo-row" style="background:#f5f3ff;"><span class="tramo-label"><strong>Total mínimos (exentos)</strong></span><span class="tramo-val" id="r-min-total">—</span></div>
+
+      <!-- Desglose IRPF tramos -->
+      <div class="tramos-title">Desglose IRPF por tramos (estatal + autonómico)</div>
+      <div id="tramos-desglose"></div>
+
+      <a href="calculadora-hipoteca.html" class="cta-link">🏠 Simular hipoteca con tu salario neto →</a>
+    </div>
+  </div>
+
+</div>
+
+<div class="ad wrap" style="max-width:960px;margin:0 auto 2rem;">
+  <ins class="adsbygoogle" style="display:block" data-ad-client="TU_ID" data-ad-slot="222" data-ad-format="auto" data-full-width-responsive="true"></ins>
+</div>
+
+<!-- SEO CONTENT -->
 <section class="cnt wrap">
 
-<h2>¿Cómo funciona el IRPF en España?</h2>
+  <h2>¿Cómo funciona el IRPF en España?</h2>
+  <p>El Impuesto sobre la Renta de las Personas Físicas (IRPF) es un impuesto <strong>directo, personal y progresivo</strong> regulado por la Ley 35/2006 y gestionado por la Agencia Tributaria (AEAT). Grava los ingresos de todos los residentes fiscales en España.</p>
+  <p>Su principal característica es la <strong>progresividad</strong>: los ingresos se dividen en tramos y cada tramo tributa a un tipo diferente. Solo la parte que supera el límite de cada tramo paga el tipo más alto, nunca la totalidad del salario. Por eso subir de tramo nunca puede hacer que cobres menos.</p>
 
-<p>
-El IRPF es un impuesto progresivo dividido en tramos. Cada tramo aplica un porcentaje diferente sobre el salario, por lo que el tipo efectivo final suele ser inferior al tipo máximo.
-</p>
+  <div class="info-box">
+    ⚠️ <strong>El IRPF tiene dos partes:</strong> la cuota estatal (igual para todos) y la cuota autonómica (varía según tu comunidad de residencia). Dos personas con el mismo salario pueden pagar distinto IRPF si viven en comunidades diferentes.
+  </div>
 
-<h2>¿Cuánto te retienen en nómina?</h2>
+  <h2>Cotizaciones a la Seguridad Social en 2026</h2>
+  <p>Antes de calcular el IRPF, el trabajador descuenta del salario bruto sus cotizaciones a la Seguridad Social. El empleado asume el <strong>6,35%</strong>:</p>
+  <table class="tramos-table">
+    <thead><tr><th>Concepto</th><th>Porcentaje trabajador</th></tr></thead>
+    <tbody>
+      <tr><td>Contingencias comunes (enfermedad, jubilación)</td><td>4,70 %</td></tr>
+      <tr><td>Desempleo (contrato indefinido)</td><td>1,55 %</td></tr>
+      <tr><td>Formación profesional + MEI</td><td>0,10 %</td></tr>
+      <tr><td><strong>Total a cargo del trabajador</strong></td><td><strong>6,35 %</strong></td></tr>
+    </tbody>
+  </table>
+  <p>La empresa paga adicionalmente cerca de un <strong>30% extra</strong> sobre tu salario en cotizaciones patronales, que no aparece en tu nómina pero supone el coste real para la empresa. Las bases de cotización están topadas: a partir de ~58.900 €/año, las cotizaciones no aumentan.</p>
 
-<p>
-La retención depende de tu salario, situación familiar y edad. Esta calculadora estima una retención mensual orientativa basada en los tramos actuales.
-</p>
+  <h2>Tramos del IRPF 2026: tabla oficial</h2>
+  <p>Los tramos estatales no han variado respecto a 2025. La cuota total resulta de sumar los tipos estatal y autonómico:</p>
+  <table class="tramos-table">
+    <thead><tr><th>Base liquidable</th><th>Tipo estatal</th><th>Tipo total orientativo*</th></tr></thead>
+    <tbody>
+      <tr><td>Hasta 12.450 €</td><td>9,50 %</td><td>~19 %</td></tr>
+      <tr><td>12.450 € — 20.200 €</td><td>12,00 %</td><td>~24 %</td></tr>
+      <tr><td>20.200 € — 35.200 €</td><td>15,00 %</td><td>~30 %</td></tr>
+      <tr><td>35.200 € — 60.000 €</td><td>18,50 %</td><td>~37 %</td></tr>
+      <tr><td>60.000 € — 300.000 €</td><td>22,50 %</td><td>~45 %</td></tr>
+      <tr><td>Más de 300.000 €</td><td>24,50 %</td><td>~47 %</td></tr>
+    </tbody>
+  </table>
+  <p style="font-size:.82rem;color:#888;">* Tipo total orientativo sumando tramo autonómico medio nacional. Varía significativamente por comunidad.</p>
 
-<h2>¿Por qué usar esta calculadora?</h2>
+  <h2>IRPF por comunidad autónoma: diferencias clave</h2>
+  <p>La parte autonómica del IRPF puede suponer diferencias de <strong>más de 1.000 € anuales</strong> para el mismo salario según donde residas:</p>
+  <table class="tramos-table">
+    <thead><tr><th>Comunidad</th><th>Tipo máximo total</th><th>Presión fiscal</th></tr></thead>
+    <tbody>
+      <tr><td>Madrid</td><td>~46 %</td><td>✅ La más baja</td></tr>
+      <tr><td>Canarias</td><td>~46,5 %</td><td>✅ Baja</td></tr>
+      <tr><td>Andalucía</td><td>~47 %</td><td>✅ Baja-media</td></tr>
+      <tr><td>Aragón / Murcia</td><td>~49 %</td><td>⚠️ Media</td></tr>
+      <tr><td>Cataluña</td><td>~50 %</td><td>⚠️ Alta</td></tr>
+      <tr><td>Comunitat Valenciana</td><td>~54 %</td><td>🔴 Muy alta</td></tr>
+    </tbody>
+  </table>
 
-<ul>
-<li>Estimación rápida del salario neto</li>
-<li>Cálculo automático de retenciones</li>
-<li>Adaptado a normativa española</li>
-</ul>
+  <h2>Mínimo personal y familiar 2026</h2>
+  <p>El mínimo personal y familiar es la cantidad que no tributa, diseñada para garantizar un mínimo vital. Se resta de la base imponible antes de aplicar los tramos:</p>
+  <table class="tramos-table">
+    <thead><tr><th>Concepto</th><th>Reducción anual</th></tr></thead>
+    <tbody>
+      <tr><td>Mínimo personal general</td><td>5.550 €</td></tr>
+      <tr><td>Mayores de 65 años (adicional)</td><td>+1.150 €</td></tr>
+      <tr><td>Mayores de 75 años (adicional sobre el anterior)</td><td>+1.400 €</td></tr>
+      <tr><td>1er hijo menor de 25 años</td><td>2.400 €</td></tr>
+      <tr><td>2º hijo</td><td>2.700 €</td></tr>
+      <tr><td>3er hijo</td><td>4.000 €</td></tr>
+      <tr><td>4º hijo y siguientes</td><td>4.500 € cada uno</td></tr>
+      <tr><td>Hijo menor de 3 años (adicional)</td><td>+2.800 €</td></tr>
+      <tr><td>Discapacidad 33%–65%</td><td>+3.000 €</td></tr>
+      <tr><td>Discapacidad 65% o más</td><td>+9.000 €</td></tr>
+    </tbody>
+  </table>
 
+  <h2>Ejemplo práctico: 35.000 € brutos en Madrid</h2>
+  <p>Contribuyente soltero, sin hijos, menor de 65 años, residente en Madrid:</p>
+  <div class="fml">
+    Salario bruto anual: 35.000 €<br>
+    − Seguridad Social (6,35%): 2.222,50 €<br>
+    = Base imponible: 32.777,50 €<br>
+    − Mínimo personal: 5.550,00 €<br>
+    = Base liquidable: 27.227,50 €<br><br>
+    Cuota estatal (tramos):<br>
+    &nbsp;12.450 × 9,50% = 1.182,75 €<br>
+    &nbsp;7.750 × 12,00% = 930,00 €<br>
+    &nbsp;7.027,50 × 15,00% = 1.054,13 €<br>
+    &nbsp;→ Total estatal: 3.166,88 €<br><br>
+    Cuota autonómica Madrid:<br>
+    &nbsp;12.450 × 8,50% = 1.058,25 €<br>
+    &nbsp;5.257 × 10,70% = 562,50 €<br>
+    &nbsp;9.520,50 × 12,80% = 1.218,62 €<br>
+    &nbsp;→ Total autonómica: 2.839,37 €<br><br>
+    IRPF total: 6.006,25 €<br>
+    Tipo efectivo: 17,16%<br>
+    Salario neto anual: ≈ 26.771 €<br>
+    Neto mensual (12 pagas): ≈ 2.231 €
+  </div>
+
+  <p>¿Quieres saber cuánta hipoteca puedes pagar con ese salario neto? Usa nuestra <a href="calculadora-hipoteca.html">calculadora de hipoteca</a>, o calcula las cuotas de tu <a href="calculadora-prestamo.html">préstamo personal</a>.</p>
+
+</section>
+
+<div class="ad wrap" style="max-width:960px;margin:0 auto 2rem;">
+  <ins class="adsbygoogle" style="display:block" data-ad-client="TU_ID" data-ad-slot="333" data-ad-format="auto" data-full-width-responsive="true"></ins>
+</div>
+
+<!-- FAQs -->
+<section class="cnt wrap">
+  <h2>Preguntas frecuentes sobre el IRPF 2026</h2>
+
+  <button class="fq" onclick="toggleFaq(this)">¿Qué diferencia hay entre tipo marginal y tipo efectivo?</button>
+  <div class="fa"><p>El <strong>tipo marginal</strong> es el porcentaje que se aplica al último tramo de tu renta (el más alto en el que caes). El <strong>tipo efectivo</strong> o tipo medio es el porcentaje real que pagas sobre tu salario bruto total. Siempre es menor que el marginal porque los primeros euros tributan a tipos más bajos.</p><p>Por ejemplo, alguien con 40.000 € puede tener un tipo marginal del 37%, pero un tipo efectivo del 20% aproximadamente.</p></div>
+
+  <button class="fq" onclick="toggleFaq(this)">¿Cuándo estoy obligado a presentar la declaración de la renta?</button>
+  <div class="fa"><p>Con carácter general, si tus ingresos del trabajo superan <strong>22.000 € anuales con un solo pagador</strong>, o <strong>15.000 € con dos o más pagadores</strong> (cuando el segundo supera 1.500 €/año). También si tienes ganancias patrimoniales, rendimientos del capital superiores a 1.600 €, o eres autónomo con actividad económica.</p></div>
+
+  <button class="fq" onclick="toggleFaq(this)">¿Subir de tramo significa cobrar menos neto?</button>
+  <div class="fa"><p><strong>No, es un mito muy extendido.</strong> El IRPF es progresivo: el tipo superior solo se aplica sobre la parte del ingreso que supera el límite del tramo anterior. El resto sigue tributando a los tipos bajos. Una subida de sueldo siempre supone mayor salario neto, aunque el incremento sea algo menor de lo esperado.</p></div>
+
+  <button class="fq" onclick="toggleFaq(this)">¿Afecta la comunidad autónoma donde vivo a mi IRPF?</button>
+  <div class="fa"><p>Sí, y de forma significativa. El IRPF se divide entre parte estatal (igual para todos) y parte autonómica (fijada por cada comunidad). Madrid tiene los tipos más bajos del régimen común, mientras que Comunitat Valenciana tiene los más altos. Para un salario de 60.000 €, la diferencia puede superar los <strong>2.000 €/año</strong>.</p></div>
+
+  <button class="fq" onclick="toggleFaq(this)">¿Qué ocurre si tengo dos pagadores?</button>
+  <div class="fa"><p>Cada pagador aplica retenciones sin conocer los ingresos del otro, generalmente más bajas de lo que corresponde al total. Al sumar ambas rentas en la declaración, es probable que salga <strong>a pagar</strong> la diferencia. Si el segundo pagador supera 1.500 €/año, estás obligado a declarar aunque no llegues a 22.000 €.</p></div>
+
+  <button class="fq" onclick="toggleFaq(this)">¿Cómo tributan los autónomos?</button>
+  <div class="fa"><p>Los autónomos aplican retenciones en sus facturas (habitualmente el <strong>15%</strong>, o 7% los primeros 3 años) y presentan pagos fraccionados trimestrales mediante el <strong>modelo 130</strong>. Los tramos del IRPF son los mismos, pero el sistema de liquidación es diferente al de un asalariado.</p></div>
+
+  <button class="fq" onclick="toggleFaq(this)">¿Las pagas extras se gravan igual?</button>
+  <div class="fa"><p>Sí, las pagas extraordinarias son rendimientos del trabajo y forman parte del salario bruto anual total. Tributan con los mismos tramos. Sin embargo, en el mes de cobro puedes notar una retención mayor si la empresa no ha periodificado bien las retenciones a lo largo del año.</p></div>
+</section>
+
+<!-- TRUST -->
+<section class="trust wrap">
+  <h2>¿Por qué usar esta calculadora de IRPF?</h2>
+  <ul class="trust-list">
+    <li>✅ <strong>Tramos autonómicos incluidos</strong> — Cálculo diferenciado por comunidad autónoma</li>
+    <li>✅ <strong>Seguridad Social real</strong> — Descuento del 6,35% con desglose por concepto</li>
+    <li>✅ <strong>Mínimos personales y familiares</strong> — Hijos, edad y discapacidad reconocidos</li>
+    <li>✅ <strong>Desglose tramo a tramo</strong> — Ves exactamente cuánto paga cada parte</li>
+    <li>✅ <strong>Actualizada a 2026</strong> — Datos basados en normativa oficial AEAT</li>
+    <li>✅ <strong>100% gratuita y privada</strong> — Sin registro, no almacenamos datos</li>
+  </ul>
 </section>
 
 <section class="disclaimer wrap">
-
-<p>
-⚠️ <strong>Aviso:</strong> Los resultados son orientativos y pueden variar según deducciones personales, comunidad autónoma y situación fiscal concreta.
-</p>
-
+  <p>⚠️ <strong>Aviso legal:</strong> Los resultados son orientativos. El cálculo exacto de retenciones depende de factores adicionales como deducciones autonómicas específicas, pensiones compensatorias, rendimientos del capital o situaciones especiales no contempladas. Para tu declaración oficial, usa el <a href="https://sede.agenciatributaria.gob.es" target="_blank" rel="noopener noreferrer">simulador oficial de la Agencia Tributaria</a>.</p>
 </section>
-
-<div class="ad ad-b wrap">
-<ins class="adsbygoogle"
-style="display:block"
-data-ad-client="TU_ID"
-data-ad-slot="111"
-data-ad-format="auto"></ins>
-</div>
-
-<section class="cs wrap">
-
-<div class="ccard">
-
-<h2>Datos del contribuyente</h2>
-
-<div class="fg">
-<label>Salario bruto anual (€)</label>
-<input type="number" id="salario" value="35000">
-</div>
-
-<div class="fg">
-<label>Hijos</label>
-<select id="hijos">
-<option value="0">0</option>
-<option value="1">1</option>
-<option value="2">2</option>
-<option value="3">3</option>
-<option value="4">4+</option>
-</select>
-</div>
-
-<div class="fg">
-<label>Edad</label>
-<select id="edad">
-<option value="0">Menor de 65</option>
-<option value="1">65-75</option>
-<option value="2">+75</option>
-</select>
-</div>
-
-<button class="btn bp bfw" onclick="calc()">Calcular IRPF</button>
-
-<div class="rb" id="resultado"></div>
-
-</div>
-
-</section>
-
-<div class="ad ad-m wrap">
-<ins class="adsbygoogle"
-style="display:block"
-data-ad-client="TU_ID"
-data-ad-slot="222"
-data-ad-format="auto"></ins>
-</div>
-
-<section class="cnt wrap">
-
-<h2>¿Cuánto se paga de IRPF en España?</h2>
-
-<p>El IRPF es un impuesto progresivo: cuanto más ganas, mayor porcentaje pagas. No todo el salario tributa al mismo tipo, sino por tramos.</p>
-
-<h2>¿Cómo calcular el IRPF?</h2>
-
-<p>Para calcular el IRPF se tienen en cuenta el salario bruto, las cotizaciones a la Seguridad Social, las reducciones aplicables y el mínimo personal y familiar.</p>
-
-<h2>Tramos orientativos</h2>
-
-<div class="fml">
-Hasta 12.450 € → 19%<br>
-12.450 - 20.200 € → 24%<br>
-20.200 - 35.200 € → 30%<br>
-35.200 - 60.000 € → 37%<br>
-60.000 - 300.000 € → 45%<br>
-Más de 300.000 € → 47%
-</div>
-
-<p>También puedes usar nuestra 
-<a href="calculadora-hipoteca.html">calculadora de hipoteca</a> 
-o la 
-<a href="calculadora-prestamo.html">calculadora de préstamo</a>.</p>
-
-</section>
-
-<div class="ad ad-b wrap">
-<ins class="adsbygoogle"
-style="display:block"
-data-ad-client="TU_ID"
-data-ad-slot="333"
-data-ad-format="auto"></ins>
-</div>
 
 <footer class="ft">
-<p>© <span id="year"></span> CalculadoraGratis.es</p>
+  <div class="wrap footer-inner">
+    <p class="footer-copy"><span id="year"></span> CalculadoraGratis.es</p>
+    <nav class="footer-links" aria-label="Enlaces legales">
+      <a href="sobre-nosotros.html">Sobre nosotros</a>
+      <a href="privacidad.html">Privacidad</a>
+      <a href="cookies.html">Cookies</a>
+      <a href="contacto.html">Contacto</a>
+    </nav>
+  </div>
 </footer>
 
+<!-- ===== JAVASCRIPT ===== -->
 <script>
-
 document.getElementById("year").textContent = new Date().getFullYear();
 
+// Tramos autonómicos: [límite1, límite2, límite3, límite4, límite5, tipo1, tipo2, tipo3, tipo4, tipo5, tipo6]
+const CCAA = {
+  madrid:   { l:[12450,17707,33007,53407,300000], t:[8.50,10.70,12.80,17.40,20.50,20.50] },
+  cataluna: { l:[12450,20200,35200,60000,90000],  t:[10.50,12.00,14.00,21.50,25.50,25.50] },
+  andalucia:{ l:[12450,20200,35200,60000,300000], t:[9.50,12.00,15.00,18.50,22.50,24.50] },
+  valencia: { l:[12450,17707,33007,53407,300000], t:[9.50,11.00,13.50,18.50,22.50,24.50] },
+  castilla: { l:[12450,20200,35200,60000,300000], t:[9.50,12.00,15.00,18.50,22.50,24.50] },
+  galicia:  { l:[12450,20200,35200,60000,300000], t:[10.00,12.00,15.00,19.00,23.00,24.50] },
+  aragon:   { l:[12450,20200,35200,60000,300000], t:[9.50,12.00,15.00,19.50,23.50,25.00] },
+  murcia:   { l:[12450,20200,35200,60000,300000], t:[9.50,12.00,15.00,18.50,22.50,24.50] },
+  canarias: { l:[12450,20200,35200,60000,300000], t:[9.00,11.50,14.50,18.00,22.00,23.50] },
+  baleares: { l:[12450,20200,35200,60000,300000], t:[10.00,12.50,15.50,19.50,24.00,25.00] },
+  media:    { l:[12450,20200,35200,60000,300000], t:[9.50,12.00,15.00,18.50,22.50,24.50] }
+};
+
+const ESTATAL_L = [12450, 20200, 35200, 60000, 300000];
+const ESTATAL_T = [9.50, 12.00, 15.00, 18.50, 22.50, 24.50];
+const MIN_HIJOS = [0, 2400, 5100, 9100, 13600];
+
 function fmt(n){
-  return n.toLocaleString("es-ES",{minimumFractionDigits:2,maximumFractionDigits:2});
+  return n.toLocaleString("es-ES",{minimumFractionDigits:2,maximumFractionDigits:2})+" €";
 }
 
-function calc(){
-
-  let bruto = parseFloat(document.getElementById("salario").value);
-  let hijos = parseInt(document.getElementById("hijos").value);
-  let edad = parseInt(document.getElementById("edad").value);
-
-  let ss = bruto * 0.0635;
-  let base = bruto - ss;
-
-  let minPersonal = 5550;
-  if(edad==1) minPersonal=6700;
-  if(edad==2) minPersonal=8100;
-
-  let minHijos=[0,2400,5100,9100,13600];
-  let minTotal=minPersonal+(minHijos[hijos]||0);
-
-  let tramos=[12450,20200,35200,60000,300000];
-  let tipos=[0.19,0.24,0.30,0.37,0.45,0.47];
-
-  let cuota=0;
-  let baseCalc=Math.max(0,base);
-
-  let prev=0;
-  for(let i=0;i<tipos.length;i++){
-    let limite=tramos[i]||9999999;
-    if(baseCalc>prev){
-      let tramo=Math.min(baseCalc,limite)-prev;
-      cuota+=tramo*tipos[i];
-      prev=limite;
+function calcTramos(base, limites, tipos){
+  let cuota = 0, prev = 0, desglose = [];
+  for(let i = 0; i < tipos.length; i++){
+    let lim = (limites[i] !== undefined) ? limites[i] : 9999999;
+    if(base > prev){
+      let trozo = Math.min(base, lim) - prev;
+      let c = trozo * tipos[i] / 100;
+      cuota += c;
+      desglose.push({ desde:prev, hasta:Math.min(base,lim), tipo:tipos[i], cuota:c, base:trozo });
+      prev = lim;
+      if(base <= lim) break;
     }
   }
-
-  cuota = Math.max(0, cuota - (minTotal*0.19));
-
-  let neto = bruto - cuota;
-  let tipoMedio = (cuota/bruto)*100;
-
-  document.getElementById("resultado").innerHTML =
-    "<b>IRPF anual:</b> "+fmt(cuota)+" €<br>" +
-    "<b>Salario neto:</b> "+fmt(neto)+" €<br>" +
-    "<b>Tipo medio:</b> "+fmt(tipoMedio)+" %<br>" +
-    "<b>Retención mensual:</b> "+fmt(cuota/12)+" €<br><br>" +
-    "<a class='btn' href='calculadora-hipoteca.html'>Calcular hipoteca →</a>";
-
-  document.getElementById("resultado").classList.add("on");
+  return { cuota, desglose };
 }
 
+function calcIRPF(){
+  const bruto   = parseFloat(document.getElementById("salario").value)||0;
+  const ccaaKey = document.getElementById("ccaa").value;
+  const hijos   = parseInt(document.getElementById("hijos").value);
+  const edad    = parseInt(document.getElementById("edad").value);
+  const disc    = parseInt(document.getElementById("discapacidad").value);
+  const pagas   = parseInt(document.getElementById("pagas").value);
+
+  if(bruto <= 0){ alert("Introduce un salario válido mayor que 0."); return; }
+
+  // Seguridad Social
+  const ssCC    = bruto * 0.0470;
+  const ssDes   = bruto * 0.0155;
+  const ssMEI   = bruto * 0.0010;
+  const ssTotal = bruto * 0.0635;
+
+  // Base imponible
+  const baseImponible = bruto - ssTotal;
+
+  // Mínimos
+  let minPersonal = 5550;
+  if(edad===1) minPersonal += 1150;
+  if(edad===2) minPersonal += 2550;
+  const minDisc  = disc===1 ? 3000 : disc===2 ? 9000 : 0;
+  const minHijos = MIN_HIJOS[Math.min(hijos,4)];
+  const minTotal = minPersonal + minDisc + minHijos;
+
+  // Base liquidable
+  const baseLiq = Math.max(0, baseImponible - minTotal);
+
+  // Cuotas
+  const est  = calcTramos(baseLiq, ESTATAL_L, ESTATAL_T);
+  const ccaa = CCAA[ccaaKey] || CCAA.media;
+  const aut  = calcTramos(baseLiq, ccaa.l, ccaa.t);
+
+  const irpfTotal    = est.cuota + aut.cuota;
+  const netoAnual    = bruto - ssTotal - irpfTotal;
+  const netoPaga     = netoAnual / pagas;
+  const tipoEfectivo = (irpfTotal / bruto) * 100;
+  const retMes       = irpfTotal / 12;
+  const retPct       = (irpfTotal / bruto) * 100;
+
+  // — Mostrar panel —
+  document.getElementById("resultado-vacio").style.display = "none";
+  document.getElementById("result-panel").classList.add("on");
+
+  document.getElementById("r-neto-anual").textContent    = fmt(netoAnual);
+  document.getElementById("r-neto-mes").textContent      = fmt(netoPaga);
+  document.getElementById("r-pagas-label").textContent   = `En ${pagas} pagas`;
+  document.getElementById("r-irpf").textContent          = fmt(irpfTotal);
+  document.getElementById("r-tipo-medio").textContent    = `Tipo efectivo: ${tipoEfectivo.toFixed(2)}%`;
+  document.getElementById("r-retencion-mes").textContent = fmt(retMes);
+  document.getElementById("r-tipo-retencion").textContent= `${retPct.toFixed(2)}% s/ bruto`;
+
+  // SS
+  document.getElementById("r-ss-cc").textContent    = fmt(ssCC);
+  document.getElementById("r-ss-d").textContent     = fmt(ssDes);
+  document.getElementById("r-ss-mei").textContent   = fmt(ssMEI);
+  document.getElementById("r-ss-total").textContent = fmt(ssTotal);
+
+  // Mínimos
+  document.getElementById("r-min-personal").textContent = fmt(minPersonal);
+  document.getElementById("r-min-total").textContent    = fmt(minTotal);
+  const rh = document.getElementById("row-min-hijos");
+  const rd = document.getElementById("row-min-disc");
+  if(minHijos>0){ rh.style.display="flex"; document.getElementById("r-min-hijos").textContent=fmt(minHijos); }
+  else rh.style.display="none";
+  if(minDisc>0){ rd.style.display="flex"; document.getElementById("r-min-disc").textContent=fmt(minDisc); }
+  else rd.style.display="none";
+
+  // Barra visual
+  const pN = (netoAnual/bruto)*100;
+  const pS = (ssTotal/bruto)*100;
+  const pI = (irpfTotal/bruto)*100;
+  document.getElementById("bar-neto").style.width  = pN+"%";
+  document.getElementById("bar-ss").style.width    = pS+"%";
+  document.getElementById("bar-irpf").style.width  = pI+"%";
+  document.getElementById("bar-ss-pct").textContent  = pS.toFixed(1);
+  document.getElementById("bar-irpf-pct").textContent = pI.toFixed(1);
+
+  // Desglose por tramos
+  const el = document.getElementById("tramos-desglose");
+  el.innerHTML = "";
+  const maxTramos = Math.max(est.desglose.length, aut.desglose.length);
+  for(let i=0; i<maxTramos; i++){
+    const e = est.desglose[i];
+    const a = aut.desglose[i];
+    if(!e && !a) continue;
+    const desde  = (e||a).desde;
+    const hasta  = (e||a).hasta;
+    const tipoE  = e ? e.tipo : 0;
+    const tipoA  = a ? a.tipo : 0;
+    const cuotaT = (e ? e.cuota : 0) + (a ? a.cuota : 0);
+    const baseT  = (e||a).base;
+    const div = document.createElement("div");
+    div.className="tramo-row";
+    div.innerHTML=`<span class="tramo-label">${desde.toLocaleString("es-ES")}–${hasta.toLocaleString("es-ES")} € &nbsp;<small style="color:#aaa">(${tipoE}+${tipoA}%=${tipoE+tipoA}%)</small></span><span class="tramo-val">${fmt(cuotaT)}</span>`;
+    el.appendChild(div);
+  }
+  const tot=document.createElement("div");
+  tot.className="tramo-row";
+  tot.style.background="#f5f3ff";
+  tot.innerHTML=`<span class="tramo-label"><strong>IRPF total (estatal + autonómico)</strong></span><span class="tramo-val"><strong>${fmt(irpfTotal)}</strong></span>`;
+  el.appendChild(tot);
+}
+
+function toggleFaq(btn){
+  const ans = btn.nextElementSibling;
+  ans.classList.toggle("on");
+}
 </script>
 
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
   "@type": "WebApplication",
-  "name": "Calculadora de IRPF España",
+  "name": "Calculadora de IRPF España 2026",
   "url": "https://www.calculadoragratis.es/calculadora-irpf-espana.html",
-  "description": "Estima tu IRPF, salario neto, tipo medio y retención mensual en España.",
+  "description": "Calcula tu IRPF 2026, salario neto, tipo efectivo y retención mensual con desglose por tramos estatales y autonómicos.",
   "applicationCategory": "FinanceApplication",
   "operatingSystem": "Web",
   "offers": { "@type": "Offer", "price": "0", "priceCurrency": "EUR" },
@@ -262,23 +570,14 @@ function calc(){
 </script>
 <script type="application/ld+json">
 {
- "@context": "https://schema.org",
- "@type": "FAQPage",
- "mainEntity": [{
-   "@type": "Question",
-   "name": "¿Cómo calcular el IRPF?",
-   "acceptedAnswer": {
-     "@type": "Answer",
-     "text": "Se calcula aplicando tramos progresivos al salario tras deducciones de la Seguridad Social y el mínimo personal y familiar."
-   }
- },{
-   "@type": "Question",
-   "name": "¿Cuánto se paga de IRPF en España?",
-   "acceptedAnswer": {
-     "@type": "Answer",
-     "text": "El IRPF es progresivo: desde el 19% hasta el 47% según tramos de salario bruto anual."
-   }
- }]
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    { "@type":"Question","name":"¿Qué diferencia hay entre tipo marginal y tipo efectivo?","acceptedAnswer":{"@type":"Answer","text":"El tipo marginal es el porcentaje del último tramo en que caes. El tipo efectivo es el porcentaje real que pagas sobre tu salario bruto total. Siempre es menor que el marginal."}},
+    { "@type":"Question","name":"¿Cuándo estoy obligado a presentar la declaración de la renta?","acceptedAnswer":{"@type":"Answer","text":"Si tus ingresos superan 22.000 € con un solo pagador, o 15.000 € con dos o más pagadores cuando el segundo supera 1.500 €/año."}},
+    { "@type":"Question","name":"¿Subir de tramo significa cobrar menos neto?","acceptedAnswer":{"@type":"Answer","text":"No. El IRPF es progresivo: solo tributa al tipo superior la parte que supera el límite del tramo anterior. Subir de tramo nunca implica cobrar menos neto."}},
+    { "@type":"Question","name":"¿Afecta la comunidad autónoma a mi IRPF?","acceptedAnswer":{"@type":"Answer","text":"Sí. Madrid tiene los tipos más bajos y Comunitat Valenciana los más altos. La diferencia puede superar 2.000 €/año para salarios de 60.000 €."}}
+  ]
 }
 </script>
 <script src="seo.js"></script>
