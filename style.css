@@ -193,3 +193,53 @@ h2 {
     text-align: center;
   }
 }
+/* ===== FORMULARIOS (FIX GLOBAL) ===== */
+
+form {
+  max-width: 500px;
+}
+
+label {
+  display: block;
+  margin-top: 12px;
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+input,
+select {
+  width: 100%;
+  padding: 10px 12px;
+  margin-top: 5px;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  background: #fafafa;
+  font-size: 0.95rem;
+}
+
+input:focus,
+select:focus {
+  outline: none;
+  border-color: var(--primary);
+  background: #fff;
+  box-shadow: 0 0 0 3px rgba(108,71,255,0.1);
+}
+
+/* Botones */
+button,
+input[type="button"],
+input[type="submit"] {
+  margin-top: 15px;
+  padding: 12px;
+  border: none;
+  border-radius: 12px;
+  background: linear-gradient(135deg,#7b2ff7,#4a6cf7);
+  color: #fff;
+  font-weight: 700;
+  cursor: pointer;
+  width: 100%;
+}
+
+button:hover {
+  opacity: 0.9;
+}
