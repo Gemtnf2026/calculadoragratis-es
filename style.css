@@ -350,3 +350,8 @@ main p {
     gap: 12px;
   }
 }
+/* ===== FOOTER FIX ===== */
+.wrap.footer-inner {
+  padding: 0 40px !important;
+  margin: 0 auto !important;
+}
