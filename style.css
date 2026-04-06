@@ -50,7 +50,9 @@ body {
   align-items: center;
   flex-wrap: wrap;
   gap: 10px;
-  padding: 12px 20px;
+  padding: 14px 20px;
+  max-width: 1100px;
+  margin: 0 auto;
 }
 
 @media (max-width: 600px) {
@@ -60,7 +62,7 @@ body {
     text-align: center;
   }
 
-  .hdr .nav {
+  .nav {
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
@@ -80,6 +82,17 @@ body {
 .hero-top h1 {
   font-size: 2.5rem;
   font-weight: 800;
+}
+
+@media (max-width: 600px) {
+  .hero-top h1 {
+    font-size: 1.6rem;
+  }
+
+  .hero-top h1 svg {
+    width: 36px;
+    height: 36px;
+  }
 }
 
 .hero-sub {
