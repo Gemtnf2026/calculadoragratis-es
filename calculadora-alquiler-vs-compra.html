@@ -88,7 +88,18 @@ crossorigin="anonymous"></script>
 <label>Alquiler mensual (€)</label>
 <input id="alquiler" type="number" value="800">
 </div>
+<div class="fg">
+  <label>Gastos e impuestos de compra (%)</label>
+  <input id="gastos_compra_pct" type="number" value="10">
+  <small style="color:var(--muted); font-size:0.75rem; display:block; margin-top:2px;">
+    ITP, notaría y registro (suele ser el 10-12%).
+  </small>
+</div>
 
+<div class="fg">
+  <label>Gastos anuales propiedad (IBI, Seguro...) (€)</label>
+  <input id="mantenimiento" type="number" value="1000">
+</div>
 <button class="btn bp bfw" onclick="calc()">Comparar</button>
 
 <div class="rb" id="resultado"></div>
@@ -185,23 +196,62 @@ para afinar los cálculos.</p>
 document.getElementById("year").textContent = new Date().getFullYear();
 
 function calc(){
+  // Captura de datos
+  const precio = parseFloat(document.getElementById("precio").value) || 0;
+  const entradaPct = parseFloat(document.getElementById("entrada").value) / 100;
+  const interesAnual = parseFloat(document.getElementById("interes").value) / 100;
+  const años = parseFloat(document.getElementById("años").value) || 0;
+  const alquilerMensual = parseFloat(document.getElementById("alquiler").value) || 0;
+  const gastosCompraPct = parseFloat(document.getElementById("gastos_compra_pct").value) / 100;
+  const mantenimientoAnual = parseFloat(document.getElementById("mantenimiento").value) || 0;
 
-  let precio = parseFloat(document.getElementById("precio").value);
-  let entrada = parseFloat(document.getElementById("entrada").value)/100;
-  let interes = parseFloat(document.getElementById("interes").value)/100/12;
-  let meses = parseFloat(document.getElementById("años").value)*12;
-  let alquiler = parseFloat(document.getElementById("alquiler").value);
+  const meses = años * 12;
+  const interesMensual = interesAnual / 12;
 
-  let capital = precio*(1-entrada);
+  // Lógica de Compra
+  const pagoEntrada = precio * entradaPct;
+  const gastosEscritura = precio * gastosCompraPct; // ITP y Notaría
+  const capitalHipotecado = precio - pagoEntrada;
+  
+  // Cálculo de cuota hipotecaria (Sistema Francés)
+  let cuotaMensual = 0;
+  if(interesMensual > 0) {
+    cuotaMensual = (capitalHipotecado * interesMensual) / (1 - Math.pow(1 + interesMensual, -meses));
+  } else {
+    cuotaMensual = capitalHipotecado / meses;
+  }
+  
+  const totalPagadoHipoteca = cuotaMensual * meses;
+  const totalMantenimiento = mantenimientoAnual * años;
+  
+  // COSTE TOTAL COMPRA = Entrada + Gastos Iniciales + Pago de Hipoteca + Gastos anuales
+  const costeTotalCompra = pagoEntrada + gastosEscritura + totalPagadoHipoteca + totalMantenimiento;
 
-  let cuota = (capital*interes)/(1-Math.pow(1+interes,-meses));
+  // Lógica de Alquiler
+  const costeTotalAlquiler = alquilerMensual * meses;
 
-  let totalCompra = cuota*meses;
-  let totalAlquiler = alquiler*meses;
+  // Formateo de moneda
+  const f = new Intl.NumberFormat('es-ES', { style: 'currency', currency: 'EUR', maximumFractionDigits: 0 });
 
-  document.getElementById("resultado").innerHTML =
-    "<b>Comprar:</b> "+totalCompra.toFixed(0)+" €<br>" +
-    "<b>Alquilar:</b> "+totalAlquiler.toFixed(0)+" €";
+  // Mostrar resultados
+  const diff = Math.abs(costeTotalCompra - costeTotalAlquiler);
+  const ganador = costeTotalCompra < costeTotalAlquiler ? "Comprar" : "Alquilar";
+  const color = ganador === "Comprar" ? "#16a34a" : "#f97316";
+
+  document.getElementById("resultado").innerHTML = `
+    <div style="text-align:left; font-size:0.95rem;">
+      <p style="margin-bottom:8px;"><b>Total Compra:</b> ${f.format(costeTotalCompra)}</p>
+      <p style="margin-bottom:12px; color:var(--muted); font-size:0.8rem;">
+        (Incluye entrada, gastos iniciales, intereses y mantenimiento)
+      </p>
+      <p style="margin-bottom:15px;"><b>Total Alquiler:</b> ${f.format(costeTotalAlquiler)}</p>
+      <div style="padding:12px; background:#f8f9ff; border-radius:10px; border-left:4px solid ${color};">
+        <span style="color:${color}; font-weight:800; font-size:1.1rem;">
+          Ahorras ${f.format(diff)} al ${ganador.toLowerCase()}.
+        </span>
+      </div>
+    </div>
+  `;
 
   document.getElementById("resultado").classList.add("on");
 }
@@ -220,14 +270,24 @@ document.querySelectorAll(".fq").forEach(btn=>{
 {
  "@context": "https://schema.org",
  "@type": "FAQPage",
- "mainEntity": [{
-   "@type": "Question",
-   "name": "¿Cuándo compensa comprar vivienda?",
-   "acceptedAnswer": {
-     "@type": "Answer",
-     "text": "Compensa cuando el coste total de la hipoteca es inferior al alquiler a largo plazo."
-   }
- }]
+"mainEntity": [
+  {
+    "@type": "Question",
+    "name": "¿Cuándo compensa comprar vivienda?",
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Compensa cuando el coste total de la hipoteca, impuestos y mantenimiento a largo plazo es inferior al gasto total del alquiler, y tienes estabilidad financiera."
+    }
+  },
+  {
+    "@type": "Question",
+    "name": "¿Qué gastos tiene la compra de una casa?",
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Además del precio de la vivienda, debes contar con entre un 10% y un 12% adicional para impuestos (ITP o IVA), gastos de notaría, registro y tasación."
+    }
+  }
+]
 }
 </script>
 <script src="seo.js"></script>
