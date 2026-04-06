@@ -32,6 +32,25 @@ body {
   padding: 40px 20px;
 }
 
+/* ===== LOGO ===== */
+.logo {
+  text-decoration: none;
+  font-weight: 700;
+  color: var(--primary);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.logo svg {
+  color: var(--primary);
+  stroke: var(--primary);
+}
+
+.logo:hover {
+  opacity: 0.8;
+}
+
 /* ===== HEADER ===== */
 .site-header {
   background: #fff;
@@ -48,48 +67,6 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  /* Sobreescribe el padding vertical del .wrap */
-  padding-top: 14px;
-  padding-bottom: 14px;
-}
-
-/* ===== MAIN (páginas interiores) ===== */
-main {
-  max-width: 1100px;
-  margin: 0 auto;
-  padding: 40px 20px;
-}
-
-main h1 {
-  font-size: 2rem;
-  font-weight: 800;
-  margin-bottom: 12px;
-}
-
-main h2 {
-  margin-top: 28px;
-}
-
-main p {
-  color: var(--muted);
-  margin-bottom: 8px;
-}
-
-/* ===== RESPONSIVE HEADER ===== */
-@media (max-width: 600px) {
-  .hdr {
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-    gap: 10px;
-  }
-
-  .nav {
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    gap: 12px;
-  }
 }
 
 /* ===== HERO ===== */
@@ -103,17 +80,6 @@ main p {
 .hero-top h1 {
   font-size: 2.5rem;
   font-weight: 800;
-}
-
-@media (max-width: 600px) {
-  .hero-top h1 {
-    font-size: 1.6rem;
-  }
-
-  .hero-top h1 svg {
-    width: 36px;
-    height: 36px;
-  }
 }
 
 .hero-sub {
