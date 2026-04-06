@@ -26,11 +26,20 @@
 .hero p{color:#6b6b8a;font-size:1.05rem}
 .calc-layout{
   display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:24px;
-  max-width:960px;
+  grid-template-columns: 1fr 1.2fr;
+  gap:32px;
+  max-width:1100px;
   margin:0 auto 2rem;
-  padding:0 24px;
+  padding:0 20px;
+  align-items:start;
+}
+  .calc-layout .ccard:last-child{
+  position:sticky;
+  top:20px;
+}
+
+.result-panel{
+  display:block;
 }
   .calc-irpf{
   display:grid;
