@@ -1,232 +1,284 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
+/* ===== VARIABLES ===== */
+:root {
+  --bg: #f5f5fa;
+  --card: #ffffff;
+  --border: #e2e2f0;
+  --text: #1a1a2e;
+  --muted: #6b6b8a;
+  --primary: #6c47ff;
+  --radius: 14px;
+  --shadow: 0 10px 30px rgba(108, 71, 255, 0.08);
+  --font: system-ui, -apple-system, sans-serif;
+}
 
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+/* ===== RESET ===== */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
 
-<title>Calculadoras online gratis (IRPF, hipoteca, IVA, IMC y más) 2026</title>
+body {
+  font-family: var(--font);
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+}
 
-<meta name="description" content="Calculadoras online gratis: IRPF 2026, hipoteca, préstamo, IVA, porcentajes, IMC y más. Rápidas, fáciles y sin registro.">
+/* ===== CONTAINER ===== */
+.wrap {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 40px 20px;
+}
 
-<link rel="canonical" href="https://gemtnf2026.github.io/calculadoragratis-es/">
-<meta name="robots" content="index,follow">
+/* ===== HEADER ===== */
+.site-header {
+  background: #fff;
+}
 
-<link rel="stylesheet" href="style.css?v=3">
+.site-header::after {
+  content: '';
+  display: block;
+  height: 6px;
+  background: linear-gradient(90deg,#f7931e,#e8317a,#c026d3,#7b2ff7);
+}
 
-<!-- FAVICON -->
-<link rel="icon" href="/calculadoragratis-es/favicon.png" sizes="any">
-<link rel="apple-touch-icon" href="/calculadoragratis-es/favicon.png">
+.hdr {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 14px 40px;
+  max-width: 1100px;
+  margin: 0 auto;
+  width: 100%;
+}
 
-</head>
+/* ===== HERO ===== */
+.hero-top {
+  background: linear-gradient(135deg, #4a00e0, #1f6fd1);
+  color: #fff;
+  text-align: center;
+  padding: 80px 20px 60px;
+}
 
-<body>
+.hero-top h1 {
+  font-size: 2.5rem;
+  font-weight: 800;
+}
 
-<header class="site-header">
-  <div class="hdr">
+.hero-sub {
+  margin-top: 12px;
+  font-size: 1.2rem;
+}
 
-    <a href="index.html" class="logo" aria-label="Inicio">
-      <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="vertical-align:middle;margin-right:8px"><rect x="4" y="2" width="24" height="28" rx="3"/><rect x="8" y="6" width="16" height="6" rx="1.5" stroke-width="1.5" fill="currentColor" fill-opacity="0.15"/><circle cx="10" cy="18" r="1.5" fill="currentColor" stroke="none"/><circle cx="16" cy="18" r="1.5" fill="currentColor" stroke="none"/><circle cx="22" cy="18" r="1.5" fill="currentColor" stroke="none"/><circle cx="10" cy="24" r="1.5" fill="currentColor" stroke="none"/><circle cx="16" cy="24" r="1.5" fill="currentColor" stroke="none"/><circle cx="22" cy="24" r="1.5" fill="currentColor" stroke="none"/></svg>CalculadoraGratis
-    </a>
+.hero-mini {
+  margin-top: 6px;
+  font-size: 0.95rem;
+  opacity: 0.85;
+}
 
-    <nav class="nav" aria-label="Navegación principal">
-      <a href="#finanzas">Finanzas</a>
-      <a href="#matematicas">Matemáticas</a>
-      <a href="#utiles">Útiles</a>
-    </nav>
+/* ===== GRID ===== */
+.grid-cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 30px;
+  margin-top: 25px;
+}
 
-  </div>
-</header>
+@media (max-width: 900px) {
+  .grid-cards {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
 
-<!-- HERO -->
-<section class="hero-top">
-  <div class="wrap">
+@media (max-width: 600px) {
+  .grid-cards {
+    grid-template-columns: 1fr;
+  }
+}
 
-    <h1><svg xmlns="http://www.w3.org/2000/svg" width="56" height="56" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="vertical-align:middle;margin-right:12px;display:inline-block"><rect x="4" y="2" width="24" height="28" rx="3"/><rect x="8" y="6" width="16" height="6" rx="1.5" stroke-width="1.5" fill="currentColor" fill-opacity="0.25"/><circle cx="10" cy="18" r="1.8" fill="currentColor" stroke="none"/><circle cx="16" cy="18" r="1.8" fill="currentColor" stroke="none"/><circle cx="22" cy="18" r="1.8" fill="currentColor" stroke="none"/><circle cx="10" cy="24" r="1.8" fill="currentColor" stroke="none"/><circle cx="16" cy="24" r="1.8" fill="currentColor" stroke="none"/><rect x="19" y="21.5" width="6" height="5" rx="1" fill="currentColor" stroke="none"/></svg>CalculadoraGratis.es</h1>
+/* ===== CARDS ===== */
+.lc {
+  display: block;
+  background: var(--card);
+  border-radius: 16px;
+  padding: 20px;
+  border: 1px solid var(--border);
+  text-decoration: none;
+  color: var(--text);
+  box-shadow: var(--shadow);
+  transition: 0.2s;
+}
 
-    <p class="hero-sub">
-      Todas las calculadoras online que necesitas, gratis y sin registro
-    </p>
+.lc:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 15px 35px rgba(108,71,255,0.15);
+}
 
-    <p class="hero-mini">
-      Herramientas de cálculo para finanzas, salud, hogar, educación y más
-    </p>
+.le {
+  font-size: 1.6rem;
+  margin-bottom: 8px;
+  display: block;
+}
 
-  </div>
-</section>
+.lt {
+  font-weight: 700;
+  margin-bottom: 6px;
+  display: block;
+}
 
-<!-- FINANZAS -->
-<section id="finanzas" class="wrap">
+.ld {
+  font-size: 0.9rem;
+  color: var(--muted);
+  margin-bottom: 10px;
+  display: block;
+}
 
-<h2>💰 Calculadoras financieras</h2>
+.la {
+  color: var(--primary);
+  font-weight: 600;
+}
 
-<div class="grid-cards">
+/* ===== SECTIONS ===== */
+h2 {
+  margin-bottom: 15px;
+}
 
-<a href="calculadora-irpf-espana.html" class="lc">
-<span class="le">🧾</span>
-<span class="lt">Calculadora IRPF España</span>
-<span class="ld">Calcula tu salario neto en 2026.</span>
-<span class="la">Calcular →</span>
-</a>
+/* ===== FOOTER PRO FIX ===== */
 
-<a href="calculadora-hipoteca.html" class="lc">
-<span class="le">🏠</span>
-<span class="lt">Calculadora de hipoteca</span>
-<span class="ld">Simula tu cuota mensual.</span>
-<span class="la">Calcular →</span>
-</a>
+.ft {
+  background: #fff;
+  border-top: 1px solid var(--border);
+  padding: 25px 0;
+  margin-top: 40px;
+}
 
-<a href="calculadora-prestamo.html" class="lc">
-<span class="le">💳</span>
-<span class="lt">Calculadora de préstamo</span>
-<span class="ld">Cuotas e intereses.</span>
-<span class="la">Calcular →</span>
-</a>
+.footer-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 20px;
 
-<a href="calculadora-interes-compuesto.html" class="lc">
-<span class="le">📈</span>
-<span class="lt">Interés compuesto</span>
-<span class="ld">Haz crecer tus ahorros.</span>
-<span class="la">Calcular →</span>
-</a>
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
 
-<a href="calculadora-alquiler-vs-compra.html" class="lc">
-<span class="le">🏘️</span>
-<span class="lt">Alquiler vs compra</span>
-<span class="ld">Compara qué te conviene.</span>
-<span class="la">Calcular →</span>
-</a>
+/* texto izquierda */
+.footer-copy {
+  font-size: 0.9rem;
+  color: var(--muted);
+}
 
-<a href="calculadora-iva.html" class="lc">
-<span class="le">💱</span>
-<span class="lt">Calculadora de IVA</span>
-<span class="ld">Precios con o sin IVA.</span>
-<span class="la">Calcular →</span>
-</a>
+/* links derecha */
+.footer-links {
+  display: flex;
+  gap: 20px;
+}
 
-</div>
+.footer-links a {
+  text-decoration: none;
+  color: var(--muted);
+  font-size: 0.9rem;
+  transition: color 0.2s;
+}
 
-</section>
+.footer-links a:hover {
+  color: var(--primary);
+}
 
-<!-- MATEMÁTICAS -->
-<section id="matematicas" class="wrap">
+/* ===== RESPONSIVE ===== */
+@media (max-width: 768px) {
+  .footer-inner {
+    flex-direction: column;
+    gap: 10px;
+    text-align: center;
+  }
+}
+/* ===== FORMULARIOS (FIX GLOBAL) ===== */
 
-<h2>📊 Calculadoras matemáticas</h2>
+form {
+  max-width: 500px;
+}
 
-<div class="grid-cards">
+label {
+  display: block;
+  margin-top: 12px;
+  font-weight: 600;
+  font-size: 0.9rem;
+}
 
-<a href="calculadora-porcentajes.html" class="lc">
-<span class="le">💯</span>
-<span class="lt">Porcentajes</span>
-<span class="ld">Aumentos y descuentos.</span>
-<span class="la">Calcular →</span>
-</a>
+input,
+select {
+  width: 100%;
+  padding: 10px 12px;
+  margin-top: 5px;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  background: #fafafa;
+  font-size: 0.95rem;
+}
 
-<a href="calculadora-regla-de-tres.html" class="lc">
-<span class="le">📐</span>
-<span class="lt">Regla de tres</span>
-<span class="ld">Proporciones rápidas.</span>
-<span class="la">Calcular →</span>
-</a>
+input:focus,
+select:focus {
+  outline: none;
+  border-color: var(--primary);
+  background: #fff;
+  box-shadow: 0 0 0 3px rgba(108,71,255,0.1);
+}
 
-<a href="calculadora-notas.html" class="lc">
-<span class="le">📚</span>
-<span class="lt">Calculadora de notas</span>
-<span class="ld">Media de notas.</span>
-<span class="la">Calcular →</span>
-</a>
+/* Botones */
+button,
+input[type="button"],
+input[type="submit"] {
+  margin-top: 15px;
+  padding: 12px;
+  border: none;
+  border-radius: 12px;
+  background: linear-gradient(135deg,#7b2ff7,#4a6cf7);
+  color: #fff;
+  font-weight: 700;
+  cursor: pointer;
+  width: 100%;
+}
 
-</div>
+button:hover {
+  opacity: 0.9;
+}
+/* ===== FORM BOX ===== */
+.form-box {
+  max-width: 500px;
+}
 
-</section>
+/* ===== GRUPOS ===== */
+.fg {
+  margin-bottom: 15px;
+}
 
-<!-- ÚTILES -->
-<section id="utiles" class="wrap">
+/* ===== LABEL ===== */
+.fg label {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 5px;
+}
 
-<h2>⚡ Calculadoras útiles</h2>
+/* ===== INPUT ===== */
+.fg input {
+  width: 100%;
+  padding: 10px;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  background: #fafafa;
+}
 
-<div class="grid-cards">
-
-<a href="calculadora-imc.html" class="lc">
-<span class="le">⚖️</span>
-<span class="lt">IMC</span>
-<span class="ld">Índice de masa corporal.</span>
-<span class="la">Calcular →</span>
-</a>
-
-<a href="calculadora-metabolismo-basal.html" class="lc">
-<span class="le">🔥</span>
-<span class="lt">Metabolismo basal</span>
-<span class="ld">Calorías diarias.</span>
-<span class="la">Calcular →</span>
-</a>
-
-<a href="calculadora-consumo-electrico.html" class="lc">
-<span class="le">⚡</span>
-<span class="lt">Consumo eléctrico</span>
-<span class="ld">Gasto energético.</span>
-<span class="la">Calcular →</span>
-</a>
-
-<a href="calculadora-gasto-gasolina.html" class="lc">
-<span class="le">⛽</span>
-<span class="lt">Gasto gasolina</span>
-<span class="ld">Coste de viaje.</span>
-<span class="la">Calcular →</span>
-</a>
-
-<a href="calculadora-propina.html" class="lc">
-<span class="le">🍽️</span>
-<span class="lt">Propina</span>
-<span class="ld">Divide la cuenta.</span>
-<span class="la">Calcular →</span>
-</a>
-
-<a href="calculadora-edad.html" class="lc">
-<span class="le">🎂</span>
-<span class="lt">Edad</span>
-<span class="ld">Edad exacta.</span>
-<span class="la">Calcular →</span>
-</a>
-
-</div>
-
-</section>
-
-<section class="trust wrap">
-
-  <h2>¿Por qué usar nuestras calculadoras?</h2>
-
-  <ul class="trust-list">
-    <li>✅ <strong>100% gratuitas</strong> — Sin registro ni suscripciones</li>
-    <li>✅ <strong>Resultados instantáneos</strong> — Cálculos en tiempo real</li>
-    <li>✅ <strong>Fórmulas fiables</strong> — Basadas en métodos estándar</li>
-    <li>✅ <strong>Privacidad total</strong> — No almacenamos datos</li>
-    <li>✅ <strong>Adaptadas a España</strong> — IRPF, IVA y normativa actual</li>
-  </ul>
-
-</section>
-
-<section class="disclaimer wrap">
-  <p><strong>Aviso:</strong> Esta web ofrece cálculos orientativos. No constituye asesoramiento financiero, fiscal o legal.</p>
-</section>
-
-<footer class="ft">
-  <div class="wrap footer-inner">
-    <p class="footer-copy"><span id="year"></span> CalculadoraGratis.es</p>
-
-    <nav class="footer-links" aria-label="Enlaces legales">
-      <a href="sobre-nosotros.html">Sobre nosotros</a>
-      <a href="privacidad.html">Privacidad</a>
-      <a href="cookies.html">Cookies</a>
-      <a href="contacto.html">Contacto</a>
-    </nav>
-  </div>
-</footer>
-
-<script>
-  document.getElementById("year").textContent = new Date().getFullYear();
-</script>
-
-</body>
-</html>
+/* ===== BOTÓN ===== */
+.btn {
+  width: 100%;
+  padding: 12px;
+  border-radius: 12px;
+  border: none;
+  background: linear-gradient(135deg,#7b2ff7,#4a6cf7);
+  color: #fff;
+  font-weight: 700;
+  cursor: pointer;
+}
