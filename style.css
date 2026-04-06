@@ -359,3 +359,8 @@ main p {
 .cnt p{margin-bottom:1.2rem; line-height:1.6;}
 .cnt h2{margin-top:2.5rem; margin-bottom:1rem;}
 section{margin-bottom:3rem;}
+
+p{
+  margin-bottom:1.2rem;
+  line-height:1.6;
+}
