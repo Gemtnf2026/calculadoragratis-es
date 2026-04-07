@@ -6,9 +6,9 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<title>¿Comprar o alquilar vivienda en España? Calculadora y comparativa real</title>
+<title>Simulador comprar o alquilar vivienda: qué es mejor — calculadora gratuita | España</title>
 
-<meta name="description" content="Descubre si compensa comprar o alquilar vivienda en España. Calcula costes reales con hipoteca, alquiler y rentabilidad.">
+<meta name="description" content="Simulador comprar o alquilar vivienda en España: compara coste total de hipoteca y alquiler. Calculadora orientativa con escenarios y factores clave.">
 
 <link rel="canonical" href="https://www.calculadoragratis.es/calculadora-alquiler-vs-compra.html">
 
@@ -18,6 +18,71 @@
 
 <link rel="preconnect" href="https://api.fontshare.com">
 <link href="https://api.fontshare.com/v2/css?f[]=satoshi@400,500,700,800&display=swap" rel="stylesheet">
+
+<style>
+.badge{display:inline-block;background:rgba(108,71,255,.1);color:#6c47ff;font-size:.78rem;font-weight:700;padding:4px 12px;border-radius:20px;margin-bottom:.8rem;text-transform:uppercase;letter-spacing:.06em}
+.hero.wrap{padding-top:2.5rem;padding-bottom:1rem}
+.hero h1{font-size:clamp(1.45rem,3vw,2.25rem);font-weight:800;margin-bottom:.5rem;line-height:1.2}
+.hero p{color:#6b6b8a;font-size:1.05rem}
+.calc-layout{
+  display:grid;
+  grid-template-columns:1fr 1.05fr;
+  gap:28px;
+  max-width:1100px;
+  margin:0 auto;
+  padding:0;
+  align-items:start;
+}
+@media(max-width:900px){.calc-layout{grid-template-columns:1fr}}
+.calc-layout .ccard:last-child{position:sticky;top:20px}
+@media(max-width:900px){.calc-layout .ccard:last-child{position:static}}
+.ccard{
+  background:#fff;
+  border-radius:18px;
+  padding:1.75rem 1.5rem;
+  border:1px solid #e2e2f0;
+  box-shadow:0 8px 28px rgba(108,71,255,.07);
+  width:100%;
+  max-width:none;
+  margin:0;
+}
+.ccard h2{font-size:1.1rem;font-weight:800;margin-bottom:1.25rem;color:#1a1a2e}
+.fg small{display:block;margin-top:4px;font-size:.82rem;color:#6b6b8a;font-weight:500}
+.result-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:1rem}
+@media(max-width:480px){.result-grid{grid-template-columns:1fr}}
+.res-box{background:#f5f3ff;border-radius:12px;padding:1rem 1.1rem;border-left:4px solid #6c47ff}
+.res-box.res-box--accent{border-left-color:#f97316;background:#fffaf5}
+.res-box.res-box--diff{border-left-color:#16a34a;background:#f0fdf4}
+.res-label{font-size:.72rem;font-weight:700;color:#6b6b8a;text-transform:uppercase;letter-spacing:.04em;margin-bottom:4px}
+.res-value{font-size:1.25rem;font-weight:800;color:#1a1a2e;font-variant-numeric:tabular-nums;line-height:1.25}
+.res-sub{font-size:.78rem;color:#6b6b8a;margin-top:4px;line-height:1.4}
+.rb{margin-top:0;padding:0}
+.cmp-chart{margin:1rem 0 1.25rem}
+.cmp-row{display:flex;align-items:center;gap:10px;margin-bottom:8px;font-size:.85rem}
+.cmp-name{flex:0 0 72px;font-weight:600;color:#1a1a2e}
+.cmp-track{flex:1;height:14px;background:#e2e2f0;border-radius:8px;overflow:hidden}
+.cmp-fill{height:100%;border-radius:8px;min-width:2px;transition:width .35s ease}
+.cmp-fill--rent{background:linear-gradient(90deg,#6c47ff,#4a6cf7)}
+.cmp-fill--buy{background:linear-gradient(90deg,#f97316,#ea580c)}
+.interpret-block{margin-top:1rem;padding:1rem 1.1rem;border-radius:12px;border:1px solid #e2e2f0;background:#fafafa;font-size:.95rem;line-height:1.55;color:#1a1a2e}
+.msg-err{margin-top:.75rem;padding:.65rem .85rem;border-radius:10px;background:#fef2f2;border:1px solid #fecaca;color:#b91c1c;font-size:.9rem;display:none}
+.msg-err.on{display:block}
+.cta-mort{margin-top:1.25rem;padding:1rem 1.1rem;border-radius:14px;border:1px solid #e2e2f0;background:linear-gradient(180deg,#fafaff,#fff);text-align:center}
+.cta-mort p{margin:0 0 .75rem;font-size:.95rem;font-weight:600;color:#1a1a2e}
+.cta-mort a{display:inline-block;padding:.7rem 1.25rem;border-radius:12px;font-weight:700;font-size:.92rem;text-decoration:none;background:linear-gradient(135deg,#7b2ff7,#4a6cf7);color:#fff}
+.cta-mort a:hover{opacity:.92}
+.fi{margin-bottom:8px}
+.fq{background:#fff;border:1px solid #c4b5fd;border-left:4px solid #6c47ff;border-radius:12px;padding:14px 16px;width:100%;text-align:left;font-weight:600;color:#1a1a2e;cursor:pointer;transition:background .2s,color .2s;font-size:.97rem;font-family:inherit}
+.fq:hover{background:linear-gradient(90deg,#3a5bd9,#2a9bb8);color:#fff;border-color:#3a5bd9;border-left-color:#fff}
+.fa{padding:.5rem .5rem 1rem;color:#6b6b8a;display:none;font-size:.95rem;line-height:1.6}
+.fa.on{display:block}
+.cnt table{width:100%;border-collapse:collapse;margin:1rem 0;font-size:.92rem}
+.cnt table caption{text-align:left;font-weight:700;margin-bottom:.5rem;color:#1a1a2e}
+.cnt th,.cnt td{border:1px solid #e2e2f0;padding:.65rem .75rem;text-align:left}
+.cnt thead th{background:#f5f3ff;font-weight:700}
+.pub-muted{font-size:.85rem;color:#6b6b8a;margin-bottom:.35rem}
+.link-inline a{color:#6c47ff;font-weight:600}
+</style>
 
 <!-- ADSENSE -->
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=TU_ID"
@@ -45,10 +110,11 @@ crossorigin="anonymous"></script>
 
 <section class="hero wrap">
   <span class="badge">Vivienda · Finanzas</span>
-  <h1>¿Comprar o alquilar vivienda en España?</h1>
-  <p>Compara el coste real de comprar frente a alquilar y toma la mejor decisión financiera.</p>
+  <h1>Comprar o alquilar vivienda: simulador de qué es mejor (España)</h1>
+  <p>Compara el coste total de comprar frente a alquilar y obtén una lectura clara del escenario. Resultados orientativos.</p>
 </section>
 
+<p class="wrap pub-muted">Publicidad</p>
 <!-- ANUNCIO TOP -->
 <div class="ad ad-t wrap">
   <ins class="adsbygoogle"
@@ -60,50 +126,108 @@ crossorigin="anonymous"></script>
 
 <section class="cs wrap">
 
-<div class="cgrid">
+<div class="calc-layout">
 
 <div class="ccard">
 <h2>Datos de la vivienda</h2>
 
 <div class="fg">
-<label>Precio vivienda (€)</label>
+<label for="precio">Precio vivienda (€)</label>
 <input id="precio" type="text" inputmode="decimal" autocomplete="off" value="200.000,00">
+<small>Precio de compra del inmueble</small>
 </div>
 
 <div class="fg">
-<label>Entrada (%)</label>
+<label for="entrada">Entrada (%)</label>
 <input id="entrada" type="text" inputmode="decimal" autocomplete="off" value="20,00">
 </div>
 
 <div class="fg">
-<label>Interés (%)</label>
+<label for="interes">Interés (%)</label>
 <input id="interes" type="text" inputmode="decimal" autocomplete="off" value="3,00">
+<small>Tipo medio hipotecario</small>
 </div>
 
 <div class="fg">
-<label>Años hipoteca</label>
+<label for="años">Años hipoteca</label>
 <input id="años" type="text" inputmode="numeric" autocomplete="off" value="25">
 </div>
 
 <div class="fg">
-<label>Alquiler mensual (€)</label>
+<label for="alquiler">Alquiler mensual (€)</label>
 <input id="alquiler" type="text" inputmode="decimal" autocomplete="off" value="800,00">
-</div>
-<div class="fg">
-  <label>Gastos e impuestos de compra (%)</label>
-  <input id="gastos_compra_pct" type="text" inputmode="decimal" autocomplete="off" value="10,00">
-  <small style="color:var(--muted); font-size:0.75rem; display:block; margin-top:2px;">
-    ITP, notaría y registro (suele ser el 10-12%).
-  </small>
+<small>Pago mensual actual</small>
 </div>
 
 <div class="fg">
-  <label>Gastos anuales propiedad (IBI, Seguro...) (€)</label>
+  <label for="gastos_compra_pct">Gastos e impuestos de compra (%)</label>
+  <input id="gastos_compra_pct" type="text" inputmode="decimal" autocomplete="off" value="10,00">
+  <small>ITP, notaría y registro (suele ser el 10–12&nbsp;%).</small>
+</div>
+
+<div class="fg">
+  <label for="mantenimiento">Gastos anuales propiedad (IBI, Seguro...) (€)</label>
   <input id="mantenimiento" type="text" inputmode="decimal" autocomplete="off" value="1.000,00">
 </div>
-<button class="btn bp bfw" onclick="calc()">Comparar</button>
 
-<div class="rb" id="resultado"></div>
+<div class="fg">
+  <label for="revalorizacion">Revalorización vivienda (% anual)</label>
+  <input id="revalorizacion" type="text" inputmode="decimal" autocomplete="off" value="2,00">
+  <small>Crecimiento anual estimado del valor del inmueble (solo para estimar valor futuro).</small>
+</div>
+
+<button type="button" class="btn bp bfw" onclick="calc()">Comparar</button>
+
+<div id="msgErr" class="msg-err" role="alert"></div>
+
+</div>
+
+<div class="ccard" id="panelResultado">
+<h2>Resultados</h2>
+
+<div class="result-grid">
+  <div class="res-box">
+    <div class="res-label">Coste total alquiler</div>
+    <div class="res-value" id="outAlquiler">—</div>
+    <div class="res-sub">Suma de alquileres en el periodo</div>
+  </div>
+  <div class="res-box">
+    <div class="res-label">Coste total compra</div>
+    <div class="res-value" id="outCompra">—</div>
+    <div class="res-sub">Entrada, gastos iniciales, hipoteca y mantenimiento</div>
+  </div>
+</div>
+
+<div class="result-grid">
+  <div class="res-box res-box--accent">
+    <div class="res-label">Valor futuro vivienda (estim.)</div>
+    <div class="res-value" id="outValorFuturo">—</div>
+    <div class="res-sub">Precio × (1 + revalorización anual)<sup>n</sup> años</div>
+  </div>
+  <div class="res-box res-box--diff">
+    <div class="res-label">Diferencia</div>
+    <div class="res-value" id="outDiff">—</div>
+    <div class="res-sub" id="outDiffSub">Coste total menor según el escenario</div>
+  </div>
+</div>
+
+<div class="cmp-chart" aria-hidden="true">
+  <div class="cmp-row">
+    <span class="cmp-name">Alquiler</span>
+    <div class="cmp-track"><div class="cmp-fill cmp-fill--rent" id="barAlquiler" style="width:0%"></div></div>
+  </div>
+  <div class="cmp-row">
+    <span class="cmp-name">Compra</span>
+    <div class="cmp-track"><div class="cmp-fill cmp-fill--buy" id="barCompra" style="width:0%"></div></div>
+  </div>
+</div>
+
+<p class="interpret-block" id="interpretacion">Introduce los datos y pulsa «Comparar» para ver la interpretación.</p>
+
+<div class="cta-mort">
+  <p>🏦 Ver mejores hipotecas en España</p>
+  <a href="#">Comparar ofertas ahora</a>
+</div>
 
 </div>
 
@@ -111,6 +235,7 @@ crossorigin="anonymous"></script>
 </section>
 
 <!-- ANUNCIO MEDIO -->
+<p class="wrap pub-muted">Publicidad</p>
 <div class="ad ad-m wrap">
   <ins class="adsbygoogle"
    style="display:block"
@@ -121,28 +246,79 @@ crossorigin="anonymous"></script>
 
 <section class="cnt wrap">
 
-<h2>¿Qué es mejor: comprar o alquilar?</h2>
+<h2>¿Qué es mejor: comprar o alquilar una vivienda?</h2>
 
-<p>La decisión depende del coste total, el tipo de interés y el tiempo que pienses vivir en la vivienda.</p>
+<p>Comprar implica entrada, impuestos, cuota hipotecaria y gastos de la propiedad; alquilar implica pagar un canon mensual sin acumular patrimonio en la vivienda. La decisión depende del <strong>coste total</strong> en el periodo que elijas, del <strong>tipo de interés</strong> y de tu <strong>horizonte temporal</strong>.</p>
 
-<p>También puedes usar nuestra 
-<a href="calculadora-hipoteca.html">calculadora de hipoteca</a> 
-o la 
-<a href="calculadora-prestamo.html">calculadora de préstamo</a> 
-para afinar los cálculos.</p>
+<p>En plazos cortos suele pesar la flexibilidad del alquiler; en plazos largos, la compra puede compensar si el coste acumulado es menor y encaja en tu estabilidad laboral y familiar.</p>
+
+<p class="link-inline">Para afinar cifras puedes usar la <a href="calculadora-hipoteca.html">calculadora de hipoteca</a>, la <a href="calculadora-prestamo.html">calculadora de préstamo</a>, el <a href="calculadora-interes-compuesto.html">simulador de interés compuesto</a> (útil para proyectar <strong>ahorro</strong>), estimar variaciones porcentuales como la <a href="calculadora-porcentajes.html">inflación o subidas anuales</a> con la calculadora de porcentajes, y explorar más herramientas en <a href="index.html#finanzas">finanzas y ahorro</a>.</p>
 
 <h2>Factores clave</h2>
 
 <ul>
-<li>Precio de la vivienda</li>
-<li>Intereses de la hipoteca</li>
-<li>Coste del alquiler</li>
-<li>Horizonte temporal</li>
+<li><strong>Plazo:</strong> años que esperas vivir en la misma vivienda</li>
+<li><strong>Tipos de interés:</strong> condicionan la cuota y el coste total de la hipoteca</li>
+<li><strong>Estabilidad:</strong> ingresos previsibles y movilidad laboral o familiar</li>
+<li>Precio del inmueble, alquiler de mercado y gastos de compra y mantenimiento</li>
 </ul>
+
+<h2>Ejemplos reales: comprar vs alquilar</h2>
+
+<p>Los importes siguientes son <strong>ilustrativos</strong>: combinan el mismo tipo de simulación (entrada 20&nbsp;%, gastos de compra 10&nbsp;%, interés 3&nbsp;% anual, 25 años, mantenimiento anual moderado) y un alquiler mensual coherente con cada tramo de precio en muchas zonas de España. No son recomendaciones: sirven para ver cómo cambia el reparto entre escenarios.</p>
+
+<ul>
+<li><strong>Vivienda 120.000&nbsp;€:</strong> con alquiler alrededor de 450–500&nbsp;€/mes, en un escenario tipo (entrada 20&nbsp;%, gastos 10&nbsp;%, 3&nbsp;% nominal, 25 años, mantenimiento anual moderado) el coste total de compra suele superar al del alquiler en una magnitud de decenas de miles de euros; la cifra exacta depende del alquiler local y del tipo.</li>
+<li><strong>Vivienda 200.000&nbsp;€:</strong> con alquiler en torno a 750–900&nbsp;€/mes, la brecha entre costes puede ser mayor o menor; usa el simulador con tu alquiler real.</li>
+<li><strong>Vivienda 300.000&nbsp;€:</strong> con alquiler aproximado de 1.000–1.200&nbsp;€/mes, el coste total de compra (entrada + impuestos + hipoteca + mantenimiento) suele quedar claramente por encima del alquiler acumulado en el mismo periodo en muchos supuestos, salvo que el alquiler de mercado sea muy elevado.</li>
+</ul>
+
+<table>
+  <caption>Tabla orientativa (25 años, entrada 20&nbsp;%, gastos compra 10&nbsp;%, interés 3&nbsp;%, mantenimiento anual indicado)</caption>
+  <thead>
+    <tr>
+      <th scope="col">Precio vivienda</th>
+      <th scope="col">Alquiler mensual</th>
+      <th scope="col">Años</th>
+      <th scope="col">Coste alquilar (aprox.)</th>
+      <th scope="col">Coste comprar (aprox.)</th>
+      <th scope="col">Diferencia (aprox.)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>120.000&nbsp;€</td>
+      <td>480&nbsp;€</td>
+      <td>25</td>
+      <td>144.000&nbsp;€</td>
+      <td>≈ 197.600&nbsp;€</td>
+      <td>≈ 53.600&nbsp;€ a favor del alquiler</td>
+    </tr>
+    <tr>
+      <td>200.000&nbsp;€</td>
+      <td>800&nbsp;€</td>
+      <td>25</td>
+      <td>240.000&nbsp;€</td>
+      <td>≈ 312.600&nbsp;€</td>
+      <td>≈ 72.600&nbsp;€ a favor del alquiler</td>
+    </tr>
+    <tr>
+      <td>300.000&nbsp;€</td>
+      <td>1.100&nbsp;€</td>
+      <td>25</td>
+      <td>330.000&nbsp;€</td>
+      <td>≈ 456.400&nbsp;€</td>
+      <td>≈ 126.400&nbsp;€ a favor del alquiler</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><small>Cifras obtenidas con la misma lógica que el simulador (entrada 20&nbsp;%, gastos de compra 10&nbsp;%, interés 3&nbsp;% nominal, sistema francés, mantenimiento anual 1.000&nbsp;€). Son orientativas.</small></p>
 
 </section>
 
 <!-- ANUNCIO BOTTOM -->
+<p class="wrap pub-muted">Publicidad</p>
 <div class="ad ad-b wrap">
   <ins class="adsbygoogle"
    style="display:block"
@@ -156,16 +332,35 @@ para afinar los cálculos.</p>
 <h2>Preguntas frecuentes</h2>
 
 <div class="fi">
-<button class="fq">¿Cuándo compensa comprar?</button>
+<button type="button" class="fq">¿Cuándo compensa comprar?</button>
 <div class="fa"><p>Cuando el coste total es inferior al alquiler a largo plazo.</p></div>
 </div>
 
 <div class="fi">
-<button class="fq">¿Qué gastos tiene comprar?</button>
+<button type="button" class="fq">¿Qué gastos tiene comprar?</button>
 <div class="fa"><p>Impuestos, notaría, registro y mantenimiento.</p></div>
 </div>
 
+<div class="fi">
+<button type="button" class="fq">¿Cuándo conviene comprar en lugar de alquilar?</button>
+<div class="fa"><p>Suele valorarse la compra cuando el coste total estimado en tu horizonte temporal es menor que el del alquiler, tienes ahorro para entrada y gastos, y encaja con tu estabilidad. También entran factores no monetarios (estabilidad familiar, riesgo de subida del alquiler en tu zona).</p></div>
+</div>
+
+<div class="fi">
+<button type="button" class="fq">¿Qué factores influyen más en la decisión?</button>
+<div class="fa"><p>El plazo en la vivienda, el tipo de interés y el alquiler de mercado, más los gastos de compra y el mantenimiento. La inflación y la revalorización del inmueble afectan al patrimonio, pero este simulador se centra en el coste total del periodo.</p></div>
+</div>
+
 </section>
+
+<section class="cnt wrap">
+
+<h2>Sobre esta calculadora</h2>
+
+<p>Esta herramienta <strong>compara comprar frente a alquilar</strong> usando estimaciones financieras (cuota tipo francés, costes iniciales y mantenimiento). Está <strong>pensada para el contexto español</strong> (formato de números y conceptos habituales como ITP y gastos de formalización). El uso es <strong>orientativo</strong>: no sustituye asesoramiento personalizado ni incluye todos los impuestos o comisiones que puedan aplicar en cada comunidad o banco.</p>
+
+</section>
+
 <section class="trust wrap">
 
   <h2>¿Por qué usar nuestras calculadoras?</h2>
@@ -216,7 +411,52 @@ function fmtIn0(n) {
   return n.toLocaleString("es-ES", { maximumFractionDigits: 0 });
 }
 
+function validateInputs() {
+  var ids = ["precio", "entrada", "interes", "años", "alquiler", "gastos_compra_pct", "mantenimiento", "revalorizacion"];
+  var i, el, v;
+  for (i = 0; i < ids.length; i++) {
+    el = document.getElementById(ids[i]);
+    if (!el) continue;
+    v = parseEsp(el.value);
+    if (!isFinite(v)) {
+      return "Completa todos los campos con valores numéricos válidos.";
+    }
+    if (v < 0) {
+      return "Los valores no pueden ser negativos.";
+    }
+  }
+  var años = parseEsp(document.getElementById("años").value);
+  var precio = parseEsp(document.getElementById("precio").value);
+  if (!(años > 0)) {
+    return "Los años de hipoteca deben ser mayores que cero.";
+  }
+  if (!(precio > 0)) {
+    return "El precio de la vivienda debe ser mayor que cero.";
+  }
+  return null;
+}
+
+function setMsgErr(msg) {
+  var box = document.getElementById("msgErr");
+  if (!box) return;
+  if (msg) {
+    box.textContent = msg;
+    box.classList.add("on");
+  } else {
+    box.textContent = "";
+    box.classList.remove("on");
+  }
+}
+
 function calc(){
+  setMsgErr("");
+
+  var err = validateInputs();
+  if (err) {
+    setMsgErr(err);
+    return;
+  }
+
   // Captura de datos
   const precio = parseEsp(document.getElementById("precio").value) || 0;
   const entradaPct = parseEsp(document.getElementById("entrada").value) / 100;
@@ -225,6 +465,7 @@ function calc(){
   const alquilerMensual = parseEsp(document.getElementById("alquiler").value) || 0;
   const gastosCompraPct = parseEsp(document.getElementById("gastos_compra_pct").value) / 100;
   const mantenimientoAnual = parseEsp(document.getElementById("mantenimiento").value) || 0;
+  const revalorizacionAnual = parseEsp(document.getElementById("revalorizacion").value) / 100;
 
   const meses = años * 12;
   const interesMensual = interesAnual / 12;
@@ -251,30 +492,47 @@ function calc(){
   // Lógica de Alquiler
   const costeTotalAlquiler = alquilerMensual * meses;
 
+  // Valor futuro vivienda (estimación, no entra en coste total compra)
+  const valorFuturoVivienda = precio * Math.pow(1 + revalorizacionAnual, años);
+
   // Mostrar resultados
-  const diff = Math.abs(costeTotalCompra - costeTotalAlquiler);
+  const diffAbs = Math.abs(costeTotalCompra - costeTotalAlquiler);
   const ganador = costeTotalCompra < costeTotalAlquiler ? "Comprar" : "Alquilar";
-  const color = ganador === "Comprar" ? "#16a34a" : "#f97316";
 
-  document.getElementById("resultado").innerHTML = `
-    <div style="text-align:left; font-size:0.95rem;">
-      <p style="margin-bottom:8px;"><b>Total Compra:</b> ${fmtE(costeTotalCompra)}</p>
-      <p style="margin-bottom:12px; color:var(--muted); font-size:0.8rem;">
-        (Incluye entrada, gastos iniciales, intereses y mantenimiento)
-      </p>
-      <p style="margin-bottom:15px;"><b>Total Alquiler:</b> ${fmtE(costeTotalAlquiler)}</p>
-      <div style="padding:12px; background:#f8f9ff; border-radius:10px; border-left:4px solid ${color};">
-        <span style="color:${color}; font-weight:800; font-size:1.1rem;">
-          Ahorras ${fmtE(diff)} al ${ganador.toLowerCase()}.
-        </span>
-      </div>
-    </div>
-  `;
+  document.getElementById("outAlquiler").textContent = fmtE(costeTotalAlquiler);
+  document.getElementById("outCompra").textContent = fmtE(costeTotalCompra);
+  document.getElementById("outValorFuturo").textContent = fmtE(valorFuturoVivienda);
+  document.getElementById("outDiff").textContent = fmtE(diffAbs);
+  document.getElementById("outDiffSub").textContent =
+    ganador === "Comprar"
+      ? "Menor coste total: compra (ahorro frente al alquiler en el periodo)"
+      : "Menor coste total: alquiler (frente a la compra en el periodo)";
 
-  document.getElementById("resultado").classList.add("on");
+  var maxBar = Math.max(costeTotalAlquiler, costeTotalCompra, 1);
+  var pctAlq = (costeTotalAlquiler / maxBar) * 100;
+  var pctComp = (costeTotalCompra / maxBar) * 100;
+  document.getElementById("barAlquiler").style.width = pctAlq + "%";
+  document.getElementById("barCompra").style.width = pctComp + "%";
+
+  var interp = "";
+  if (costeTotalCompra < costeTotalAlquiler) {
+    interp = "Comprar es más rentable en este escenario (menor coste total en el periodo).";
+    if (años < 5) {
+      interp += " En plazos muy cortos, el alquiler suele ofrecer más flexibilidad; revisa también liquidez y movilidad.";
+    }
+  } else {
+    interp = "Alquilar muestra un coste total menor en este escenario.";
+    if (años < 7) {
+      interp += " Alquilar puede ser mejor si el periodo es corto o esperas cambiar de ciudad.";
+    }
+    if (años >= 15) {
+      interp += " A largo plazo, conviene repetir la simulación si cambian el tipo, el alquiler o el precio.";
+    }
+  }
+  document.getElementById("interpretacion").textContent = interp;
 }
 
-["precio", "entrada", "interes", "alquiler", "gastos_compra_pct", "mantenimiento"].forEach(function (id) {
+["precio", "entrada", "interes", "alquiler", "gastos_compra_pct", "mantenimiento", "revalorizacion"].forEach(function (id) {
   var el = document.getElementById(id);
   if (!el) return;
   el.addEventListener("blur", function () {
@@ -322,6 +580,22 @@ document.querySelectorAll(".fq").forEach(btn=>{
     "acceptedAnswer": {
       "@type": "Answer",
       "text": "Además del precio de la vivienda, debes contar con entre un 10% y un 12% adicional para impuestos (ITP o IVA), gastos de notaría, registro y tasación."
+    }
+  },
+  {
+    "@type": "Question",
+    "name": "¿Cuándo conviene comprar en lugar de alquilar?",
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Suele valorarse la compra cuando el coste total estimado en tu horizonte temporal es menor que el del alquiler, tienes ahorro para entrada y gastos, y encaja con tu estabilidad. También influyen factores no monetarios."
+    }
+  },
+  {
+    "@type": "Question",
+    "name": "¿Qué factores influyen más en la decisión?",
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "El plazo en la vivienda, el tipo de interés y el alquiler de mercado, más los gastos de compra y el mantenimiento."
     }
   }
 ]
