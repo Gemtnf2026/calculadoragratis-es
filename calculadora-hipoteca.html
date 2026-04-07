@@ -116,6 +116,13 @@
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=TU_ID"
 crossorigin="anonymous"></script>
 
+<style>
+#scroll-top-btn{position:fixed;right:18px;bottom:22px;z-index:60;width:48px;height:48px;padding:0;border:none;border-radius:50%;background:linear-gradient(145deg,#4a00e0,#2563d4);color:#fff;cursor:pointer;box-shadow:0 4px 18px rgba(37,99,212,0.45);transition:opacity .25s ease,transform .2s ease;opacity:0;visibility:hidden;pointer-events:none;-webkit-tap-highlight-color:transparent}
+#scroll-top-btn.is-visible{opacity:1;visibility:visible;pointer-events:auto}
+#scroll-top-btn:hover{transform:translateY(-2px)}
+#scroll-top-btn:focus-visible{outline:2px solid #fff;outline-offset:3px}
+</style>
+
 </head>
 
 <body>
@@ -455,6 +462,10 @@ Las condiciones reales pueden variar según el banco, comisiones y seguros asoci
 </p>
 </section>
 
+<button type="button" id="scroll-top-btn" aria-label="Volver arriba" title="Volver arriba">
+  <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m18 15-6-6-6 6"/></svg>
+</button>
+
 <footer class="ft">
 <p>© <span id="year"></span> CalculadoraGratis.es</p>
 </footer>
@@ -785,6 +796,21 @@ document.querySelectorAll(".fq").forEach(btn=>{
 }
 </script>
 
+<script>
+(function () {
+  var btn = document.getElementById("scroll-top-btn");
+  if (!btn) return;
+  function toggle() {
+    if (window.scrollY > Math.min(420, window.innerHeight * 0.85)) btn.classList.add("is-visible");
+    else btn.classList.remove("is-visible");
+  }
+  toggle();
+  window.addEventListener("scroll", toggle, { passive: true });
+  btn.addEventListener("click", function () {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  });
+})();
+</script>
 <script src="seo.js"></script>
 </body>
 </html>

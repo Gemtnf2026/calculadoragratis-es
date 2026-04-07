@@ -7,6 +7,12 @@
   <title>Política de Privacidad | CalculadoraGratis.es</title>
   <meta name="description" content="Política de privacidad de CalculadoraGratis.es: uso de cookies, analítica, anuncios y contacto.">
   <link rel="stylesheet" href="./style.css?v=2">
+  <style>
+  #scroll-top-btn{position:fixed;right:18px;bottom:22px;z-index:60;width:48px;height:48px;padding:0;border:none;border-radius:50%;background:linear-gradient(145deg,#4a00e0,#2563d4);color:#fff;cursor:pointer;box-shadow:0 4px 18px rgba(37,99,212,0.45);transition:opacity .25s ease,transform .2s ease;opacity:0;visibility:hidden;pointer-events:none;-webkit-tap-highlight-color:transparent}
+  #scroll-top-btn.is-visible{opacity:1;visibility:visible;pointer-events:auto}
+  #scroll-top-btn:hover{transform:translateY(-2px)}
+  #scroll-top-btn:focus-visible{outline:2px solid #fff;outline-offset:3px}
+  </style>
 </head>
 <body>
 
@@ -39,6 +45,10 @@
     <p>Última actualización: abril de 2026.</p>
   </main>
 
+<button type="button" id="scroll-top-btn" aria-label="Volver arriba" title="Volver arriba">
+  <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m18 15-6-6-6 6"/></svg>
+</button>
+
   <footer class="ft">
     <div class="wrap footer-inner">
       <p class="footer-copy">© 2026 CalculadoraGratis.es</p>
@@ -51,5 +61,20 @@
     </div>
   </footer>
 
+<script>
+(function () {
+  var btn = document.getElementById("scroll-top-btn");
+  if (!btn) return;
+  function toggle() {
+    if (window.scrollY > Math.min(420, window.innerHeight * 0.85)) btn.classList.add("is-visible");
+    else btn.classList.remove("is-visible");
+  }
+  toggle();
+  window.addEventListener("scroll", toggle, { passive: true });
+  btn.addEventListener("click", function () {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  });
+})();
+</script>
 </body>
 </html>
