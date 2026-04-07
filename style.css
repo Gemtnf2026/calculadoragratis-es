@@ -364,3 +364,15 @@ p{
   margin-bottom:1.2rem;
   line-height:1.6;
 }
+
+@media (max-width: 768px){
+  .calc-layout{
+    grid-template-columns: 1fr !important;
+    gap:16px;
+  }
+
+  .calc-layout .ccard:last-child{
+    position: static;
+    top: auto;
+  }
+}
