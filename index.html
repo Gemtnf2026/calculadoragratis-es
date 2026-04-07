@@ -18,6 +18,11 @@
 <style>
 #calc-search::placeholder{color:rgba(255,255,255,0.78)}
 #calc-search:focus-visible{outline:2px solid rgba(255,255,255,0.55);outline-offset:2px}
+#calc-search-empty{margin:0.65rem 0 0;font-size:0.92rem;line-height:1.4;opacity:0.92;text-align:center;color:rgba(255,255,255,0.92)}
+#scroll-top-btn{position:fixed;right:18px;bottom:22px;z-index:60;width:48px;height:48px;padding:0;border:none;border-radius:50%;background:linear-gradient(145deg,#4a00e0,#2563d4);color:#fff;cursor:pointer;box-shadow:0 4px 18px rgba(37,99,212,0.45);transition:opacity .25s ease,transform .2s ease;opacity:0;visibility:hidden;pointer-events:none;-webkit-tap-highlight-color:transparent}
+#scroll-top-btn.is-visible{opacity:1;visibility:visible;pointer-events:auto}
+#scroll-top-btn:hover{transform:translateY(-2px)}
+#scroll-top-btn:focus-visible{outline:2px solid #fff;outline-offset:3px}
 </style>
 
 <!-- FAVICON -->
@@ -70,7 +75,8 @@
     </div>
 
     <div role="search" style="margin-top:clamp(1.1rem,2.8vw,1.65rem);max-width:22rem;margin-left:auto;margin-right:auto;width:100%">
-      <input type="search" id="calc-search" name="q" aria-label="Buscar calculadora" placeholder="Buscar calculadora..." autocomplete="off" inputmode="search" style="width:100%;box-sizing:border-box;margin:0;padding:0.68rem 1rem;border-radius:10px;border:1px solid rgba(255,255,255,0.38);background:rgba(0,0,0,0.2);color:#fff;font-size:1rem;line-height:1.4;-webkit-tap-highlight-color:transparent">
+      <input type="search" id="calc-search" name="q" aria-label="Buscar calculadora" placeholder="Buscar calculadora..." autocomplete="off" inputmode="search" enterkeyhint="search" style="width:100%;box-sizing:border-box;margin:0;padding:0.68rem 1rem;border-radius:10px;border:1px solid rgba(255,255,255,0.38);background:rgba(0,0,0,0.2);color:#fff;font-size:1rem;line-height:1.4;-webkit-tap-highlight-color:transparent">
+      <p id="calc-search-empty" hidden>No hay calculadoras que coincidan. Prueba con otra palabra.</p>
     </div>
 
   </div>
@@ -251,6 +257,10 @@
 <p>Seguimos añadiendo nuevas calculadoras constantemente para cubrir todas las necesidades de cálculo online.</p>
 
 </section>
+<button type="button" id="scroll-top-btn" aria-label="Volver arriba" title="Volver arriba">
+  <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m18 15-6-6-6 6"/></svg>
+</button>
+
 <footer class="ft">
   <div class="wrap footer-inner">
     <p class="footer-copy"><span id="year"></span> CalculadoraGratis.es</p>
@@ -269,9 +279,11 @@
 
   (function () {
     var searchInput = document.getElementById("calc-search");
+    var emptyMsg = document.getElementById("calc-search-empty");
     if (!searchInput) return;
 
     var sections = ["finanzas", "matematicas", "utiles"];
+    var scrollTimer;
 
     function norm(s) {
       return (s || "").toLowerCase().replace(/\s+/g, " ").trim();
@@ -289,12 +301,15 @@
     function cardText(card) {
       var lt = card.querySelector(".lt");
       var ld = card.querySelector(".ld");
-      return (lt && lt.textContent) + " " + (ld && ld.textContent);
+      var a = (lt && lt.textContent) || "";
+      var b = (ld && ld.textContent) || "";
+      return a + " " + b;
     }
 
     function applyFilter() {
       var q = norm(searchInput.value);
       var qFold = fold(searchInput.value);
+      var totalVisible = 0;
       sections.forEach(function (id) {
         var sec = document.getElementById(id);
         if (!sec) return;
@@ -303,16 +318,69 @@
         cards.forEach(function (card) {
           var show = !q || fold(cardText(card)).indexOf(qFold) !== -1;
           card.style.display = show ? "" : "none";
-          if (show) any = true;
+          if (show) {
+            any = true;
+            totalVisible += 1;
+          }
         });
         if (q) sec.style.display = any ? "" : "none";
         else sec.style.display = "";
       });
+      if (emptyMsg) {
+        if (q && totalVisible === 0) emptyMsg.removeAttribute("hidden");
+        else emptyMsg.setAttribute("hidden", "");
+      }
     }
 
-    searchInput.addEventListener("input", applyFilter);
+    function scrollToFirstMatch() {
+      var q = norm(searchInput.value);
+      if (!q) return;
+      var first = null;
+      sections.forEach(function (id) {
+        var sec = document.getElementById(id);
+        if (!sec || sec.style.display === "none") return;
+        sec.querySelectorAll("a.lc").forEach(function (card) {
+          if (!first && card.style.display !== "none") first = card;
+        });
+      });
+      var target = first || emptyMsg;
+      if (target && typeof target.scrollIntoView === "function") {
+        target.scrollIntoView({ behavior: "smooth", block: "nearest" });
+      }
+    }
+
+    function scheduleScrollToResults() {
+      clearTimeout(scrollTimer);
+      scrollTimer = setTimeout(scrollToFirstMatch, 200);
+    }
+
+    searchInput.addEventListener("input", function () {
+      applyFilter();
+      if (norm(searchInput.value)) scheduleScrollToResults();
+    });
     searchInput.addEventListener("search", function () {
       if (searchInput.value === "") applyFilter();
+    });
+    searchInput.addEventListener("keydown", function (e) {
+      if (e.key === "Enter") {
+        e.preventDefault();
+        applyFilter();
+        scrollToFirstMatch();
+      }
+    });
+  })();
+
+  (function () {
+    var btn = document.getElementById("scroll-top-btn");
+    if (!btn) return;
+    function toggle() {
+      if (window.scrollY > Math.min(420, window.innerHeight * 0.85)) btn.classList.add("is-visible");
+      else btn.classList.remove("is-visible");
+    }
+    toggle();
+    window.addEventListener("scroll", toggle, { passive: true });
+    btn.addEventListener("click", function () {
+      window.scrollTo({ top: 0, behavior: "smooth" });
     });
   })();
 </script>
