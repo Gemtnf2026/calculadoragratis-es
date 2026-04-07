@@ -219,7 +219,7 @@ crossorigin="anonymous"></script>
   <div class="hip-field">
     <select id="zona" class="hip-select" aria-label="Zona">
       <option value="">Selecciona una opción</option>
-      <option value="andalucia" selected>Andalucía</option>
+      <option value="andalucia">Andalucía</option>
       <option value="aragon">Aragón</option>
       <option value="asturias">Asturias</option>
       <option value="baleares">Illes Balears</option>
@@ -230,7 +230,7 @@ crossorigin="anonymous"></script>
       <option value="cataluna">Cataluña</option>
       <option value="extremadura">Extremadura</option>
       <option value="galicia">Galicia</option>
-      <option value="madrid">Comunidad de Madrid</option>
+      <option value="madrid" selected>Comunidad de Madrid</option>
       <option value="murcia">Región de Murcia</option>
       <option value="navarra">Navarra</option>
       <option value="rioja">La Rioja</option>
@@ -266,6 +266,18 @@ crossorigin="anonymous"></script>
     <div class="res-label">Capital prestado</div>
     <div class="res-value" id="outCapital">—</div>
     <div class="res-sub" id="outAvisoFin"></div>
+  </div>
+</div>
+<div class="result-grid">
+  <div class="res-box">
+    <div class="res-label">Impuestos y gastos (est.)</div>
+    <div class="res-value" id="outGastos">—</div>
+    <div class="res-sub">Notaría, registro, ITP/IVA según tipo y comunidad</div>
+  </div>
+  <div class="res-box">
+    <div class="res-label">Coste total del inmueble</div>
+    <div class="res-value" id="outCosteTotal">—</div>
+    <div class="res-sub">Precio de compra + gastos estimados</div>
   </div>
 </div>
 <div class="result-grid">
@@ -345,7 +357,7 @@ Cuota = (capital × interés) / (1 - (1 + interés)^-n)
 <ul>
 <li>Tipo de interés (fijo o variable) y revisiones</li>
 <li>Duración del préstamo</li>
-<li>Capital solicitado (valor menos aportación, dentro de los límites que marque el banco)</li>
+<li>Capital solicitado (coste total orientativo —precio más gastos— menos aportación, dentro de los límites que marque el banco)</li>
 </ul>
 
 <p>También puedes usar nuestra
@@ -438,6 +450,78 @@ document.getElementById("year").textContent = new Date().getFullYear();
   var btnMas = document.getElementById("tinMas");
   var btnCalc = document.getElementById("btnCalc");
   var panel = document.getElementById("resultadoPanel");
+  var zonaEl = document.getElementById("zona");
+
+  /** ITP aproximado segunda mano por CCAA (orientativo; la normativa puede cambiar). */
+  var ITP_SEGUNDA = {
+    andalucia: 0.07,
+    aragon: 0.08,
+    asturias: 0.08,
+    baleares: 0.08,
+    canarias: 0.065,
+    cantabria: 0.1,
+    clm: 0.06,
+    cyl: 0.08,
+    cataluna: 0.1,
+    extremadura: 0.08,
+    galicia: 0.1,
+    madrid: 0.06,
+    murcia: 0.08,
+    navarra: 0.06,
+    rioja: 0.07,
+    valencia: 0.1,
+    ceuta: 0.06,
+    melilla: 0.06
+  };
+
+  /** AJD orientativo obra nueva / primera transmisión (sobre precio; simplificado). */
+  var AJD_OBRA_NUEVA = {
+    madrid: 0.012,
+    cataluna: 0.015,
+    valencia: 0.015,
+    andalucia: 0.012,
+    clm: 0.012,
+    cyl: 0.012,
+    murcia: 0.012,
+    galicia: 0.015,
+    aragon: 0.012,
+    asturias: 0.012,
+    baleares: 0.012,
+    canarias: 0.007,
+    cantabria: 0.015,
+    extremadura: 0.012,
+    navarra: 0.006,
+    rioja: 0.012,
+    ceuta: 0.006,
+    melilla: 0.006
+  };
+
+  /** Notaría, registro, gestoría, etc. (calibrado para alinear con simuladores que suman gastos al precio). */
+  var GASTOS_ADICIONALES_PCT = 0.008625;
+
+  function estimateGastosCompra(precio, zona, esSegundaMano) {
+    if (!isFinite(precio) || precio <= 0) return 0;
+    var z = zona || "";
+    if (esSegundaMano) {
+      var itp = ITP_SEGUNDA[z] != null ? ITP_SEGUNDA[z] : 0.07;
+      return precio * (itp + GASTOS_ADICIONALES_PCT);
+    }
+    var ajd = AJD_OBRA_NUEVA[z] != null ? AJD_OBRA_NUEVA[z] : 0.012;
+    return precio * (0.1 + ajd + GASTOS_ADICIONALES_PCT);
+  }
+
+  function getEsSegundaMano() {
+    var usado = document.querySelector('input[name="estadoVivienda"]:checked');
+    return !usado || usado.value === "usado";
+  }
+
+  function getCosteTotalInmueble() {
+    var precio = getValor();
+    var zona = zonaEl.value;
+    if (!isFinite(precio) || precio <= 0) return { precio: NaN, gastos: NaN, coste: NaN };
+    var gastos = estimateGastosCompra(precio, zona, getEsSegundaMano());
+    return { precio: precio, gastos: gastos, coste: precio + gastos };
+  }
 
   function parseEuro(str) {
     if (!str || typeof str !== "string") return NaN;
@@ -491,8 +575,10 @@ document.getElementById("year").textContent = new Date().getFullYear();
     var a = getAport();
     if (!isFinite(precio)) precio = 200000;
     if (!isFinite(a)) a = 0;
-    var maxA = Math.min(precio, 500000);
-    rAport.max = String(maxA);
+    var ct = getCosteTotalInmueble().coste;
+    if (!isFinite(ct)) ct = precio * 1.1;
+    var maxA = Math.min(Math.max(ct, precio), 500000);
+    rAport.max = String(Math.round(maxA));
     rAport.min = "0";
     a = Math.max(0, Math.min(maxA, a));
     rAport.value = String(Math.round(a / 1000) * 1000);
@@ -535,6 +621,15 @@ document.getElementById("year").textContent = new Date().getFullYear();
     plazoEl.value = String(v);
   });
 
+  zonaEl.addEventListener("change", function () {
+    syncRAport();
+  });
+  document.querySelectorAll('input[name="estadoVivienda"]').forEach(function (el) {
+    el.addEventListener("change", function () {
+      syncRAport();
+    });
+  });
+
   function tinStep(delta) {
     var t = parseTin(tinEl.value);
     if (!isFinite(t)) t = 1.85;
@@ -566,20 +661,30 @@ document.getElementById("year").textContent = new Date().getFullYear();
     if (!isFinite(años) || años < 1) años = 30;
     if (!isFinite(tin) || tin <= 0) tin = 1.85;
 
-    var capital = precio - aport;
+    var desglose = getCosteTotalInmueble();
+    var gastosCompra = desglose.gastos;
+    var costeTotal = desglose.coste;
+    if (!isFinite(costeTotal)) {
+      alert("Indica un valor de vivienda válido.");
+      return;
+    }
+
+    var capital = costeTotal - aport;
     var maxFin = precio * 0.8;
     var avisoFin = "";
     if (capital <= 0) {
       document.getElementById("outCuota").textContent = "—";
       document.getElementById("outCapital").textContent = "—";
+      document.getElementById("outGastos").textContent = gastosCompra.toLocaleString("es-ES", { maximumFractionDigits: 0 }) + " €";
+      document.getElementById("outCosteTotal").textContent = costeTotal.toLocaleString("es-ES", { maximumFractionDigits: 0 }) + " €";
       document.getElementById("outTotal").textContent = "—";
       document.getElementById("outIntereses").textContent = "—";
-      document.getElementById("outAvisoFin").textContent = "La aportación cubre o supera el valor: no hay préstamo que simular.";
+      document.getElementById("outAvisoFin").textContent = "La aportación cubre o supera el coste total estimado (precio + gastos): no hay préstamo que simular.";
       panel.classList.add("on");
       return;
     }
     if (capital > maxFin + 0.01) {
-      avisoFin = "Nota: financias más del 80&nbsp;% del valor indicado; muchas entidades limitan la financiación a ese entorno (comprueba con tu banco).";
+      avisoFin = "Nota: financias más del 80&nbsp;% del valor de la vivienda; muchas entidades limitan la financiación a ese entorno (comprueba con tu banco).";
     }
 
     var i = tin / 100 / 12;
@@ -590,16 +695,18 @@ document.getElementById("year").textContent = new Date().getFullYear();
 
     document.getElementById("outCuota").textContent = cuota.toLocaleString("es-ES", { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + " €";
     document.getElementById("outCapital").textContent = capital.toLocaleString("es-ES", { maximumFractionDigits: 0 }) + " €";
+    document.getElementById("outGastos").textContent = gastosCompra.toLocaleString("es-ES", { maximumFractionDigits: 0 }) + " €";
+    document.getElementById("outCosteTotal").textContent = costeTotal.toLocaleString("es-ES", { maximumFractionDigits: 0 }) + " €";
     document.getElementById("outTotal").textContent = total.toLocaleString("es-ES", { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + " €";
     document.getElementById("outIntereses").textContent = intereses.toLocaleString("es-ES", { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + " €";
-    document.getElementById("outAvisoFin").innerHTML = avisoFin || "Capital = valor de vivienda − aportación.";
+    document.getElementById("outAvisoFin").innerHTML = avisoFin || "Capital = coste total del inmueble (precio + gastos estimados) − aportación.";
 
     var usado = document.querySelector('input[name="estadoVivienda"]:checked');
     var notaITP = document.getElementById("outNotaITP");
     if (usado && usado.value === "usado") {
-      notaITP.innerHTML = "En <strong>segunda mano</strong> suele aplicarse el ITP (impuesto que varía por comunidad). Esta simulación no incluye impuestos ni gastos de notaría.";
+      notaITP.innerHTML = "En <strong>segunda mano</strong> el ITP y otros tributos varían por comunidad. Los importes de gastos son <strong>estimaciones</strong>; el desglose real lo marca la notaría y la normativa aplicable.";
     } else {
-      notaITP.innerHTML = "En <strong>obra nueva</strong> suelen aplicarse otros tributos (p. ej. AJD en ciertos casos). Los gastos reales dependen de la operación y la normativa vigente.";
+      notaITP.innerHTML = "En <strong>obra nueva</strong> suelen aplicarse IVA y AJD según caso. Los gastos mostrados son <strong>orientativos</strong>; los reales dependen de la operación y la normativa vigente.";
     }
 
     panel.classList.add("on");
@@ -644,7 +751,7 @@ document.querySelectorAll(".fq").forEach(btn=>{
     { "@type":"Question","name":"¿Cómo se calcula la cuota mensual con esta calculadora de hipoteca?","acceptedAnswer":{"@type":"Answer","text":"Aplica el sistema de amortización francés: convierte el interés anual en mensual dividiéndolo entre 12, calcula el número de meses multiplicando los años por 12 y obtiene la cuota con la fórmula estándar Cuota = (capital × i) / (1 − (1 + i)^−n), donde i es el interés mensual y n el número de cuotas."}},
     { "@type":"Question","name":"¿Qué representan “total pagado” e “intereses” en el resultado?","acceptedAnswer":{"@type":"Answer","text":"El total pagado es la cuota mensual multiplicada por todos los meses del préstamo. Los intereses son la diferencia entre ese total y el capital prestado; es decir, lo que pagas de coste financiero además de devolver el importe solicitado."}},
     { "@type":"Question","name":"Ejemplo: ¿cuánto sería la cuota de 200.000 € al 3 % en 25 años?","acceptedAnswer":{"@type":"Answer","text":"Con esos datos orientativos, la cuota mensual ronda los 948 €; el total pagado supera los 280.000 € y los intereses acumulados superan los 80.000 €. Los valores exactos dependen del redondeo y de las condiciones reales del banco."}},
-    { "@type":"Question","name":"¿La simulación incluye comisiones, seguros o gastos de compraventa?","acceptedAnswer":{"@type":"Answer","text":"No: solo usa capital, tipo de interés anual y plazo en años. En la práctica, comisiones, seguros vinculados, impuestos y notaría pueden cambiar el coste total; el aviso de la página indica que los resultados son orientativos."}},
+    { "@type":"Question","name":"¿La simulación incluye comisiones, seguros o gastos de compraventa?","acceptedAnswer":{"@type":"Answer","text":"El capital del préstamo se calcula restando la aportación al coste total orientativo (precio más una estimación de impuestos y gastos de compra según comunidad y tipo de vivienda), como en simuladores habituales. No incluye comisiones bancarias, seguros vinculados ni otros costes del préstamo; los gastos de compraventa son estimaciones y el aviso de la página indica que los resultados son orientativos."}},
     { "@type":"Question","name":"¿Qué diferencia hay entre hipoteca fija y variable?","acceptedAnswer":{"@type":"Answer","text":"En la hipoteca a tipo fijo, la cuota se calcula con un interés que no cambia durante el periodo pactado. En la variable, el tipo se revisa según un índice de referencia más un diferencial, y la cuota puede subir o bajar en cada revisión."}},
     { "@type":"Question","name":"¿Cuánto se recomienda destinar a la hipoteca?","acceptedAnswer":{"@type":"Answer","text":"Como orientación general, muchas familias intentan que la cuota no supere el 30–35 % de los ingresos netos recurrentes, aunque depende de gastos fijos, ahorro de emergencia y otros objetivos."}}
   ]
