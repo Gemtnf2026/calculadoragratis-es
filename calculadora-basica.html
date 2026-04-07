@@ -8,7 +8,7 @@
 
 <title>Calculadora básica online gratis</title>
 
-<meta name="description" content="Calculadora básica online: suma, resta, multiplicación y división con números en formato español. Resultado al instante, sin registro. Uso educativo y orientativo.">
+<meta name="description" content="Calculadora básica online con teclado en pantalla: suma, resta, multiplicación, división, memoria y funciones útiles. Formato español (coma decimal). Sin registro. Uso educativo.">
 
 <link rel="canonical" href="https://www.calculadoragratis.es/calculadora-basica.html">
 
@@ -17,6 +17,74 @@
 <link rel="stylesheet" href="style.css">
 
 <style>
+/* Misma cabecera que calculadora-cientifica.html */
+.badge {
+  display: inline-block;
+  background: rgba(108, 71, 255, 0.1);
+  color: #6c47ff;
+  font-size: 0.78rem;
+  font-weight: 700;
+  padding: 4px 12px;
+  border-radius: 20px;
+  margin-bottom: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.hero.wrap {
+  padding-top: 2.5rem;
+  padding-bottom: 1rem;
+}
+
+.hero h1 {
+  font-size: clamp(1.5rem, 3.2vw, 2.35rem);
+  font-weight: 800;
+  margin-bottom: 0.5rem;
+  line-height: 1.2;
+}
+
+.hero p {
+  color: #6b6b8a;
+  font-size: 1.05rem;
+}
+
+.ccard {
+  background: #fff;
+  border-radius: 18px;
+  padding: 1.75rem 1.5rem;
+  border: 1px solid #e2e2f0;
+  box-shadow: 0 8px 28px rgba(108, 71, 255, 0.07);
+  width: 100%;
+  max-width: none;
+  margin: 0;
+}
+
+.ccard h2 {
+  font-size: 1.1rem;
+  font-weight: 800;
+  margin-bottom: 1.25rem;
+  color: #1a1a2e;
+}
+
+/* Misma anchura que el teclado (520px) */
+#bas-display {
+  max-width: 520px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+#rbas {
+  max-width: 520px;
+}
+
+#bas-pad button {
+  margin-top: 0;
+}
+
+#bas-pad .bas-inv-txt {
+  font-size: 0.85rem;
+}
+
 /* Bloques de calculadora — solo esta página */
 .cs .cgrid {
   display: flex;
@@ -104,7 +172,7 @@ crossorigin="anonymous"></script>
 <section class="hero wrap">
   <span class="badge">Matemáticas</span>
   <h1>Calculadora básica online</h1>
-  <p>Suma, resta, multiplica y divide con una interfaz clara y resultados inmediatos.</p>
+  <p>Suma, resta, multiplicación y división con teclado en pantalla, memoria (M+, M−, MR, MC) y atajos (√, %, 1/x). Formato numérico español y panel de resultados bajo la calculadora.</p>
 </section>
 
 <p class="wrap pub-muted">Publicidad</p>
@@ -122,28 +190,47 @@ data-ad-format="auto"></ins>
 
 <div class="ccard">
 
-<h2>Operación</h2>
+<h2>Calculadora básica</h2>
 
 <div class="fg">
-<label for="n1">Primer número</label>
-<input id="n1" type="text" inputmode="decimal" autocomplete="off" value="12,50">
+<label for="bas-display">Pantalla</label>
+<input id="bas-display" type="text" inputmode="decimal" readonly autocomplete="off" value="0" aria-live="polite" style="text-align:right;font-size:1.35rem;font-weight:700;font-variant-numeric:tabular-nums">
 </div>
 
 <div class="fg">
-<label for="n2">Segundo número</label>
-<input id="n2" type="text" inputmode="decimal" autocomplete="off" value="3,00">
-</div>
+<label>Teclado</label>
+<div id="bas-pad" style="display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:0.5rem;max-width:520px">
+<button type="button" class="btn bp bfw" data-bas="mc">MC</button>
+<button type="button" class="btn bp bfw" data-bas="mr">MR</button>
+<button type="button" class="btn bp bfw" data-bas="mplus">M+</button>
+<button type="button" class="btn bp bfw" data-bas="mminus">M−</button>
+<button type="button" class="btn bp bfw" data-bas="ce">CE</button>
 
-<div class="fg">
-<label>Operación</label>
-<button type="button" class="btn bp bfw" onclick="setOpBasica('+')">+ Suma</button>
-<button type="button" class="btn bp bfw" onclick="setOpBasica('-')">− Resta</button>
-<button type="button" class="btn bp bfw" onclick="setOpBasica('*')">× Multiplicación</button>
-<button type="button" class="btn bp bfw" onclick="setOpBasica('/')">÷ División</button>
-<input type="hidden" id="op" value="+" aria-hidden="true">
-</div>
+<button type="button" class="btn bp bfw" data-bas="d" data-d="7">7</button>
+<button type="button" class="btn bp bfw" data-bas="d" data-d="8">8</button>
+<button type="button" class="btn bp bfw" data-bas="d" data-d="9">9</button>
+<button type="button" class="btn bp bfw" data-bas="op" data-op="/">÷</button>
+<button type="button" class="btn bp bfw" data-bas="sqrt">√</button>
 
-<button type="button" class="btn bp bfw" onclick="calcBasica()">Calcular</button>
+<button type="button" class="btn bp bfw" data-bas="d" data-d="4">4</button>
+<button type="button" class="btn bp bfw" data-bas="d" data-d="5">5</button>
+<button type="button" class="btn bp bfw" data-bas="d" data-d="6">6</button>
+<button type="button" class="btn bp bfw" data-bas="op" data-op="*">×</button>
+<button type="button" class="btn bp bfw" data-bas="percent">%</button>
+
+<button type="button" class="btn bp bfw" data-bas="d" data-d="1">1</button>
+<button type="button" class="btn bp bfw" data-bas="d" data-d="2">2</button>
+<button type="button" class="btn bp bfw" data-bas="d" data-d="3">3</button>
+<button type="button" class="btn bp bfw" data-bas="op" data-op="-">−</button>
+<button type="button" class="btn bp bfw bas-inv-txt" data-bas="inv">1/x</button>
+
+<button type="button" class="btn bp bfw" data-bas="d" data-d="0">0</button>
+<button type="button" class="btn bp bfw" data-bas="comma">,</button>
+<button type="button" class="btn bp bfw" data-bas="sign">+/−</button>
+<button type="button" class="btn bp bfw" data-bas="op" data-op="+">+</button>
+<button type="button" class="btn bp bfw" data-bas="eq">=</button>
+</div>
+</div>
 
 <div class="rb" id="rbas" role="status" aria-live="polite"></div>
 
@@ -173,7 +260,7 @@ data-ad-format="auto"></ins>
 
 <h2>Cómo usarla</h2>
 
-<p>Escribe el <strong>primer número</strong> y el <strong>segundo número</strong> usando el formato español (coma decimal, opcionalmente punto de miles). Pulsa el botón de la <strong>operación</strong> que quieras (+, −, × o ÷) y luego <strong>Calcular</strong>. El resultado aparece debajo. Si divides entre cero, verás un aviso en lugar del resultado.</p>
+<p>Usa el <strong>teclado en pantalla</strong>: escribe números con la <strong>coma</strong> como decimal. Pulsa un <strong>operador</strong> (+, −, × o ÷), introduce el segundo número y pulsa <strong>=</strong>. El resultado se ve en la pantalla y en el panel debajo. <strong>CE</strong> borra solo lo que estás escribiendo; <strong>MC / MR / M+ / M−</strong> gestionan la memoria. <strong>√</strong>, <strong>%</strong> (divide el número mostrado entre 100) y <strong>1/x</strong> actúan sobre el valor actual. Si divides entre cero, verás un aviso.</p>
 
 <p>También puedes usar la <a href="calculadora-porcentajes.html">calculadora de porcentajes</a> y la <a href="calculadora-regla-de-tres.html">regla de tres</a> para proporciones y tantos por ciento.</p>
 
@@ -225,83 +312,273 @@ data-ad-format="auto"></ins>
 
 document.getElementById("year").textContent = new Date().getFullYear();
 
-function setOpBasica(v) {
-  var h = document.getElementById("op");
-  if (h) h.value = v;
-}
+(function () {
+  var disp = document.getElementById("bas-display");
+  var rb = document.getElementById("rbas");
+  var pad = document.getElementById("bas-pad");
+  if (!disp || !pad || !rb) return;
 
-function parseEsp(s) {
-  if (s == null) return NaN;
-  var t = String(s).trim();
-  if (t === "") return NaN;
-  t = t.replace(/\s/g, "").replace(/\./g, "").replace(",", ".");
-  var n = parseFloat(t);
-  return isFinite(n) ? n : NaN;
-}
+  var acc = null;
+  var pendingOp = null;
+  var newEntry = true;
+  var memory = 0;
 
-function fmtRes(n) {
-  if (!isFinite(n)) return "—";
-  var abs = Math.abs(n);
-  var opts = abs >= 1e9 || (abs > 0 && abs < 1e-6)
-    ? { maximumFractionDigits: 10 }
-    : { minimumFractionDigits: 0, maximumFractionDigits: 6 };
-  return n.toLocaleString("es-ES", opts);
-}
-
-function calcBasica() {
-  var a = parseEsp(document.getElementById("n1").value);
-  var b = parseEsp(document.getElementById("n2").value);
-  var op = document.getElementById("op").value;
-  var el = document.getElementById("rbas");
-  el.classList.remove("on");
-
-  if (!isFinite(a) || !isFinite(b)) {
-    el.innerHTML = "<b>No se pudo calcular</b> Revisa que ambos números sean válidos.";
-    el.classList.add("on");
-    return;
+  function parseEsp(s) {
+    if (s == null) return NaN;
+    var t = String(s).trim();
+    if (t === "" || t === "-" || t === "-,") return NaN;
+    t = t.replace(/\s/g, "").replace(/\./g, "").replace(",", ".");
+    var n = parseFloat(t);
+    return isFinite(n) ? n : NaN;
   }
 
-  var r;
-  var sym = op;
-  if (op === "+") {
-    r = a + b;
-    sym = "+";
-  } else if (op === "-") {
-    r = a - b;
-    sym = "−";
-  } else if (op === "*") {
-    r = a * b;
-    sym = "×";
-  } else if (op === "/") {
-    if (b === 0) {
-      el.innerHTML = "<b>Error</b> No se puede dividir entre cero.";
-      el.classList.add("on");
+  function fmtBas(n) {
+    if (!isFinite(n)) return "Error";
+    var abs = Math.abs(n);
+    var opts = abs >= 1e9 || (abs > 0 && abs < 1e-6)
+      ? { maximumFractionDigits: 10 }
+      : { minimumFractionDigits: 0, maximumFractionDigits: 6 };
+    return n.toLocaleString("es-ES", opts);
+  }
+
+  function setPanel(html, isError) {
+    rb.innerHTML = html;
+    rb.classList.toggle("on", !!html);
+    if (isError) rb.setAttribute("data-err", "1");
+    else rb.removeAttribute("data-err");
+  }
+
+  function applyOp(a, b, op) {
+    if (op === "+") return a + b;
+    if (op === "-") return a - b;
+    if (op === "*") return a * b;
+    if (op === "/") {
+      if (b === 0) return NaN;
+      return a / b;
+    }
+    return NaN;
+  }
+
+  function foldPending() {
+    if (acc === null || pendingOp === null || newEntry) return;
+    var b = parseEsp(disp.value);
+    if (!isFinite(b)) return;
+    var r = applyOp(acc, b, pendingOp);
+    if (!isFinite(r)) {
+      setPanel("<b>Aviso:</b> operación no válida (por ejemplo división entre 0).", true);
+      acc = null;
+      pendingOp = null;
+      newEntry = true;
+      disp.value = "0";
       return;
     }
-    r = a / b;
-    sym = "÷";
-  } else {
-    el.innerHTML = "<b>Error</b> Operación no reconocida.";
-    el.classList.add("on");
-    return;
+    acc = r;
+    disp.value = fmtBas(r);
+    newEntry = true;
   }
 
-  var aStr = fmtRes(a);
-  var bStr = fmtRes(b);
-  var rStr = fmtRes(r);
-  el.innerHTML = "<b>Resultado:</b> " + aStr + " " + sym + " " + bStr + " = " + rStr;
-  el.classList.add("on");
-}
+  function commitNumberForOp() {
+    var n = parseEsp(disp.value);
+    if (!isFinite(n)) {
+      n = 0;
+      disp.value = fmtBas(0);
+    }
+    if (acc === null) {
+      acc = n;
+    } else if (pendingOp !== null && !newEntry) {
+      foldPending();
+      if (acc === null) return;
+    } else if (newEntry) {
+      acc = n;
+    }
+  }
 
-["n1", "n2"].forEach(function (id) {
-  var el = document.getElementById(id);
-  if (!el) return;
-  el.addEventListener("blur", function () {
-    var v = parseEsp(el.value);
-    if (!isFinite(v)) return;
-    el.value = v.toLocaleString("es-ES", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+  function onDigit(d) {
+    if (newEntry) {
+      disp.value = d === "0" ? "0" : d;
+      newEntry = false;
+    } else {
+      if (disp.value === "0" && d !== "0") disp.value = d;
+      else if (disp.value === "0" && d === "0") return;
+      else disp.value += d;
+    }
+  }
+
+  function onComma() {
+    if (newEntry) {
+      disp.value = "0,";
+      newEntry = false;
+      return;
+    }
+    if (disp.value.indexOf(",") === -1) disp.value += ",";
+  }
+
+  function onUnarySqrt() {
+    var n = parseEsp(disp.value);
+    if (!isFinite(n)) {
+      setPanel("<b>Aviso:</b> introduce un número válido.", true);
+      return;
+    }
+    if (n < 0) {
+      setPanel("<b>Aviso:</b> la raíz cuadrada de un número negativo no es un resultado real aquí.", true);
+      return;
+    }
+    var r = Math.sqrt(n);
+    disp.value = fmtBas(r);
+    acc = null;
+    pendingOp = null;
+    newEntry = true;
+    setPanel("<b>Resultado (√):</b> " + fmtBas(r), false);
+  }
+
+  function onPercent() {
+    var n = parseEsp(disp.value);
+    if (!isFinite(n)) {
+      setPanel("<b>Aviso:</b> introduce un número válido.", true);
+      return;
+    }
+    var r = n / 100;
+    disp.value = fmtBas(r);
+    newEntry = true;
+    setPanel("<b>Resultado (%):</b> " + fmtBas(r) + " (número ÷ 100)", false);
+  }
+
+  function onInv() {
+    var n = parseEsp(disp.value);
+    if (!isFinite(n)) {
+      setPanel("<b>Aviso:</b> introduce un número válido.", true);
+      return;
+    }
+    if (n === 0) {
+      setPanel("<b>Aviso:</b> no existe el inverso de cero (1/0).", true);
+      return;
+    }
+    var r = 1 / n;
+    disp.value = fmtBas(r);
+    acc = null;
+    pendingOp = null;
+    newEntry = true;
+    setPanel("<b>Resultado (1/x):</b> " + fmtBas(r), false);
+  }
+
+  function onSign() {
+    var n = parseEsp(disp.value);
+    if (!isFinite(n)) n = 0;
+    disp.value = fmtBas(-n);
+    newEntry = false;
+  }
+
+  function onBinaryOp(op) {
+    foldPending();
+    if (acc === null) {
+      var n = parseEsp(disp.value);
+      if (!isFinite(n)) n = 0;
+      acc = n;
+    } else if (pendingOp !== null && newEntry) {
+      /* mantener acumulador */
+    } else {
+      commitNumberForOp();
+    }
+    pendingOp = op;
+    newEntry = true;
+    disp.value = acc !== null ? fmtBas(acc) : "0";
+    var label = { "+": "suma", "-": "resta", "*": "multiplicación", "/": "división" }[op] || op;
+    setPanel("<b>Operación:</b> " + label + " — introduce el siguiente número y pulsa =.", false);
+  }
+
+  function onEquals() {
+    if (pendingOp === null) {
+      var solo = parseEsp(disp.value);
+      if (isFinite(solo)) setPanel("<b>Valor en pantalla:</b> " + fmtBas(solo), false);
+      return;
+    }
+    var onScreen = parseEsp(disp.value);
+    var b;
+    if (newEntry && acc !== null && isFinite(onScreen) && isFinite(acc)) {
+      var sameAsAcc = Math.abs(onScreen - acc) <= 1e-12 * Math.max(1, Math.abs(acc));
+      b = sameAsAcc ? 0 : onScreen;
+    } else {
+      b = onScreen;
+    }
+    if (!isFinite(b)) {
+      setPanel("<b>Aviso:</b> segundo número no válido.", true);
+      return;
+    }
+    if (acc === null) acc = b;
+    var r = applyOp(acc, b, pendingOp);
+    if (!isFinite(r)) {
+      setPanel("<b>Aviso:</b> operación no válida (por ejemplo división entre 0).", true);
+      acc = null;
+      pendingOp = null;
+      newEntry = true;
+      disp.value = "0";
+      return;
+    }
+    var sym = { "+": "+", "-": "−", "*": "×", "/": "÷" }[pendingOp] || pendingOp;
+    setPanel("<b>Resultado:</b> " + fmtBas(acc) + " " + sym + " " + fmtBas(b) + " = " + fmtBas(r), false);
+    disp.value = fmtBas(r);
+    acc = null;
+    pendingOp = null;
+    newEntry = true;
+  }
+
+  function onCE() {
+    disp.value = "0";
+    newEntry = true;
+  }
+
+  function onMC() {
+    memory = 0;
+    rb.classList.remove("on");
+    rb.innerHTML = "";
+    rb.removeAttribute("data-err");
+  }
+
+  function onMR() {
+    disp.value = fmtBas(memory);
+    newEntry = true;
+    setPanel("<b>Memoria:</b> recuperada en pantalla (MR).", false);
+  }
+
+  function onMplus() {
+    var n = parseEsp(disp.value);
+    if (!isFinite(n)) {
+      setPanel("<b>Aviso:</b> número no válido para M+.", true);
+      return;
+    }
+    memory += n;
+    setPanel("<b>Memoria:</b> sumado " + fmtBas(n) + " (M+). Total en memoria: " + fmtBas(memory) + ".", false);
+  }
+
+  function onMminus() {
+    var n = parseEsp(disp.value);
+    if (!isFinite(n)) {
+      setPanel("<b>Aviso:</b> número no válido para M−.", true);
+      return;
+    }
+    memory -= n;
+    setPanel("<b>Memoria:</b> restado " + fmtBas(n) + " (M−). Total en memoria: " + fmtBas(memory) + ".", false);
+  }
+
+  pad.addEventListener("click", function (e) {
+    var t = e.target.closest("[data-bas]");
+    if (!t) return;
+    var kind = t.getAttribute("data-bas");
+    if (kind === "d") onDigit(t.getAttribute("data-d"));
+    else if (kind === "comma") onComma();
+    else if (kind === "sqrt") onUnarySqrt();
+    else if (kind === "percent") onPercent();
+    else if (kind === "inv") onInv();
+    else if (kind === "sign") onSign();
+    else if (kind === "op") onBinaryOp(t.getAttribute("data-op"));
+    else if (kind === "eq") onEquals();
+    else if (kind === "ce") onCE();
+    else if (kind === "mc") onMC();
+    else if (kind === "mr") onMR();
+    else if (kind === "mplus") onMplus();
+    else if (kind === "mminus") onMminus();
   });
-});
+})();
 
 document.querySelectorAll(".fq").forEach(function (btn) {
   btn.onclick = function () {
