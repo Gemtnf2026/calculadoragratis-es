@@ -124,25 +124,25 @@ crossorigin="anonymous"></script>
 
 <div class="fg">
 <label for="capital">Capital inicial (€)</label>
-<input id="capital" type="number" inputmode="decimal" min="0" step="1" value="10000">
+<input id="capital" type="text" inputmode="decimal" autocomplete="off" value="10.000,00">
 <small>Cantidad inicial invertida</small>
 </div>
 
 <div class="fg">
 <label for="aporte">Aportación mensual (€)</label>
-<input id="aporte" type="number" inputmode="decimal" min="0" step="1" value="200">
+<input id="aporte" type="text" inputmode="decimal" autocomplete="off" value="200,00">
 <small>Cantidad añadida cada mes</small>
 </div>
 
 <div class="fg">
 <label for="interes">Interés anual (%)</label>
-<input id="interes" type="number" inputmode="decimal" min="0" step="0.01" value="7">
+<input id="interes" type="text" inputmode="decimal" autocomplete="off" value="7,00">
 <small>Rentabilidad anual estimada</small>
 </div>
 
 <div class="fg">
 <label for="años">Años</label>
-<input id="años" type="number" inputmode="numeric" min="0" step="1" value="20">
+<input id="años" type="text" inputmode="numeric" autocomplete="off" value="20">
 <small>Tiempo de inversión</small>
 </div>
 
@@ -328,6 +328,23 @@ VF = C × (1 + r)^t
 
 document.getElementById("year").textContent=new Date().getFullYear();
 
+function parseEsp(s){
+  if(s==null)return NaN;
+  var t=String(s).trim();
+  if(t==="")return NaN;
+  t=t.replace(/\s/g,"").replace(/\./g,"").replace(",",".");
+  var n=parseFloat(t);
+  return isFinite(n)?n:NaN;
+}
+function fmtIn2(n){
+  if(!isFinite(n))return"";
+  return n.toLocaleString("es-ES",{minimumFractionDigits:2,maximumFractionDigits:2});
+}
+function fmtIn0(n){
+  if(!isFinite(n))return"";
+  return n.toLocaleString("es-ES",{maximumFractionDigits:0});
+}
+
 function fmtEuro(x){
   if(typeof x!=="number"||isNaN(x)) return "—";
   return x.toLocaleString("es-ES",{minimumFractionDigits:2,maximumFractionDigits:2})+" €";
@@ -359,17 +376,17 @@ function calc(){
     return;
   }
 
-  let c=parseFloat(document.getElementById("capital").value);
-  let a=parseFloat(document.getElementById("aporte").value);
-  let r=parseFloat(document.getElementById("interes").value)/100/12;
-  let n=parseFloat(document.getElementById("años").value)*12;
+  let c=parseEsp(document.getElementById("capital").value);
+  let a=parseEsp(document.getElementById("aporte").value);
+  let r=parseEsp(document.getElementById("interes").value)/100/12;
+  let n=parseEsp(document.getElementById("años").value)*12;
 
   if(isNaN(c)||isNaN(a)||isNaN(r)||isNaN(n)){
     showCalcErr("Los datos introducidos no son válidos.");
     return;
   }
 
-  if(c<0||a<0||parseFloat(document.getElementById("interes").value)<0||parseFloat(document.getElementById("años").value)<0){
+  if(c<0||a<0||parseEsp(document.getElementById("interes").value)<0||parseEsp(document.getElementById("años").value)<0){
     showCalcErr("Usa solo valores iguales o mayores que cero.");
     return;
   }
@@ -407,6 +424,25 @@ function calc(){
 
   document.getElementById("simViz").classList.add("on");
 }
+
+["capital","aporte","interes"].forEach(function(id){
+  var el=document.getElementById(id);
+  if(!el)return;
+  el.addEventListener("blur",function(){
+    var v=parseEsp(el.value);
+    if(!isFinite(v))return;
+    el.value=fmtIn2(v);
+  });
+});
+(function(){
+  var el=document.getElementById("años");
+  if(!el)return;
+  el.addEventListener("blur",function(){
+    var v=parseEsp(el.value);
+    if(!isFinite(v))return;
+    el.value=fmtIn0(v);
+  });
+})();
 
 </script>
 <script>

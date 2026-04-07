@@ -65,7 +65,7 @@ data-ad-format="auto"></ins>
 
 <div class="fg">
 <label>Precio</label>
-<input id="precio" type="number" value="100">
+<input id="precio" type="text" inputmode="decimal" autocomplete="off" value="100,00">
 </div>
 
 <div class="fg">
@@ -141,9 +141,21 @@ data-ad-format="auto"></ins>
 
 document.getElementById("year").textContent = new Date().getFullYear();
 
+function parseEsp(s) {
+  if (s == null) return NaN;
+  var t = String(s).trim();
+  if (t === "") return NaN;
+  t = t.replace(/\s/g, "").replace(/\./g, "").replace(",", ".");
+  var n = parseFloat(t);
+  return isFinite(n) ? n : NaN;
+}
+function fmt2(n) {
+  return n.toLocaleString("es-ES", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+}
+
 function calc(){
 
-  let precio = parseFloat(document.getElementById("precio").value);
+  let precio = parseEsp(document.getElementById("precio").value);
   let iva = parseFloat(document.getElementById("iva").value)/100;
   let modo = document.getElementById("modo").value;
 
@@ -160,13 +172,23 @@ function calc(){
   }
 
   document.getElementById("resultado").innerHTML =
-    "<b>Base imponible:</b> "+base.toFixed(2)+" €<br>" +
-    "<b>IVA:</b> "+impuesto.toFixed(2)+" €<br>" +
-    "<b>Total:</b> "+total.toFixed(2)+" €<br><br>" +
+    "<b>Base imponible:</b> "+fmt2(base)+" €<br>" +
+    "<b>IVA:</b> "+fmt2(impuesto)+" €<br>" +
+    "<b>Total:</b> "+fmt2(total)+" €<br><br>" +
     "<a class='btn' href='calculadora-irpf-espana.html'>Calcular IRPF →</a>";
 
   document.getElementById("resultado").classList.add("on");
 }
+
+(function () {
+  var el = document.getElementById("precio");
+  if (!el) return;
+  el.addEventListener("blur", function () {
+    var v = parseEsp(el.value);
+    if (!isFinite(v)) return;
+    el.value = fmt2(v);
+  });
+})();
 
 </script>
 <script src="seo.js"></script>

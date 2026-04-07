@@ -67,17 +67,17 @@ crossorigin="anonymous"></script>
 
 <div class="fg">
 <label>Total (€)</label>
-<input id="total" type="number" value="50">
+<input id="total" type="text" inputmode="decimal" autocomplete="off" value="50,00">
 </div>
 
 <div class="fg">
 <label>Propina (%)</label>
-<input id="propina" type="number" value="10">
+<input id="propina" type="text" inputmode="decimal" autocomplete="off" value="10,00">
 </div>
 
 <div class="fg">
 <label>Personas</label>
-<input id="personas" type="number" value="2">
+<input id="personas" type="text" inputmode="numeric" autocomplete="off" value="2">
 </div>
 
 <button class="btn bp bfw" onclick="calc()">Calcular</button>
@@ -149,23 +149,67 @@ para otros cálculos rápidos.</p>
 
 document.getElementById("year").textContent = new Date().getFullYear();
 
+function parseEsp(s) {
+  if (s == null) return NaN;
+  var t = String(s).trim();
+  if (t === "") return NaN;
+  t = t.replace(/\s/g, "").replace(/\./g, "").replace(",", ".");
+  var n = parseFloat(t);
+  return isFinite(n) ? n : NaN;
+}
+function fmt2(n) {
+  return n.toLocaleString("es-ES", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+}
+function fmtIn0(n) {
+  if (!isFinite(n)) return "";
+  return n.toLocaleString("es-ES", { maximumFractionDigits: 0 });
+}
+
 function calc(){
 
-  let total = parseFloat(document.getElementById("total").value);
-  let propina = parseFloat(document.getElementById("propina").value)/100;
-  let personas = parseFloat(document.getElementById("personas").value);
+  let total = parseEsp(document.getElementById("total").value);
+  let propina = parseEsp(document.getElementById("propina").value)/100;
+  let personas = parseEsp(document.getElementById("personas").value);
 
   let tip = total * propina;
   let totalFinal = total + tip;
   let porPersona = totalFinal / personas;
 
   document.getElementById("resultado").innerHTML =
-    "<b>Propina:</b> "+tip.toFixed(2)+" €<br>" +
-    "<b>Total:</b> "+totalFinal.toFixed(2)+" €<br>" +
-    "<b>Por persona:</b> "+porPersona.toFixed(2)+" €";
+    "<b>Propina:</b> "+fmt2(tip)+" €<br>" +
+    "<b>Total:</b> "+fmt2(totalFinal)+" €<br>" +
+    "<b>Por persona:</b> "+fmt2(porPersona)+" €";
 
   document.getElementById("resultado").classList.add("on");
 }
+
+(function () {
+  var el = document.getElementById("total");
+  if (!el) return;
+  el.addEventListener("blur", function () {
+    var v = parseEsp(el.value);
+    if (!isFinite(v)) return;
+    el.value = fmt2(v);
+  });
+})();
+(function () {
+  var el = document.getElementById("propina");
+  if (!el) return;
+  el.addEventListener("blur", function () {
+    var v = parseEsp(el.value);
+    if (!isFinite(v)) return;
+    el.value = fmt2(v);
+  });
+})();
+(function () {
+  var el = document.getElementById("personas");
+  if (!el) return;
+  el.addEventListener("blur", function () {
+    var v = parseEsp(el.value);
+    if (!isFinite(v)) return;
+    el.value = fmtIn0(v);
+  });
+})();
 
 // FAQ toggle
 document.querySelectorAll(".fq").forEach(btn=>{

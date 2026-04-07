@@ -128,29 +128,29 @@ crossorigin="anonymous"></script>
 
 <div class="fg">
 <label for="monto">Importe (€)</label>
-<input id="monto" type="number" inputmode="decimal" min="1" step="100" value="10000">
+<input id="monto" type="text" inputmode="decimal" autocomplete="off" value="10.000,00">
 </div>
 
 <div class="fg">
 <label for="tin">Interés nominal (TIN %)</label>
-<input id="tin" type="number" inputmode="decimal" min="0" step="0.01" value="6">
+<input id="tin" type="text" inputmode="decimal" autocomplete="off" value="6,00">
 <small>Tipo anual sobre saldo pendiente; la TAE mostrada es una aproximación.</small>
 </div>
 
 <div class="fg">
 <label for="plazo">Plazo (años)</label>
-<input id="plazo" type="number" inputmode="numeric" min="1" max="40" step="1" value="5">
+<input id="plazo" type="text" inputmode="numeric" autocomplete="off" value="5">
 </div>
 
 <div class="fg">
 <label for="comision">Comisión de apertura (%)</label>
-<input id="comision" type="number" inputmode="decimal" min="0" step="0.01" value="" placeholder="Opcional">
+<input id="comision" type="text" inputmode="decimal" autocomplete="off" value="" placeholder="Opcional">
 <small>Sobre el capital prestado. Déjalo vacío o 0 si no aplica.</small>
 </div>
 
 <div class="fg">
 <label for="otrosGastos">Otros gastos (€)</label>
-<input id="otrosGastos" type="number" inputmode="decimal" min="0" step="1" value="" placeholder="Opcional">
+<input id="otrosGastos" type="text" inputmode="decimal" autocomplete="off" value="" placeholder="Opcional">
 <small>Por ejemplo tasación o gestión, si los quieres sumar al coste total.</small>
 </div>
 
@@ -315,10 +315,28 @@ Cuota = (capital × i) / (1 − (1 + i)<sup>−n</sup>)
 
 document.getElementById("year").textContent = new Date().getFullYear();
 
+function parseEsp(s) {
+  if (s == null) return NaN;
+  var t = String(s).trim();
+  if (t === "") return NaN;
+  t = t.replace(/\s/g, "").replace(/\./g, "").replace(",", ".");
+  var n = parseFloat(t);
+  return isFinite(n) ? n : NaN;
+}
+function fmtIn2(n) {
+  if (!isFinite(n)) return "";
+  return n.toLocaleString("es-ES", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+}
+function fmtIn0(n) {
+  if (!isFinite(n)) return "";
+  return n.toLocaleString("es-ES", { maximumFractionDigits: 0 });
+}
 function parseNum(id, fallback) {
   var el = document.getElementById(id);
   if (!el) return fallback;
-  var v = parseFloat(String(el.value).replace(",", "."));
+  var raw = String(el.value).trim();
+  if (raw === "") return fallback;
+  var v = parseEsp(raw);
   return isNaN(v) ? fallback : v;
 }
 
@@ -365,7 +383,7 @@ function calc() {
   var costeTotal = totalPagado + comisionEuro + otros;
 
   document.getElementById("outCuota").textContent = formatMoney(cuota);
-  document.getElementById("outCapital").textContent = m.toLocaleString("es-ES", { maximumFractionDigits: 0 }) + " €";
+  document.getElementById("outCapital").textContent = m.toLocaleString("es-ES", { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + " €";
   document.getElementById("outTotalPagado").textContent = formatMoney(totalPagado);
   document.getElementById("outIntereses").textContent = formatMoney(intereses);
   document.getElementById("outCosteTotal").textContent = formatMoney(costeTotal);
@@ -377,6 +395,38 @@ function calc() {
 }
 
 document.getElementById("btnCalc").addEventListener("click", calc);
+
+["monto", "tin", "otrosGastos"].forEach(function (id) {
+  var el = document.getElementById(id);
+  if (!el) return;
+  el.addEventListener("blur", function () {
+    var raw = String(el.value).trim();
+    if (raw === "") return;
+    var v = parseEsp(raw);
+    if (!isFinite(v)) return;
+    el.value = fmtIn2(v);
+  });
+});
+(function () {
+  var el = document.getElementById("plazo");
+  if (!el) return;
+  el.addEventListener("blur", function () {
+    var v = parseEsp(el.value);
+    if (!isFinite(v)) return;
+    el.value = fmtIn0(v);
+  });
+})();
+(function () {
+  var el = document.getElementById("comision");
+  if (!el) return;
+  el.addEventListener("blur", function () {
+    var raw = String(el.value).trim();
+    if (raw === "") return;
+    var v = parseEsp(raw);
+    if (!isFinite(v)) return;
+    el.value = fmtIn2(v);
+  });
+})();
 
 document.querySelectorAll(".fq").forEach(function (btn) {
   btn.onclick = function () {

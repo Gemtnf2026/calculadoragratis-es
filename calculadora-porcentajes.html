@@ -67,12 +67,12 @@ data-ad-format="auto"></ins>
 
 <div class="fg">
 <label>Porcentaje (%)</label>
-<input id="p1" type="number" value="20">
+<input id="p1" type="text" inputmode="decimal" autocomplete="off" value="20,00">
 </div>
 
 <div class="fg">
 <label>Número</label>
-<input id="n1" type="number" value="200">
+<input id="n1" type="text" inputmode="decimal" autocomplete="off" value="200,00">
 </div>
 
 <button class="btn bp bfw" onclick="calc1()">Calcular</button>
@@ -88,12 +88,12 @@ data-ad-format="auto"></ins>
 
 <div class="fg">
 <label>Valor</label>
-<input id="p2" type="number" value="50">
+<input id="p2" type="text" inputmode="decimal" autocomplete="off" value="50,00">
 </div>
 
 <div class="fg">
 <label>Total</label>
-<input id="n2" type="number" value="200">
+<input id="n2" type="text" inputmode="decimal" autocomplete="off" value="200,00">
 </div>
 
 <button class="btn bp bfw" onclick="calc2()">Calcular</button>
@@ -109,12 +109,12 @@ data-ad-format="auto"></ins>
 
 <div class="fg">
 <label>Valor inicial</label>
-<input id="p3" type="number" value="100">
+<input id="p3" type="text" inputmode="decimal" autocomplete="off" value="100,00">
 </div>
 
 <div class="fg">
 <label>Porcentaje (%)</label>
-<input id="n3" type="number" value="10">
+<input id="n3" type="text" inputmode="decimal" autocomplete="off" value="10,00">
 </div>
 
 <button class="btn bp bfw" onclick="calc3()">Calcular</button>
@@ -175,29 +175,51 @@ data-ad-format="auto"></ins>
 
 document.getElementById("year").textContent = new Date().getFullYear();
 
+function parseEsp(s) {
+  if (s == null) return NaN;
+  var t = String(s).trim();
+  if (t === "") return NaN;
+  t = t.replace(/\s/g, "").replace(/\./g, "").replace(",", ".");
+  var n = parseFloat(t);
+  return isFinite(n) ? n : NaN;
+}
+function fmt2(n) {
+  return n.toLocaleString("es-ES", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+}
+
 function calc1(){
-  let p = parseFloat(document.getElementById("p1").value);
-  let n = parseFloat(document.getElementById("n1").value);
+  let p = parseEsp(document.getElementById("p1").value);
+  let n = parseEsp(document.getElementById("n1").value);
   let r = (p*n)/100;
-  document.getElementById("r1").innerHTML = "<b>Resultado:</b> "+r.toFixed(2);
+  document.getElementById("r1").innerHTML = "<b>Resultado:</b> "+fmt2(r);
   document.getElementById("r1").classList.add("on");
 }
 
 function calc2(){
-  let p = parseFloat(document.getElementById("p2").value);
-  let n = parseFloat(document.getElementById("n2").value);
+  let p = parseEsp(document.getElementById("p2").value);
+  let n = parseEsp(document.getElementById("n2").value);
   let r = (p/n)*100;
-  document.getElementById("r2").innerHTML = "<b>Resultado:</b> "+r.toFixed(2)+"%";
+  document.getElementById("r2").innerHTML = "<b>Resultado:</b> "+fmt2(r)+"%";
   document.getElementById("r2").classList.add("on");
 }
 
 function calc3(){
-  let p = parseFloat(document.getElementById("p3").value);
-  let n = parseFloat(document.getElementById("n3").value);
+  let p = parseEsp(document.getElementById("p3").value);
+  let n = parseEsp(document.getElementById("n3").value);
   let r = p + (p*n/100);
-  document.getElementById("r3").innerHTML = "<b>Total:</b> "+r.toFixed(2);
+  document.getElementById("r3").innerHTML = "<b>Total:</b> "+fmt2(r);
   document.getElementById("r3").classList.add("on");
 }
+
+["p1","n1","p2","n2","p3","n3"].forEach(function(id){
+  var el=document.getElementById(id);
+  if(!el)return;
+  el.addEventListener("blur",function(){
+    var v=parseEsp(el.value);
+    if(!isFinite(v))return;
+    el.value=fmt2(v);
+  });
+});
 
 </script>
 <script src="seo.js"></script>

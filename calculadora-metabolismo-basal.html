@@ -72,17 +72,17 @@ data-ad-format="auto"></ins>
 
 <div class="fg">
 <label>Peso (kg)</label>
-<input id="peso" type="number" value="70">
+<input id="peso" type="text" inputmode="decimal" autocomplete="off" value="70,00">
 </div>
 
 <div class="fg">
 <label>Altura (cm)</label>
-<input id="altura" type="number" value="170">
+<input id="altura" type="text" inputmode="decimal" autocomplete="off" value="170,00">
 </div>
 
 <div class="fg">
 <label>Edad</label>
-<input id="edad" type="number" value="30">
+<input id="edad" type="text" inputmode="numeric" autocomplete="off" value="30">
 </div>
 
 <div class="fg">
@@ -151,11 +151,30 @@ data-ad-format="auto"></ins>
 
 document.getElementById("year").textContent = new Date().getFullYear();
 
+function parseEsp(s) {
+  if (s == null) return NaN;
+  var t = String(s).trim();
+  if (t === "") return NaN;
+  t = t.replace(/\s/g, "").replace(/\./g, "").replace(",", ".");
+  var n = parseFloat(t);
+  return isFinite(n) ? n : NaN;
+}
+function fmt2(n) {
+  return n.toLocaleString("es-ES", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+}
+function fmtIn0(n) {
+  if (!isFinite(n)) return "";
+  return n.toLocaleString("es-ES", { maximumFractionDigits: 0 });
+}
+function fmtKcal(n) {
+  return n.toLocaleString("es-ES", { maximumFractionDigits: 0 });
+}
+
 function calc(){
 
-  let peso = parseFloat(document.getElementById("peso").value);
-  let altura = parseFloat(document.getElementById("altura").value);
-  let edad = parseFloat(document.getElementById("edad").value);
+  let peso = parseEsp(document.getElementById("peso").value);
+  let altura = parseEsp(document.getElementById("altura").value);
+  let edad = parseEsp(document.getElementById("edad").value);
   let sexo = document.getElementById("sexo").value;
   let act = parseFloat(document.getElementById("actividad").value);
 
@@ -170,12 +189,31 @@ function calc(){
   let tdee = tmb * act;
 
   document.getElementById("resultado").innerHTML =
-    "<b>Metabolismo basal:</b> "+tmb.toFixed(0)+" kcal<br>" +
-    "<b>Calorías diarias:</b> "+tdee.toFixed(0)+" kcal<br><br>" +
+    "<b>Metabolismo basal:</b> "+fmtKcal(tmb)+" kcal<br>" +
+    "<b>Calorías diarias:</b> "+fmtKcal(tdee)+" kcal<br><br>" +
     "<a class='btn' href='calculadora-imc.html'>Calcular IMC →</a>";
 
   document.getElementById("resultado").classList.add("on");
 }
+
+["peso","altura"].forEach(function(id){
+  var el=document.getElementById(id);
+  if(!el)return;
+  el.addEventListener("blur",function(){
+    var v=parseEsp(el.value);
+    if(!isFinite(v))return;
+    el.value=fmt2(v);
+  });
+});
+(function(){
+  var el=document.getElementById("edad");
+  if(!el)return;
+  el.addEventListener("blur",function(){
+    var v=parseEsp(el.value);
+    if(!isFinite(v))return;
+    el.value=fmtIn0(v);
+  });
+})();
 
 </script>
 <script src="seo.js"></script>

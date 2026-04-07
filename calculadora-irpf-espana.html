@@ -130,7 +130,7 @@
 
     <div class="fg">
       <label for="salario">Salario bruto anual (€)</label>
-      <input type="number" id="salario" value="35000" min="0" max="999999" step="100">
+      <input type="text" id="salario" inputmode="decimal" autocomplete="off" value="35.000,00">
     </div>
 
     <div class="fg">
@@ -522,6 +522,19 @@ function fmt(n){
   return n.toLocaleString("es-ES",{minimumFractionDigits:2,maximumFractionDigits:2})+" €";
 }
 
+function parseEsp(s){
+  if(s==null)return NaN;
+  var t=String(s).trim();
+  if(t==="")return NaN;
+  t=t.replace(/\s/g,"").replace(/\./g,"").replace(",",".");
+  var n=parseFloat(t);
+  return isFinite(n)?n:NaN;
+}
+function fmtIn2(n){
+  if(!isFinite(n))return"";
+  return n.toLocaleString("es-ES",{minimumFractionDigits:2,maximumFractionDigits:2});
+}
+
 function calcTramos(base, limites, tipos){
   let cuota = 0, prev = 0, desglose = [];
   for(let i = 0; i < tipos.length; i++){
@@ -539,7 +552,7 @@ function calcTramos(base, limites, tipos){
 }
 
 function calcIRPF(){
-  const bruto   = parseFloat(document.getElementById("salario").value)||0;
+  const bruto   = parseEsp(document.getElementById("salario").value)||0;
   const ccaaKey = document.getElementById("ccaa").value;
   const hijos   = parseInt(document.getElementById("hijos").value);
   const edad    = parseInt(document.getElementById("edad").value);
@@ -588,9 +601,9 @@ function calcIRPF(){
   document.getElementById("r-neto-mes").textContent      = fmt(netoPaga);
   document.getElementById("r-pagas-label").textContent   = `En ${pagas} pagas`;
   document.getElementById("r-irpf").textContent          = fmt(irpfTotal);
-  document.getElementById("r-tipo-medio").textContent    = `Tipo efectivo: ${tipoEfectivo.toFixed(2)}%`;
+  document.getElementById("r-tipo-medio").textContent    = `Tipo efectivo: ${tipoEfectivo.toLocaleString("es-ES",{minimumFractionDigits:2,maximumFractionDigits:2})}%`;
   document.getElementById("r-retencion-mes").textContent = fmt(retMes);
-  document.getElementById("r-tipo-retencion").textContent= `${retPct.toFixed(2)}% s/ bruto`;
+  document.getElementById("r-tipo-retencion").textContent= `${retPct.toLocaleString("es-ES",{minimumFractionDigits:2,maximumFractionDigits:2})}% s/ bruto`;
 
   // SS
   document.getElementById("r-ss-cc").textContent    = fmt(ssCC);
@@ -615,8 +628,8 @@ function calcIRPF(){
   document.getElementById("bar-neto").style.width  = pN+"%";
   document.getElementById("bar-ss").style.width    = pS+"%";
   document.getElementById("bar-irpf").style.width  = pI+"%";
-  document.getElementById("bar-ss-pct").textContent  = pS.toFixed(1);
-  document.getElementById("bar-irpf-pct").textContent = pI.toFixed(1);
+  document.getElementById("bar-ss-pct").textContent  = pS.toLocaleString("es-ES",{minimumFractionDigits:1,maximumFractionDigits:1});
+  document.getElementById("bar-irpf-pct").textContent = pI.toLocaleString("es-ES",{minimumFractionDigits:1,maximumFractionDigits:1});
 
   // Desglose por tramos
   const el = document.getElementById("tramos-desglose");
@@ -634,7 +647,7 @@ function calcIRPF(){
     const baseT  = (e||a).base;
     const div = document.createElement("div");
     div.className="tramo-row";
-    div.innerHTML=`<span class="tramo-label">${desde.toLocaleString("es-ES")}–${hasta.toLocaleString("es-ES")} € &nbsp;<small style="color:#aaa">(${tipoE}+${tipoA}%=${tipoE+tipoA}%)</small></span><span class="tramo-val">${fmt(cuotaT)}</span>`;
+    div.innerHTML=`<span class="tramo-label">${desde.toLocaleString("es-ES",{minimumFractionDigits:2,maximumFractionDigits:2})}–${hasta.toLocaleString("es-ES",{minimumFractionDigits:2,maximumFractionDigits:2})} € &nbsp;<small style="color:#aaa">(${tipoE}+${tipoA}%=${tipoE+tipoA}%)</small></span><span class="tramo-val">${fmt(cuotaT)}</span>`;
     el.appendChild(div);
   }
   const tot=document.createElement("div");
@@ -648,6 +661,16 @@ function toggleFaq(btn){
   const ans = btn.nextElementSibling;
   ans.classList.toggle("on");
 }
+
+(function(){
+  var el=document.getElementById("salario");
+  if(!el)return;
+  el.addEventListener("blur",function(){
+    var v=parseEsp(el.value);
+    if(!isFinite(v))return;
+    el.value=fmtIn2(v);
+  });
+})();
 </script>
 
 <script type="application/ld+json">

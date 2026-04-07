@@ -81,17 +81,17 @@ data-ad-format="auto"></ins>
 
 <div class="fg">
 <label>Nota actual</label>
-<input id="actual" type="number" value="5">
+<input id="actual" type="text" inputmode="decimal" autocomplete="off" value="5,00">
 </div>
 
 <div class="fg">
 <label>Peso (%)</label>
-<input id="peso" type="number" value="50">
+<input id="peso" type="text" inputmode="decimal" autocomplete="off" value="50,00">
 </div>
 
 <div class="fg">
 <label>Nota objetivo</label>
-<input id="objetivo" type="number" value="5">
+<input id="objetivo" type="text" inputmode="decimal" autocomplete="off" value="5,00">
 </div>
 
 <button class="btn bp bfw" onclick="calcNecesaria()">Calcular</button>
@@ -149,11 +149,29 @@ data-ad-format="auto"></ins>
 
 document.getElementById("year").textContent = new Date().getFullYear();
 
+function parseEsp(s) {
+  if (s == null) return NaN;
+  var t = String(s).trim();
+  if (t === "") return NaN;
+  t = t.replace(/\s/g, "").replace(/\./g, "").replace(",", ".");
+  var n = parseFloat(t);
+  return isFinite(n) ? n : NaN;
+}
+function fmt2(n) {
+  return n.toLocaleString("es-ES", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+}
+
 function addNota(){
   let div = document.createElement("div");
   div.className="fg";
-  div.innerHTML='<input type="number" class="nota" value="5">';
+  div.innerHTML='<input type="text" inputmode="decimal" autocomplete="off" class="nota" value="5,00">';
   document.getElementById("notas").appendChild(div);
+  var inp=div.querySelector(".nota");
+  inp.addEventListener("blur",function(){
+    var v=parseEsp(inp.value);
+    if(!isFinite(v))return;
+    inp.value=fmt2(v);
+  });
 }
 
 // añadir 3 por defecto
@@ -164,30 +182,40 @@ function calcMedia(){
   let total = 0;
 
   notas.forEach(n=>{
-    total += parseFloat(n.value) || 0;
+    total += parseEsp(n.value) || 0;
   });
 
   let media = total / notas.length;
 
   document.getElementById("r1").innerHTML =
-    "<b>Media:</b> "+media.toFixed(2);
+    "<b>Media:</b> "+fmt2(media);
 
   document.getElementById("r1").classList.add("on");
 }
 
 function calcNecesaria(){
 
-  let actual = parseFloat(document.getElementById("actual").value);
-  let peso = parseFloat(document.getElementById("peso").value)/100;
-  let objetivo = parseFloat(document.getElementById("objetivo").value);
+  let actual = parseEsp(document.getElementById("actual").value);
+  let peso = parseEsp(document.getElementById("peso").value)/100;
+  let objetivo = parseEsp(document.getElementById("objetivo").value);
 
   let necesaria = (objetivo - actual*(1-peso))/peso;
 
   document.getElementById("r2").innerHTML =
-    "<b>Necesitas:</b> "+necesaria.toFixed(2);
+    "<b>Necesitas:</b> "+fmt2(necesaria);
 
   document.getElementById("r2").classList.add("on");
 }
+
+["actual","peso","objetivo"].forEach(function(id){
+  var el=document.getElementById(id);
+  if(!el)return;
+  el.addEventListener("blur",function(){
+    var v=parseEsp(el.value);
+    if(!isFinite(v))return;
+    el.value=fmt2(v);
+  });
+});
 
 </script>
 <script src="seo.js"></script>

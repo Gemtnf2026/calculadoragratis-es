@@ -67,31 +67,31 @@ crossorigin="anonymous"></script>
 
 <div class="fg">
 <label>Precio vivienda (€)</label>
-<input id="precio" type="number" value="200000">
+<input id="precio" type="text" inputmode="decimal" autocomplete="off" value="200.000,00">
 </div>
 
 <div class="fg">
 <label>Entrada (%)</label>
-<input id="entrada" type="number" value="20">
+<input id="entrada" type="text" inputmode="decimal" autocomplete="off" value="20,00">
 </div>
 
 <div class="fg">
 <label>Interés (%)</label>
-<input id="interes" type="number" value="3">
+<input id="interes" type="text" inputmode="decimal" autocomplete="off" value="3,00">
 </div>
 
 <div class="fg">
 <label>Años hipoteca</label>
-<input id="años" type="number" value="25">
+<input id="años" type="text" inputmode="numeric" autocomplete="off" value="25">
 </div>
 
 <div class="fg">
 <label>Alquiler mensual (€)</label>
-<input id="alquiler" type="number" value="800">
+<input id="alquiler" type="text" inputmode="decimal" autocomplete="off" value="800,00">
 </div>
 <div class="fg">
   <label>Gastos e impuestos de compra (%)</label>
-  <input id="gastos_compra_pct" type="number" value="10">
+  <input id="gastos_compra_pct" type="text" inputmode="decimal" autocomplete="off" value="10,00">
   <small style="color:var(--muted); font-size:0.75rem; display:block; margin-top:2px;">
     ITP, notaría y registro (suele ser el 10-12%).
   </small>
@@ -99,7 +99,7 @@ crossorigin="anonymous"></script>
 
 <div class="fg">
   <label>Gastos anuales propiedad (IBI, Seguro...) (€)</label>
-  <input id="mantenimiento" type="number" value="1000">
+  <input id="mantenimiento" type="text" inputmode="decimal" autocomplete="off" value="1.000,00">
 </div>
 <button class="btn bp bfw" onclick="calc()">Comparar</button>
 
@@ -196,15 +196,35 @@ para afinar los cálculos.</p>
 
 document.getElementById("year").textContent = new Date().getFullYear();
 
+function parseEsp(s) {
+  if (s == null) return NaN;
+  var t = String(s).trim();
+  if (t === "") return NaN;
+  t = t.replace(/\s/g, "").replace(/\./g, "").replace(",", ".");
+  var n = parseFloat(t);
+  return isFinite(n) ? n : NaN;
+}
+function fmtE(x) {
+  return x.toLocaleString("es-ES", { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + " €";
+}
+function fmtIn2(n) {
+  if (!isFinite(n)) return "";
+  return n.toLocaleString("es-ES", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+}
+function fmtIn0(n) {
+  if (!isFinite(n)) return "";
+  return n.toLocaleString("es-ES", { maximumFractionDigits: 0 });
+}
+
 function calc(){
   // Captura de datos
-  const precio = parseFloat(document.getElementById("precio").value) || 0;
-  const entradaPct = parseFloat(document.getElementById("entrada").value) / 100;
-  const interesAnual = parseFloat(document.getElementById("interes").value) / 100;
-  const años = parseFloat(document.getElementById("años").value) || 0;
-  const alquilerMensual = parseFloat(document.getElementById("alquiler").value) || 0;
-  const gastosCompraPct = parseFloat(document.getElementById("gastos_compra_pct").value) / 100;
-  const mantenimientoAnual = parseFloat(document.getElementById("mantenimiento").value) || 0;
+  const precio = parseEsp(document.getElementById("precio").value) || 0;
+  const entradaPct = parseEsp(document.getElementById("entrada").value) / 100;
+  const interesAnual = parseEsp(document.getElementById("interes").value) / 100;
+  const años = parseEsp(document.getElementById("años").value) || 0;
+  const alquilerMensual = parseEsp(document.getElementById("alquiler").value) || 0;
+  const gastosCompraPct = parseEsp(document.getElementById("gastos_compra_pct").value) / 100;
+  const mantenimientoAnual = parseEsp(document.getElementById("mantenimiento").value) || 0;
 
   const meses = años * 12;
   const interesMensual = interesAnual / 12;
@@ -231,9 +251,6 @@ function calc(){
   // Lógica de Alquiler
   const costeTotalAlquiler = alquilerMensual * meses;
 
-  // Formateo de moneda
-  const f = new Intl.NumberFormat('es-ES', { style: 'currency', currency: 'EUR', maximumFractionDigits: 0 });
-
   // Mostrar resultados
   const diff = Math.abs(costeTotalCompra - costeTotalAlquiler);
   const ganador = costeTotalCompra < costeTotalAlquiler ? "Comprar" : "Alquilar";
@@ -241,14 +258,14 @@ function calc(){
 
   document.getElementById("resultado").innerHTML = `
     <div style="text-align:left; font-size:0.95rem;">
-      <p style="margin-bottom:8px;"><b>Total Compra:</b> ${f.format(costeTotalCompra)}</p>
+      <p style="margin-bottom:8px;"><b>Total Compra:</b> ${fmtE(costeTotalCompra)}</p>
       <p style="margin-bottom:12px; color:var(--muted); font-size:0.8rem;">
         (Incluye entrada, gastos iniciales, intereses y mantenimiento)
       </p>
-      <p style="margin-bottom:15px;"><b>Total Alquiler:</b> ${f.format(costeTotalAlquiler)}</p>
+      <p style="margin-bottom:15px;"><b>Total Alquiler:</b> ${fmtE(costeTotalAlquiler)}</p>
       <div style="padding:12px; background:#f8f9ff; border-radius:10px; border-left:4px solid ${color};">
         <span style="color:${color}; font-weight:800; font-size:1.1rem;">
-          Ahorras ${f.format(diff)} al ${ganador.toLowerCase()}.
+          Ahorras ${fmtE(diff)} al ${ganador.toLowerCase()}.
         </span>
       </div>
     </div>
@@ -256,6 +273,25 @@ function calc(){
 
   document.getElementById("resultado").classList.add("on");
 }
+
+["precio", "entrada", "interes", "alquiler", "gastos_compra_pct", "mantenimiento"].forEach(function (id) {
+  var el = document.getElementById(id);
+  if (!el) return;
+  el.addEventListener("blur", function () {
+    var v = parseEsp(el.value);
+    if (!isFinite(v)) return;
+    el.value = fmtIn2(v);
+  });
+});
+(function () {
+  var el = document.getElementById("años");
+  if (!el) return;
+  el.addEventListener("blur", function () {
+    var v = parseEsp(el.value);
+    if (!isFinite(v)) return;
+    el.value = fmtIn0(v);
+  });
+})();
 
 // FAQ toggle
 document.querySelectorAll(".fq").forEach(btn=>{

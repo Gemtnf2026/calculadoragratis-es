@@ -100,17 +100,17 @@ data-ad-format="auto"></ins>
 
 <div class="fg">
 <label>Potencia (W)</label>
-<input id="potencia" type="number" value="1000">
+<input id="potencia" type="text" inputmode="decimal" autocomplete="off" value="1.000,00">
 </div>
 
 <div class="fg">
 <label>Horas al día</label>
-<input id="horas" type="number" value="3">
+<input id="horas" type="text" inputmode="decimal" autocomplete="off" value="3,00">
 </div>
 
 <div class="fg">
 <label>Precio kWh (€)</label>
-<input id="precio" type="number" value="0.20">
+<input id="precio" type="text" inputmode="decimal" autocomplete="off" value="0,20">
 </div>
 
 <button class="btn bp bfw" onclick="calc()">Calcular</button>
@@ -195,11 +195,23 @@ data-ad-format="auto"></ins>
 
 document.getElementById("year").textContent = new Date().getFullYear();
 
+function parseEsp(s) {
+  if (s == null) return NaN;
+  var t = String(s).trim();
+  if (t === "") return NaN;
+  t = t.replace(/\s/g, "").replace(/\./g, "").replace(",", ".");
+  var n = parseFloat(t);
+  return isFinite(n) ? n : NaN;
+}
+function fmt2(n) {
+  return n.toLocaleString("es-ES", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+}
+
 function calc(){
 
-  let p = parseFloat(document.getElementById("potencia").value);
-  let h = parseFloat(document.getElementById("horas").value);
-  let precio = parseFloat(document.getElementById("precio").value);
+  let p = parseEsp(document.getElementById("potencia").value);
+  let h = parseEsp(document.getElementById("horas").value);
+  let precio = parseEsp(document.getElementById("precio").value);
 
   let consumo = (p*h)/1000;
 
@@ -211,15 +223,25 @@ function calc(){
   let costeAnual = anual * precio;
 
   document.getElementById("resultado").innerHTML =
-    "<b>Consumo diario:</b> "+consumo.toFixed(2)+" kWh<br>" +
-    "<b>Coste diario:</b> "+costeDia.toFixed(2)+" €<br><br>" +
-    "<b>Consumo mensual:</b> "+mensual.toFixed(2)+" kWh<br>" +
-    "<b>Coste mensual:</b> "+costeMes.toFixed(2)+" €<br><br>" +
-    "<b>Consumo anual:</b> "+anual.toFixed(2)+" kWh<br>" +
-    "<b>Coste anual:</b> "+costeAnual.toFixed(2)+" €";
+    "<b>Consumo diario:</b> "+fmt2(consumo)+" kWh<br>" +
+    "<b>Coste diario:</b> "+fmt2(costeDia)+" €<br><br>" +
+    "<b>Consumo mensual:</b> "+fmt2(mensual)+" kWh<br>" +
+    "<b>Coste mensual:</b> "+fmt2(costeMes)+" €<br><br>" +
+    "<b>Consumo anual:</b> "+fmt2(anual)+" kWh<br>" +
+    "<b>Coste anual:</b> "+fmt2(costeAnual)+" €";
 
   document.getElementById("resultado").classList.add("on");
 }
+
+["potencia","horas","precio"].forEach(function(id){
+  var el=document.getElementById(id);
+  if(!el)return;
+  el.addEventListener("blur",function(){
+    var v=parseEsp(el.value);
+    if(!isFinite(v))return;
+    el.value=fmt2(v);
+  });
+});
 
 document.querySelectorAll(".fq").forEach(btn=>{
   btn.onclick=()=>{

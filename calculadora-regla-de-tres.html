@@ -68,17 +68,17 @@ crossorigin="anonymous"></script>
 
 <div class="fg">
 <label>Valor A</label>
-<input id="a" type="number" value="2">
+<input id="a" type="text" inputmode="decimal" autocomplete="off" value="2,00">
 </div>
 
 <div class="fg">
 <label>Valor B</label>
-<input id="b" type="number" value="4">
+<input id="b" type="text" inputmode="decimal" autocomplete="off" value="4,00">
 </div>
 
 <div class="fg">
 <label>Valor C</label>
-<input id="c" type="number" value="6">
+<input id="c" type="text" inputmode="decimal" autocomplete="off" value="6,00">
 </div>
 
 <button class="btn bp bfw" onclick="calc()">Calcular</button>
@@ -167,20 +167,42 @@ para cálculos relacionados.</p>
 // Año automático
 document.getElementById("year").textContent = new Date().getFullYear();
 
+function parseEsp(s) {
+  if (s == null) return NaN;
+  var t = String(s).trim();
+  if (t === "") return NaN;
+  t = t.replace(/\s/g, "").replace(/\./g, "").replace(",", ".");
+  var n = parseFloat(t);
+  return isFinite(n) ? n : NaN;
+}
+function fmt2(n) {
+  return n.toLocaleString("es-ES", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+}
+
 // cálculo
 function calc(){
 
-  let a = parseFloat(document.getElementById("a").value);
-  let b = parseFloat(document.getElementById("b").value);
-  let c = parseFloat(document.getElementById("c").value);
+  let a = parseEsp(document.getElementById("a").value);
+  let b = parseEsp(document.getElementById("b").value);
+  let c = parseEsp(document.getElementById("c").value);
 
   let x = (b * c) / a;
 
   document.getElementById("resultado").innerHTML =
-    "<b>Resultado:</b> " + x.toFixed(2);
+    "<b>Resultado:</b> " + fmt2(x);
 
   document.getElementById("resultado").classList.add("on");
 }
+
+["a","b","c"].forEach(function(id){
+  var el=document.getElementById(id);
+  if(!el)return;
+  el.addEventListener("blur",function(){
+    var v=parseEsp(el.value);
+    if(!isFinite(v))return;
+    el.value=fmt2(v);
+  });
+});
 
 // FAQ toggle
 document.querySelectorAll(".fq").forEach(btn=>{

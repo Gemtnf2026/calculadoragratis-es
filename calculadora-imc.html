@@ -49,12 +49,12 @@
 
 <div class="fg">
 <label>Peso (kg)</label>
-<input id="peso" type="number" value="70">
+<input id="peso" type="text" inputmode="decimal" autocomplete="off" value="70,00">
 </div>
 
 <div class="fg">
 <label>Altura (cm)</label>
-<input id="altura" type="number" value="175">
+<input id="altura" type="text" inputmode="decimal" autocomplete="off" value="175,00">
 </div>
 
 <button class="btn bp bfw" onclick="calc()">Calcular</button>
@@ -97,10 +97,25 @@ IMC = peso / altura²
 
 document.getElementById("year").textContent=new Date().getFullYear();
 
+function parseEsp(s) {
+  if (s == null) return NaN;
+  var t = String(s).trim();
+  if (t === "") return NaN;
+  t = t.replace(/\s/g, "").replace(/\./g, "").replace(",", ".");
+  var n = parseFloat(t);
+  return isFinite(n) ? n : NaN;
+}
+function fmt2(n) {
+  return n.toLocaleString("es-ES", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+}
+function fmt1(n) {
+  return n.toLocaleString("es-ES", { minimumFractionDigits: 1, maximumFractionDigits: 1 });
+}
+
 function calc(){
 
-  let p=parseFloat(document.getElementById("peso").value);
-  let a=parseFloat(document.getElementById("altura").value)/100;
+  let p=parseEsp(document.getElementById("peso").value);
+  let a=parseEsp(document.getElementById("altura").value)/100;
 
   let imc=p/(a*a);
 
@@ -111,11 +126,21 @@ function calc(){
   else cat="Obesidad";
 
   document.getElementById("resultado").innerHTML=
-    "<b>IMC:</b> "+imc.toFixed(1)+"<br>"+
+    "<b>IMC:</b> "+fmt1(imc)+"<br>"+
     "<b>Estado:</b> "+cat;
 
   document.getElementById("resultado").classList.add("on");
 }
+
+["peso","altura"].forEach(function(id){
+  var el=document.getElementById(id);
+  if(!el)return;
+  el.addEventListener("blur",function(){
+    var v=parseEsp(el.value);
+    if(!isFinite(v))return;
+    el.value=fmt2(v);
+  });
+});
 
 </script>
 <script src="seo.js"></script>
