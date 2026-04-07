@@ -29,7 +29,7 @@ document.addEventListener("DOMContentLoaded", function () {
   // Insertar antes del footer
   const footer = document.querySelector("footer");
 
-  if (footer) {
+  if (footer && !document.querySelector("section.trust.wrap")) {
     footer.insertAdjacentHTML("beforebegin", bloqueSEO);
   }
 
