@@ -135,7 +135,7 @@ crossorigin="anonymous"></script>
 
 <section class="hero wrap">
   <span class="badge">Finanzas · Vivienda</span>
-  <h1>Simulador hipotecario: cuota, intereses y amortización</h1>
+  <h1>Simulador de hipoteca: cuota mensual, intereses y amortización</h1>
   <p>Introduce valor de vivienda, aportación y condiciones del préstamo para ver la cuota mensual y el coste total (sistema francés).</p>
 </section>
 
@@ -268,6 +268,10 @@ crossorigin="anonymous"></script>
     <div class="res-sub" id="outAvisoFin"></div>
   </div>
 </div>
+<div class="rb">
+  <p class="res-sub" style="margin:0">🏦 Ver mejores hipotecas en España</p>
+  <a class="internal-cta" href="#">Comparar ofertas ahora</a>
+</div>
 <div class="result-grid">
   <div class="res-box">
     <div class="res-label">Impuestos y gastos (est.)</div>
@@ -297,7 +301,7 @@ crossorigin="anonymous"></script>
 </section>
 
 <section class="cnt wrap">
-<h2>¿Cuánto se paga según el importe del préstamo?</h2>
+<h2>¿Cuánto se paga por una hipoteca según el importe?</h2>
 <p>La cuota mensual depende del capital prestado, del tipo de interés nominal anual y del plazo. Con un ejemplo orientativo al <strong>3&nbsp;% anual a 25 años</strong> (sistema francés, habitual en España), estas son cifras aproximadas:</p>
 <ul>
 <li><strong>150.000&nbsp;€</strong>: cuota mensual de unos <strong>711&nbsp;€</strong>; en total pagarías alrededor de <strong>213.200&nbsp;€</strong> (unos <strong>63.200&nbsp;€</strong> de intereses).</li>
@@ -317,6 +321,17 @@ crossorigin="anonymous"></script>
 <tr><td>300.000&nbsp;€</td><td>3&nbsp;%</td><td>25 años</td><td>~1.421&nbsp;€</td><td>~426.400&nbsp;€</td></tr>
 </tbody>
 </table>
+
+<h2 id="calculadoras-relacionadas">Calculadoras relacionadas</h2>
+<nav aria-label="Calculadoras relacionadas">
+<ul>
+<li><a href="calculadora-prestamo.html">Calculadora de préstamo</a> — cuotas e intereses de préstamos personales</li>
+<li><a href="calculadora-interes-compuesto.html">Interés compuesto</a> — crecimiento del capital y metas de <strong>ahorro</strong></li>
+<li><a href="calculadora-porcentajes.html">Calculadora de porcentajes</a> — incrementos, descuentos y variaciones (p. ej. impacto de la <strong>inflación</strong>)</li>
+<li><a href="calculadora-alquiler-vs-compra.html">Alquiler o compra</a> — contrasta escenarios de vivienda</li>
+<li><a href="index.html#finanzas">Más herramientas de finanzas</a> — listado en la página principal</li>
+</ul>
+</nav>
 
 <h2>Sobre esta calculadora</h2>
 <p>Esta herramienta aplica el <strong>sistema de amortización francés</strong> (cuota constante y capital e intereses repartidos según la fórmula estándar). Está pensada para un uso <strong>orientativo en el contexto de España</strong>: no sustituye la oferta vinculante de una entidad financiera ni incluye comisiones, seguros u otros gastos. Comprueba siempre las condiciones con tu banco o intermediario.</p>
@@ -419,6 +434,16 @@ para tomar mejores decisiones financieras.</p>
 <div class="fi">
 <button class="fq">¿Cuánto se recomienda destinar a la hipoteca?</button>
 <div class="fa"><p>Como orientación general, muchas familias intentan que la cuota no supere el <strong>30–35&nbsp;%</strong> de los ingresos netos recurrentes, aunque depende de gastos fijos, ahorro de emergencia y otros objetivos. Es una referencia, no una regla legal: valora tu situación con asesoramiento profesional si lo necesitas.</p></div>
+</div>
+
+<div class="fi">
+<button class="fq">¿Qué es el TIN y cómo se relaciona con la TAE?</button>
+<div class="fa"><p>El <strong>TIN</strong> (tipo de interés nominal) es el porcentaje anual acordado sobre el capital pendiente. La <strong>TAE</strong> incluye el coste total expresado en anual (TIN más comisiones, seguros obligatorios vinculados, etc., según el caso). Para comparar ofertas suele usarse la TAE; este simulador trabaja con el TIN que introduces.</p></div>
+</div>
+
+<div class="fi">
+<button class="fq">¿Qué es el euríbor y por qué importa en hipotecas variables?</button>
+<div class="fa"><p>El <strong>euríbor</strong> es un índice de referencia para intereses en euros; en hipotecas a tipo variable la cuota suele revisarse sumando un <strong>diferencial</strong> al euríbor (u otro índice según contrato). Si el índice sube o baja, puede cambiar la cuota en cada revisión. Este simulador usa un TIN que tú fijas como escenario, no predice el euríbor futuro.</p></div>
 </div>
 
 </section>
@@ -753,7 +778,9 @@ document.querySelectorAll(".fq").forEach(btn=>{
     { "@type":"Question","name":"Ejemplo: ¿cuánto sería la cuota de 200.000 € al 3 % en 25 años?","acceptedAnswer":{"@type":"Answer","text":"Con esos datos orientativos, la cuota mensual ronda los 948 €; el total pagado supera los 280.000 € y los intereses acumulados superan los 80.000 €. Los valores exactos dependen del redondeo y de las condiciones reales del banco."}},
     { "@type":"Question","name":"¿La simulación incluye comisiones, seguros o gastos de compraventa?","acceptedAnswer":{"@type":"Answer","text":"El capital del préstamo se calcula restando la aportación al coste total orientativo (precio más una estimación de impuestos y gastos de compra según comunidad y tipo de vivienda), como en simuladores habituales. No incluye comisiones bancarias, seguros vinculados ni otros costes del préstamo; los gastos de compraventa son estimaciones y el aviso de la página indica que los resultados son orientativos."}},
     { "@type":"Question","name":"¿Qué diferencia hay entre hipoteca fija y variable?","acceptedAnswer":{"@type":"Answer","text":"En la hipoteca a tipo fijo, la cuota se calcula con un interés que no cambia durante el periodo pactado. En la variable, el tipo se revisa según un índice de referencia más un diferencial, y la cuota puede subir o bajar en cada revisión."}},
-    { "@type":"Question","name":"¿Cuánto se recomienda destinar a la hipoteca?","acceptedAnswer":{"@type":"Answer","text":"Como orientación general, muchas familias intentan que la cuota no supere el 30–35 % de los ingresos netos recurrentes, aunque depende de gastos fijos, ahorro de emergencia y otros objetivos."}}
+    { "@type":"Question","name":"¿Cuánto se recomienda destinar a la hipoteca?","acceptedAnswer":{"@type":"Answer","text":"Como orientación general, muchas familias intentan que la cuota no supere el 30–35 % de los ingresos netos recurrentes, aunque depende de gastos fijos, ahorro de emergencia y otros objetivos."}},
+    { "@type":"Question","name":"¿Qué es el TIN y cómo se relaciona con la TAE?","acceptedAnswer":{"@type":"Answer","text":"El TIN (tipo de interés nominal) es el porcentaje anual acordado sobre el capital pendiente. La TAE incluye el coste total expresado en anual (TIN más comisiones, seguros obligatorios vinculados, etc., según el caso). Para comparar ofertas suele usarse la TAE."}},
+    { "@type":"Question","name":"¿Qué es el euríbor y por qué importa en hipotecas variables?","acceptedAnswer":{"@type":"Answer","text":"El euríbor es un índice de referencia para intereses en euros; en hipotecas a tipo variable la cuota suele revisarse sumando un diferencial al euríbor según contrato. Si el índice sube o baja, puede cambiar la cuota en cada revisión."}}
   ]
 }
 </script>
