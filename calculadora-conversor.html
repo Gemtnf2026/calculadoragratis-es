@@ -1,0 +1,405 @@
+<!-- autor: Gemma Ramo | copyright g@ramo | v1 -->
+<!DOCTYPE html>
+<html lang="es">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>Conversor de tiempo online (milisegundos, segundos, minutos, horas, días) | CalculadoraGratis.es</title>
+
+<meta name="description" content="Convierte unidades de tiempo fácilmente: milisegundos, segundos, minutos, horas, días y semanas con este conversor online gratuito.">
+
+<link rel="canonical" href="https://www.calculadoragratis.es/calculadora-conversor.html">
+
+<meta name="robots" content="index,follow">
+
+<link rel="stylesheet" href="style.css">
+
+<link rel="preconnect" href="https://api.fontshare.com">
+<link href="https://api.fontshare.com/v2/css?f[]=satoshi@400,500,700,800&display=swap" rel="stylesheet">
+
+<style>
+.calc-layout{
+  display:grid;
+  grid-template-columns:1fr 1.05fr;
+  gap:28px;
+  max-width:1100px;
+  margin:0 auto 2rem;
+  padding:0 20px;
+  align-items:start;
+}
+@media(max-width:900px){.calc-layout{grid-template-columns:1fr}}
+.calc-layout .ccard:last-child{position:sticky;top:20px}
+@media(max-width:900px){.calc-layout .ccard:last-child{position:static}}
+.ccard{
+  background:#fff;
+  border-radius:18px;
+  padding:1.75rem 1.5rem;
+  border:1px solid #e2e2f0;
+  box-shadow:0 8px 28px rgba(108,71,255,.07);
+  width:100%;
+  max-width:none;
+  margin:0;
+}
+.ccard h2{font-size:1.1rem;font-weight:800;margin-bottom:1.25rem;color:#1a1a2e}
+.fg small{display:block;margin-top:4px;font-size:.82rem;color:#6b6b8a;font-weight:500}
+.result-panel{display:none}
+.result-panel.on{display:block}
+.time-results-stack{display:flex;flex-direction:column;gap:12px}
+.res-box{background:#f5f3ff;border-radius:12px;padding:1rem 1.1rem;border-left:4px solid #6c47ff}
+.res-box.green{background:#f0fdf4;border-left-color:#16a34a}
+.res-box.blue{background:#eff6ff;border-left-color:#3b82f6}
+.res-label{font-size:.72rem;font-weight:700;color:#6b6b8a;text-transform:uppercase;letter-spacing:.04em;margin-bottom:4px}
+.res-value{font-size:1.35rem;font-weight:800;color:#1a1a2e;font-variant-numeric:tabular-nums;line-height:1.25}
+.calc-msg{margin-top:.85rem;padding:.75rem .9rem;border-radius:10px;font-size:.9rem;display:none;background:#fef2f2;border:1px solid #fecaca;color:#991b1b}
+.calc-msg.on{display:block}
+.fml{background:#f5f3ff;border:1px solid #e2e2f0;border-radius:12px;padding:1rem 1.25rem;font-family:ui-monospace,monospace;font-size:.95rem;margin:1rem 0}
+.pub-muted{font-size:.85rem;color:#6b6b8a;margin-bottom:.35rem}
+.conv-more{margin-top:1.5rem;margin-bottom:0}
+.conv-cta{margin-top:1.1rem;margin-bottom:0}
+</style>
+
+<!-- ADSENSE -->
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=TU_ID"
+crossorigin="anonymous"></script>
+
+<style>
+#scroll-top-btn{position:fixed;right:18px;bottom:22px;z-index:60;width:48px;height:48px;padding:0;border:none;border-radius:50%;background:linear-gradient(145deg,#4a00e0,#2563d4);color:#fff;cursor:pointer;box-shadow:0 4px 18px rgba(37,99,212,0.45);transition:opacity .25s ease,transform .2s ease;opacity:0;visibility:hidden;pointer-events:none;-webkit-tap-highlight-color:transparent}
+#scroll-top-btn.is-visible{opacity:1;visibility:visible;pointer-events:auto}
+#scroll-top-btn:hover{transform:translateY(-2px)}
+#scroll-top-btn:focus-visible{outline:2px solid #fff;outline-offset:3px}
+</style>
+
+</head>
+
+<body>
+
+<header class="site-header">
+  <div class="hdr wrap">
+
+ <a href="index.html" class="logo">
+      <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="vertical-align:middle;margin-right:8px"><rect x="4" y="2" width="24" height="28" rx="3"/><rect x="8" y="6" width="16" height="6" rx="1.5" stroke-width="1.5" fill="currentColor" fill-opacity="0.15"/><circle cx="10" cy="18" r="1.5" fill="currentColor" stroke="none"/><circle cx="16" cy="18" r="1.5" fill="currentColor" stroke="none"/><circle cx="22" cy="18" r="1.5" fill="currentColor" stroke="none"/><circle cx="10" cy="24" r="1.5" fill="currentColor" stroke="none"/><circle cx="16" cy="24" r="1.5" fill="currentColor" stroke="none"/><circle cx="22" cy="24" r="1.5" fill="currentColor" stroke="none"/></svg>CalculadoraGratis
+    </a>
+    <nav class="nav">
+      <a href="index.html#finanzas">Finanzas</a>
+      <a href="index.html#matematicas">Matemáticas</a>
+      <a href="index.html#utiles">Útiles</a>
+    </nav>
+
+  </div>
+</header>
+
+<section class="hero wrap">
+  <span class="badge">Útiles</span>
+  <h1>Conversor de tiempo online</h1>
+  <p>Introduce un valor y elige la unidad: verás al instante la equivalencia en milisegundos, segundos, minutos, horas, días y semanas.</p>
+</section>
+
+<p class="wrap pub-muted">Publicidad</p>
+<div class="ad ad-t wrap">
+<ins class="adsbygoogle"
+style="display:block"
+data-ad-client="TU_ID"
+data-ad-slot="111"
+data-ad-format="auto"></ins>
+</div>
+
+<section class="cs wrap">
+
+<div class="calc-layout">
+
+<div class="ccard">
+<h2>Valor y unidad</h2>
+
+<div class="fg">
+<label for="timeVal">Cantidad</label>
+<input id="timeVal" type="text" inputmode="decimal" autocomplete="off" placeholder="Ej. 60">
+<small>Puedes usar decimales y coma como separador (p. ej. 1,5).</small>
+</div>
+
+<div class="fg">
+<label for="timeUnit">Unidad de origen</label>
+<select id="timeUnit" aria-label="Unidad de tiempo">
+<option value="ms">Milisegundos</option>
+<option value="s">Segundos</option>
+<option value="m">Minutos</option>
+<option value="h">Horas</option>
+<option value="d">Días</option>
+<option value="w">Semanas</option>
+</select>
+</div>
+
+<div class="calc-msg" id="convMsg" role="alert"></div>
+</div>
+
+<div class="ccard result-panel" id="resultPanel" aria-live="polite">
+<h2>Equivalencias</h2>
+
+<div class="time-results-stack">
+  <div class="res-box">
+    <div class="res-label">Milisegundos</div>
+    <div class="res-value" id="outMs">—</div>
+  </div>
+  <div class="res-box blue">
+    <div class="res-label">Segundos</div>
+    <div class="res-value" id="outSeg">—</div>
+  </div>
+  <div class="res-box">
+    <div class="res-label">Minutos</div>
+    <div class="res-value" id="outMin">—</div>
+  </div>
+  <div class="res-box green">
+    <div class="res-label">Horas</div>
+    <div class="res-value" id="outHor">—</div>
+  </div>
+  <div class="res-box">
+    <div class="res-label">Días</div>
+    <div class="res-value" id="outDia">—</div>
+  </div>
+  <div class="res-box blue">
+    <div class="res-label">Semanas</div>
+    <div class="res-value" id="outSem">—</div>
+  </div>
+</div>
+
+<p class="conv-more">📊 Descubre más calculadoras útiles</p>
+<p class="conv-cta"><a class="btn bp bfw" href="index.html">Ver todas las calculadoras</a></p>
+</div>
+
+</div>
+
+</section>
+
+<p class="wrap pub-muted">Publicidad</p>
+<div class="ad ad-m wrap">
+<ins class="adsbygoogle"
+style="display:block"
+data-ad-client="TU_ID"
+data-ad-slot="222"
+data-ad-format="auto"></ins>
+</div>
+
+<section class="cnt wrap">
+
+<h2>¿Cómo convertir unidades de tiempo?</h2>
+
+<p>Escribe la cantidad en el campo numérico y selecciona en qué unidad está expresada (milisegundos, segundos, minutos, horas, días o semanas). La herramienta pasa todo a <strong>segundos</strong> como referencia común y a partir de ahí calcula el resto, sin que tengas que pulsar ningún botón.</p>
+
+<p>Si el campo está vacío, no se muestran resultados. Si el texto no es un número válido, verás un mensaje para corregirlo. Los decimales están permitidos.</p>
+
+<h2>Equivalencias entre unidades</h2>
+
+<div class="fml">
+1 segundo = 1.000 milisegundos<br>
+1 minuto = 60 segundos<br>
+1 hora = 60 minutos<br>
+1 día = 24 horas<br>
+1 semana = 7 días
+</div>
+
+<p>En segundos, a modo de referencia: 1 hora son 3.600 segundos; un día son 86.400 segundos; una semana son 604.800 segundos.</p>
+
+<h2>Ejemplos prácticos</h2>
+
+<ul>
+<li><strong>1.000 milisegundos = 1 segundo</strong>.</li>
+<li><strong>60 segundos = 1 minuto</strong> (y también 0,016… horas, según la precisión mostrada).</li>
+<li><strong>24 horas = 1 día</strong>.</li>
+<li><strong>7 días = 1 semana</strong>.</li>
+<li><strong>3.600 segundos = 1 hora</strong>.</li>
+</ul>
+
+<p>Para cálculos con porcentajes o proporciones puedes usar la <a href="calculadora-porcentajes.html">calculadora de porcentajes</a> y la <a href="calculadora-regla-de-tres.html">regla de tres</a>. Más herramientas en la <a href="index.html">página principal</a>.</p>
+
+<h2>Sobre este conversor</h2>
+
+<p>Este conversor es una herramienta <strong>educativa y práctica</strong>: sirve para trabajar equivalencias entre unidades de tiempo de uso cotidiano. No sustituye normas técnicas ni definiciones especializadas (por ejemplo en física o sistemas informáticos con otras bases).</p>
+
+<h2>Preguntas frecuentes</h2>
+
+<button type="button" class="fq">¿Cómo convertir segundos a minutos?</button>
+<div class="fa"><p>Divide los segundos entre 60. Por ejemplo, 120 segundos ÷ 60 = 2 minutos. En esta página basta con escribir la cantidad, elegir «Segundos» y leer el valor en «Minutos».</p></div>
+
+<button type="button" class="fq">¿Cuántas horas tiene un día?</button>
+<div class="fa"><p>Un día civil habitual tiene <strong>24 horas</strong>. En minutos son 1.440 y en segundos 86.400.</p></div>
+
+<button type="button" class="fq">¿Cómo pasar días a semanas?</button>
+<div class="fa"><p>Divide los días entre 7, porque una semana equivale a 7 días. Por ejemplo, 14 días son 2 semanas. Aquí puedes introducir los días, seleccionar «Días» y ver la fila «Semanas».</p></div>
+
+</section>
+
+<p class="wrap pub-muted">Publicidad</p>
+<div class="ad ad-b wrap">
+<ins class="adsbygoogle"
+style="display:block"
+data-ad-client="TU_ID"
+data-ad-slot="333"
+data-ad-format="auto"></ins>
+</div>
+
+<button type="button" id="scroll-top-btn" aria-label="Volver arriba" title="Volver arriba">
+  <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m18 15-6-6-6 6"/></svg>
+</button>
+
+<footer class="ft">
+<p>© <span id="year"></span> CalculadoraGratis.es</p>
+</footer>
+
+<script>
+
+document.getElementById("year").textContent = new Date().getFullYear();
+
+var SEC_MIN = 60;
+var SEC_HOUR = SEC_MIN * 60;
+var SEC_DAY = SEC_HOUR * 24;
+var SEC_WEEK = SEC_DAY * 7;
+
+function parseEsp(s) {
+  if (s == null) return NaN;
+  var t = String(s).trim();
+  if (t === "") return NaN;
+  t = t.replace(/\s/g, "").replace(/\./g, "").replace(",", ".");
+  var n = parseFloat(t);
+  return isFinite(n) ? n : NaN;
+}
+
+function fmtNum(n) {
+  if (!isFinite(n)) return "";
+  var a = Math.abs(n);
+  var opts = { useGrouping: true, minimumFractionDigits: 0, maximumFractionDigits: 12 };
+  if (a > 0 && a < 1e-3) opts.maximumFractionDigits = 10;
+  else if (a < 1) opts.maximumFractionDigits = 8;
+  else if (a < 100) opts.maximumFractionDigits = 6;
+  else opts.maximumFractionDigits = 4;
+  return n.toLocaleString("es-ES", opts);
+}
+
+function unitWord(n, singular, plural) {
+  if (!isFinite(n)) return plural;
+  if (n === 1 || n === -1) return singular;
+  return plural;
+}
+
+function phraseMilliseconds(ms) {
+  return fmtNum(ms) + " " + unitWord(ms, "milisegundo", "milisegundos");
+}
+function phraseSeconds(s) {
+  return fmtNum(s) + " " + unitWord(s, "segundo", "segundos");
+}
+function phraseMinutes(m) {
+  return fmtNum(m) + " " + unitWord(m, "minuto", "minutos");
+}
+function phraseHours(h) {
+  return fmtNum(h) + " " + unitWord(h, "hora", "horas");
+}
+function phraseDays(d) {
+  return fmtNum(d) + " " + unitWord(d, "día", "días");
+}
+function phraseWeeks(w) {
+  return fmtNum(w) + " " + unitWord(w, "semana", "semanas");
+}
+
+function toSeconds(val, unit) {
+  switch (unit) {
+    case "ms": return val / 1000;
+    case "s": return val;
+    case "m": return val * SEC_MIN;
+    case "h": return val * SEC_HOUR;
+    case "d": return val * SEC_DAY;
+    case "w": return val * SEC_WEEK;
+    default: return NaN;
+  }
+}
+
+function showConvErr(t) {
+  var el = document.getElementById("convMsg");
+  el.textContent = t;
+  el.classList.add("on");
+}
+
+function clearConvErr() {
+  var el = document.getElementById("convMsg");
+  el.textContent = "";
+  el.classList.remove("on");
+}
+
+function updateConv() {
+  var raw = document.getElementById("timeVal").value;
+  var unit = document.getElementById("timeUnit").value;
+  var panel = document.getElementById("resultPanel");
+
+  if (String(raw).trim() === "") {
+    clearConvErr();
+    panel.classList.remove("on");
+    return;
+  }
+
+  var val = parseEsp(raw);
+  if (!isFinite(val)) {
+    showConvErr("Introduce un número válido (puedes usar decimales y coma).");
+    panel.classList.remove("on");
+    return;
+  }
+
+  clearConvErr();
+
+  var sec = toSeconds(val, unit);
+  if (!isFinite(sec)) {
+    showConvErr("No se pudo convertir. Revisa la unidad seleccionada.");
+    panel.classList.remove("on");
+    return;
+  }
+
+  document.getElementById("outMs").textContent = phraseMilliseconds(sec * 1000);
+  document.getElementById("outSeg").textContent = phraseSeconds(sec);
+  document.getElementById("outMin").textContent = phraseMinutes(sec / SEC_MIN);
+  document.getElementById("outHor").textContent = phraseHours(sec / SEC_HOUR);
+  document.getElementById("outDia").textContent = phraseDays(sec / SEC_DAY);
+  document.getElementById("outSem").textContent = phraseWeeks(sec / SEC_WEEK);
+
+  panel.classList.add("on");
+}
+
+document.getElementById("timeVal").addEventListener("input", updateConv);
+document.getElementById("timeUnit").addEventListener("change", updateConv);
+
+document.getElementById("timeVal").addEventListener("blur", function () {
+  var el = document.getElementById("timeVal");
+  var v = parseEsp(el.value);
+  if (!isFinite(v) || String(el.value).trim() === "") return;
+  el.value = v.toLocaleString("es-ES", { maximumFractionDigits: 12 });
+});
+
+document.querySelectorAll(".fq").forEach(function (btn) {
+  btn.onclick = function () {
+    btn.nextElementSibling.classList.toggle("on");
+  };
+});
+
+updateConv();
+
+</script>
+<script>
+try {
+  (window.adsbygoogle = window.adsbygoogle || []).push({});
+} catch (e) {}
+</script>
+<script>
+(function () {
+  var btn = document.getElementById("scroll-top-btn");
+  if (!btn) return;
+  function toggle() {
+    if (window.scrollY > Math.min(420, window.innerHeight * 0.85)) btn.classList.add("is-visible");
+    else btn.classList.remove("is-visible");
+  }
+  toggle();
+  window.addEventListener("scroll", toggle, { passive: true });
+  btn.addEventListener("click", function () {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  });
+})();
+</script>
+<script src="seo.js"></script>
+</body>
+</html>
