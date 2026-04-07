@@ -26,6 +26,92 @@
 <link rel="preconnect" href="https://api.fontshare.com">
 <link href="https://api.fontshare.com/v2/css?f[]=satoshi@400,500,700,800&display=swap" rel="stylesheet">
 
+<style>
+.badge{display:inline-block;background:rgba(108,71,255,.1);color:#6c47ff;font-size:.78rem;font-weight:700;padding:4px 12px;border-radius:20px;margin-bottom:.8rem;text-transform:uppercase;letter-spacing:.06em}
+.hero.wrap{padding-top:2.5rem;padding-bottom:1rem}
+.hero h1{font-size:clamp(1.8rem,3.5vw,2.5rem);font-weight:800;margin-bottom:.5rem}
+.hero p{color:#6b6b8a;font-size:1.05rem}
+
+.calc-layout{
+  display:grid;
+  grid-template-columns: 1fr 1.05fr;
+  gap:28px;
+  max-width:1100px;
+  margin:0 auto 2rem;
+  padding:0 20px;
+  align-items:start;
+}
+@media(max-width:900px){.calc-layout{grid-template-columns:1fr}}
+.calc-layout .ccard:last-child{position:sticky;top:20px}
+@media(max-width:900px){.calc-layout .ccard:last-child{position:static}}
+
+.ccard{
+  background:#fff;
+  border-radius:18px;
+  padding:1.75rem 1.5rem;
+  border:1px solid #e2e2f0;
+  box-shadow:0 8px 28px rgba(108,71,255,.07);
+  width:100%;
+  max-width:none;
+  margin:0;
+}
+.ccard h2{font-size:1.1rem;font-weight:800;margin-bottom:1.25rem;color:#1a1a2e}
+
+/* Simulador hipoteca — paleta CalculadoraGratis (violeta / gradiente, acento coral) */
+.hip-sim{--hip-accent:#6c47ff;--hip-accent2:#e8317a;--hip-line:linear-gradient(90deg,#f7931e,#e8317a,#7b2ff7);--hip-soft:#f5f3ff;--hip-muted:#6b6b8a}
+.hip-row{display:grid;grid-template-columns:minmax(140px,34%) 1fr;gap:12px 20px;align-items:start;margin-bottom:1.35rem}
+@media(max-width:640px){.hip-row{grid-template-columns:1fr}}
+.hip-row > label{font-size:.88rem;font-weight:700;color:#1a1a2e;padding-top:.35rem;line-height:1.35}
+.hip-row .hip-field{display:flex;flex-direction:column;gap:8px;min-width:0}
+.hip-num-wrap{display:flex;align-items:center;border:1.5px solid #e2e2f0;border-radius:12px;background:#fafafa;overflow:hidden;transition:border-color .2s,box-shadow .2s}
+.hip-num-wrap:focus-within{border-color:var(--hip-accent);box-shadow:0 0 0 3px rgba(108,71,255,.12);background:#fff}
+.hip-num-wrap input[type="text"]{flex:1;border:none;background:transparent;padding:.75rem 1rem;font-size:1rem;font-weight:600;color:#1a1a2e;font-variant-numeric:tabular-nums;min-width:0}
+.hip-num-wrap input:focus{outline:none}
+.hip-suffix{padding-right:12px;font-size:.9rem;font-weight:600;color:var(--hip-muted)}
+.hip-range{width:100%;height:6px;-webkit-appearance:none;appearance:none;background:linear-gradient(90deg,#e9e4ff,#dbeafe);border-radius:6px;outline:none}
+.hip-range::-webkit-slider-thumb{-webkit-appearance:none;width:18px;height:18px;border-radius:50%;background:linear-gradient(135deg,#7b2ff7,#4a6cf7);cursor:pointer;box-shadow:0 2px 8px rgba(108,71,255,.35)}
+.hip-range::-moz-range-thumb{width:18px;height:18px;border:none;border-radius:50%;background:linear-gradient(135deg,#7b2ff7,#4a6cf7);cursor:pointer}
+.hip-link{font-size:.82rem;font-weight:600;color:var(--hip-accent);text-decoration:none;border-bottom:1px solid rgba(108,71,255,.35);align-self:flex-start}
+.hip-link:hover{color:#5a3ad9;border-bottom-color:#5a3ad9}
+.hip-info{display:flex;gap:10px;background:#f0f7ff;border:1px solid #bfdbfe;border-radius:12px;padding:.75rem .9rem;font-size:.82rem;color:#1e3a5f;line-height:1.45}
+.hip-info svg{flex-shrink:0;margin-top:2px;color:#2563eb}
+.hip-inline-h{display:flex;align-items:center;gap:6px;font-size:.88rem;font-weight:700;color:#1a1a2e}
+.hip-inline-h button.hip-i{background:none;border:none;padding:0;width:18px;height:18px;color:var(--hip-accent);cursor:pointer;line-height:0}
+.hip-tipo-row{display:flex;flex-wrap:wrap;align-items:center;gap:12px 20px;justify-content:space-between}
+.hip-radios{display:flex;gap:16px;flex-wrap:wrap}
+.hip-radios label{display:flex;align-items:center;gap:8px;cursor:pointer;font-weight:600;font-size:.9rem;color:#333}
+.hip-radios input{width:18px;height:18px;accent-color:var(--hip-accent2)}
+.hip-stepper{display:flex;align-items:center;border:1.5px solid #e2e2f0;border-radius:12px;background:#fafafa;overflow:hidden}
+.hip-stepper button{width:40px;height:42px;border:none;background:#fff;color:var(--hip-accent2);font-size:1.35rem;font-weight:700;cursor:pointer;line-height:1;transition:background .2s}
+.hip-stepper button:hover{background:var(--hip-soft)}
+.hip-stepper input{width:72px;border:none;text-align:center;font-weight:700;font-size:1rem;padding:.5rem;background:transparent;font-variant-numeric:tabular-nums}
+.hip-stepper input:focus{outline:none}
+.hip-stepper .hip-pct-suf{padding-right:10px;font-size:.85rem;font-weight:700;color:var(--hip-muted)}
+.hip-select{width:100%;padding:.75rem 2.2rem .75rem 1rem;border-radius:12px;border:1.5px solid var(--hip-accent);background:#fff url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%236c47ff' d='M6 8L1 3h10z'/%3E%3C/svg%3E") no-repeat right 12px center;font-size:.95rem;font-family:inherit;color:#1a1a2e;cursor:pointer}
+.hip-select:focus{outline:none;box-shadow:0 0 0 3px rgba(108,71,255,.15)}
+.hip-select option{color:#1a1a2e}
+.hip-sep{height:3px;border:none;background:var(--hip-line);border-radius:2px;margin:1.25rem 0 1rem;opacity:.85}
+.btn-calc{width:100%;margin-top:.25rem;padding:1rem;border:none;border-radius:12px;background:linear-gradient(135deg,#7b2ff7,#4a6cf7);color:#fff;font-weight:700;font-size:1rem;cursor:pointer;font-family:inherit;transition:opacity .2s}
+.btn-calc:hover{opacity:.92}
+.result-panel{display:none}
+.result-panel.on{display:block}
+.result-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:1rem}
+@media(max-width:480px){.result-grid{grid-template-columns:1fr}}
+.res-box{background:var(--hip-soft);border-radius:12px;padding:1rem 1.1rem;border-left:4px solid var(--hip-accent)}
+.res-label{font-size:.72rem;font-weight:700;color:var(--hip-muted);text-transform:uppercase;letter-spacing:.04em;margin-bottom:4px}
+.res-value{font-size:1.35rem;font-weight:800;color:#1a1a2e;font-variant-numeric:tabular-nums}
+.res-sub{font-size:.78rem;color:var(--hip-muted);margin-top:4px;line-height:1.4}
+.rb{margin-top:1rem;padding:0}
+.internal-cta{display:block;margin-top:1rem;padding:.75rem 1rem;border-radius:10px;text-align:center;font-weight:700;font-size:.9rem;text-decoration:none;background:linear-gradient(135deg,#7b2ff7,#4a6cf7);color:#fff}
+.internal-cta:hover{opacity:.92}
+
+.fi{margin-bottom:8px}
+.fq{background:#fff;border:1px solid #c4b5fd;border-left:4px solid #6c47ff;border-radius:12px;padding:14px 16px;width:100%;text-align:left;font-weight:600;color:#1a1a2e;cursor:pointer;transition:background .2s,color .2s;font-size:.97rem;font-family:inherit}
+.fq:hover{background:linear-gradient(90deg,#3a5bd9,#2a9bb8);color:#fff;border-color:#3a5bd9;border-left-color:#fff}
+.fa{padding:.5rem .5rem 1rem;color:#6b6b8a;display:none;font-size:.95rem;line-height:1.6}
+.fa.on{display:block}
+</style>
+
 <!-- ADSENSE -->
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=TU_ID"
 crossorigin="anonymous"></script>
@@ -49,8 +135,8 @@ crossorigin="anonymous"></script>
 
 <section class="hero wrap">
   <span class="badge">Finanzas · Vivienda</span>
-  <h1>Simulador de hipoteca: cuota mensual, intereses y amortización francesa</h1>
-  <p>Simula tu hipoteca y descubre cuánto pagarás al mes, en intereses y en total.</p>
+  <h1>Simulador hipotecario: cuota, intereses y amortización</h1>
+  <p>Introduce valor de vivienda, aportación y condiciones del préstamo para ver la cuota mensual y el coste total (sistema francés).</p>
 </section>
 
 <p class="wrap">Publicidad</p>
@@ -64,46 +150,149 @@ crossorigin="anonymous"></script>
 </div>
 
 <section class="cs wrap">
-<div class="cgrid">
-<div class="ccard">
+<div class="calc-layout">
+<div class="ccard hip-sim">
+<h2>Condiciones del préstamo</h2>
 
-<h2>Datos de la hipoteca</h2>
-
-<div class="fg">
-<label>Importe (€)</label>
-<input id="capital" type="number" value="200000">
+<div class="hip-row">
+  <label for="valorInmueble">Valor de la vivienda</label>
+  <div class="hip-field">
+    <div class="hip-num-wrap">
+      <input type="text" id="valorInmueble" inputmode="numeric" autocomplete="off" value="200.000" aria-describedby="r-valor">
+      <span class="hip-suffix">€</span>
+    </div>
+    <input type="range" id="r-valor" class="hip-range" min="50000" max="900000" step="5000" value="200000" aria-label="Ajustar valor de la vivienda">
+    <a class="hip-link" href="calculadora-alquiler-vs-compra.html">Estimar cuánto puedes destinar a la compra</a>
+  </div>
 </div>
 
-<div class="fg">
-<label>Interés anual (%)</label>
-<input id="interes" type="number" value="3">
+<div class="hip-row">
+  <label for="aportacion">Aportación inicial (ahorro)</label>
+  <div class="hip-field">
+    <div class="hip-num-wrap">
+      <input type="text" id="aportacion" inputmode="numeric" autocomplete="off" value="70.000" aria-describedby="r-aport">
+      <span class="hip-suffix">€</span>
+    </div>
+    <input type="range" id="r-aport" class="hip-range" min="0" max="200000" step="1000" value="70000" aria-label="Ajustar aportación">
+    <div class="hip-info" role="note">
+      <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>
+      <span>En la práctica, muchas entidades piden alrededor del <strong>10&nbsp;% del precio</strong> más una parte de los <strong>gastos asociados</strong> a la operación.</span>
+    </div>
+  </div>
 </div>
 
-<div class="fg">
-<label>Años</label>
-<input id="años" type="number" value="25">
+<div class="hip-row">
+  <label for="plazoAnios">Duración del préstamo (años)</label>
+  <div class="hip-field">
+    <div class="hip-num-wrap">
+      <input type="text" id="plazoAnios" inputmode="numeric" autocomplete="off" value="30" aria-describedby="r-plazo">
+      <span class="hip-suffix">años</span>
+    </div>
+    <input type="range" id="r-plazo" class="hip-range" min="5" max="40" step="1" value="30" aria-label="Ajustar plazo en años">
+  </div>
 </div>
 
-<button class="btn bp bfw" onclick="calc()">Calcular hipoteca</button>
+<div class="hip-row">
+  <div class="hip-inline-h">
+    Tipo nominal anual (TIN)
+    <button type="button" class="hip-i" title="Tipo de interés nominal anual aplicado a la simulación. En préstamos a tipo variable el tipo efectivo puede cambiar en las revisiones." aria-label="Ayuda sobre el TIN">?</button>
+  </div>
+  <div class="hip-field">
+    <div class="hip-tipo-row">
+      <div class="hip-radios">
+        <label><input type="radio" name="tipoInteres" value="fijo" checked> Tipo fijo</label>
+        <label><input type="radio" name="tipoInteres" value="variable"> Tipo variable</label>
+      </div>
+      <div class="hip-stepper" role="group" aria-label="Ajustar tipo de interés">
+        <button type="button" id="tinMenos" aria-label="Bajar tipo">−</button>
+        <input type="text" id="tinPct" inputmode="decimal" value="1,85" aria-label="Tipo de interés en porcentaje">
+        <span class="hip-pct-suf">%</span>
+        <button type="button" id="tinMas" aria-label="Subir tipo">+</button>
+      </div>
+    </div>
+    <p class="res-sub" style="margin:0">Si eliges <strong>variable</strong>, aquí se usa un TIN de partida; la cuota real dependerá de las revisiones (p. ej. euríbor + diferencial).</p>
+  </div>
+</div>
 
-<div class="rb" id="resultado"></div>
+<div class="hip-row">
+  <label for="zona">Comunidad o ciudad de referencia</label>
+  <div class="hip-field">
+    <select id="zona" class="hip-select" aria-label="Zona">
+      <option value="">Selecciona una opción</option>
+      <option value="andalucia" selected>Andalucía</option>
+      <option value="aragon">Aragón</option>
+      <option value="asturias">Asturias</option>
+      <option value="baleares">Illes Balears</option>
+      <option value="canarias">Canarias</option>
+      <option value="cantabria">Cantabria</option>
+      <option value="clm">Castilla-La Mancha</option>
+      <option value="cyl">Castilla y León</option>
+      <option value="cataluna">Cataluña</option>
+      <option value="extremadura">Extremadura</option>
+      <option value="galicia">Galicia</option>
+      <option value="madrid">Comunidad de Madrid</option>
+      <option value="murcia">Región de Murcia</option>
+      <option value="navarra">Navarra</option>
+      <option value="rioja">La Rioja</option>
+      <option value="valencia">Comunitat Valenciana</option>
+      <option value="ceuta">Ceuta</option>
+      <option value="melilla">Melilla</option>
+    </select>
+  </div>
+</div>
 
-<p>🏦 Ver mejores hipotecas en España</p>
-<p><a class="btn bp bfw" href="#">Comparar ofertas ahora</a></p>
+<div class="hip-row">
+  <span id="lbl-estado">Tipo de vivienda</span>
+  <div class="hip-field hip-radios" role="radiogroup" aria-labelledby="lbl-estado">
+    <label><input type="radio" name="estadoVivienda" value="nuevo"> Obra nueva / primera transmisión</label>
+    <label><input type="radio" name="estadoVivienda" value="usado" checked> Segunda mano</label>
+  </div>
+</div>
 
+<hr class="hip-sep" aria-hidden="true">
+
+<button type="button" class="btn-calc" id="btnCalc">Calcular cuota y coste total</button>
+</div>
+
+<div class="ccard result-panel" id="resultadoPanel">
+<h2>Resultado de la simulación</h2>
+<div class="result-grid">
+  <div class="res-box">
+    <div class="res-label">Cuota mensual</div>
+    <div class="res-value" id="outCuota">—</div>
+    <div class="res-sub">Amortización francesa, cuota constante</div>
+  </div>
+  <div class="res-box">
+    <div class="res-label">Capital prestado</div>
+    <div class="res-value" id="outCapital">—</div>
+    <div class="res-sub" id="outAvisoFin"></div>
+  </div>
+</div>
+<div class="result-grid">
+  <div class="res-box">
+    <div class="res-label">Total devuelto</div>
+    <div class="res-value" id="outTotal">—</div>
+  </div>
+  <div class="res-box">
+    <div class="res-label">Intereses (estimación)</div>
+    <div class="res-value" id="outIntereses">—</div>
+  </div>
+</div>
+<p class="res-sub" id="outNotaITP" style="margin-top:8px"></p>
+<a class="internal-cta" href="calculadora-prestamo.html">Comparar con un préstamo personal →</a>
 </div>
 </div>
 </section>
 
 <section class="cnt wrap">
-<h2>¿Cuánto se paga por una hipoteca según el importe?</h2>
-<p>La cuota mensual depende del capital, del tipo de interés nominal anual y del plazo. Con un ejemplo orientativo al <strong>3&nbsp;% anual a 25 años</strong> (sistema francés, como suele simularse en España), estas son cifras aproximadas:</p>
+<h2>¿Cuánto se paga según el importe del préstamo?</h2>
+<p>La cuota mensual depende del capital prestado, del tipo de interés nominal anual y del plazo. Con un ejemplo orientativo al <strong>3&nbsp;% anual a 25 años</strong> (sistema francés, habitual en España), estas son cifras aproximadas:</p>
 <ul>
 <li><strong>150.000&nbsp;€</strong>: cuota mensual de unos <strong>711&nbsp;€</strong>; en total pagarías alrededor de <strong>213.200&nbsp;€</strong> (unos <strong>63.200&nbsp;€</strong> de intereses).</li>
 <li><strong>200.000&nbsp;€</strong>: cuota mensual de unos <strong>948&nbsp;€</strong>; total aproximado <strong>284.300&nbsp;€</strong> (unos <strong>84.300&nbsp;€</strong> de intereses).</li>
 <li><strong>300.000&nbsp;€</strong>: cuota mensual de unos <strong>1.421&nbsp;€</strong>; total aproximado <strong>426.400&nbsp;€</strong> (unos <strong>126.400&nbsp;€</strong> de intereses).</li>
 </ul>
-<p>Subir o bajar el tipo unas décimas o alargar el plazo cambia mucho el coste total: usa el simulador de arriba con tus datos reales.</p>
+<p>Subir o bajar el tipo unas décimas o alargar el plazo cambia mucho el coste total: usa el simulador superior con tus cifras.</p>
 
 <table>
 <caption>Ejemplo orientativo: tipo 3&nbsp;% y plazo 25 años (cuotas mensuales)</caption>
@@ -134,29 +323,29 @@ crossorigin="anonymous"></script>
 
 <section class="cnt wrap">
 
-<h2>¿Cómo calcular la cuota de una hipoteca?</h2>
-<p>La cuota mensual se calcula mediante el sistema de amortización francés, utilizado en la mayoría de hipotecas en España. Este sistema mantiene una cuota fija durante toda la vida del préstamo.</p>
+<h2>¿Cómo se obtiene la cuota mensual?</h2>
+<p>La cuota se calcula con el sistema de amortización francés, frecuente en hipotecas en España: la cuota se mantiene estable durante el plazo si el tipo es fijo (en variable, puede cambiar en cada revisión según el contrato).</p>
 
 <div class="fml">
 Cuota = (capital × interés) / (1 - (1 + interés)^-n)
 </div>
 
-<h2>¿Cuánto se paga realmente?</h2>
-<p>Aunque la cuota mensual sea fija, el coste total de la hipoteca puede ser mucho mayor debido a los intereses acumulados a lo largo del tiempo.</p>
+<h2>¿Cuánto cuesta en total?</h2>
+<p>Aunque la cuota sea estable, el coste acumulado puede ser elevado por los intereses repartidos en muchos años.</p>
 
 <h2>Ejemplo práctico</h2>
-<p>Para una hipoteca de 200.000€ al 3% a 25 años:</p>
+<p>Para un préstamo de 200.000&nbsp;€ al 3&nbsp;% a 25 años:</p>
 <ul>
-<li>Cuota mensual aproximada: 948€</li>
-<li>Total pagado: más de 280.000€</li>
-<li>Intereses: más de 80.000€</li>
+<li>Cuota mensual aproximada: 948&nbsp;€</li>
+<li>Total devuelto: más de 284.000&nbsp;€</li>
+<li>Intereses: más de 84.000&nbsp;€</li>
 </ul>
 
 <h2>Factores que influyen</h2>
 <ul>
-<li>Tipo de interés (fijo o variable)</li>
+<li>Tipo de interés (fijo o variable) y revisiones</li>
 <li>Duración del préstamo</li>
-<li>Capital financiado</li>
+<li>Capital solicitado (valor menos aportación, dentro de los límites que marque el banco)</li>
 </ul>
 
 <p>También puedes usar nuestra
@@ -172,13 +361,13 @@ para tomar mejores decisiones financieras.</p>
 </section>
 
 <section class="trust wrap">
-<h2>¿Por qué usar esta calculadora de hipoteca?</h2>
+<h2>¿Por qué usar este simulador?</h2>
 <ul class="trust-list">
-<li>✅ Simulación real con sistema francés</li>
-<li>✅ Cálculo inmediato sin registro</li>
-<li>✅ Adaptado a hipotecas en España</li>
+<li>✅ Simulación con sistema francés</li>
+<li>✅ Cálculo al instante, sin registro</li>
+<li>✅ Pensado para contexto España (orientativo)</li>
 <li>✅ Resultados claros: cuota, intereses y total</li>
-<li>✅ Funciona en móvil y ordenador</li>
+<li>✅ Uso cómodo en móvil y ordenador</li>
 </ul>
 </section>
 
@@ -196,13 +385,13 @@ para tomar mejores decisiones financieras.</p>
 <h2>Preguntas frecuentes</h2>
 
 <div class="fi">
-<button class="fq">¿Qué hipoteca es mejor?</button>
-<div class="fa"><p>Depende del tipo de interés y de tu estabilidad financiera.</p></div>
+<button class="fq">¿Qué hipoteca encaja mejor conmigo?</button>
+<div class="fa"><p>Depende del tipo de interés, de tu estabilidad de ingresos y de cuánto quieres arriesgar a que suba la cuota en el futuro.</p></div>
 </div>
 
 <div class="fi">
-<button class="fq">¿Cuánto puedo pedir?</button>
-<div class="fa"><p>Normalmente hasta el 80% del valor de la vivienda.</p></div>
+<button class="fq">¿Hasta qué cantidad suelen financiar?</button>
+<div class="fa"><p>Muchas operaciones se sitúan en torno a un porcentaje del valor de tasación o de compra (a menudo hasta el 80&nbsp;%), pero la decisión es del banco.</p></div>
 </div>
 
 <div class="fi">
@@ -235,27 +424,194 @@ Las condiciones reales pueden variar según el banco, comisiones y seguros asoci
 
 <script>
 
-// año automático
 document.getElementById("year").textContent = new Date().getFullYear();
 
-// cálculo hipoteca
-function calc(){
-  let c = parseFloat(document.getElementById("capital").value);
-  let i = parseFloat(document.getElementById("interes").value)/100/12;
-  let n = parseFloat(document.getElementById("años").value)*12;
+(function () {
+  var valorEl = document.getElementById("valorInmueble");
+  var aportEl = document.getElementById("aportacion");
+  var plazoEl = document.getElementById("plazoAnios");
+  var rValor = document.getElementById("r-valor");
+  var rAport = document.getElementById("r-aport");
+  var rPlazo = document.getElementById("r-plazo");
+  var tinEl = document.getElementById("tinPct");
+  var btnMenos = document.getElementById("tinMenos");
+  var btnMas = document.getElementById("tinMas");
+  var btnCalc = document.getElementById("btnCalc");
+  var panel = document.getElementById("resultadoPanel");
 
-  let cuota = (c*i)/(1-Math.pow(1+i,-n));
-  let total = cuota * n;
-  let intereses = total - c;
+  function parseEuro(str) {
+    if (!str || typeof str !== "string") return NaN;
+    var t = str.replace(/\./g, "").replace(",", ".").replace(/[^\d.]/g, "");
+    var n = parseFloat(t);
+    return isFinite(n) ? n : NaN;
+  }
 
-  document.getElementById("resultado").innerHTML =
-    "<b>Cuota mensual:</b> "+cuota.toFixed(2)+" €<br>" +
-    "<b>Total pagado:</b> "+total.toFixed(2)+" €<br>" +
-    "<b>Intereses:</b> "+intereses.toFixed(2)+" €<br><br>" +
-    "<a class='btn' href='calculadora-prestamo.html'>Comparar con préstamo →</a>";
+  function formatEuro(n) {
+    if (!isFinite(n)) return "";
+    return Math.round(n).toLocaleString("es-ES");
+  }
 
-  document.getElementById("resultado").classList.add("on");
-}
+  function parseTin(str) {
+    if (!str || typeof str !== "string") return NaN;
+    var t = str.replace(",", ".").replace(/[^\d.-]/g, "");
+    return parseFloat(t);
+  }
+
+  function formatTin(n) {
+    if (!isFinite(n)) return "";
+    var s = n.toFixed(2).replace(".", ",");
+    return s;
+  }
+
+  function getValor() {
+    var v = parseEuro(valorEl.value);
+    return isFinite(v) ? v : NaN;
+  }
+
+  function getAport() {
+    var v = parseEuro(aportEl.value);
+    return isFinite(v) ? v : NaN;
+  }
+
+  function getPlazo() {
+    var v = parseInt(plazoEl.value.replace(/\D/g, ""), 10);
+    return isFinite(v) ? v : NaN;
+  }
+
+  function syncRValor() {
+    var v = getValor();
+    if (!isFinite(v)) return;
+    v = Math.max(50000, Math.min(900000, v));
+    rValor.value = String(Math.round(v / 5000) * 5000);
+    valorEl.value = formatEuro(v);
+  }
+
+  function syncRAport() {
+    var precio = getValor();
+    var a = getAport();
+    if (!isFinite(precio)) precio = 200000;
+    if (!isFinite(a)) a = 0;
+    var maxA = Math.min(precio, 500000);
+    rAport.max = String(maxA);
+    rAport.min = "0";
+    a = Math.max(0, Math.min(maxA, a));
+    rAport.value = String(Math.round(a / 1000) * 1000);
+    aportEl.value = formatEuro(a);
+  }
+
+  function syncRPlazo() {
+    var n = getPlazo();
+    if (!isFinite(n)) return;
+    n = Math.max(5, Math.min(40, n));
+    rPlazo.value = String(n);
+    plazoEl.value = String(n);
+  }
+
+  valorEl.addEventListener("blur", function () {
+    syncRValor();
+    syncRAport();
+  });
+  aportEl.addEventListener("blur", function () {
+    syncRAport();
+  });
+  plazoEl.addEventListener("blur", syncRPlazo);
+
+  rValor.addEventListener("input", function () {
+    var v = parseFloat(rValor.value);
+    if (!isFinite(v)) return;
+    valorEl.value = formatEuro(v);
+    syncRAport();
+  });
+
+  rAport.addEventListener("input", function () {
+    var v = parseFloat(rAport.value);
+    if (!isFinite(v)) return;
+    aportEl.value = formatEuro(v);
+  });
+
+  rPlazo.addEventListener("input", function () {
+    var v = parseInt(rPlazo.value, 10);
+    if (!isFinite(v)) return;
+    plazoEl.value = String(v);
+  });
+
+  function tinStep(delta) {
+    var t = parseTin(tinEl.value);
+    if (!isFinite(t)) t = 1.85;
+    t = Math.round((t + delta) * 100) / 100;
+    t = Math.max(0.1, Math.min(8, t));
+    tinEl.value = formatTin(t);
+  }
+
+  btnMenos.addEventListener("click", function () { tinStep(-0.05); });
+  btnMas.addEventListener("click", function () { tinStep(0.05); });
+
+  tinEl.addEventListener("blur", function () {
+    var t = parseTin(tinEl.value);
+    if (!isFinite(t)) t = 1.85;
+    t = Math.max(0.1, Math.min(8, t));
+    tinEl.value = formatTin(t);
+  });
+
+  function calcHipoteca() {
+    var precio = getValor();
+    var aport = getAport();
+    var años = getPlazo();
+    var tin = parseTin(tinEl.value);
+    if (!isFinite(precio) || precio <= 0) {
+      alert("Indica un valor de vivienda válido.");
+      return;
+    }
+    if (!isFinite(aport) || aport < 0) aport = 0;
+    if (!isFinite(años) || años < 1) años = 30;
+    if (!isFinite(tin) || tin <= 0) tin = 1.85;
+
+    var capital = precio - aport;
+    var maxFin = precio * 0.8;
+    var avisoFin = "";
+    if (capital <= 0) {
+      document.getElementById("outCuota").textContent = "—";
+      document.getElementById("outCapital").textContent = "—";
+      document.getElementById("outTotal").textContent = "—";
+      document.getElementById("outIntereses").textContent = "—";
+      document.getElementById("outAvisoFin").textContent = "La aportación cubre o supera el valor: no hay préstamo que simular.";
+      panel.classList.add("on");
+      return;
+    }
+    if (capital > maxFin + 0.01) {
+      avisoFin = "Nota: financias más del 80&nbsp;% del valor indicado; muchas entidades limitan la financiación a ese entorno (comprueba con tu banco).";
+    }
+
+    var i = tin / 100 / 12;
+    var n = años * 12;
+    var cuota = (capital * i) / (1 - Math.pow(1 + i, -n));
+    var total = cuota * n;
+    var intereses = total - capital;
+
+    document.getElementById("outCuota").textContent = cuota.toLocaleString("es-ES", { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + " €";
+    document.getElementById("outCapital").textContent = capital.toLocaleString("es-ES", { maximumFractionDigits: 0 }) + " €";
+    document.getElementById("outTotal").textContent = total.toLocaleString("es-ES", { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + " €";
+    document.getElementById("outIntereses").textContent = intereses.toLocaleString("es-ES", { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + " €";
+    document.getElementById("outAvisoFin").innerHTML = avisoFin || "Capital = valor de vivienda − aportación.";
+
+    var usado = document.querySelector('input[name="estadoVivienda"]:checked');
+    var notaITP = document.getElementById("outNotaITP");
+    if (usado && usado.value === "usado") {
+      notaITP.innerHTML = "En <strong>segunda mano</strong> suele aplicarse el ITP (impuesto que varía por comunidad). Esta simulación no incluye impuestos ni gastos de notaría.";
+    } else {
+      notaITP.innerHTML = "En <strong>obra nueva</strong> suelen aplicarse otros tributos (p. ej. AJD en ciertos casos). Los gastos reales dependen de la operación y la normativa vigente.";
+    }
+
+    panel.classList.add("on");
+  }
+
+  btnCalc.addEventListener("click", calcHipoteca);
+
+  syncRValor();
+  syncRAport();
+  syncRPlazo();
+  calcHipoteca();
+})();
 
 // FAQ
 document.querySelectorAll(".fq").forEach(btn=>{
