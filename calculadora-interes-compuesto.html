@@ -72,6 +72,9 @@ crossorigin="anonymous"></script>
 .sim-dot.int{background:#d97706}
 .sim-legend-val{font-weight:700;font-variant-numeric:tabular-nums;color:#1a1a2e}
 .fml{background:#f5f3ff;border:1px solid #e2e2f0;border-radius:12px;padding:1rem 1.25rem;font-family:ui-monospace,monospace;font-size:.95rem;margin:1rem 0}
+.promo-cuentas ul{margin:.5rem 0 1.5rem 1.25rem;padding-left:.25rem;list-style-position:outside}
+.promo-cuentas ul li{margin-bottom:.35rem}
+.promo-cuentas .btn-cta{display:block;box-sizing:border-box;margin-top:.25rem;text-align:center;text-decoration:none;color:#fff}
 </style>
 
 </head>
@@ -243,15 +246,17 @@ crossorigin="anonymous"></script>
 <p>La tabla muestra que <strong>un punto porcentual más o menos</strong> al año altera mucho el resultado a largo plazo, y que <strong>ampliar el horizonte</strong> (de 10 a 30 años) multiplica el efecto del interés compuesto sobre las aportaciones. En la práctica, parte del dinero acumulado es aportación propia y parte es efecto de intereses reinvertidos; cuanto más tiempo, más peso tienen los intereses. Usa el simulador de arriba para cambiar el importe mensual o el tipo y ver tu caso concreto.</p>
 
 <p>📈 Mejores opciones para invertir tu dinero</p>
-<p><a class="btn bp bfw" href="#">Ver opciones de inversión</a></p>
+<p><a class="btn bp bfw btn-cta" href="#">Ver opciones de inversión</a></p>
 
+<div class="promo-cuentas">
 <p><strong>💰 Mejores cuentas remuneradas en España</strong></p>
 <ul>
 <li>Sin comisiones</li>
 <li>Alta rentabilidad</li>
 <li>Opciones actualizadas</li>
 </ul>
-<p><a class="btn bp bfw" href="#">Comparar opciones ahora</a></p>
+<p><a class="btn bp bfw btn-cta" href="#">Comparar opciones ahora</a></p>
+</div>
 
 <h2>Ejemplos de interés compuesto mes a mes</h2>
 
@@ -325,7 +330,7 @@ document.getElementById("year").textContent=new Date().getFullYear();
 
 function fmtEuro(x){
   if(typeof x!=="number"||isNaN(x)) return "—";
-  return x.toFixed(2)+" €";
+  return x.toLocaleString("es-ES",{minimumFractionDigits:2,maximumFractionDigits:2})+" €";
 }
 
 function showCalcErr(t){
