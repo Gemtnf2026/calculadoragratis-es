@@ -15,6 +15,61 @@
 
 <link rel="stylesheet" href="style.css">
 
+<style>
+.calc-layout{
+  display:grid;
+  grid-template-columns:1fr 1.05fr;
+  gap:28px;
+  max-width:1100px;
+  margin:0 auto 2rem;
+  padding:0 20px;
+  align-items:start;
+}
+@media(max-width:900px){.calc-layout{grid-template-columns:1fr}}
+.calc-layout .ccard:last-child{position:sticky;top:20px}
+@media(max-width:900px){.calc-layout .ccard:last-child{position:static}}
+.ccard{
+  background:#fff;
+  border-radius:18px;
+  padding:1.75rem 1.5rem;
+  border:1px solid #e2e2f0;
+  box-shadow:0 8px 28px rgba(108,71,255,.07);
+  width:100%;
+  max-width:none;
+  margin:0;
+}
+.ccard h2{font-size:1.1rem;font-weight:800;margin-bottom:1.25rem;color:#1a1a2e}
+.fg small{display:block;margin-top:4px;font-size:.82rem;color:#6b6b8a;font-weight:500}
+.res-box{background:#f5f3ff;border-radius:12px;padding:1rem 1.1rem;border-left:4px solid #6c47ff}
+.res-box.green{background:#f0fdf4;border-left-color:#16a34a}
+.res-box.blue{background:#eff6ff;border-left-color:#3b82f6}
+.res-label{font-size:.72rem;font-weight:700;color:#6b6b8a;text-transform:uppercase;letter-spacing:.04em;margin-bottom:4px}
+.res-value{font-size:1.35rem;font-weight:800;color:#1a1a2e;font-variant-numeric:tabular-nums}
+.res-total-wrap{background:linear-gradient(135deg,#f5f3ff,#eff6ff);border-radius:14px;padding:1.25rem 1.15rem;border:1px solid #e2e2f0;margin-bottom:1rem}
+.res-total-wrap .res-label{margin-bottom:6px}
+.res-total-hero{font-size:clamp(1.55rem,4vw,2.05rem);font-weight:800;color:#5b3fd9;font-variant-numeric:tabular-nums;line-height:1.15}
+.result-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:1rem}
+@media(max-width:480px){.result-grid{grid-template-columns:1fr}}
+.calc-msg{margin-top:.85rem;padding:.75rem .9rem;border-radius:10px;font-size:.9rem;display:none;background:#fef2f2;border:1px solid #fecaca;color:#991b1b}
+.calc-msg.on{display:block}
+.sim-viz{margin-top:1.25rem;padding-top:1rem;border-top:1px solid #e8e8f2;display:none}
+.sim-viz.on{display:block}
+.sim-viz-title{font-size:.78rem;font-weight:700;color:#6b6b8a;text-transform:uppercase;letter-spacing:.04em;margin-bottom:10px}
+.sim-bar-track{display:flex;height:32px;border-radius:10px;overflow:hidden;background:#f1f1f7;border:1px solid #e2e2f0}
+.sim-seg{height:100%;min-width:2px;transition:width .35s ease}
+.sim-seg.seg-cap{background:linear-gradient(180deg,#6366f1,#4f46e5)}
+.sim-seg.seg-apo{background:linear-gradient(180deg,#22c55e,#16a34a)}
+.sim-seg.seg-int{background:linear-gradient(180deg,#f59e0b,#d97706)}
+.sim-legend{display:grid;gap:8px;margin-top:12px;font-size:.88rem;color:#1a1a2e}
+.sim-legend-row{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap}
+.sim-dot{display:inline-block;width:10px;height:10px;border-radius:3px;margin-right:8px;vertical-align:middle}
+.sim-dot.cap{background:#4f46e5}
+.sim-dot.apo{background:#16a34a}
+.sim-dot.int{background:#d97706}
+.sim-legend-val{font-weight:700;font-variant-numeric:tabular-nums;color:#1a1a2e}
+.fml{background:#f5f3ff;border:1px solid #e2e2f0;border-radius:12px;padding:1rem 1.25rem;font-family:ui-monospace,monospace;font-size:.95rem;margin:1rem 0}
+</style>
+
 </head>
 
 <body>
@@ -43,33 +98,76 @@
 
 <section class="cs wrap">
 
+<div class="calc-layout">
+
 <div class="ccard">
 
 <h2>Datos</h2>
 
 <div class="fg">
-<label>Capital inicial (€)</label>
-<input id="capital" type="number" value="10000">
+<label for="capital">Capital inicial (€)</label>
+<input id="capital" type="number" inputmode="decimal" min="0" step="1" value="10000">
+<small>Cantidad inicial invertida</small>
 </div>
 
 <div class="fg">
-<label>Aportación mensual (€)</label>
-<input id="aporte" type="number" value="200">
+<label for="aporte">Aportación mensual (€)</label>
+<input id="aporte" type="number" inputmode="decimal" min="0" step="1" value="200">
+<small>Cantidad añadida cada mes</small>
 </div>
 
 <div class="fg">
-<label>Interés anual (%)</label>
-<input id="interes" type="number" value="7">
+<label for="interes">Interés anual (%)</label>
+<input id="interes" type="number" inputmode="decimal" min="0" step="0.01" value="7">
+<small>Rentabilidad anual estimada</small>
 </div>
 
 <div class="fg">
-<label>Años</label>
-<input id="años" type="number" value="20">
+<label for="años">Años</label>
+<input id="años" type="number" inputmode="numeric" min="0" step="1" value="20">
+<small>Tiempo de inversión</small>
 </div>
 
-<button class="btn bp bfw" onclick="calc()">Calcular</button>
+<button type="button" class="btn bp bfw" onclick="calc()">Calcular</button>
 
-<div class="rb" id="resultado"></div>
+<div class="calc-msg" id="calcMsg" role="alert"></div>
+
+</div>
+
+<div class="ccard" id="panelResultado">
+<h2>Simulación</h2>
+
+<div class="res-total-wrap">
+  <div class="res-label">Total acumulado</div>
+  <div class="res-total-hero" id="outTotal">—</div>
+</div>
+
+<div class="result-grid">
+  <div class="res-box blue">
+    <div class="res-label">Total invertido</div>
+    <div class="res-value" id="outInvertido">—</div>
+  </div>
+  <div class="res-box green">
+    <div class="res-label">Intereses generados</div>
+    <div class="res-value" id="outIntereses">—</div>
+  </div>
+</div>
+
+<div class="sim-viz" id="simViz" aria-label="Composición del total acumulado">
+  <div class="sim-viz-title">Composición del total</div>
+  <div class="sim-bar-track" id="simBarTrack">
+    <div class="sim-seg seg-cap" id="segCap"></div>
+    <div class="sim-seg seg-apo" id="segApo"></div>
+    <div class="sim-seg seg-int" id="segInt"></div>
+  </div>
+  <div class="sim-legend">
+    <div class="sim-legend-row"><span><span class="sim-dot cap" aria-hidden="true"></span>Capital inicial</span><span class="sim-legend-val" id="legCap">—</span></div>
+    <div class="sim-legend-row"><span><span class="sim-dot apo" aria-hidden="true"></span>Aportaciones</span><span class="sim-legend-val" id="legApo">—</span></div>
+    <div class="sim-legend-row"><span><span class="sim-dot int" aria-hidden="true"></span>Intereses</span><span class="sim-legend-val" id="legInt">—</span></div>
+  </div>
+</div>
+
+</div>
 
 </div>
 
@@ -100,12 +198,51 @@ VF = C × (1 + r)^t
 
 document.getElementById("year").textContent=new Date().getFullYear();
 
+function fmtEuro(x){
+  if(typeof x!=="number"||isNaN(x)) return "—";
+  return x.toFixed(2)+" €";
+}
+
+function showCalcErr(t){
+  var el=document.getElementById("calcMsg");
+  el.textContent=t;
+  el.classList.add("on");
+}
+
+function clearCalcErr(){
+  var el=document.getElementById("calcMsg");
+  el.textContent="";
+  el.classList.remove("on");
+}
+
 function calc(){
+
+  clearCalcErr();
+
+  var sCap=document.getElementById("capital").value.trim();
+  var sAporte=document.getElementById("aporte").value.trim();
+  var sInt=document.getElementById("interes").value.trim();
+  var sAños=document.getElementById("años").value.trim();
+
+  if(sCap===""||sAporte===""||sInt===""||sAños===""){
+    showCalcErr("Completa todos los campos para calcular.");
+    return;
+  }
 
   let c=parseFloat(document.getElementById("capital").value);
   let a=parseFloat(document.getElementById("aporte").value);
   let r=parseFloat(document.getElementById("interes").value)/100/12;
   let n=parseFloat(document.getElementById("años").value)*12;
+
+  if(isNaN(c)||isNaN(a)||isNaN(r)||isNaN(n)){
+    showCalcErr("Los datos introducidos no son válidos.");
+    return;
+  }
+
+  if(c<0||a<0||parseFloat(document.getElementById("interes").value)<0||parseFloat(document.getElementById("años").value)<0){
+    showCalcErr("Usa solo valores iguales o mayores que cero.");
+    return;
+  }
 
   let total=c;
 
@@ -116,12 +253,29 @@ function calc(){
   let invertido=c+(a*n);
   let intereses=total-invertido;
 
-  document.getElementById("resultado").innerHTML=
-    "<b>Total:</b> "+total.toFixed(2)+" €<br>"+
-    "<b>Invertido:</b> "+invertido.toFixed(2)+" €<br>"+
-    "<b>Intereses:</b> "+intereses.toFixed(2)+" €";
+  if(isNaN(total)||isNaN(invertido)||isNaN(intereses)){
+    showCalcErr("No se pudo calcular el resultado. Revisa los valores.");
+    return;
+  }
 
-  document.getElementById("resultado").classList.add("on");
+  document.getElementById("outTotal").textContent=fmtEuro(total);
+  document.getElementById("outInvertido").textContent=fmtEuro(invertido);
+  document.getElementById("outIntereses").textContent=fmtEuro(intereses);
+
+  var base=total>0?total:1;
+  var pCap=(c/base)*100;
+  var pApo=((a*n)/base)*100;
+  var pInt=(intereses/base)*100;
+
+  document.getElementById("segCap").style.width=pCap+"%";
+  document.getElementById("segApo").style.width=pApo+"%";
+  document.getElementById("segInt").style.width=pInt+"%";
+
+  document.getElementById("legCap").textContent=fmtEuro(c);
+  document.getElementById("legApo").textContent=fmtEuro(a*n);
+  document.getElementById("legInt").textContent=fmtEuro(intereses);
+
+  document.getElementById("simViz").classList.add("on");
 }
 
 </script>
