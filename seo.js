@@ -26,10 +26,9 @@ document.addEventListener("DOMContentLoaded", function () {
     </section>
   `;
 
-  // Insertar antes del footer
+  // Insertar antes del footer solo si la página no trae ya el bloque (evita duplicar con HTML estático)
   const footer = document.querySelector("footer");
-
-  if (footer && !document.querySelector("section.trust.wrap")) {
+  if (footer && !document.querySelector(".trust.wrap")) {
     footer.insertAdjacentHTML("beforebegin", bloqueSEO);
   }
 
