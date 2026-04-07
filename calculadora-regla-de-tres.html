@@ -31,11 +31,11 @@ crossorigin="anonymous"></script>
 .regla-row .fg{flex:1;min-width:0;margin-bottom:0}
 .regla-sep{flex:0 0 auto;padding-bottom:10px;font-size:1.2rem;font-weight:800;color:var(--muted);line-height:1;-webkit-user-select:none;user-select:none}
 .regla-xslot{flex:1;min-width:0;min-height:46px;border:1px dashed var(--border);border-radius:10px;display:flex;align-items:center;justify-content:center;background:#fafafa;color:var(--muted);font-weight:700;font-size:0.95rem}
-.regla-actions{margin-top:1.35rem}
+.regla-actions{display:flex;justify-content:center;margin-top:1.85rem;padding-top:0.25rem}
 @keyframes rb-fade-in{from{opacity:0;transform:translateY(5px)}to{opacity:1;transform:translateY(0)}}
-.rb.on{margin-top:1.5rem;padding:1.1rem 1.2rem 1.15rem;background:linear-gradient(180deg,rgba(108,71,255,0.07) 0%,#fafafa 50%);border:1px solid var(--border);border-radius:12px;box-shadow:0 2px 14px rgba(26,26,46,0.07);animation:rb-fade-in 0.38s ease-out;font-variant-numeric:tabular-nums}
+.rb.on{margin-top:1.85rem;padding:1.25rem 1.35rem 1.3rem;background:linear-gradient(180deg,rgba(108,71,255,0.07) 0%,#fafafa 50%);border:1px solid var(--border);border-radius:12px;box-shadow:0 2px 14px rgba(26,26,46,0.07);animation:rb-fade-in 0.38s ease-out;font-variant-numeric:tabular-nums}
 .rb.on.regla-err{background:linear-gradient(180deg,rgba(220,38,38,0.06) 0%,#fafafa 55%);border-color:#fecaca}
-.regla-res-main{font-size:clamp(1.45rem,4vw,1.95rem);font-weight:800;color:var(--text);line-height:1.25;margin:0 0 0.65rem}
+.regla-res-main{font-size:clamp(1.55rem,4.2vw,2.1rem);font-weight:800;color:var(--text);line-height:1.25;margin:0 0 0.7rem;letter-spacing:-0.02em}
 .regla-res-sub{font-size:0.8125rem;font-weight:600;color:var(--muted);margin:0 0 0.35rem;line-height:1.4}
 .regla-res-ex{font-size:0.9rem;font-weight:600;color:var(--text);margin:0;line-height:1.45}
 .rb.on .regla-err-msg{margin:0;font-size:0.95rem;font-weight:600;color:#b91c1c;line-height:1.45}
@@ -213,6 +213,12 @@ function parseEsp(s) {
 function fmt2(n) {
   return n.toLocaleString("es-ES", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
 }
+function fmtEjemplo(n) {
+  if (!isFinite(n)) return fmt2(0);
+  var r = Math.round(n * 100) / 100;
+  if (Math.abs(r - Math.round(r)) < 1e-12) return String(Math.round(r));
+  return fmt2(r);
+}
 
 // cálculo
 function calc(){
@@ -262,7 +268,7 @@ function calc(){
   out.innerHTML =
     "<div class=\"regla-res-main\">X = " + fmt2(x) + "</div>" +
     "<p class=\"regla-res-sub\">Fórmula: (B × C) / A</p>" +
-    "<p class=\"regla-res-ex\">(" + fmt2(b) + " × " + fmt2(c) + ") / " + fmt2(a) + " = " + fmt2(x) + "</p>";
+    "<p class=\"regla-res-ex\">(" + fmtEjemplo(b) + " × " + fmtEjemplo(c) + ") / " + fmtEjemplo(a) + " = " + fmtEjemplo(x) + "</p>";
 
   out.classList.add("on");
 }
