@@ -89,9 +89,11 @@ data-ad-format="auto"></ins>
 <button class="btn bp bfw" onclick="calc()">Calcular</button>
 
 <div class="rb" id="resultado"></div>
+<br><br>
 
 <p>💰 Calcula también tus impuestos en España</p>
 <p><a href="calculadora-irpf-espana.html" class="btn bp bfw">Ver calculadora IRPF</a></p>
+<br><br>
 
 </div>
 
@@ -174,7 +176,7 @@ Quitar IVA: Precio / (1 + IVA)
 </table>
 
 <p>También puedes usar nuestra
-<a href="calculadora-irpf-espana.html">calculadora de IRPF</a>
+<a href="calculadora-irpf-espana.html">calculadora de IRPF</a><br>
 o la
 <a href="calculadora-hipoteca.html">calculadora de hipoteca</a>.
 Complementa con la
@@ -254,7 +256,7 @@ function calc(){
     "<b>Base imponible:</b> "+fmt2(base)+" €<br>" +
     "<b>IVA:</b> "+fmt2(impuesto)+" €<br>" +
     "<b>Total:</b> "+fmt2(total)+" €<br><br>" +
-    "<a class='btn' href='calculadora-irpf-espana.html'>Calcular IRPF →</a>";
+    "<a class='btn' href='calculadora-irpf-espana.html'>Calcular IRPF →</a><br><br>";
 
   document.getElementById("resultado").classList.add("on");
 }
