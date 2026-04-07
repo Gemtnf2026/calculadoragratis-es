@@ -15,6 +15,11 @@
 
 <link rel="stylesheet" href="style.css?v=3">
 
+<style>
+#calc-search::placeholder{color:rgba(255,255,255,0.78)}
+#calc-search:focus-visible{outline:2px solid rgba(255,255,255,0.55);outline-offset:2px}
+</style>
+
 <!-- FAVICON -->
 <link rel="icon" href="/calculadoragratis-es/favicon.png" sizes="any">
 <link rel="apple-touch-icon" href="/calculadoragratis-es/favicon.png">
@@ -31,9 +36,9 @@
     </a>
 
     <nav class="nav" aria-label="Navegación principal">
-      <a href="#finanzas">Finanzas</a>
-      <a href="#matematicas">Matemáticas</a>
-      <a href="#utiles">Útiles</a>
+      <a href="#finanzas" style="font-weight:600;letter-spacing:0.02em;-webkit-tap-highlight-color:transparent">Finanzas</a>
+      <a href="#matematicas" style="font-weight:600;letter-spacing:0.02em;-webkit-tap-highlight-color:transparent">Matemáticas</a>
+      <a href="#utiles" style="font-weight:600;letter-spacing:0.02em;-webkit-tap-highlight-color:transparent">Útiles</a>
     </nav>
 
   </div>
@@ -55,9 +60,18 @@
       Todas las calculadoras online que necesitas, gratis y sin registro
     </p>
 
-    <p class="hero-mini" style="margin-top:clamp(0.65rem,2vw,1rem);margin-bottom:0;font-size:clamp(0.88rem,0.82rem + 0.2vw,0.98rem);line-height:1.55;max-width:40em;margin-left:auto;margin-right:auto;opacity:0.88;">
+    <p class="hero-mini" style="margin-top:clamp(0.65rem,2vw,1rem);margin-bottom:clamp(0.35rem,1.2vw,0.6rem);font-size:clamp(0.88rem,0.82rem + 0.2vw,0.98rem);line-height:1.55;max-width:40em;margin-left:auto;margin-right:auto;opacity:0.88;">
       Herramientas de cálculo para finanzas, salud, hogar, educación y más
     </p>
+
+    <div style="margin:clamp(1.35rem,3.5vw,2rem) 0 0;display:flex;flex-wrap:wrap;gap:12px;justify-content:center;align-items:center;">
+      <a href="#finanzas" style="display:inline-block;font-weight:600;text-decoration:none;padding:0.72rem 1.4rem;border-radius:10px;background:rgba(255,255,255,0.24);color:#fff;border:1px solid rgba(255,255,255,0.4);box-shadow:0 2px 14px rgba(0,0,0,0.14);font-size:clamp(0.95rem,0.88rem + 0.25vw,1.06rem);line-height:1.25;transition:background-color .2s ease,box-shadow .2s ease,border-color .2s ease;-webkit-tap-highlight-color:transparent" onmouseover="this.style.background='rgba(255,255,255,0.36)';this.style.boxShadow='0 4px 20px rgba(0,0,0,0.2)';this.style.borderColor='rgba(255,255,255,0.55)'" onmouseout="this.style.background='rgba(255,255,255,0.24)';this.style.boxShadow='0 2px 14px rgba(0,0,0,0.14)';this.style.borderColor='rgba(255,255,255,0.4)'">Ver todas las calculadoras</a>
+      <a href="#matematicas" style="display:inline-block;font-weight:600;text-decoration:none;padding:0.72rem 1.4rem;border-radius:10px;background:rgba(255,255,255,0.1);color:#fff;border:1px solid rgba(255,255,255,0.35);box-shadow:0 2px 12px rgba(0,0,0,0.1);font-size:clamp(0.95rem,0.88rem + 0.25vw,1.06rem);line-height:1.25;transition:background-color .2s ease,box-shadow .2s ease,border-color .2s ease;-webkit-tap-highlight-color:transparent" onmouseover="this.style.background='rgba(255,255,255,0.2)';this.style.boxShadow='0 4px 18px rgba(0,0,0,0.16)';this.style.borderColor='rgba(255,255,255,0.5)'" onmouseout="this.style.background='rgba(255,255,255,0.1)';this.style.boxShadow='0 2px 12px rgba(0,0,0,0.1)';this.style.borderColor='rgba(255,255,255,0.35)'">Explorar calculadoras</a>
+    </div>
+
+    <div role="search" style="margin-top:clamp(1.1rem,2.8vw,1.65rem);max-width:22rem;margin-left:auto;margin-right:auto;width:100%">
+      <input type="search" id="calc-search" name="q" aria-label="Buscar calculadora" placeholder="Buscar calculadora..." autocomplete="off" inputmode="search" style="width:100%;box-sizing:border-box;margin:0;padding:0.68rem 1rem;border-radius:10px;border:1px solid rgba(255,255,255,0.38);background:rgba(0,0,0,0.2);color:#fff;font-size:1rem;line-height:1.4;-webkit-tap-highlight-color:transparent">
+    </div>
 
   </div>
 </section>
@@ -65,7 +79,7 @@
 <!-- FINANZAS -->
 <section id="finanzas" class="wrap">
 
-<h2><svg class="icon" xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="display:inline-block;vertical-align:middle;margin-right:8px"><path d="M19 7V4a1 1 0 0 0-1-1H5a2 2 0 0 0 0 4h15a1 1 0 0 1 1 1v4h-3a2 2 0 0 0 0 4h3a1 1 0 0 0 1-1v-2a1 1 0 0 0-1-1"/><path d="M3 5v14a2 2 0 0 0 2 2h15a1 1 0 0 0 1-1v-4"/></svg> Calculadoras financieras</h2>
+<h2><svg class="icon" xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="display:inline-block;vertical-align:middle;margin-right:8px;width:28px;height:28px"><path d="M19 7V4a1 1 0 0 0-1-1H5a2 2 0 0 0 0 4h15a1 1 0 0 1 1 1v4h-3a2 2 0 0 0 0 4h3a1 1 0 0 0 1-1v-2a1 1 0 0 0-1-1"/><path d="M3 5v14a2 2 0 0 0 2 2h15a1 1 0 0 0 1-1v-4"/></svg> Calculadoras financieras</h2>
 
 <div class="grid-cards">
 
@@ -118,7 +132,7 @@
 <!-- MATEMÁTICAS -->
 <section id="matematicas" class="wrap">
 
-<h2><svg class="icon" xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="display:inline-block;vertical-align:middle;margin-right:8px"><path d="M3 3v16a2 2 0 0 0 2 2h16"/><path d="M18 17V9"/><path d="M13 17V5"/><path d="M8 17v-3"/></svg> Calculadoras matemáticas</h2>
+<h2><svg class="icon" xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="display:inline-block;vertical-align:middle;margin-right:8px;width:28px;height:28px"><path d="M3 3v16a2 2 0 0 0 2 2h16"/><path d="M18 17V9"/><path d="M13 17V5"/><path d="M8 17v-3"/></svg> Calculadoras matemáticas</h2>
 
 <div class="grid-cards">
 
@@ -150,7 +164,7 @@
 <!-- ÚTILES -->
 <section id="utiles" class="wrap">
 
-<h2><svg class="icon" xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="display:inline-block;vertical-align:middle;margin-right:8px"><path d="M4 14a1 1 0 0 1-.78-1.63l9.9-10.2a.5.5 0 0 1 .86.46l-1.92 6.02A1 1 0 0 0 13 10h7a1 1 0 0 1 .78 1.63l-9.9 10.2a.5.5 0 0 1-.86-.46l1.92-6.02A1 1 0 0 0 11 14z"/></svg> Calculadoras útiles</h2>
+<h2><svg class="icon" xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="display:inline-block;vertical-align:middle;margin-right:8px;width:28px;height:28px"><path d="M4 14a1 1 0 0 1-.78-1.63l9.9-10.2a.5.5 0 0 1 .86.46l-1.92 6.02A1 1 0 0 0 13 10h7a1 1 0 0 1 .78 1.63l-9.9 10.2a.5.5 0 0 1-.86-.46l1.92-6.02A1 1 0 0 0 11 14z"/></svg> Calculadoras útiles</h2>
 
 <div class="grid-cards">
 
@@ -252,6 +266,55 @@
 
 <script>
   document.getElementById("year").textContent = new Date().getFullYear();
+
+  (function () {
+    var searchInput = document.getElementById("calc-search");
+    if (!searchInput) return;
+
+    var sections = ["finanzas", "matematicas", "utiles"];
+
+    function norm(s) {
+      return (s || "").toLowerCase().replace(/\s+/g, " ").trim();
+    }
+
+    function fold(s) {
+      var t = norm(s);
+      try {
+        return t.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+      } catch (e) {
+        return t;
+      }
+    }
+
+    function cardText(card) {
+      var lt = card.querySelector(".lt");
+      var ld = card.querySelector(".ld");
+      return (lt && lt.textContent) + " " + (ld && ld.textContent);
+    }
+
+    function applyFilter() {
+      var q = norm(searchInput.value);
+      var qFold = fold(searchInput.value);
+      sections.forEach(function (id) {
+        var sec = document.getElementById(id);
+        if (!sec) return;
+        var cards = sec.querySelectorAll("a.lc");
+        var any = false;
+        cards.forEach(function (card) {
+          var show = !q || fold(cardText(card)).indexOf(qFold) !== -1;
+          card.style.display = show ? "" : "none";
+          if (show) any = true;
+        });
+        if (q) sec.style.display = any ? "" : "none";
+        else sec.style.display = "";
+      });
+    }
+
+    searchInput.addEventListener("input", applyFilter);
+    searchInput.addEventListener("search", function () {
+      if (searchInput.value === "") applyFilter();
+    });
+  })();
 </script>
 
 </body>
