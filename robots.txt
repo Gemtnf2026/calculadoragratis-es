@@ -1,3 +1,4 @@
+# autor: Gemma Ramo | copyright g@ramo | v1
 User-agent: *
 Allow: /
 

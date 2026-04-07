@@ -1,4 +1,4 @@
-
+<!-- autor: Gemma Ramo | copyright g@ramo | v1 -->
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -6,13 +6,20 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<title>Calculadora de hipoteca — cuota mensual y simulador</title>
+<title>Hipoteca 2026: calculadora cuota mensual (simulador)</title>
 
-<meta name="description" content="Calcula la cuota de tu hipoteca, intereses y total a pagar. Simulador hipotecario con amortización francesa en España.">
+<meta name="description" content="Simula tu hipoteca: cuota mensual, total pagado e intereses con capital, tipo anual y plazo. Amortización francesa como en España. Planifica gratis ahora.">
 
-<link rel="canonical" href="https://gemtnf2026.github.io/calculadoragratis-es/calculadora-hipoteca.html">
+<link rel="canonical" href="https://www.calculadoragratis.es/calculadora-hipoteca.html">
 
 <meta name="robots" content="index,follow">
+
+<meta property="og:title" content="Simulador hipotecario: cuota, intereses y total | CalculadoraGratis">
+<meta property="og:description" content="Descubre al instante tu cuota mensual y el coste total de tu hipoteca. Introduce el importe, el interés y el plazo en unos clics y compara escenarios.">
+<meta property="og:url" content="https://www.calculadoragratis.es/calculadora-hipoteca.html">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="es_ES">
+<meta property="og:site_name" content="CalculadoraGratis.es">
 
 <link rel="stylesheet" href="style.css">
 
@@ -22,40 +29,6 @@
 <!-- ADSENSE -->
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=TU_ID"
 crossorigin="anonymous"></script>
-
-<!-- SCHEMA FAQ -->
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "FAQPage",
-  "mainEntity": [
-    {
-      "@type": "Question",
-      "name": "¿Qué hipoteca es mejor?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Depende del tipo de interés y de tu estabilidad financiera. Una hipoteca fija ofrece seguridad en la cuota mensual, mientras que la variable puede ser más barata a corto plazo pero con más riesgo."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "¿Cuánto puedo pedir de hipoteca?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Normalmente los bancos financian hasta el 80% del valor de tasación de la vivienda. El 20% restante más los gastos de compraventa (notaría, impuestos) deben pagarse con ahorros propios."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "¿Se puede amortizar la hipoteca antes?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Sí, la amortización anticipada puede reducir significativamente los intereses totales. Puedes amortizar capital reduciendo la cuota mensual o acortando el plazo del préstamo."
-      }
-    }
-  ]
-}
-</script>
 
 </head>
 
@@ -244,6 +217,33 @@ document.querySelectorAll(".fq").forEach(btn=>{
   }
 });
 
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "Calculadora de hipoteca — cuota mensual y simulador",
+  "url": "https://www.calculadoragratis.es/calculadora-hipoteca.html",
+  "description": "Calcula la cuota mensual de una hipoteca con sistema de amortización francés a partir del capital, el tipo de interés anual y el plazo en años. Muestra también el total pagado y los intereses.",
+  "applicationCategory": "FinanceApplication",
+  "operatingSystem": "Web",
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "EUR" },
+  "inLanguage": "es",
+  "author": { "@type": "Organization", "name": "CalculadoraGratis.es", "url": "https://www.calculadoragratis.es" }
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    { "@type":"Question","name":"¿Cómo se calcula la cuota mensual con esta calculadora de hipoteca?","acceptedAnswer":{"@type":"Answer","text":"Aplica el sistema de amortización francés: convierte el interés anual en mensual dividiéndolo entre 12, calcula el número de meses multiplicando los años por 12 y obtiene la cuota con la fórmula estándar Cuota = (capital × i) / (1 − (1 + i)^−n), donde i es el interés mensual y n el número de cuotas."}},
+    { "@type":"Question","name":"¿Qué representan “total pagado” e “intereses” en el resultado?","acceptedAnswer":{"@type":"Answer","text":"El total pagado es la cuota mensual multiplicada por todos los meses del préstamo. Los intereses son la diferencia entre ese total y el capital prestado; es decir, lo que pagas de coste financiero además de devolver el importe solicitado."}},
+    { "@type":"Question","name":"Ejemplo: ¿cuánto sería la cuota de 200.000 € al 3 % en 25 años?","acceptedAnswer":{"@type":"Answer","text":"Con esos datos orientativos, la cuota mensual ronda los 948 €; el total pagado supera los 280.000 € y los intereses acumulados superan los 80.000 €. Los valores exactos dependen del redondeo y de las condiciones reales del banco."}},
+    { "@type":"Question","name":"¿La simulación incluye comisiones, seguros o gastos de compraventa?","acceptedAnswer":{"@type":"Answer","text":"No: solo usa capital, tipo de interés anual y plazo en años. En la práctica, comisiones, seguros vinculados, impuestos y notaría pueden cambiar el coste total; el aviso de la página indica que los resultados son orientativos."}}
+  ]
+}
 </script>
 
 <script src="seo.js"></script>
