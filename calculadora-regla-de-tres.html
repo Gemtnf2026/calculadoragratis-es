@@ -24,6 +24,21 @@
 crossorigin="anonymous"></script>
 
 <style>
+/* Regla de tres — solo esta página; no altera style.css global */
+.cs .cgrid{display:flex;flex-direction:column;gap:2rem}
+.regla-prop{display:flex;flex-direction:column;gap:1rem;margin-top:0.25rem}
+.regla-row{display:flex;align-items:flex-end;gap:0.65rem}
+.regla-row .fg{flex:1;min-width:0;margin-bottom:0}
+.regla-sep{flex:0 0 auto;padding-bottom:10px;font-size:1.2rem;font-weight:800;color:var(--muted);line-height:1;-webkit-user-select:none;user-select:none}
+.regla-xslot{flex:1;min-width:0;min-height:46px;border:1px dashed var(--border);border-radius:10px;display:flex;align-items:center;justify-content:center;background:#fafafa;color:var(--muted);font-weight:700;font-size:0.95rem}
+.regla-actions{margin-top:1.35rem}
+@keyframes rb-fade-in{from{opacity:0;transform:translateY(5px)}to{opacity:1;transform:translateY(0)}}
+.rb.on{margin-top:1.5rem;padding:1.1rem 1.2rem 1.15rem;background:linear-gradient(180deg,rgba(108,71,255,0.07) 0%,#fafafa 50%);border:1px solid var(--border);border-radius:12px;box-shadow:0 2px 14px rgba(26,26,46,0.07);animation:rb-fade-in 0.38s ease-out;font-variant-numeric:tabular-nums}
+.rb.on.regla-err{background:linear-gradient(180deg,rgba(220,38,38,0.06) 0%,#fafafa 55%);border-color:#fecaca}
+.regla-res-main{font-size:clamp(1.45rem,4vw,1.95rem);font-weight:800;color:var(--text);line-height:1.25;margin:0 0 0.65rem}
+.regla-res-sub{font-size:0.8125rem;font-weight:600;color:var(--muted);margin:0 0 0.35rem;line-height:1.4}
+.regla-res-ex{font-size:0.9rem;font-weight:600;color:var(--text);margin:0;line-height:1.45}
+.rb.on .regla-err-msg{margin:0;font-size:0.95rem;font-weight:600;color:#b91c1c;line-height:1.45}
 #scroll-top-btn{position:fixed;right:18px;bottom:22px;z-index:60;width:48px;height:48px;padding:0;border:none;border-radius:50%;background:linear-gradient(145deg,#4a00e0,#2563d4);color:#fff;cursor:pointer;box-shadow:0 4px 18px rgba(37,99,212,0.45);transition:opacity .25s ease,transform .2s ease;opacity:0;visibility:hidden;pointer-events:none;-webkit-tap-highlight-color:transparent}
 #scroll-top-btn.is-visible{opacity:1;visibility:visible;pointer-events:auto}
 #scroll-top-btn:hover{transform:translateY(-2px)}
@@ -39,7 +54,7 @@ crossorigin="anonymous"></script>
 
 <a href="index.html" class="logo">
       <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="vertical-align:middle;margin-right:8px"><rect x="4" y="2" width="24" height="28" rx="3"/><rect x="8" y="6" width="16" height="6" rx="1.5" stroke-width="1.5" fill="currentColor" fill-opacity="0.15"/><circle cx="10" cy="18" r="1.5" fill="currentColor" stroke="none"/><circle cx="16" cy="18" r="1.5" fill="currentColor" stroke="none"/><circle cx="22" cy="18" r="1.5" fill="currentColor" stroke="none"/><circle cx="10" cy="24" r="1.5" fill="currentColor" stroke="none"/><circle cx="16" cy="24" r="1.5" fill="currentColor" stroke="none"/><circle cx="22" cy="24" r="1.5" fill="currentColor" stroke="none"/></svg>CalculadoraGratis
-    </a>>
+    </a>
 
     <nav class="nav">
       <a href="index.html#finanzas">Finanzas</a>
@@ -73,24 +88,33 @@ crossorigin="anonymous"></script>
 
 <h2>Introduce los valores</h2>
 
+<div class="regla-prop" role="group" aria-label="Proporción: A es a B como C es a X">
+<div class="regla-row">
 <div class="fg">
-<label>Valor A</label>
+<label for="a">Valor A (relación base)</label>
 <input id="a" type="text" inputmode="decimal" autocomplete="off" value="2,00">
 </div>
-
+<span class="regla-sep" aria-hidden="true">→</span>
 <div class="fg">
-<label>Valor B</label>
+<label for="b">Valor B (resultado conocido)</label>
 <input id="b" type="text" inputmode="decimal" autocomplete="off" value="4,00">
 </div>
-
+</div>
+<div class="regla-row">
 <div class="fg">
-<label>Valor C</label>
+<label for="c">Valor C (nuevo valor)</label>
 <input id="c" type="text" inputmode="decimal" autocomplete="off" value="6,00">
 </div>
+<span class="regla-sep" aria-hidden="true">→</span>
+<div class="regla-xslot" title="X se calcula al pulsar Calcular">X</div>
+</div>
+</div>
 
-<button class="btn bp bfw" onclick="calc()">Calcular</button>
+<div class="regla-actions">
+<button type="button" class="btn bp bfw" onclick="calc()">Calcular</button>
+</div>
 
-<div class="rb" id="resultado"></div>
+<div class="rb" id="resultado" role="status" aria-live="polite"></div>
 
 </div>
 
@@ -192,17 +216,55 @@ function fmt2(n) {
 
 // cálculo
 function calc(){
+  var out = document.getElementById("resultado");
+  var aEl = document.getElementById("a");
+  var bEl = document.getElementById("b");
+  var cEl = document.getElementById("c");
+  var sa = String(aEl.value).trim();
+  var sb = String(bEl.value).trim();
+  var sc = String(cEl.value).trim();
 
-  let a = parseEsp(document.getElementById("a").value);
-  let b = parseEsp(document.getElementById("b").value);
-  let c = parseEsp(document.getElementById("c").value);
+  if (sa === "" || sb === "" || sc === "") {
+    out.innerHTML = "<p class=\"regla-err-msg\">Rellena los tres valores (A, B y C) para calcular X.</p>";
+    out.classList.add("on");
+    out.classList.add("regla-err");
+    return;
+  }
 
-  let x = (b * c) / a;
+  var a = parseEsp(aEl.value);
+  var b = parseEsp(bEl.value);
+  var c = parseEsp(cEl.value);
 
-  document.getElementById("resultado").innerHTML =
-    "<b>Resultado:</b> " + fmt2(x);
+  if (!isFinite(a) || !isFinite(b) || !isFinite(c)) {
+    out.innerHTML = "<p class=\"regla-err-msg\">Comprueba que A, B y C sean números válidos.</p>";
+    out.classList.add("on");
+    out.classList.add("regla-err");
+    return;
+  }
 
-  document.getElementById("resultado").classList.add("on");
+  if (a === 0) {
+    out.innerHTML = "<p class=\"regla-err-msg\">El valor A no puede ser cero (división entre cero).</p>";
+    out.classList.add("on");
+    out.classList.add("regla-err");
+    return;
+  }
+
+  var x = (b * c) / a;
+
+  if (!isFinite(x)) {
+    out.innerHTML = "<p class=\"regla-err-msg\">No se puede calcular un resultado válido con estos valores.</p>";
+    out.classList.add("on");
+    out.classList.add("regla-err");
+    return;
+  }
+
+  out.classList.remove("regla-err");
+  out.innerHTML =
+    "<div class=\"regla-res-main\">X = " + fmt2(x) + "</div>" +
+    "<p class=\"regla-res-sub\">Fórmula: (B × C) / A</p>" +
+    "<p class=\"regla-res-ex\">(" + fmt2(b) + " × " + fmt2(c) + ") / " + fmt2(a) + " = " + fmt2(x) + "</p>";
+
+  out.classList.add("on");
 }
 
 ["a","b","c"].forEach(function(id){

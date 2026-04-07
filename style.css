@@ -377,3 +377,37 @@ p{
     top: auto;
   }
 }
+
+/* FAQ acordeón (misma apariencia que calculadora IRPF) */
+.fq {
+  background: #fff;
+  border: 1px solid #c4b5fd;
+  border-left: 4px solid #6c47ff;
+  border-radius: 12px;
+  padding: 14px 16px;
+  width: 100%;
+  text-align: left;
+  font-weight: 600;
+  color: #1a1a2e;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+  font-size: 0.97rem;
+  font-family: inherit;
+  margin-bottom: 8px;
+}
+.fq:hover {
+  background: linear-gradient(90deg, #3a5bd9, #2a9bb8);
+  color: #fff;
+  border-color: #3a5bd9;
+  border-left-color: #fff;
+}
+.fa {
+  padding: 0.5rem 0.5rem 1rem;
+  color: #6b6b8a;
+  display: none;
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+.fa.on {
+  display: block;
+}

@@ -316,14 +316,14 @@ VF = C × (1 + r)^t
 
 <h2>Preguntas frecuentes</h2>
 
-<h3>¿Qué es el interés compuesto?</h3>
-<p>Es el efecto por el cual los intereses generados se suman al capital y, en periodos siguientes, también devengan intereses. Por eso el crecimiento puede acelerarse con el tiempo respecto a un interés simple, sobre todo a largo plazo.</p>
+<button type="button" class="fq">¿Qué es el interés compuesto?</button>
+<div class="fa"><p>Es el efecto por el cual los intereses generados se suman al capital y, en periodos siguientes, también devengan intereses. Por eso el crecimiento puede acelerarse con el tiempo respecto a un interés simple, sobre todo a largo plazo.</p></div>
 
-<h3>¿Cuánto interés es bueno para invertir?</h3>
-<p>No hay una cifra universal: depende del riesgo, del plazo, del producto y de tu perfil. En la práctica se comparan ofertas con criterios de riesgo similar y se revisa si el rendimiento esperado compensa comisiones e inflación. Usa esta calculadora como <strong>referencia numérica</strong>, no como promesa de rentabilidad.</p>
+<button type="button" class="fq">¿Cuánto interés es bueno para invertir?</button>
+<div class="fa"><p>No hay una cifra universal: depende del riesgo, del plazo, del producto y de tu perfil. En la práctica se comparan ofertas con criterios de riesgo similar y se revisa si el rendimiento esperado compensa comisiones e inflación. Usa esta calculadora como <strong>referencia numérica</strong>, no como promesa de rentabilidad.</p></div>
 
-<h3>¿Es mejor aportar mensualmente o una sola vez?</h3>
-<p>Una aportación única antigua maximiza el tiempo de capitalización sobre todo el capital desde el día uno; las aportaciones periódicas reparten la entrada en el tiempo (en mercados volátiles a veces se relaciona con la idea de “media” en precios, aunque el resultado depende del escenario). Muchas personas combinan un capital inicial con aportaciones mensuales: puedes simular ambos casos arriba y comparar.</p>
+<button type="button" class="fq">¿Es mejor aportar mensualmente o una sola vez?</button>
+<div class="fa"><p>Una aportación única antigua maximiza el tiempo de capitalización sobre todo el capital desde el día uno; las aportaciones periódicas reparten la entrada en el tiempo (en mercados volátiles a veces se relaciona con la idea de “media” en precios, aunque el resultado depende del escenario). Muchas personas combinan un capital inicial con aportaciones mensuales: puedes simular ambos casos arriba y comparar.</p></div>
 
 </section>
 
@@ -454,6 +454,12 @@ function calc(){
     el.value=fmtIn0(v);
   });
 })();
+
+document.querySelectorAll(".fq").forEach(function (btn) {
+  btn.onclick = function () {
+    btn.nextElementSibling.classList.toggle("on");
+  };
+});
 
 </script>
 <script>

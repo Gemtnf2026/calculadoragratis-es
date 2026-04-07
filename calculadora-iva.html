@@ -198,17 +198,17 @@ y
 
 <h2>Preguntas frecuentes</h2>
 
-<h3>¿Cómo se calcula el IVA del 21 %?</h3>
-<p>Multiplicas la base imponible por 0,21 para obtener la cuota de IVA, o el total con IVA como base × 1,21. Por ejemplo, 200 € × 0,21 = 42 € de IVA y 242 € de total.</p>
+<button type="button" class="fq">¿Cómo se calcula el IVA del 21 %?</button>
+<div class="fa"><p>Multiplicas la base imponible por 0,21 para obtener la cuota de IVA, o el total con IVA como base × 1,21. Por ejemplo, 200 € × 0,21 = 42 € de IVA y 242 € de total.</p></div>
 
-<h3>¿Cómo quitar el IVA de un precio?</h3>
-<p>Divide el precio con IVA entre (1 + tipo de IVA en decimal). Con 21 %: precio con IVA ÷ 1,21. La base es ese cociente y la cuota de IVA es la diferencia respecto al precio inicial.</p>
+<button type="button" class="fq">¿Cómo quitar el IVA de un precio?</button>
+<div class="fa"><p>Divide el precio con IVA entre (1 + tipo de IVA en decimal). Con 21 %: precio con IVA ÷ 1,21. La base es ese cociente y la cuota de IVA es la diferencia respecto al precio inicial.</p></div>
 
-<h3>¿Cuál es el IVA en España?</h3>
-<p>Los tipos generales más usados son el general 21 %, el reducido 10 % y el superreducido 4 %, según el bien o servicio.</p>
+<button type="button" class="fq">¿Cuál es el IVA en España?</button>
+<div class="fa"><p>Los tipos generales más usados son el general 21 %, el reducido 10 % y el superreducido 4 %, según el bien o servicio.</p></div>
 
-<h3>¿Qué diferencia hay entre base imponible y total?</h3>
-<p>La base imponible es el importe sobre el que se calcula el IVA. El total (o precio final) es la base más la cuota de IVA, es decir, lo que se paga con impuestos incluidos.</p>
+<button type="button" class="fq">¿Qué diferencia hay entre base imponible y total?</button>
+<div class="fa"><p>La base imponible es el importe sobre el que se calcula el IVA. El total (o precio final) es la base más la cuota de IVA, es decir, lo que se paga con impuestos incluidos.</p></div>
 
 </section>
 
@@ -281,6 +281,12 @@ function calc(){
     el.value = fmt2(v);
   });
 })();
+
+document.querySelectorAll(".fq").forEach(function (btn) {
+  btn.onclick = function () {
+    btn.nextElementSibling.classList.toggle("on");
+  };
+});
 
 </script>
 <script>
