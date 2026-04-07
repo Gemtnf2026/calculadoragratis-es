@@ -6,20 +6,78 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<title>Calculadora de préstamo personal en España — Cuota mensual y amortización</title>
+<title>Calculadora de préstamo personal: cuota mensual, intereses y simulador online | España</title>
 
-<meta name="description" content="Calcula la cuota de tu préstamo personal en España. Simula intereses, plazo y total a pagar con tabla de amortización completa.">
+<meta name="description" content="Simulador de préstamo personal con cuota mensual, total pagado, intereses, TIN y TAE aproximada. Amortización francesa, comisión de apertura y otros gastos opcionales. Orientativo para España.">
 
 <link rel="canonical" href="https://www.calculadoragratis.es/calculadora-prestamo.html">
 
 <meta name="robots" content="index,follow">
 
-<!-- CSS -->
+<meta property="og:title" content="Calculadora de préstamo personal: cuota, intereses y simulador online">
+<meta property="og:description" content="Calcula la cuota mensual de un préstamo personal con sistema francés: total pagado, intereses, coste con comisiones y TAE aproximada.">
+<meta property="og:url" content="https://www.calculadoragratis.es/calculadora-prestamo.html">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="es_ES">
+<meta property="og:site_name" content="CalculadoraGratis.es">
+
 <link rel="stylesheet" href="style.css">
 
-<!-- Google Fonts -->
 <link rel="preconnect" href="https://api.fontshare.com">
 <link href="https://api.fontshare.com/v2/css?f[]=satoshi@400,500,700,800&display=swap" rel="stylesheet">
+
+<style>
+.badge{display:inline-block;background:rgba(108,71,255,.1);color:#6c47ff;font-size:.78rem;font-weight:700;padding:4px 12px;border-radius:20px;margin-bottom:.8rem;text-transform:uppercase;letter-spacing:.06em}
+.hero.wrap{padding-top:2.5rem;padding-bottom:1rem}
+.hero h1{font-size:clamp(1.5rem,3.2vw,2.35rem);font-weight:800;margin-bottom:.5rem;line-height:1.2}
+.hero p{color:#6b6b8a;font-size:1.05rem}
+.calc-layout{
+  display:grid;
+  grid-template-columns:1fr 1.05fr;
+  gap:28px;
+  max-width:1100px;
+  margin:0 auto 2rem;
+  padding:0 20px;
+  align-items:start;
+}
+@media(max-width:900px){.calc-layout{grid-template-columns:1fr}}
+.calc-layout .ccard:last-child{position:sticky;top:20px}
+@media(max-width:900px){.calc-layout .ccard:last-child{position:static}}
+.ccard{
+  background:#fff;
+  border-radius:18px;
+  padding:1.75rem 1.5rem;
+  border:1px solid #e2e2f0;
+  box-shadow:0 8px 28px rgba(108,71,255,.07);
+  width:100%;
+  max-width:none;
+  margin:0;
+}
+.ccard h2{font-size:1.1rem;font-weight:800;margin-bottom:1.25rem;color:#1a1a2e}
+.fg small{display:block;margin-top:4px;font-size:.82rem;color:#6b6b8a;font-weight:500}
+.result-panel{display:none}
+.result-panel.on{display:block}
+.result-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:1rem}
+@media(max-width:480px){.result-grid{grid-template-columns:1fr}}
+.res-box{background:#f5f3ff;border-radius:12px;padding:1rem 1.1rem;border-left:4px solid #6c47ff}
+.res-label{font-size:.72rem;font-weight:700;color:#6b6b8a;text-transform:uppercase;letter-spacing:.04em;margin-bottom:4px}
+.res-value{font-size:1.35rem;font-weight:800;color:#1a1a2e;font-variant-numeric:tabular-nums}
+.res-sub{font-size:.78rem;color:#6b6b8a;margin-top:4px;line-height:1.4}
+.rb{margin-top:1rem;padding:0}
+.internal-cta{display:block;margin-top:.75rem;padding:.75rem 1rem;border-radius:10px;text-align:center;font-weight:700;font-size:.9rem;text-decoration:none;background:linear-gradient(135deg,#7b2ff7,#4a6cf7);color:#fff}
+.internal-cta:hover{opacity:.92}
+.fi{margin-bottom:8px}
+.fq{background:#fff;border:1px solid #c4b5fd;border-left:4px solid #6c47ff;border-radius:12px;padding:14px 16px;width:100%;text-align:left;font-weight:600;color:#1a1a2e;cursor:pointer;transition:background .2s,color .2s;font-size:.97rem;font-family:inherit}
+.fq:hover{background:linear-gradient(90deg,#3a5bd9,#2a9bb8);color:#fff;border-color:#3a5bd9;border-left-color:#fff}
+.fa{padding:.5rem .5rem 1rem;color:#6b6b8a;display:none;font-size:.95rem;line-height:1.6}
+.fa.on{display:block}
+.fml{background:#f5f3ff;border:1px solid #e2e2f0;border-radius:12px;padding:1rem 1.25rem;font-family:ui-monospace,monospace;font-size:.95rem;margin:1rem 0}
+.cnt table{width:100%;border-collapse:collapse;margin:1rem 0;font-size:.92rem}
+.cnt table caption{text-align:left;font-weight:700;margin-bottom:.5rem;color:#1a1a2e}
+.cnt th,.cnt td{border:1px solid #e2e2f0;padding:.65rem .75rem;text-align:left}
+.cnt thead th{background:#f5f3ff;font-weight:700}
+.pub-muted{font-size:.85rem;color:#6b6b8a;margin-bottom:.35rem}
+</style>
 
 <!-- ADSENSE -->
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=TU_ID"
@@ -47,10 +105,11 @@ crossorigin="anonymous"></script>
 
 <section class="hero wrap">
   <span class="badge">Finanzas personales</span>
-  <h1>Calculadora de préstamo personal en España</h1>
-  <p>Calcula la cuota mensual de tu préstamo y el total de intereses de forma rápida.</p>
+  <h1>Calculadora de préstamo personal: cuota mensual, intereses y simulador online</h1>
+  <p>Introduce el importe, el interés nominal (TIN), el plazo y, si quieres, comisión de apertura y otros gastos. Obtén la cuota mensual y el coste total con amortización francesa.</p>
 </section>
 
+<p class="wrap pub-muted">Publicidad</p>
 <!-- ANUNCIO ARRIBA -->
 <div class="ad ad-t wrap">
   <ins class="adsbygoogle"
@@ -62,35 +121,89 @@ crossorigin="anonymous"></script>
 
 <section class="cs wrap">
 
-<div class="cgrid">
+<div class="calc-layout">
 
 <div class="ccard">
 <h2>Datos del préstamo</h2>
 
 <div class="fg">
-<label>Importe (€)</label>
-<input id="monto" type="number" value="10000">
+<label for="monto">Importe (€)</label>
+<input id="monto" type="number" inputmode="decimal" min="1" step="100" value="10000">
 </div>
 
 <div class="fg">
-<label>Interés (%)</label>
-<input id="interes" type="number" value="5">
+<label for="tin">Interés nominal (TIN %)</label>
+<input id="tin" type="number" inputmode="decimal" min="0" step="0.01" value="6">
+<small>Tipo anual sobre saldo pendiente; la TAE mostrada es una aproximación.</small>
 </div>
 
 <div class="fg">
-<label>Años</label>
-<input id="años" type="number" value="5">
+<label for="plazo">Plazo (años)</label>
+<input id="plazo" type="number" inputmode="numeric" min="1" max="40" step="1" value="5">
 </div>
 
-<button class="btn bp bfw" onclick="calc()">Calcular préstamo</button>
+<div class="fg">
+<label for="comision">Comisión de apertura (%)</label>
+<input id="comision" type="number" inputmode="decimal" min="0" step="0.01" value="" placeholder="Opcional">
+<small>Sobre el capital prestado. Déjalo vacío o 0 si no aplica.</small>
+</div>
 
-<div class="rb" id="resultado"></div>
+<div class="fg">
+<label for="otrosGastos">Otros gastos (€)</label>
+<input id="otrosGastos" type="number" inputmode="decimal" min="0" step="1" value="" placeholder="Opcional">
+<small>Por ejemplo tasación o gestión, si los quieres sumar al coste total.</small>
+</div>
 
+<button type="button" class="btn bp bfw" id="btnCalc">Calcular préstamo</button>
+
+</div>
+
+<div class="ccard result-panel" id="panelResultado">
+<h2>Resultado</h2>
+<div class="result-grid">
+  <div class="res-box">
+    <div class="res-label">Cuota mensual</div>
+    <div class="res-value" id="outCuota">—</div>
+    <div class="res-sub">Sistema francés, cuota constante</div>
+  </div>
+  <div class="res-box">
+    <div class="res-label">Capital</div>
+    <div class="res-value" id="outCapital">—</div>
+    <div class="res-sub">Importe financiado</div>
+  </div>
+</div>
+<div class="result-grid">
+  <div class="res-box">
+    <div class="res-label">Total pagado (cuotas)</div>
+    <div class="res-value" id="outTotalPagado">—</div>
+  </div>
+  <div class="res-box">
+    <div class="res-label">Intereses</div>
+    <div class="res-value" id="outIntereses">—</div>
+  </div>
+</div>
+<div class="result-grid">
+  <div class="res-box">
+    <div class="res-label">Coste total</div>
+    <div class="res-value" id="outCosteTotal">—</div>
+    <div class="res-sub">Cuotas + comisión de apertura + otros gastos indicados</div>
+  </div>
+  <div class="res-box">
+    <div class="res-label">TIN · TAE aproximada</div>
+    <div class="res-value" id="outTinTae">—</div>
+    <div class="res-sub" id="outTaeNota">La TAE oficial puede incluir más conceptos según el contrato.</div>
+  </div>
+</div>
+<div class="rb">
+  <p class="res-sub">🏦 Comparar préstamos en España</p>
+  <a class="internal-cta" href="#">Ver mejores ofertas</a>
+</div>
 </div>
 
 </div>
 </section>
 
+<p class="wrap pub-muted">Publicidad</p>
 <!-- ANUNCIO MEDIO -->
 <div class="ad ad-m wrap">
   <ins class="adsbygoogle"
@@ -102,21 +215,64 @@ crossorigin="anonymous"></script>
 
 <section class="cnt wrap">
 
-<h2>¿Cómo calcular la cuota de un préstamo?</h2>
+<h2>¿Cuánto se paga por un préstamo según el importe?</h2>
 
-<p>La cuota mensual de un préstamo depende del capital, el interés y el plazo. Se utiliza el sistema de amortización francés.</p>
+<p>La cuota depende del capital, del tipo nominal anual y del plazo. Con un ejemplo orientativo al <strong>6&nbsp;% anual a 5 años</strong> (amortización francesa, habitual en préstamos personales), estas cifras son aproximadas:</p>
 
-<p>También puedes usar nuestra 
-<a href="calculadora-hipoteca.html">calculadora de hipoteca</a> 
-o la 
-<a href="calculadora-interes-compuesto.html">calculadora de interés compuesto</a> 
-para análisis más avanzados.</p>
+<ul>
+<li><strong>5.000&nbsp;€</strong>: cuota mensual de unos <strong>97&nbsp;€</strong>; en total pagarías alrededor de <strong>5.800&nbsp;€</strong> (unos <strong>800&nbsp;€</strong> de intereses).</li>
+<li><strong>10.000&nbsp;€</strong>: cuota mensual de unos <strong>193&nbsp;€</strong>; total aproximado <strong>11.600&nbsp;€</strong> (unos <strong>1.600&nbsp;€</strong> de intereses).</li>
+<li><strong>20.000&nbsp;€</strong>: cuota mensual de unos <strong>387&nbsp;€</strong>; total aproximado <strong>23.200&nbsp;€</strong> (unos <strong>3.200&nbsp;€</strong> de intereses).</li>
+</ul>
 
-<h2>Ejemplo</h2>
-<p>Un préstamo de 10.000€ al 5% a 5 años tendrá una cuota aproximada de 188€.</p>
+<p>Subir el tipo o alargar el plazo aumenta el coste total: usa el simulador superior con tus cifras y revisa siempre la oferta vinculante del banco.</p>
+
+<p>Por ejemplo, con un TIN del <strong>5&nbsp;%</strong> a 5 años, un préstamo de <strong>10.000&nbsp;€</strong> tendría una cuota aproximada de <strong>188&nbsp;€</strong> (simulación orientativa).</p>
+
+<p>También puedes usar nuestra
+<a href="calculadora-hipoteca.html">calculadora de hipoteca</a>,
+la <a href="calculadora-interes-compuesto.html">calculadora de interés compuesto</a>
+y la <a href="calculadora-porcentajes.html">calculadora de porcentajes</a>
+para análisis relacionados.</p>
+
+<table>
+<caption>Ejemplos orientativos de préstamo personal (cuotas mensuales, sistema francés)</caption>
+<thead>
+<tr><th scope="col">Capital</th><th scope="col">Interés (TIN anual)</th><th scope="col">Plazo</th><th scope="col">Cuota mensual</th><th scope="col">Total pagado</th></tr>
+</thead>
+<tbody>
+<tr><td>6.000&nbsp;€</td><td>6,5&nbsp;%</td><td>5 años</td><td>~117&nbsp;€</td><td>~7.020&nbsp;€</td></tr>
+<tr><td>10.000&nbsp;€</td><td>6&nbsp;%</td><td>5 años</td><td>~193&nbsp;€</td><td>~11.600&nbsp;€</td></tr>
+<tr><td>15.000&nbsp;€</td><td>7&nbsp;%</td><td>6 años</td><td>~256&nbsp;€</td><td>~18.450&nbsp;€</td></tr>
+<tr><td>20.000&nbsp;€</td><td>5,5&nbsp;%</td><td>7 años</td><td>~288&nbsp;€</td><td>~24.200&nbsp;€</td></tr>
+</tbody>
+</table>
+
+<h2 id="calculadoras-relacionadas">Calculadoras relacionadas</h2>
+<nav aria-label="Calculadoras relacionadas">
+<ul>
+<li><a href="calculadora-hipoteca.html">Calculadora de hipoteca</a> — simulación de cuota y coste con amortización francesa</li>
+<li><a href="calculadora-interes-compuesto.html">Interés compuesto</a> — proyección de ahorro o inversión en el tiempo</li>
+<li><a href="calculadora-porcentajes.html">Calculadora de porcentajes</a> — variaciones, descuentos y comparativas</li>
+<li><a href="index.html#finanzas">Más herramientas de finanzas</a> — listado en la página principal</li>
+</ul>
+</nav>
+
+<h2>Sobre esta calculadora</h2>
+<p>Esta herramienta utiliza el <strong>sistema de amortización francés</strong> (cuota mensual constante; capital e intereses se reparten según la fórmula estándar). Está pensada para un uso <strong>orientativo en España</strong>: los resultados son <strong>estimaciones</strong> y no sustituyen la información de una entidad financiera, ni incluyen seguros vinculados, productos adicionales ni condiciones comerciales concretas.</p>
+<p>La <strong>TAE aproximada</strong> que ves se calcula capitalizando el tipo nominal en base mensual; la TAE que figure en un contrato real puede diferir si hay comisiones, periodicidad distinta u otros costes.</p>
+
+<h2>¿Cómo se obtiene la cuota mensual?</h2>
+<p>La cuota se calcula con la amortización francesa, habitual en préstamos al consumo en España cuando la cuota es fija.</p>
+
+<div class="fml">
+Cuota = (capital × i) / (1 − (1 + i)<sup>−n</sup>)
+</div>
+<p>Aquí <strong>i</strong> es el interés mensual (TIN dividido entre 12 y expresado en tanto por uno) y <strong>n</strong> es el número de cuotas mensuales.</p>
 
 </section>
 
+<p class="wrap pub-muted">Publicidad</p>
 <!-- ANUNCIO ABAJO -->
 <div class="ad ad-b wrap">
   <ins class="adsbygoogle"
@@ -130,13 +286,23 @@ para análisis más avanzados.</p>
 <h2>Preguntas frecuentes</h2>
 
 <div class="fi">
-<button class="fq">¿Qué es la TAE?</button>
-<div class="fa"><p>La TAE incluye todos los costes del préstamo.</p></div>
+<button type="button" class="fq">¿Qué es la TAE?</button>
+<div class="fa"><p>La <strong>TAE</strong> (tasa anual equivalente) expresa el coste anual del préstamo de forma homogénea. Incluye el interés y, según el caso, comisiones y otros gastos obligatorios reflejados en la información normalizada. Para comparar ofertas suele usarse la TAE; en esta calculadora el TIN lo introduces tú y la TAE mostrada es una <strong>aproximación</strong> a partir del nominal.</p></div>
 </div>
 
 <div class="fi">
-<button class="fq">¿Cómo reducir intereses?</button>
-<div class="fa"><p>Reduciendo plazo o negociando tipo de interés.</p></div>
+<button type="button" class="fq">¿Cómo reducir intereses?</button>
+<div class="fa"><p>Puedes <strong>acortar el plazo</strong> (menos meses de intereses), <strong>mejorar el tipo</strong> comparando entidades o negociando, y <strong>amortizar anticipadamente</strong> si el contrato lo permite y compensa frente a comisiones.</p></div>
+</div>
+
+<div class="fi">
+<button type="button" class="fq">¿Qué diferencia hay entre préstamo personal y crédito?</button>
+<div class="fa"><p>Un <strong>préstamo personal</strong> suele abonar un capital de una vez con cuotas periódicas fijas hasta amortizarlo. Un <strong>crédito</strong> (por ejemplo una línea o tarjeta) permite disponer del dinero de forma flexible o revolvente; el coste y la forma de pago pueden variar mucho. La elección depende del uso que vayas a dar al dinero y de las condiciones de cada producto.</p></div>
+</div>
+
+<div class="fi">
+<button type="button" class="fq">¿Cuánto se recomienda pedir en un préstamo?</button>
+<div class="fa"><p>Como orientación general, conviene pedir <strong>solo lo necesario</strong> y asegurarse de que la cuota encaje en tu presupuesto (muchas personas usan como referencia no dedicar más de un <strong>20–35&nbsp;%</strong> de los ingresos netos recurrentes al pago de deudas, según situación). Es una guía, no una norma: valora gastos fijos, ahorro de emergencia y otros objetivos antes de firmar.</p></div>
 </div>
 
 </section>
@@ -147,45 +313,137 @@ para análisis más avanzados.</p>
 
 <script>
 
-// Año automático
 document.getElementById("year").textContent = new Date().getFullYear();
 
-// Cálculo préstamo
-function calc(){
-  let m = parseFloat(document.getElementById("monto").value);
-  let i = parseFloat(document.getElementById("interes").value)/100/12;
-  let n = parseFloat(document.getElementById("años").value)*12;
-
-  let cuota = (m*i)/(1-Math.pow(1+i,-n));
-
-  document.getElementById("resultado").innerHTML =
-    "<b>Cuota mensual:</b> "+cuota.toFixed(2)+" €";
-
-  document.getElementById("resultado").classList.add("on");
+function parseNum(id, fallback) {
+  var el = document.getElementById(id);
+  if (!el) return fallback;
+  var v = parseFloat(String(el.value).replace(",", "."));
+  return isNaN(v) ? fallback : v;
 }
 
-// FAQ toggle
-document.querySelectorAll(".fq").forEach(btn=>{
-  btn.onclick=()=>{
-    btn.nextElementSibling.classList.toggle("on");
+function formatMoney(x) {
+  return x.toLocaleString("es-ES", { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + " €";
+}
+
+function calc() {
+  var m = parseNum("monto", NaN);
+  var tin = parseNum("tin", NaN);
+  var años = parseNum("plazo", NaN);
+  var comisionPct = parseNum("comision", 0);
+  var otros = parseNum("otrosGastos", 0);
+
+  var panel = document.getElementById("panelResultado");
+  if (!panel) return;
+
+  if (!(m > 0) || !(años > 0) || isNaN(tin) || tin < 0 || comisionPct < 0 || otros < 0) {
+    panel.classList.remove("on");
+    return;
   }
+
+  var n = Math.round(años * 12);
+  if (n < 1) {
+    panel.classList.remove("on");
+    return;
+  }
+
+  var cuota, totalPagado, intereses, taeApr;
+  if (tin === 0) {
+    cuota = m / n;
+    totalPagado = m;
+    intereses = 0;
+    taeApr = 0;
+  } else {
+    var i = tin / 100 / 12;
+    cuota = (m * i) / (1 - Math.pow(1 + i, -n));
+    totalPagado = cuota * n;
+    intereses = totalPagado - m;
+    taeApr = (Math.pow(1 + tin / 100 / 12, 12) - 1) * 100;
+  }
+
+  var comisionEuro = m * (comisionPct / 100);
+  var costeTotal = totalPagado + comisionEuro + otros;
+
+  document.getElementById("outCuota").textContent = formatMoney(cuota);
+  document.getElementById("outCapital").textContent = m.toLocaleString("es-ES", { maximumFractionDigits: 0 }) + " €";
+  document.getElementById("outTotalPagado").textContent = formatMoney(totalPagado);
+  document.getElementById("outIntereses").textContent = formatMoney(intereses);
+  document.getElementById("outCosteTotal").textContent = formatMoney(costeTotal);
+  document.getElementById("outTinTae").textContent =
+    tin.toLocaleString("es-ES", { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + " % · " +
+    taeApr.toLocaleString("es-ES", { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + " %";
+
+  panel.classList.add("on");
+}
+
+document.getElementById("btnCalc").addEventListener("click", calc);
+
+document.querySelectorAll(".fq").forEach(function (btn) {
+  btn.onclick = function () {
+    btn.nextElementSibling.classList.toggle("on");
+  };
 });
+
+calc();
+
+try {
+  (window.adsbygoogle = window.adsbygoogle || []).push({});
+} catch (e) {}
 
 </script>
 
-<!-- SCHEMA FAQ -->
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "WebApplication",
+ "name": "Calculadora de préstamo personal — cuota e intereses",
+ "url": "https://www.calculadoragratis.es/calculadora-prestamo.html",
+ "description": "Simulador de préstamo personal con amortización francesa: cuota mensual, total pagado, intereses, coste con comisiones y TAE aproximada.",
+ "applicationCategory": "FinanceApplication",
+ "operatingSystem": "Web",
+ "offers": { "@type": "Offer", "price": "0", "priceCurrency": "EUR" },
+ "inLanguage": "es",
+ "author": { "@type": "Organization", "name": "CalculadoraGratis.es", "url": "https://www.calculadoragratis.es" }
+}
+</script>
 <script type="application/ld+json">
 {
  "@context": "https://schema.org",
  "@type": "FAQPage",
- "mainEntity": [{
-   "@type": "Question",
-   "name": "¿Qué es la TAE?",
-   "acceptedAnswer": {
-     "@type": "Answer",
-     "text": "La TAE incluye todos los costes del préstamo."
+ "mainEntity": [
+   {
+     "@type": "Question",
+     "name": "¿Qué es la TAE?",
+     "acceptedAnswer": {
+       "@type": "Answer",
+       "text": "La TAE (tasa anual equivalente) expresa el coste anual del préstamo de forma homogénea e incluye, según el caso, interés y otros costes reflejados en la información normalizada. En esta calculadora la TAE mostrada es una aproximación a partir del TIN que introduces."
+     }
+   },
+   {
+     "@type": "Question",
+     "name": "¿Cómo reducir intereses?",
+     "acceptedAnswer": {
+       "@type": "Answer",
+       "text": "Puedes acortar el plazo, mejorar el tipo comparando u ofertas, y amortizar anticipadamente si el contrato lo permite y compensa frente a posibles comisiones."
+     }
+   },
+   {
+     "@type": "Question",
+     "name": "¿Qué diferencia hay entre préstamo personal y crédito?",
+     "acceptedAnswer": {
+       "@type": "Answer",
+       "text": "Un préstamo personal suele abonar un capital de una vez con cuotas periódicas hasta amortizarlo. Un crédito (por ejemplo línea o tarjeta) puede permitir disponer del dinero de forma más flexible; el coste y la forma de pago dependen del producto."
+     }
+   },
+   {
+     "@type": "Question",
+     "name": "¿Cuánto se recomienda pedir en un préstamo?",
+     "acceptedAnswer": {
+       "@type": "Answer",
+       "text": "Conviene pedir solo lo necesario y que la cuota encaje en el presupuesto; como orientación general muchas personas revisan no dedicar más de un 20–35 % de los ingresos netos recurrentes al pago de deudas, según su situación."
+     }
    }
- }]
+ ]
 }
 </script>
 <script src="seo.js"></script>
