@@ -30,14 +30,14 @@
   }
 }
 
-/* CTA bajo la calculadora: separado del teclado (despegue visual) */
+/* CTA bajo la calculadora — misma gama que .btn (violeta → azul) */
 .cs .sci-cta-depegue {
   margin-top: 2.75rem;
   padding: 1.5rem 1.25rem 1.25rem;
-  border-top: 1px solid #e8eaed;
+  border-top: 1px solid rgba(123, 47, 247, 0.22);
   border-radius: 0 0 var(--radius, 14px) var(--radius, 14px);
   text-align: center;
-  background: linear-gradient(180deg, rgba(241, 243, 244, 0.45) 0%, transparent 100%);
+  background: linear-gradient(180deg, rgba(123, 47, 247, 0.08) 0%, rgba(74, 108, 247, 0.04) 45%, transparent 100%);
 }
 
 .cs .sci-cta-depegue .sci-cta-lead {
@@ -71,10 +71,10 @@
   margin-top: 1.25rem;
   margin-bottom: 1.25rem;
   padding: 1rem 1.125rem;
-  background: linear-gradient(180deg, rgba(108, 71, 255, 0.06) 0%, #fafafa 55%);
-  border: 1px solid var(--border);
+  background: linear-gradient(180deg, rgba(123, 47, 247, 0.07) 0%, #faf8ff 55%);
+  border: 1px solid rgba(123, 47, 247, 0.2);
   border-radius: 12px;
-  box-shadow: 0 2px 14px rgba(26, 26, 46, 0.07);
+  box-shadow: 0 2px 14px rgba(74, 108, 247, 0.12);
   animation: rb-fade-in 0.38s ease-out;
   font-size: clamp(1.2rem, 2.6vw, 1.55rem);
   font-weight: 700;
@@ -92,17 +92,21 @@
   letter-spacing: 0.01em;
 }
 
-/* Calculadora científica — panel estilo limpio (tipo buscador) */
+/*
+ * Calculadora científica — misma gama que el botón .btn del sitio:
+ * linear-gradient(135deg, #7b2ff7, #4a6cf7)
+ * Importante: style.css aplica estilos globales a `button`; usamos `button.sci-key`.
+ */
 .sci-calc {
-  --sci-bg: #ffffff;
-  --sci-text: #202124;
-  --sci-fn: #e8f0fe;
-  --sci-fn-hover: #d2e3fc;
-  --sci-num: #f1f3f4;
-  --sci-num-hover: #e8eaed;
-  --sci-eq: #1a73e8;
-  --sci-eq-hover: #1557b0;
-  --sci-border: #dadce0;
+  --sci-violet: #7b2ff7;
+  --sci-blue: #4a6cf7;
+  --sci-bg: linear-gradient(175deg, #faf8ff 0%, #f4f3ff 55%, #f0f4ff 100%);
+  --sci-text: #1e1b4b;
+  --sci-fn: #ddd6fe;
+  --sci-fn-hover: #c4b5fd;
+  --sci-num: #ede9fe;
+  --sci-num-hover: #ddd6fe;
+  --sci-border: rgba(123, 47, 247, 0.35);
   --sci-radius: 22px;
   --sci-key-radius: 18px;
   max-width: 520px;
@@ -111,7 +115,7 @@
   background: var(--sci-bg);
   border: 1px solid var(--sci-border);
   border-radius: var(--sci-radius);
-  box-shadow: 0 1px 6px rgba(32, 33, 36, 0.08);
+  box-shadow: 0 2px 16px rgba(91, 33, 182, 0.12);
   font-family: system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
   color: var(--sci-text);
 }
@@ -123,27 +127,30 @@
   margin-bottom: 0.85rem;
 }
 
-.sci-calc .sci-history-btn {
+.sci-calc button.sci-history-btn {
   flex-shrink: 0;
   width: 44px;
   height: 44px;
-  border: none;
+  margin-top: 0;
+  padding: 0;
+  border: 2px solid rgba(123, 47, 247, 0.4);
   border-radius: 50%;
   background: var(--sci-num);
-  color: var(--sci-text);
+  color: #5b21b6;
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: background 0.15s ease;
+  transition: background 0.15s ease, border-color 0.15s ease;
 }
 
-.sci-calc .sci-history-btn:hover {
+.sci-calc button.sci-history-btn:hover {
   background: var(--sci-num-hover);
+  border-color: rgba(74, 108, 247, 0.55);
 }
 
-.sci-calc .sci-history-btn:focus-visible {
-  outline: 2px solid var(--sci-eq);
+.sci-calc button.sci-history-btn:focus-visible {
+  outline: 2px solid var(--sci-violet);
   outline-offset: 2px;
 }
 
@@ -165,13 +172,14 @@
 
 .sci-calc #sci-display {
   width: 100%;
+  margin-top: 0;
   padding: 0.85rem 1rem;
   font-size: clamp(1.35rem, 4vw, 1.85rem);
   font-weight: 500;
   text-align: right;
-  border: 1px solid var(--sci-border);
+  border: 2px solid rgba(123, 47, 247, 0.28);
   border-radius: var(--sci-radius);
-  background: #fff;
+  background: #fffcff;
   color: var(--sci-text);
   font-variant-numeric: tabular-nums;
 }
@@ -182,12 +190,12 @@
   gap: 0.35rem 0.5rem;
   margin-bottom: 0.65rem;
   font-size: 0.75rem;
-  color: #5f6368;
+  color: #6b6680;
 }
 
 .sci-calc .sci-modes span[data-on="1"] {
   font-weight: 700;
-  color: var(--sci-eq);
+  color: var(--sci-violet);
 }
 
 .sci-calc #sci-pad {
@@ -196,55 +204,64 @@
   gap: 0.4rem;
 }
 
-.sci-calc .sci-key {
+.sci-calc button.sci-key {
   min-height: 44px;
+  margin-top: 0;
+  width: 100%;
   padding: 0.35rem 0.25rem;
-  border: none;
+  border: 1px solid rgba(123, 47, 247, 0.22);
   border-radius: var(--sci-key-radius);
   font-size: 0.8125rem;
-  font-weight: 500;
-  color: var(--sci-text);
+  font-weight: 600;
+  color: #312e81;
   cursor: pointer;
-  transition: background 0.12s ease, box-shadow 0.12s ease;
+  transition: background 0.12s ease, box-shadow 0.12s ease, border-color 0.12s ease;
   -webkit-tap-highlight-color: transparent;
   line-height: 1.15;
 }
 
-.sci-calc .sci-key:active {
+.sci-calc button.sci-key:active {
   transform: scale(0.98);
 }
 
-.sci-calc .sci-key-fn {
+.sci-calc button.sci-key-fn {
   background: var(--sci-fn);
 }
 
-.sci-calc .sci-key-fn:hover {
+.sci-calc button.sci-key-fn:hover {
   background: var(--sci-fn-hover);
+  border-color: rgba(123, 47, 247, 0.42);
 }
 
-.sci-calc .sci-key-num {
+.sci-calc button.sci-key-num {
   background: var(--sci-num);
 }
 
-.sci-calc .sci-key-num:hover {
+.sci-calc button.sci-key-num:hover {
   background: var(--sci-num-hover);
+  border-color: rgba(74, 108, 247, 0.38);
 }
 
-.sci-calc .sci-key-eq {
-  background: var(--sci-eq);
+/* Igual que .btn en style.css */
+.sci-calc button.sci-key-eq {
+  background: linear-gradient(135deg, #7b2ff7, #4a6cf7);
+  border: 1px solid rgba(91, 33, 182, 0.65);
   color: #fff;
-  font-weight: 600;
-}
-
-.sci-calc .sci-key-eq:hover {
-  background: var(--sci-eq-hover);
-  color: #fff;
-}
-
-.sci-calc .sci-key-toggle[data-active="1"] {
-  background: #d2e3fc;
-  box-shadow: inset 0 0 0 2px var(--sci-eq);
   font-weight: 700;
+}
+
+.sci-calc button.sci-key-eq:hover {
+  background: linear-gradient(135deg, #6d28d9, #3d5fd6);
+  color: #fff;
+  border-color: rgba(76, 29, 149, 0.85);
+}
+
+.sci-calc button.sci-key-toggle[data-active="1"] {
+  background: linear-gradient(145deg, #ddd6fe, #c7d2fe);
+  border-color: var(--sci-violet);
+  box-shadow: inset 0 0 0 2px var(--sci-violet);
+  font-weight: 700;
+  color: #312e81;
 }
 
 .sci-calc .sci-key-wide {
@@ -255,7 +272,7 @@
   .sci-calc #sci-pad {
     gap: 0.3rem;
   }
-  .sci-calc .sci-key {
+  .sci-calc button.sci-key {
     min-height: 40px;
     font-size: 0.75rem;
     padding: 0.28rem 0.15rem;
@@ -272,6 +289,11 @@
   clip: rect(0, 0, 0, 0);
   white-space: nowrap;
   border: 0;
+}
+
+/* Título — tono intermedio del gradiente del sitio */
+.cs .ccard > h2 {
+  color: #6366f1;
 }
 </style>
 
