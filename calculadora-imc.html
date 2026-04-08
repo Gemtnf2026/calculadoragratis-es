@@ -20,6 +20,19 @@
 crossorigin="anonymous"></script>
 
 <style>
+/* IMC — resultados (solo esta página) */
+@keyframes rb-fade-in{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
+.rb{margin:0;padding:0;border:none;background:transparent;min-height:0}
+.rb.on{margin-top:1.75rem;padding:1.35rem 1.25rem 1.45rem;background:linear-gradient(180deg,rgba(108,71,255,0.08) 0%,#fafafa 52%);border:1px solid var(--border);border-radius:14px;box-shadow:0 4px 20px rgba(26,26,46,0.08);animation:rb-fade-in .4s ease-out}
+.imc-result{display:flex;flex-direction:column;align-items:center;gap:1.15rem;text-align:center}
+.imc-result-block{display:flex;flex-direction:column;align-items:center;gap:0.4rem;width:100%}
+.imc-result-label{font-size:0.72rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--muted)}
+.imc-result-value{font-size:clamp(2rem,6vw,2.65rem);font-weight:800;line-height:1.05;letter-spacing:-0.03em;color:#1a1a2e;font-variant-numeric:tabular-nums}
+.imc-estado-badge{display:inline-flex;align-items:center;justify-content:center;padding:0.45rem 1.1rem;border-radius:999px;font-size:0.95rem;font-weight:700;line-height:1.2;max-width:100%}
+.imc-estado--bajo{background:#dbeafe;color:#1d4ed8}
+.imc-estado--normal{background:#dcfce7;color:#15803d}
+.imc-estado--sobrepeso{background:#ffedd5;color:#c2410c}
+.imc-estado--obesidad{background:#fee2e2;color:#b91c1c}
 #scroll-top-btn{position:fixed;right:18px;bottom:22px;z-index:60;width:48px;height:48px;padding:0;border:none;border-radius:50%;background:linear-gradient(145deg,#4a00e0,#2563d4);color:#fff;cursor:pointer;box-shadow:0 4px 18px rgba(37,99,212,0.45);transition:opacity .25s ease,transform .2s ease;opacity:0;visibility:hidden;pointer-events:none;-webkit-tap-highlight-color:transparent}
 #scroll-top-btn.is-visible{opacity:1;visibility:visible;pointer-events:auto}
 #scroll-top-btn:hover{transform:translateY(-2px)}
@@ -70,7 +83,7 @@ crossorigin="anonymous"></script>
 
 <button class="btn bp bfw" onclick="calc()">Calcular</button>
 
-<div class="rb" id="resultado"></div>
+<div class="rb" id="resultado" aria-live="polite" aria-atomic="true"></div>
 
 </div>
 
@@ -230,14 +243,23 @@ function calc(){
   let imc=p/(a*a);
 
   let cat="";
-  if(imc<18.5) cat="Bajo peso";
-  else if(imc<25) cat="Normal";
-  else if(imc<30) cat="Sobrepeso";
-  else cat="Obesidad";
+  let estadoClass="imc-estado--normal";
+  if(imc<18.5){ cat="Bajo peso"; estadoClass="imc-estado--bajo"; }
+  else if(imc<25){ cat="Normal"; estadoClass="imc-estado--normal"; }
+  else if(imc<30){ cat="Sobrepeso"; estadoClass="imc-estado--sobrepeso"; }
+  else { cat="Obesidad"; estadoClass="imc-estado--obesidad"; }
 
   document.getElementById("resultado").innerHTML=
-    "<b>IMC:</b> "+fmt1(imc)+"<br>"+
-    "<b>Estado:</b> "+cat;
+    '<div class="imc-result">'+
+      '<div class="imc-result-block">'+
+        '<span class="imc-result-label">IMC</span>'+
+        '<span class="imc-result-value">'+fmt1(imc)+'</span>'+
+      '</div>'+
+      '<div class="imc-result-block">'+
+        '<span class="imc-result-label">Estado</span>'+
+        '<span class="imc-estado-badge '+estadoClass+'">'+cat+'</span>'+
+      '</div>'+
+    '</div>';
 
   document.getElementById("resultado").classList.add("on");
 }
