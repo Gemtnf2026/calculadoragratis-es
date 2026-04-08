@@ -28,6 +28,43 @@ crossorigin="anonymous"></script>
 #scroll-top-btn.is-visible{opacity:1;visibility:visible;pointer-events:auto}
 #scroll-top-btn:hover{transform:translateY(-2px)}
 #scroll-top-btn:focus-visible{outline:2px solid #fff;outline-offset:3px}
+
+/* Calculadora consumo eléctrico — solo esta página */
+.cs-calc.cs-calc{margin-top:0}
+.cs-price-bar{display:flex;flex-wrap:wrap;align-items:center;gap:10px 14px;padding:12px 14px;margin-bottom:1.25rem;background:linear-gradient(135deg,rgba(108,71,255,0.08) 0%,rgba(74,108,247,0.06) 100%);border:1px solid var(--border);border-radius:14px;font-size:0.95rem}
+.cs-price-bar .cs-price-label{font-weight:700;color:var(--text)}
+.cs-price-bar .cs-price-value{font-weight:800;font-variant-numeric:tabular-nums;color:var(--primary)}
+.cs-badge{display:inline-block;padding:3px 10px;border-radius:999px;font-size:0.72rem;font-weight:700;text-transform:uppercase;letter-spacing:0.04em;background:rgba(108,71,255,0.15);color:#5b4fcf}
+.cs-price-min{width:100%;margin:0;font-size:0.8rem;color:var(--muted);font-weight:500}
+.cs-fields-row{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem 1rem;margin-bottom:0}
+@media (max-width:720px){.cs-fields-row{grid-template-columns:1fr}}
+.cs-field .cs-stepper{display:flex;align-items:stretch;gap:6px;width:100%}
+.cs-field .cs-stepper input{flex:1;min-width:0;margin:0}
+.cs-step-btn{flex-shrink:0;width:44px;min-height:44px;padding:0;border:1px solid var(--border);border-radius:10px;background:#fff;font-size:1.25rem;font-weight:700;line-height:1;color:var(--primary);cursor:pointer;transition:background .15s ease,border-color .15s ease}
+.cs-step-btn:hover{background:#f8faff;border-color:rgba(108,71,255,0.35)}
+.cs-step-btn:focus-visible{outline:2px solid var(--primary);outline-offset:2px}
+.cs-calc select{width:100%;padding:10px;border-radius:10px;border:1px solid var(--border);background:#fafafa;font:inherit}
+.cs-btn-row{display:flex;flex-wrap:wrap;gap:10px;margin-top:1rem}
+.cs-btn-row .btn{margin-top:0;flex:1;min-width:min(100%,160px)}
+.cs-btn-secondary{background:#fff!important;color:var(--primary)!important;border:2px solid rgba(108,71,255,0.35)!important;box-shadow:none}
+.cs-btn-secondary:hover{opacity:1;background:rgba(108,71,255,0.06)!important}
+.cs-rb{margin:0;padding:0;border:none;background:transparent;min-height:0}
+.cs-rb.on{margin-top:1.75rem;padding:1.35rem 1.25rem 1.45rem;background:linear-gradient(180deg,rgba(108,71,255,0.08) 0%,#fafafa 52%);border:1px solid var(--border);border-radius:14px;box-shadow:0 4px 20px rgba(26,26,46,0.08);animation:cs-rb-fade .4s ease-out}
+@keyframes cs-rb-fade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
+.cs-rb:not(.on) .cs-dashboard{display:none}
+.cs-dashboard{display:flex;flex-direction:column;gap:1.25rem}
+.cs-result-head{margin:0 0 0.25rem;font-size:1.05rem;font-weight:800;color:var(--text)}
+.cs-result-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+@media (max-width:900px){.cs-result-grid{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:420px){.cs-result-grid{grid-template-columns:1fr}}
+.cs-result-card{display:flex;flex-direction:column;gap:6px;padding:14px 12px;background:#fff;border:1px solid var(--border);border-radius:12px;box-shadow:0 2px 10px rgba(26,26,46,0.05)}
+.cs-result-label{font-size:0.78rem;font-weight:700;text-transform:uppercase;letter-spacing:0.04em;color:var(--muted);line-height:1.25}
+.cs-result-value{font-size:clamp(1.35rem,3.5vw,1.75rem);font-weight:800;font-variant-numeric:tabular-nums;color:var(--text);line-height:1.15}
+.cs-result-unit{font-size:0.8rem;font-weight:600;color:var(--muted)}
+.cs-iva{margin:0;font-size:0.85rem;color:var(--muted);font-weight:500}
+.cs-projection{padding:14px 14px 16px;background:rgba(108,71,255,0.06);border:1px dashed rgba(108,71,255,0.25);border-radius:12px}
+.cs-projection .cs-projection-title{margin:0 0 8px;font-size:1rem;font-weight:800;color:var(--text)}
+.cs-projection p{margin:0;font-size:0.95rem;font-weight:500;color:var(--muted);line-height:1.45}
 </style>
 
 </head>
@@ -58,28 +95,89 @@ crossorigin="anonymous"></script>
 <section class="cs wrap">
 <div class="cgrid">
 
-<div class="ccard">
+<div class="ccard cs-calc">
+
+<div class="cs-price-bar" aria-live="polite">
+  <span class="cs-price-label">Precio ahora:</span>
+  <span class="cs-price-value" id="precio-ahora-val">0,20 €/kWh</span>
+  <span class="cs-badge">Medio</span>
+  <p class="cs-price-min" id="precio-min-hoy">Mínimo hoy: 0,11 €/kWh</p>
+</div>
 
 <h2>Datos del electrodoméstico</h2>
 
 <div class="fg">
-<label>Potencia (W)</label>
-<input id="potencia" type="text" inputmode="decimal" autocomplete="off" value="1.000,00">
+<label for="appliance">Selecciona un electrodoméstico</label>
+<select id="appliance" autocomplete="off">
+  <option value="">Selecciona un electrodoméstico</option>
+  <option value="2000">Radiador eléctrico (2000W)</option>
+  <option value="1500">Aire acondicionado (1500W)</option>
+  <option value="1000">Lavadora (1000W)</option>
+  <option value="150">Nevera (150W)</option>
+  <option value="100">Televisión (100W)</option>
+</select>
 </div>
 
-<div class="fg">
-<label>Horas al día</label>
-<input id="horas" type="text" inputmode="decimal" autocomplete="off" value="3,00">
+<div class="cs-fields-row">
+    <div class="fg cs-field">
+    <label for="potencia">Potencia (W)</label>
+    <div class="cs-stepper">
+    <button type="button" class="cs-step-btn" data-for="potencia" data-delta="-50" aria-label="Reducir potencia 50 W">−</button>
+    <input id="potencia" type="text" inputmode="decimal" autocomplete="off" value="1.000,00">
+    <button type="button" class="cs-step-btn" data-for="potencia" data-delta="50" aria-label="Aumentar potencia 50 W">+</button>
+    </div>
+    </div>
+    <div class="fg cs-field">
+    <label for="horas">Horas al día</label>
+    <div class="cs-stepper">
+    <button type="button" class="cs-step-btn" data-for="horas" data-delta="-0.25" aria-label="Reducir horas al día">−</button>
+    <input id="horas" type="text" inputmode="decimal" autocomplete="off" value="3,00">
+    <button type="button" class="cs-step-btn" data-for="horas" data-delta="0.25" aria-label="Aumentar horas al día">+</button>
+    </div>
+    </div>
+    <div class="fg cs-field">
+    <label for="precio">Precio kWh (€)</label>
+    <input id="precio" type="text" inputmode="decimal" autocomplete="off" value="0,20">
+    </div>
 </div>
 
-<div class="fg">
-<label>Precio kWh (€)</label>
-<input id="precio" type="text" inputmode="decimal" autocomplete="off" value="0,20">
+<div class="cs-btn-row">
+<button type="button" class="btn bp bfw" onclick="calc()">Recalcular</button>
+<button type="button" class="btn cs-btn-secondary" onclick="resetConsulta()">Nueva consulta</button>
 </div>
 
-<button class="btn bp bfw" onclick="calc()">Calcular</button>
-
-<div class="rb" id="resultado"></div>
+<div class="rb cs-rb" id="resultado" role="region" aria-labelledby="cs-resultados-titulo">
+  <div class="cs-dashboard">
+    <h3 class="cs-result-head" id="cs-resultados-titulo">Resultados</h3>
+    <div class="cs-result-grid">
+      <div class="cs-result-card">
+        <span class="cs-result-label">Consumo diario</span>
+        <span class="cs-result-value" id="res-consumo-dia">—</span>
+        <span class="cs-result-unit">kWh</span>
+      </div>
+      <div class="cs-result-card">
+        <span class="cs-result-label">Coste diario</span>
+        <span class="cs-result-value" id="res-coste-dia">—</span>
+        <span class="cs-result-unit">€</span>
+      </div>
+      <div class="cs-result-card">
+        <span class="cs-result-label">Coste mensual</span>
+        <span class="cs-result-value" id="res-coste-mes">—</span>
+        <span class="cs-result-unit">€</span>
+      </div>
+      <div class="cs-result-card">
+        <span class="cs-result-label">Coste anual</span>
+        <span class="cs-result-value" id="res-coste-anual">—</span>
+        <span class="cs-result-unit">€</span>
+      </div>
+    </div>
+    <p class="cs-iva">Costes incluyen IVA 21%</p>
+    <div class="cs-projection">
+      <h4 class="cs-projection-title">Proyección de gasto</h4>
+      <p id="proyeccion-text">Usando este electrodoméstico durante 3,00 horas al día</p>
+    </div>
+  </div>
+</div>
 
 </div>
 
@@ -254,6 +352,52 @@ function fmt2(n) {
   return n.toLocaleString("es-ES", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
 }
 
+function updatePriceBar() {
+  var precio = parseEsp(document.getElementById("precio").value);
+  var el = document.getElementById("precio-ahora-val");
+  var minEl = document.getElementById("precio-min-hoy");
+  if (el) {
+    if (!isFinite(precio)) {
+      el.textContent = "— €/kWh";
+    } else {
+      el.textContent = fmt2(precio) + " €/kWh";
+    }
+  }
+  if (minEl && isFinite(precio)) {
+    var minV = Math.max(0.05, precio * 0.55);
+    minEl.textContent = "Mínimo hoy: " + fmt2(minV) + " €/kWh";
+  }
+}
+
+function updateProyeccionText() {
+  var txt = document.getElementById("proyeccion-text");
+  if (!txt) return;
+  var sel = document.getElementById("appliance");
+  var h = parseEsp(document.getElementById("horas").value);
+  var name = "este electrodoméstico";
+  if (sel && sel.selectedIndex > 0) {
+    var opt = sel.options[sel.selectedIndex].text;
+    name = opt.replace(/\s*\([^)]*\)\s*$/, "").trim();
+  }
+  var horasStr = isFinite(h) ? fmt2(h) : "—";
+  txt.textContent = "Usando " + name + " durante " + horasStr + " horas al día";
+}
+
+function resetConsulta() {
+  document.getElementById("potencia").value = "1.000,00";
+  document.getElementById("horas").value = "3,00";
+  document.getElementById("precio").value = "0,20";
+  var sel = document.getElementById("appliance");
+  if (sel) sel.selectedIndex = 0;
+  document.getElementById("resultado").classList.remove("on");
+  document.getElementById("res-consumo-dia").textContent = "—";
+  document.getElementById("res-coste-dia").textContent = "—";
+  document.getElementById("res-coste-mes").textContent = "—";
+  document.getElementById("res-coste-anual").textContent = "—";
+  updatePriceBar();
+  updateProyeccionText();
+}
+
 function calc(){
 
   let p = parseEsp(document.getElementById("potencia").value);
@@ -269,15 +413,14 @@ function calc(){
   let costeMes = mensual * precio;
   let costeAnual = anual * precio;
 
-  document.getElementById("resultado").innerHTML =
-    "<p><b>Consumo diario:</b> "+fmt2(consumo)+" kWh</p>" +
-    "<p><b>Coste diario:</b> "+fmt2(costeDia)+" €</p>" +
-    "<p><b>Consumo mensual:</b> "+fmt2(mensual)+" kWh</p>" +
-    "<p><b>Coste mensual:</b> "+fmt2(costeMes)+" €</p>" +
-    "<p><b>Consumo anual:</b> "+fmt2(anual)+" kWh</p>" +
-    "<p><b>Coste anual:</b> "+fmt2(costeAnual)+" €</p>";
+  document.getElementById("res-consumo-dia").textContent = fmt2(consumo);
+  document.getElementById("res-coste-dia").textContent = fmt2(costeDia);
+  document.getElementById("res-coste-mes").textContent = fmt2(costeMes);
+  document.getElementById("res-coste-anual").textContent = fmt2(costeAnual);
 
   document.getElementById("resultado").classList.add("on");
+  updatePriceBar();
+  updateProyeccionText();
 }
 
 ["potencia","horas","precio"].forEach(function(id){
@@ -287,6 +430,55 @@ function calc(){
     var v=parseEsp(el.value);
     if(!isFinite(v))return;
     el.value=fmt2(v);
+  });
+});
+
+(function () {
+  var precioEl = document.getElementById("precio");
+  if (precioEl) {
+    precioEl.addEventListener("input", updatePriceBar);
+    precioEl.addEventListener("change", updatePriceBar);
+  }
+  updatePriceBar();
+})();
+
+(function () {
+  var sel = document.getElementById("appliance");
+  if (sel) {
+    sel.addEventListener("change", function () {
+      var w = parseFloat(sel.value);
+      if (!isFinite(w) || w <= 0) return;
+      var pot = document.getElementById("potencia");
+      if (pot) pot.value = fmt2(w);
+      updateProyeccionText();
+    });
+  }
+})();
+
+(function () {
+  var horasEl = document.getElementById("horas");
+  if (horasEl) {
+    horasEl.addEventListener("input", updateProyeccionText);
+    horasEl.addEventListener("change", updateProyeccionText);
+  }
+})();
+
+document.querySelectorAll(".cs-calc .cs-step-btn").forEach(function (btn) {
+  btn.addEventListener("click", function () {
+    var id = btn.getAttribute("data-for");
+    var delta = parseFloat(btn.getAttribute("data-delta"));
+    var el = document.getElementById(id);
+    if (!el || !isFinite(delta)) return;
+    var v = parseEsp(el.value);
+    if (!isFinite(v)) v = 0;
+    var next = v + delta;
+    if (id === "potencia") {
+      if (next < 0) next = 0;
+    } else if (id === "horas") {
+      if (next < 0) next = 0;
+    }
+    el.value = fmt2(next);
+    if (id === "horas") updateProyeccionText();
   });
 });
 
