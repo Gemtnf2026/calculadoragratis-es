@@ -114,16 +114,6 @@ crossorigin="anonymous"></script>
   <p>Compara el coste total de comprar frente a alquilar y obtén una lectura clara del escenario. Resultados orientativos.</p>
 </section>
 
-<p class="wrap pub-muted">Publicidad</p>
-<!-- ANUNCIO TOP -->
-<div class="ad ad-t wrap">
-  <ins class="adsbygoogle"
-   style="display:block"
-   data-ad-client="TU_ID"
-   data-ad-slot="111"
-   data-ad-format="auto"></ins>
-</div>
-
 <section class="cs wrap">
 
 <div class="calc-layout">
@@ -234,15 +224,8 @@ crossorigin="anonymous"></script>
 </div>
 </section>
 
-<!-- ANUNCIO MEDIO -->
 <p class="wrap pub-muted">Publicidad</p>
-<div class="ad ad-m wrap">
-  <ins class="adsbygoogle"
-   style="display:block"
-   data-ad-client="TU_ID"
-   data-ad-slot="222"
-   data-ad-format="auto"></ins>
-</div>
+<ad-block variant="mid" data-ad-slot="111"></ad-block>
 
 <section class="cnt wrap">
 
@@ -317,15 +300,8 @@ crossorigin="anonymous"></script>
 
 </section>
 
-<!-- ANUNCIO BOTTOM -->
 <p class="wrap pub-muted">Publicidad</p>
-<div class="ad ad-b wrap">
-  <ins class="adsbygoogle"
-   style="display:block"
-   data-ad-client="TU_ID"
-   data-ad-slot="333"
-   data-ad-format="auto"></ins>
-</div>
+<ad-block variant="mid" data-ad-slot="222" data-on-mobile="hide"></ad-block>
 
 <section class="faq wrap">
 
@@ -360,6 +336,9 @@ crossorigin="anonymous"></script>
 <p>Esta herramienta <strong>compara comprar frente a alquilar</strong> usando estimaciones financieras (cuota tipo francés, costes iniciales y mantenimiento). Está <strong>pensada para el contexto español</strong> (formato de números y conceptos habituales como ITP y gastos de formalización). El uso es <strong>orientativo</strong>: no sustituye asesoramiento personalizado ni incluye todos los impuestos o comisiones que puedan aplicar en cada comunidad o banco.</p>
 
 </section>
+
+<p class="wrap pub-muted">Publicidad</p>
+<ad-block variant="bottom"></ad-block>
 
 <button type="button" id="scroll-top-btn" aria-label="Volver arriba" title="Volver arriba">
   <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m18 15-6-6-6 6"/></svg>
@@ -598,6 +577,7 @@ document.querySelectorAll(".fq").forEach(btn=>{
   });
 })();
 </script>
+<script src="ad-block.js" defer></script>
 <script src="seo.js"></script>
 </body>
 </html>

@@ -56,15 +56,6 @@ crossorigin="anonymous"></script>
   <p>Calcula el IVA al instante: añade el impuesto a la base imponible o quita el IVA de un precio con IVA incluido (21%, 10% o 4%).</p>
 </section>
 
-<div class="ad ad-t wrap">
-<p>Publicidad</p>
-<ins class="adsbygoogle"
-style="display:block"
-data-ad-client="TU_ID"
-data-ad-slot="111"
-data-ad-format="auto"></ins>
-</div>
-
 <section class="cs wrap">
 
 <div class="ccard">
@@ -108,11 +99,7 @@ data-ad-format="auto"></ins>
 
 <div class="ad ad-m wrap">
 <p>Publicidad</p>
-<ins class="adsbygoogle"
-style="display:block"
-data-ad-client="TU_ID"
-data-ad-slot="222"
-data-ad-format="auto"></ins>
+<ad-block variant="mid" data-ad-slot="111" ins-only></ad-block>
 </div>
 
 <section class="cnt wrap">
@@ -133,6 +120,11 @@ Quitar IVA: Precio / (1 + IVA)
 </div>
 
 <h2>Ejemplos de cálculo de IVA</h2>
+
+<div class="ad ad-m wrap">
+<p>Publicidad</p>
+<ad-block variant="mid" data-ad-slot="222" data-on-mobile="hide" ins-only></ad-block>
+</div>
 
 <p><strong>100 € + IVA del 21 %:</strong> base 100 €, IVA 21 €, precio final 121 €.</p>
 
@@ -214,11 +206,7 @@ y
 
 <div class="ad ad-b wrap">
 <p>Publicidad</p>
-<ins class="adsbygoogle"
-style="display:block"
-data-ad-client="TU_ID"
-data-ad-slot="333"
-data-ad-format="auto"></ins>
+<ad-block variant="bottom" ins-only></ad-block>
 </div>
 
 <button type="button" id="scroll-top-btn" aria-label="Volver arriba" title="Volver arriba">
@@ -304,6 +292,7 @@ document.querySelectorAll(".fq").forEach(function (btn) {
   });
 })();
 </script>
+<script src="ad-block.js" defer></script>
 <script src="seo.js"></script>
 </body>
 </html>

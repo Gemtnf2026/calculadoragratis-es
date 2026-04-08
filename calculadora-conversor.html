@@ -96,15 +96,6 @@ crossorigin="anonymous"></script>
   <p>Introduce un valor y elige la unidad: verás al instante la equivalencia en milisegundos, segundos, minutos, horas, días y semanas.</p>
 </section>
 
-<p class="wrap pub-muted">Publicidad</p>
-<div class="ad ad-t wrap">
-<ins class="adsbygoogle"
-style="display:block"
-data-ad-client="TU_ID"
-data-ad-slot="111"
-data-ad-format="auto"></ins>
-</div>
-
 <section class="cs wrap">
 
 <div class="calc-layout">
@@ -172,13 +163,7 @@ data-ad-format="auto"></ins>
 </section>
 
 <p class="wrap pub-muted">Publicidad</p>
-<div class="ad ad-m wrap">
-<ins class="adsbygoogle"
-style="display:block"
-data-ad-client="TU_ID"
-data-ad-slot="222"
-data-ad-format="auto"></ins>
-</div>
+<ad-block variant="mid" data-ad-slot="111"></ad-block>
 
 <section class="cnt wrap">
 
@@ -216,6 +201,8 @@ data-ad-format="auto"></ins>
 
 <p>Este conversor es una herramienta <strong>educativa y práctica</strong>: sirve para trabajar equivalencias entre unidades de tiempo de uso cotidiano. No sustituye normas técnicas ni definiciones especializadas (por ejemplo en física o sistemas informáticos con otras bases).</p>
 
+<ad-block variant="mid" data-ad-slot="222" data-on-mobile="hide"></ad-block>
+
 <h2>Preguntas frecuentes</h2>
 
 <button type="button" class="fq">¿Cómo convertir segundos a minutos?</button>
@@ -230,13 +217,7 @@ data-ad-format="auto"></ins>
 </section>
 
 <p class="wrap pub-muted">Publicidad</p>
-<div class="ad ad-b wrap">
-<ins class="adsbygoogle"
-style="display:block"
-data-ad-client="TU_ID"
-data-ad-slot="333"
-data-ad-format="auto"></ins>
-</div>
+<ad-block variant="bottom"></ad-block>
 
 <button type="button" id="scroll-top-btn" aria-label="Volver arriba" title="Volver arriba">
   <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m18 15-6-6-6 6"/></svg>
@@ -381,11 +362,6 @@ updateConv();
 
 </script>
 <script>
-try {
-  (window.adsbygoogle = window.adsbygoogle || []).push({});
-} catch (e) {}
-</script>
-<script>
 (function () {
   var btn = document.getElementById("scroll-top-btn");
   if (!btn) return;
@@ -400,6 +376,7 @@ try {
   });
 })();
 </script>
+<script src="ad-block.js" defer></script>
 <script src="seo.js"></script>
 </body>
 </html>
