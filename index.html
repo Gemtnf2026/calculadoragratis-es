@@ -13,7 +13,7 @@
 <link rel="canonical" href="https://gemtnf2026.github.io/calculadoragratis-es/">
 <meta name="robots" content="index,follow">
 
-<link rel="stylesheet" href="style.css?v=3">
+<link rel="stylesheet" href="style.css?v=4">
 
 <style>
 #calc-search::placeholder{color:rgba(255,255,255,0.78)}
@@ -35,7 +35,7 @@ crossorigin="anonymous"></script>
 
 </head>
 
-<body>
+<body class="home">
 
 <header class="site-header">
   <div class="hdr">
@@ -44,10 +44,15 @@ crossorigin="anonymous"></script>
       <svg class="icon" xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="vertical-align:middle;margin-right:8px;display:inline-block"><rect width="16" height="20" x="4" y="2" rx="2"/><line x1="8" x2="16" y1="6" y2="6"/><line x1="16" x2="16" y1="14" y2="18"/><path d="M16 10h.01"/><path d="M12 10h.01"/><path d="M8 10h.01"/><path d="M12 14h.01"/><path d="M8 14h.01"/><path d="M12 18h.01"/><path d="M8 18h.01"/></svg>CalculadoraGratis
     </a>
 
-    <nav class="nav" aria-label="Navegación principal">
-      <a href="#finanzas" style="font-weight:600;letter-spacing:0.02em;-webkit-tap-highlight-color:transparent">Finanzas</a>
-      <a href="#matematicas" style="font-weight:600;letter-spacing:0.02em;-webkit-tap-highlight-color:transparent">Matemáticas</a>
-      <a href="#utiles" style="font-weight:600;letter-spacing:0.02em;-webkit-tap-highlight-color:transparent">Útiles</a>
+    <button class="nav-toggle" id="navToggle" aria-label="Abrir menú" aria-expanded="false" aria-controls="mainNav">
+      <svg id="iconMenu" xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+      <svg id="iconClose" xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="display:none"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    </button>
+
+    <nav class="nav" id="mainNav" aria-label="Navegación principal">
+      <a href="#finanzas">Finanzas</a>
+      <a href="#matematicas">Matemáticas</a>
+      <a href="#utiles">Útiles</a>
     </nav>
 
   </div>
@@ -420,6 +425,44 @@ crossorigin="anonymous"></script>
 </script>
 
 <script src="ad-block.js" defer></script>
+
+<script>
+(function(){
+  var hero=document.querySelector('.hero-top');
+  if(hero){
+    function navPastHero(){
+      document.body.classList.toggle('past-hero',hero.getBoundingClientRect().bottom<=62);
+    }
+    navPastHero();
+    window.addEventListener('scroll',navPastHero,{passive:true});
+    window.addEventListener('resize',navPastHero,{passive:true});
+  }
+})();
+</script>
+
+<script>
+(function(){
+  var toggle=document.getElementById('navToggle');
+  var nav=document.getElementById('mainNav');
+  var iconMenu=document.getElementById('iconMenu');
+  var iconClose=document.getElementById('iconClose');
+  if(!toggle||!nav)return;
+  toggle.addEventListener('click',function(){
+    var isOpen=nav.classList.toggle('open');
+    toggle.setAttribute('aria-expanded',isOpen?'true':'false');
+    iconMenu.style.display=isOpen?'none':'';
+    iconClose.style.display=isOpen?'':'none';
+  });
+  nav.querySelectorAll('a').forEach(function(a){
+    a.addEventListener('click',function(){
+      nav.classList.remove('open');
+      toggle.setAttribute('aria-expanded','false');
+      iconMenu.style.display='';
+      iconClose.style.display='none';
+    });
+  });
+})();
+</script>
 
 </body>
 </html>
