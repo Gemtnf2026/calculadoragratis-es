@@ -55,41 +55,6 @@ crossorigin="anonymous"></script>
   <p>Calcula cuánto consumes y cuánto pagas de luz al día, mes y año.</p>
 </section>
 
-<!-- NUEVO CONTENIDO SEO -->
-<section class="cnt wrap">
-
-<h2>¿Cuánto cuesta la luz en España?</h2>
-
-<p>
-El precio del kWh varía según la tarifa contratada y el mercado eléctrico. Esta calculadora te permite estimar el coste real según tu consumo diario.
-</p>
-
-<h2>¿Cómo reducir el consumo eléctrico?</h2>
-
-<ul>
-<li>Usar electrodomésticos eficientes (A+++)</li>
-<li>Evitar el consumo en standby</li>
-<li>Aprovechar tarifas con discriminación horaria</li>
-</ul>
-
-<h2>¿Por qué usar esta calculadora?</h2>
-
-<ul>
-<li>Cálculo inmediato del gasto eléctrico</li>
-<li>Estimación diaria, mensual y anual</li>
-<li>Ideal para ahorrar en la factura de luz</li>
-</ul>
-
-</section>
-
-<section class="disclaimer wrap">
-
-<p>
-⚠️ <strong>Aviso:</strong> Los resultados son estimaciones y pueden variar según tarifas eléctricas y consumo real.
-</p>
-
-</section>
-
 <section class="cs wrap">
 <div class="cgrid">
 
@@ -121,6 +86,93 @@ El precio del kWh varía según la tarifa contratada y el mercado eléctrico. Es
 </div>
 </section>
 
+<section class="cnt wrap">
+
+<h2>¿Cuánto cuesta la luz en España?</h2>
+
+<p>
+El precio del kWh varía según la tarifa contratada y el mercado eléctrico. Esta calculadora te permite estimar el coste real según tu consumo diario.
+</p>
+
+<h2>¿Cómo reducir el consumo eléctrico?</h2>
+
+<ul>
+<li>Usar electrodomésticos eficientes (A+++)</li>
+<li>Evitar el consumo en standby</li>
+<li>Aprovechar tarifas con discriminación horaria</li>
+</ul>
+
+<h2>¿Por qué usar esta calculadora?</h2>
+
+<ul>
+<li>Cálculo inmediato del gasto eléctrico</li>
+<li>Estimación diaria, mensual y anual</li>
+<li>Ideal para ahorrar en la factura de luz</li>
+</ul>
+
+<div class="disclaimer wrap">
+
+<p>
+⚠️ <strong>Aviso:</strong> Los resultados son estimaciones y pueden variar según tarifas eléctricas y consumo real.
+</p>
+
+</div>
+
+<h3>Ejemplos de consumo y coste orientativo</h3>
+
+<ul>
+<li><strong>1000 W durante 3 h/día</strong> a 0,20 €/kWh: ≈ 3 kWh/día y ≈ 0,60 €/día (coincide con el ejemplo por defecto de la calculadora).</li>
+<li><strong>150 W durante 8 h</strong>: ≈ 1,2 kWh/día; el coste diario multiplica esos kWh por tu precio.</li>
+<li><strong>2000 W durante 1 h</strong>: 2 kWh en esa hora de uso.</li>
+</ul>
+
+<table>
+<caption>Ejemplos de consumo diario (kWh) según potencia y horas (orientativo)</caption>
+<thead>
+<tr>
+<th scope="col">Potencia (W)</th>
+<th scope="col">Horas/día</th>
+<th scope="col">kWh/día aprox.</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>500</td>
+<td>4</td>
+<td>2</td>
+</tr>
+<tr>
+<td>1000</td>
+<td>3</td>
+<td>3</td>
+</tr>
+<tr>
+<td>2000</td>
+<td>2</td>
+<td>4</td>
+</tr>
+<tr>
+<td>60</td>
+<td>10</td>
+<td>0,6</td>
+</tr>
+<tr>
+<td>1500</td>
+<td>5</td>
+<td>7,5</td>
+</tr>
+</tbody>
+</table>
+
+<p>También puedes usar la <a href="calculadora-imc.html">calculadora de IMC</a>, la <a href="calculadora-metabolismo-basal.html">calculadora de metabolismo basal</a>, la <a href="calculadora-gasto-gasolina.html">calculadora de gasto de gasolina</a>, la <a href="calculadora-porcentajes.html">calculadora de porcentajes</a> y la <a href="calculadora-edad.html">calculadora de edad</a>.</p>
+
+<h2>Sobre esta calculadora</h2>
+
+<p>Convierte el uso de potencia (vatios) y tiempo en kilovatios hora (kWh) y aplica el precio por kWh que indiques. Los valores son <strong>orientativos</strong>; la factura real depende de peajes, impuestos y condiciones de la comercializadora.</p>
+
+</section>
+
+<p class="wrap pub-muted">Publicidad</p>
 <ad-block variant="mid" data-ad-slot="111"></ad-block>
 
 <section class="cnt wrap">
@@ -156,6 +208,7 @@ o la
 
 </section>
 
+<p class="wrap pub-muted">Publicidad</p>
 <ad-block variant="mid" data-ad-slot="222" data-on-mobile="hide"></ad-block>
 
 <section class="faq wrap">
@@ -174,6 +227,7 @@ o la
 
 </section>
 
+<p class="wrap pub-muted">Publicidad</p>
 <ad-block variant="bottom"></ad-block>
 
 <button type="button" id="scroll-top-btn" aria-label="Volver arriba" title="Volver arriba">
@@ -216,12 +270,12 @@ function calc(){
   let costeAnual = anual * precio;
 
   document.getElementById("resultado").innerHTML =
-    "<b>Consumo diario:</b> "+fmt2(consumo)+" kWh<br>" +
-    "<b>Coste diario:</b> "+fmt2(costeDia)+" €<br><br>" +
-    "<b>Consumo mensual:</b> "+fmt2(mensual)+" kWh<br>" +
-    "<b>Coste mensual:</b> "+fmt2(costeMes)+" €<br><br>" +
-    "<b>Consumo anual:</b> "+fmt2(anual)+" kWh<br>" +
-    "<b>Coste anual:</b> "+fmt2(costeAnual)+" €";
+    "<p><b>Consumo diario:</b> "+fmt2(consumo)+" kWh</p>" +
+    "<p><b>Coste diario:</b> "+fmt2(costeDia)+" €</p>" +
+    "<p><b>Consumo mensual:</b> "+fmt2(mensual)+" kWh</p>" +
+    "<p><b>Coste mensual:</b> "+fmt2(costeMes)+" €</p>" +
+    "<p><b>Consumo anual:</b> "+fmt2(anual)+" kWh</p>" +
+    "<p><b>Coste anual:</b> "+fmt2(costeAnual)+" €</p>";
 
   document.getElementById("resultado").classList.add("on");
 }

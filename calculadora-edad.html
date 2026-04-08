@@ -78,6 +78,62 @@ crossorigin="anonymous"></script>
 </div>
 </section>
 
+<section class="cnt wrap">
+
+<h2>¿Cómo se expresa la edad exacta?</h2>
+
+<p>La edad exacta no es solo el número de años: esta herramienta compara tu <strong>fecha de nacimiento</strong> con la fecha actual y muestra <strong>años</strong>, <strong>meses</strong> y <strong>días</strong> completos, de forma coherente con el calendario.</p>
+
+<p>Para otros cálculos del sitio puedes usar la <a href="calculadora-imc.html">calculadora de IMC</a>, la <a href="calculadora-metabolismo-basal.html">calculadora de metabolismo basal</a>, la <a href="calculadora-consumo-electrico.html">calculadora de consumo eléctrico</a>, la <a href="calculadora-gasto-gasolina.html">calculadora de gasto de gasolina</a> y la <a href="calculadora-porcentajes.html">calculadora de porcentajes</a>.</p>
+
+<h3>Ejemplos de uso</h3>
+
+<ul>
+<li><strong>Planificar cumpleaños o aniversarios:</strong> ver cuántos meses y días faltan o han pasado desde una fecha.</li>
+<li><strong>Comparar con el año civil:</strong> dos personas nacidas el mismo año pueden tener distinta edad en meses según el día.</li>
+<li><strong>Documentación informal:</strong> comprobar mentalmente fechas antes de trámites oficiales.</li>
+</ul>
+
+<table>
+<caption>Referencias de edad en años (valores orientativos)</caption>
+<thead>
+<tr>
+<th scope="col">Año de nacimiento</th>
+<th scope="col">Edad en años (aprox., año 2026)</th>
+<th scope="col">Nota</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>2010</td>
+<td>16 años</td>
+<td>Depende del mes y día respecto a la fecha actual.</td>
+</tr>
+<tr>
+<td>2000</td>
+<td>26 años</td>
+<td>Misma lógica de calendario.</td>
+</tr>
+<tr>
+<td>1990</td>
+<td>36 años</td>
+<td>Útil para comprobar con la calculadora.</td>
+</tr>
+<tr>
+<td>1975</td>
+<td>51 años</td>
+<td>Comparación rápida por décadas.</td>
+</tr>
+</tbody>
+</table>
+
+<h2>Sobre esta calculadora</h2>
+
+<p>La fecha “hoy” corresponde al dispositivo del usuario. Los resultados son <strong>orientativos e informativos</strong>; no sustituyen certificados de nacimiento ni documentos oficiales.</p>
+
+</section>
+
+<p class="wrap pub-muted">Publicidad</p>
 <ad-block variant="mid" data-ad-slot="111"></ad-block>
 
 <section class="cnt wrap">
@@ -106,6 +162,7 @@ para otros cálculos útiles.</p>
 
 </section>
 
+<p class="wrap pub-muted">Publicidad</p>
 <ad-block variant="mid" data-ad-slot="222" data-on-mobile="hide"></ad-block>
 
 <section class="faq wrap">
@@ -124,6 +181,7 @@ para otros cálculos útiles.</p>
 
 </section>
 
+<p class="wrap pub-muted">Publicidad</p>
 <ad-block variant="bottom"></ad-block>
 
 <button type="button" id="scroll-top-btn" aria-label="Volver arriba" title="Volver arriba">
@@ -163,7 +221,7 @@ function calc(){
   }
 
   document.getElementById("resultado").innerHTML =
-    "<b>Edad:</b> "+años+" años, "+meses+" meses y "+dias+" días";
+    "<p><b>Edad:</b> "+años+" años, "+meses+" meses y "+dias+" días</p>";
 
   document.getElementById("resultado").classList.add("on");
 }

@@ -24,6 +24,23 @@
 crossorigin="anonymous"></script>
 
 <style>
+/* TMB — resultados (misma base visual que IMC) */
+@keyframes rb-fade-in{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
+.rb{margin:0;padding:0;border:none;background:transparent;min-height:0}
+.rb.on{margin-top:1.75rem;padding:1.35rem 1.25rem 1.45rem;background:linear-gradient(180deg,rgba(108,71,255,0.08) 0%,#fafafa 52%);border:1px solid var(--border);border-radius:14px;box-shadow:0 4px 20px rgba(26,26,46,0.08);animation:rb-fade-in .4s ease-out}
+.imc-result{display:flex;flex-direction:column;align-items:center;gap:1.15rem;text-align:center}
+.imc-result-block{display:flex;flex-direction:column;align-items:center;gap:0.4rem;width:100%}
+.imc-result-label{font-size:0.72rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--muted)}
+.imc-result-value{font-size:clamp(2rem,6vw,2.65rem);font-weight:800;line-height:1.05;letter-spacing:-0.03em;color:#1a1a2e;font-variant-numeric:tabular-nums}
+.imc-result-suffix{font-size:0.42em;font-weight:700;letter-spacing:0.04em;opacity:0.88}
+.imc-estado-badge{display:inline-flex;align-items:center;justify-content:center;padding:0.45rem 1.1rem;border-radius:999px;font-size:0.95rem;font-weight:700;line-height:1.2;max-width:100%}
+.tmb-act-badge{display:inline-flex;align-items:center;justify-content:center;padding:0.45rem 1.1rem;border-radius:999px;font-size:0.95rem;font-weight:700;line-height:1.2;max-width:100%}
+.tmb-act--sed{background:#dbeafe;color:#1d4ed8}
+.tmb-act--lig{background:#e0f2fe;color:#0369a1}
+.tmb-act--mod{background:#dcfce7;color:#15803d}
+.tmb-act--act{background:#ffedd5;color:#c2410c}
+.tmb-act--muy{background:#ede9fe;color:#5b21b6}
+.imc-result-cta{margin-top:0.35rem;width:100%;display:flex;justify-content:center;flex-wrap:wrap}
 #scroll-top-btn{position:fixed;right:18px;bottom:22px;z-index:60;width:48px;height:48px;padding:0;border:none;border-radius:50%;background:linear-gradient(145deg,#4a00e0,#2563d4);color:#fff;cursor:pointer;box-shadow:0 4px 18px rgba(37,99,212,0.45);transition:opacity .25s ease,transform .2s ease;opacity:0;visibility:hidden;pointer-events:none;-webkit-tap-highlight-color:transparent}
 #scroll-top-btn.is-visible{opacity:1;visibility:visible;pointer-events:auto}
 #scroll-top-btn:hover{transform:translateY(-2px)}
@@ -51,7 +68,7 @@ crossorigin="anonymous"></script>
 
 <section class="hero wrap">
   <span class="badge">Salud · Fitness</span>
-  <h1>Calculadora de metabolismo basal</h1>
+  <h1>Calculadora de metabolismo basal (TMB) y calorías diarias</h1>
   <p>Calcula cuántas calorías necesitas al día según tu cuerpo y actividad.</p>
 </section>
 
@@ -97,12 +114,81 @@ crossorigin="anonymous"></script>
 
 <button class="btn bp bfw" onclick="calc()">Calcular</button>
 
-<div class="rb" id="resultado"></div>
+<div class="rb" id="resultado" aria-live="polite" aria-atomic="true"></div>
 
 </div>
 
 </section>
 
+<section class="cnt wrap">
+
+<h2>¿Cuántas calorías necesitas al día?</h2>
+
+<p>La <strong>tasa metabólica basal (TMB)</strong> indica las kilocalorías que tu cuerpo utilizaría en reposo para funciones vitales. Las <strong>calorías totales diarias</strong> (a veces llamadas TDEE o gasto energético total) parten de esa base y la ajustan con tu <strong>nivel de actividad</strong>: a mayor movimiento y ejercicio, mayor factor y más calorías de mantenimiento.</p>
+
+<p>Para relacionar peso y talla con otras herramientas del sitio, puedes abrir la <a href="calculadora-imc.html">calculadora de IMC</a>, estimar el consumo de electrodomésticos con la <a href="calculadora-consumo-electrico.html">calculadora de consumo eléctrico</a> o el coste de rutas con la <a href="calculadora-gasto-gasolina.html">calculadora de gasto de gasolina</a>. Si necesitas porcentajes sobre un total, la <a href="calculadora-porcentajes.html">calculadora de porcentajes</a> es útil; para calcular años o fechas, la <a href="calculadora-edad.html">calculadora de edad</a> complementa estos datos.</p>
+
+<h3>Ejemplos de calorías según perfil</h3>
+
+<p>Valores orientativos obtenidos con la misma fórmula que arriba (aproximados):</p>
+
+<ul>
+<li><strong>Hombre, 70 kg, 170 cm, 30 años:</strong> TMB ≈ 1618 kcal; con actividad moderada (factor 1,55), calorías diarias estimadas ≈ 2507 kcal.</li>
+<li><strong>Mujer, 60 kg, 165 cm, 30 años:</strong> TMB ≈ 1320 kcal; con actividad moderada (1,55), ≈ 2046 kcal/día.</li>
+<li><strong>Hombre activo, 80 kg, 180 cm, 30 años:</strong> TMB ≈ 1780 kcal; con nivel activo (1,725), calorías diarias estimadas ≈ 3071 kcal.</li>
+</ul>
+
+<table>
+<caption>Ejemplos de TMB y calorías de mantenimiento según perfil y actividad</caption>
+<thead>
+<tr>
+<th scope="col">Perfil</th>
+<th scope="col">TMB</th>
+<th scope="col">Calorías mantenimiento</th>
+<th scope="col">Nivel actividad</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Mujer, 30 años, 65 kg, 165 cm</td>
+<td>≈ 1370 kcal</td>
+<td>≈ 1644 kcal</td>
+<td>Sedentario</td>
+</tr>
+<tr>
+<td>Hombre, 35 años, 80 kg, 178 cm</td>
+<td>≈ 1743 kcal</td>
+<td>≈ 2701 kcal</td>
+<td>Moderado</td>
+</tr>
+<tr>
+<td>Mujer, 45 años, 70 kg, 162 cm</td>
+<td>≈ 1327 kcal</td>
+<td>≈ 1824 kcal</td>
+<td>Ligero</td>
+</tr>
+<tr>
+<td>Hombre, 28 años, 90 kg, 185 cm</td>
+<td>≈ 1921 kcal</td>
+<td>≈ 3314 kcal</td>
+<td>Activo</td>
+</tr>
+<tr>
+<td>Mujer, 55 años, 58 kg, 158 cm</td>
+<td>≈ 1132 kcal</td>
+<td>≈ 2150 kcal</td>
+<td>Muy activo</td>
+</tr>
+</tbody>
+</table>
+
+<h2>Sobre esta calculadora</h2>
+
+<p>Los resultados se basan en la ecuación de <strong>Mifflin–St Jeor</strong>, un estándar muy extendido para estimar la TMB en población general. Está adaptada a un uso informativo y orientativo; <strong>no sustituye consejo médico ni nutricional personalizado</strong>. Antes de cambiar dieta o actividad por motivos de salud, consulta con un profesional.</p>
+
+</section>
+
+<p class="wrap pub-muted">Publicidad</p>
 <ad-block variant="mid" data-ad-slot="111"></ad-block>
 
 <section class="cnt wrap">
@@ -128,9 +214,25 @@ o la
 
 </section>
 
+<p class="wrap pub-muted">Publicidad</p>
 <ad-block variant="mid" data-ad-slot="222" data-on-mobile="hide"></ad-block>
 
+<p class="wrap pub-muted">Publicidad</p>
 <ad-block variant="bottom"></ad-block>
+
+<section class="cnt wrap">
+
+<h2>Preguntas frecuentes</h2>
+
+<h3>¿Qué es el metabolismo basal?</h3>
+
+<p>Es el gasto energético mínimo en reposo para mantener funciones básicas como respiración, circulación y temperatura corporal, expresado habitualmente en kilocalorías al día.</p>
+
+<h3>¿Cuántas calorías debo consumir para adelgazar?</h3>
+
+<p>Suele plantearse un déficit moderado respecto a las calorías de mantenimiento (las que muestra esta calculadora según tu actividad), combinado con hábitos sostenibles; el ritmo y el objetivo dependen de cada persona, por lo que lo razonable es valorarlo con un profesional de la salud o nutrición.</p>
+
+</section>
 
 <button type="button" id="scroll-top-btn" aria-label="Volver arriba" title="Volver arriba">
   <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m18 15-6-6-6 6"/></svg>
@@ -181,10 +283,34 @@ function calc(){
 
   let tdee = tmb * act;
 
+  var actSel = document.getElementById("actividad");
+  var actLabel = actSel.options[actSel.selectedIndex].text;
+  var actKey = actSel.value;
+  var nivelClass = "tmb-act--mod";
+  if (actKey === "1.2") nivelClass = "tmb-act--sed";
+  else if (actKey === "1.375") nivelClass = "tmb-act--lig";
+  else if (actKey === "1.55") nivelClass = "tmb-act--mod";
+  else if (actKey === "1.725") nivelClass = "tmb-act--act";
+  else if (actKey === "1.9") nivelClass = "tmb-act--muy";
+
   document.getElementById("resultado").innerHTML =
-    "<b>Metabolismo basal:</b> "+fmtKcal(tmb)+" kcal<br>" +
-    "<b>Calorías diarias:</b> "+fmtKcal(tdee)+" kcal<br><br>" +
-    "<a class='btn' href='calculadora-imc.html'>Calcular IMC →</a>";
+    '<div class="imc-result">' +
+      '<div class="imc-result-block">' +
+        '<span class="imc-result-label">Metabolismo basal</span>' +
+        '<span class="imc-result-value">' + fmtKcal(tmb) + '<span class="imc-result-suffix"> kcal</span></span>' +
+      '</div>' +
+      '<div class="imc-result-block">' +
+        '<span class="imc-result-label">Calorías diarias</span>' +
+        '<span class="imc-result-value">' + fmtKcal(tdee) + '<span class="imc-result-suffix"> kcal</span></span>' +
+      '</div>' +
+      '<div class="imc-result-block">' +
+        '<span class="imc-result-label">Nivel de actividad</span>' +
+        '<span class="tmb-act-badge ' + nivelClass + '">' + actLabel + '</span>' +
+      '</div>' +
+      '<div class="imc-result-cta">' +
+        '<a class="btn" href="calculadora-imc.html">Calcular IMC →</a>' +
+      '</div>' +
+    '</div>';
 
   document.getElementById("resultado").classList.add("on");
 }

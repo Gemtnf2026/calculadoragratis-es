@@ -103,6 +103,57 @@ crossorigin="anonymous"></script>
 
 </section>
 
+<section class="cnt wrap">
+
+<h2>¿Cómo interpretar la media y la nota necesaria?</h2>
+
+<p>La <strong>media aritmética</strong> resume varias calificaciones en un solo valor. La <strong>nota necesaria</strong> ayuda a estimar qué resultado hace falta en una parte del curso (con un peso en %) para alcanzar una media u objetivo.</p>
+
+<p>Enlaza con la <a href="calculadora-porcentajes.html">calculadora de porcentajes</a>, la <a href="calculadora-regla-de-tres.html">regla de tres</a>, la <a href="calculadora-imc.html">calculadora de IMC</a>, la <a href="calculadora-metabolismo-basal.html">calculadora de metabolismo basal</a> y la <a href="calculadora-edad.html">calculadora de edad</a>.</p>
+
+<h3>Ejemplos orientativos</h3>
+
+<ul>
+<li><strong>Notas 5, 7 y 9:</strong> media ≈ 7,00.</li>
+<li><strong>Tres notas iguales 6:</strong> media 6,00.</li>
+<li><strong>Objetivo 5,0 con pesos:</strong> usa la sección “Nota necesaria” con tus datos reales.</li>
+</ul>
+
+<table>
+<caption>Ejemplos de media con tres notas (orientativo)</caption>
+<thead>
+<tr>
+<th scope="col">Notas</th>
+<th scope="col">Media aprox.</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>4, 6, 8</td>
+<td>6,00</td>
+</tr>
+<tr>
+<td>5, 5, 5</td>
+<td>5,00</td>
+</tr>
+<tr>
+<td>10, 8, 6</td>
+<td>8,00</td>
+</tr>
+<tr>
+<td>3, 7, 5</td>
+<td>5,00</td>
+</tr>
+</tbody>
+</table>
+
+<h2>Sobre esta calculadora</h2>
+
+<p>Los cálculos son <strong>orientativos</strong>; cada centro puede usar escalas, redondeos o ponderaciones distintas.</p>
+
+</section>
+
+<p class="wrap pub-muted">Publicidad</p>
 <ad-block variant="mid" data-ad-slot="111"></ad-block>
 
 <section class="cnt wrap">
@@ -126,8 +177,10 @@ o la
 
 </section>
 
+<p class="wrap pub-muted">Publicidad</p>
 <ad-block variant="mid" data-ad-slot="222" data-on-mobile="hide"></ad-block>
 
+<p class="wrap pub-muted">Publicidad</p>
 <ad-block variant="bottom"></ad-block>
 
 <button type="button" id="scroll-top-btn" aria-label="Volver arriba" title="Volver arriba">
@@ -181,7 +234,7 @@ function calcMedia(){
   let media = total / notas.length;
 
   document.getElementById("r1").innerHTML =
-    "<b>Media:</b> "+fmt2(media);
+    "<p><b>Media:</b> "+fmt2(media)+"</p>";
 
   document.getElementById("r1").classList.add("on");
 }
@@ -195,7 +248,7 @@ function calcNecesaria(){
   let necesaria = (objetivo - actual*(1-peso))/peso;
 
   document.getElementById("r2").innerHTML =
-    "<b>Necesitas:</b> "+fmt2(necesaria);
+    "<p><b>Necesitas:</b> "+fmt2(necesaria)+"</p>";
 
   document.getElementById("r2").classList.add("on");
 }

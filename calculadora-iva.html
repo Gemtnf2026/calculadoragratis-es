@@ -97,8 +97,16 @@ crossorigin="anonymous"></script>
 
 </section>
 
+<section class="cnt wrap">
+
+<h2>Más calculadoras útiles</h2>
+
+<p>Puedes combinar este simulador con la <a href="calculadora-imc.html">calculadora de IMC</a>, la <a href="calculadora-metabolismo-basal.html">calculadora de metabolismo basal</a>, la <a href="calculadora-consumo-electrico.html">calculadora de consumo eléctrico</a>, la <a href="calculadora-gasto-gasolina.html">calculadora de gasto de gasolina</a> y la <a href="calculadora-edad.html">calculadora de edad</a>.</p>
+
+</section>
+
 <div class="ad ad-m wrap">
-<p>Publicidad</p>
+<p class="pub-muted">Publicidad</p>
 <ad-block variant="mid" data-ad-slot="111" ins-only></ad-block>
 </div>
 
@@ -122,7 +130,7 @@ Quitar IVA: Precio / (1 + IVA)
 <h2>Ejemplos de cálculo de IVA</h2>
 
 <div class="ad ad-m wrap">
-<p>Publicidad</p>
+<p class="pub-muted">Publicidad</p>
 <ad-block variant="mid" data-ad-slot="222" data-on-mobile="hide" ins-only></ad-block>
 </div>
 
@@ -205,7 +213,7 @@ y
 </section>
 
 <div class="ad ad-b wrap">
-<p>Publicidad</p>
+<p class="pub-muted">Publicidad</p>
 <ad-block variant="bottom" ins-only></ad-block>
 </div>
 
@@ -252,10 +260,10 @@ function calc(){
   }
 
   document.getElementById("resultado").innerHTML =
-    "<b>Base imponible:</b> "+fmt2(base)+" €<br>" +
-    "<b>IVA:</b> "+fmt2(impuesto)+" €<br>" +
-    "<b>Total:</b> "+fmt2(total)+" €<br><br>" +
-    "<a class='btn' href='calculadora-irpf-espana.html'>Calcular IRPF →</a><br><br>";
+    "<p><b>Base imponible:</b> "+fmt2(base)+" €</p>" +
+    "<p><b>IVA:</b> "+fmt2(impuesto)+" €</p>" +
+    "<p><b>Total:</b> "+fmt2(total)+" €</p>" +
+    "<p><a class='btn' href='calculadora-irpf-espana.html'>Calcular IRPF →</a></p>";
 
   document.getElementById("resultado").classList.add("on");
 }

@@ -87,6 +87,67 @@ crossorigin="anonymous"></script>
 </div>
 </section>
 
+<section class="cnt wrap">
+
+<h2>¿Cómo se calcula la propina sobre la cuenta?</h2>
+
+<p>La propina es un porcentaje del <strong>total de la cuenta</strong> antes o según costumbre local; la calculadora suma ese importe al total y divide entre el número de <strong>personas</strong> para ver cuánto paga cada una.</p>
+
+<p>Para más cálculos: <a href="calculadora-imc.html">calculadora de IMC</a>, <a href="calculadora-metabolismo-basal.html">calculadora de metabolismo basal</a>, <a href="calculadora-consumo-electrico.html">calculadora de consumo eléctrico</a>, <a href="calculadora-gasto-gasolina.html">calculadora de gasto de gasolina</a> y <a href="calculadora-edad.html">calculadora de edad</a>.</p>
+
+<h3>Ejemplos de propina y total</h3>
+
+<ul>
+<li><strong>50 € + 10 %:</strong> propina 5 €, total 55 € (2 personas → 27,50 € cada una).</li>
+<li><strong>80 € + 12 %:</strong> propina 9,60 €, total 89,60 €.</li>
+<li><strong>35 € + 5 %:</strong> propina 1,75 €, total 36,75 €.</li>
+</ul>
+
+<table>
+<caption>Ejemplos de propina y reparto (orientativo)</caption>
+<thead>
+<tr>
+<th scope="col">Cuenta (€)</th>
+<th scope="col">Propina (%)</th>
+<th scope="col">Propina (€)</th>
+<th scope="col">Total (€)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>40,00</td>
+<td>10</td>
+<td>4,00</td>
+<td>44,00</td>
+</tr>
+<tr>
+<td>60,00</td>
+<td>10</td>
+<td>6,00</td>
+<td>66,00</td>
+</tr>
+<tr>
+<td>100,00</td>
+<td>15</td>
+<td>15,00</td>
+<td>115,00</td>
+</tr>
+<tr>
+<td>25,00</td>
+<td>8</td>
+<td>2,00</td>
+<td>27,00</td>
+</tr>
+</tbody>
+</table>
+
+<h2>Sobre esta calculadora</h2>
+
+<p>Los resultados son <strong>orientativos</strong>; las costumbres sobre propina varían por país y establecimiento.</p>
+
+</section>
+
+<p class="wrap pub-muted">Publicidad</p>
 <ad-block variant="mid" data-ad-slot="111"></ad-block>
 
 <section class="cnt wrap">
@@ -107,6 +168,7 @@ para otros cálculos rápidos.</p>
 
 </section>
 
+<p class="wrap pub-muted">Publicidad</p>
 <ad-block variant="mid" data-ad-slot="222" data-on-mobile="hide"></ad-block>
 
 <section class="faq wrap">
@@ -125,6 +187,7 @@ para otros cálculos rápidos.</p>
 
 </section>
 
+<p class="wrap pub-muted">Publicidad</p>
 <ad-block variant="bottom"></ad-block>
 
 <button type="button" id="scroll-top-btn" aria-label="Volver arriba" title="Volver arriba">
@@ -166,9 +229,9 @@ function calc(){
   let porPersona = totalFinal / personas;
 
   document.getElementById("resultado").innerHTML =
-    "<b>Propina:</b> "+fmt2(tip)+" €<br>" +
-    "<b>Total:</b> "+fmt2(totalFinal)+" €<br>" +
-    "<b>Por persona:</b> "+fmt2(porPersona)+" €";
+    "<p><b>Propina:</b> "+fmt2(tip)+" €</p>" +
+    "<p><b>Total:</b> "+fmt2(totalFinal)+" €</p>" +
+    "<p><b>Por persona:</b> "+fmt2(porPersona)+" €</p>";
 
   document.getElementById("resultado").classList.add("on");
 }

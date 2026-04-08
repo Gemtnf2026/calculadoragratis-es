@@ -93,6 +93,67 @@ crossorigin="anonymous"></script>
 </div>
 </section>
 
+<section class="cnt wrap">
+
+<h2>¿Qué entra en el coste de un viaje en coche?</h2>
+
+<p>El gasto depende de la <strong>distancia</strong>, del <strong>consumo</strong> del vehículo (litros cada 100 km) y del <strong>precio por litro</strong> del combustible. Multiplicando litros necesarios por el precio obtienes el coste total; al dividir entre pasajeros ves cuánto corresponde a cada uno.</p>
+
+<p>Otras herramientas del sitio: <a href="calculadora-imc.html">calculadora de IMC</a>, <a href="calculadora-metabolismo-basal.html">calculadora de metabolismo basal</a>, <a href="calculadora-consumo-electrico.html">calculadora de consumo eléctrico</a>, <a href="calculadora-porcentajes.html">calculadora de porcentajes</a> y <a href="calculadora-edad.html">calculadora de edad</a>.</p>
+
+<h3>Ejemplos de coste orientativo</h3>
+
+<ul>
+<li><strong>300 km, 6 L/100 km, 1,60 €/L:</strong> unos 18 L y coste total aproximado 28,80 € (sin peajes).</li>
+<li><strong>150 km, 7 L/100 km, 1,55 €/L:</strong> unos 10,5 L y coste cercano a 16,28 €.</li>
+<li><strong>500 km, 5,5 L/100 km, 1,70 €/L:</strong> unos 27,5 L y coste cercano a 46,75 €.</li>
+</ul>
+
+<table>
+<caption>Ejemplos de coste total según distancia y consumo (precio 1,60 €/L orientativo)</caption>
+<thead>
+<tr>
+<th scope="col">Distancia</th>
+<th scope="col">Consumo (L/100 km)</th>
+<th scope="col">Litros aprox.</th>
+<th scope="col">Coste aprox.</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>100 km</td>
+<td>6</td>
+<td>6 L</td>
+<td>≈ 9,60 €</td>
+</tr>
+<tr>
+<td>200 km</td>
+<td>6,5</td>
+<td>13 L</td>
+<td>≈ 20,80 €</td>
+</tr>
+<tr>
+<td>400 km</td>
+<td>7</td>
+<td>28 L</td>
+<td>≈ 44,80 €</td>
+</tr>
+<tr>
+<td>50 km</td>
+<td>8</td>
+<td>4 L</td>
+<td>≈ 6,40 €</td>
+</tr>
+</tbody>
+</table>
+
+<h2>Sobre esta calculadora</h2>
+
+<p>Los resultados son <strong>estimaciones</strong>: el consumo real varía por conducción, carga y tráfico. El precio del combustible cambia según estación y zona.</p>
+
+</section>
+
+<p class="wrap pub-muted">Publicidad</p>
 <ad-block variant="mid" data-ad-slot="111"></ad-block>
 
 <section class="cnt wrap">
@@ -125,6 +186,7 @@ para analizar otros gastos.</p>
 
 </section>
 
+<p class="wrap pub-muted">Publicidad</p>
 <ad-block variant="mid" data-ad-slot="222" data-on-mobile="hide"></ad-block>
 
 <section class="faq wrap">
@@ -143,6 +205,7 @@ para analizar otros gastos.</p>
 
 </section>
 
+<p class="wrap pub-muted">Publicidad</p>
 <ad-block variant="bottom"></ad-block>
 
 <button type="button" id="scroll-top-btn" aria-label="Volver arriba" title="Volver arriba">
@@ -185,8 +248,8 @@ function calc(){
   let porPersona = coste / personas;
 
   document.getElementById("resultado").innerHTML =
-    "<b>Coste total:</b> "+fmt2(coste)+" €<br>" +
-    "<b>Coste por persona:</b> "+fmt2(porPersona)+" €";
+    "<p><b>Coste total:</b> "+fmt2(coste)+" €</p>" +
+    "<p><b>Coste por persona:</b> "+fmt2(porPersona)+" €</p>";
 
   document.getElementById("resultado").classList.add("on");
 }

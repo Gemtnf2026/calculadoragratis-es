@@ -33,6 +33,13 @@ body {
   padding: 40px 20px;
 }
 
+/* Etiqueta sobre bloques de anuncio (alineada con .wrap) */
+.pub-muted {
+  font-size: 0.85rem;
+  color: var(--muted);
+  margin-bottom: 0.35rem;
+}
+
 /* ===== HEADER ===== */
 .site-header {
   background: #fff;
@@ -376,13 +383,73 @@ main p {
   margin: 0 auto !important;
 }
 
-.cnt p{margin-bottom:1.2rem; line-height:1.6;}
-.cnt h2{margin-top:2.5rem; margin-bottom:1rem;}
+/* Contenido largo (.cnt): el reset * quita márgenes; aquí se restauran jerarquía y tablas */
+.cnt p {
+  margin-bottom: 1.35rem;
+  line-height: 1.65;
+}
+.cnt h2 {
+  margin-top: 2.5rem;
+  margin-bottom: 1.15rem;
+  line-height: 1.28;
+}
+.cnt h3 {
+  margin-top: 1.9rem;
+  margin-bottom: 0.95rem;
+  font-size: 1.12rem;
+  font-weight: 700;
+  color: var(--text);
+  line-height: 1.35;
+}
+.cnt table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1.35rem 0 1.75rem;
+  font-size: 0.95rem;
+  font-variant-numeric: tabular-nums;
+  line-height: 1.45;
+}
+.cnt caption {
+  caption-side: top;
+  text-align: left;
+  font-weight: 700;
+  font-size: 0.98rem;
+  margin-bottom: 0.95rem;
+  padding-top: 0.15rem;
+  color: var(--text);
+}
+.cnt th,
+.cnt td {
+  padding: 0.65rem 0.85rem;
+  text-align: left;
+  border-bottom: 1px solid var(--border);
+  vertical-align: top;
+}
+.cnt thead th {
+  font-weight: 700;
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--muted);
+  border-bottom: 2px solid var(--border);
+}
+.cnt tbody tr:last-child td {
+  border-bottom: none;
+}
+.cnt ul {
+  margin: 1.15rem 0 1.4rem;
+  padding-left: 1.4rem;
+}
+.cnt li {
+  margin-bottom: 0.5rem;
+  line-height: 1.55;
+}
+
 section{margin-bottom:3rem;}
 
 p{
-  margin-bottom:1.2rem;
-  line-height:1.6;
+  margin-bottom:1.35rem;
+  line-height:1.65;
 }
 
 @media (max-width: 768px){
