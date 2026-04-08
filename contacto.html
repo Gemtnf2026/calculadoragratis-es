@@ -43,19 +43,28 @@
   <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m18 15-6-6-6 6"/></svg>
 </button>
 
-  <footer class="ft">
-    <div class="wrap footer-inner">
-      <p class="footer-copy">© 2026 CalculadoraGratis.es</p>
-      <nav class="footer-links" aria-label="Enlaces legales">
-        <a href="sobre-nosotros.html">Sobre nosotros</a>
-        <a href="privacidad.html">Privacidad</a>
-        <a href="cookies.html">Cookies</a>
-        <a href="contacto.html">Contacto</a>
-      </nav>
-    </div>
-  </footer>
+<footer class="ft">
+  <div class="wrap" style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:12px">
+    
+    <p style="margin:0">
+      © <span id="year"></span> CalculadoraGratis.es
+    </p>
+
+    <nav style="display:flex;flex-wrap:wrap;gap:14px;font-size:.9rem">
+      <a href="sobre-nosotros.html">Sobre nosotros</a>
+      <a href="politica-privacidad.html">Privacidad</a>
+      <a href="politica-cookies.html">Cookies</a>
+      <a href="contacto.html">Contacto</a>
+    </nav>
+
+  </div>
+</footer>
 
 <script>
+(function () {
+  var y = document.getElementById("year");
+  if (y) y.textContent = new Date().getFullYear();
+})();
 (function () {
   var btn = document.getElementById("scroll-top-btn");
   if (!btn) return;
