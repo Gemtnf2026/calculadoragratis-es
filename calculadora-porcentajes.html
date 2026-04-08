@@ -16,55 +16,371 @@
 
 <link rel="stylesheet" href="style.css">
 
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+
 <style>
-/* Bloques de calculadora — solo esta página */
-.cs .cgrid {
+/* Calculadora tipo calculadora-sales — solo dentro de .pct-sales-app */
+.pct-sales-app {
+  --pct-bg: #f5f5fa;
+  --pct-surface: #ffffff;
+  --pct-surface2: #fafafa;
+  --pct-border: #e2e2f0;
+  --pct-border2: #d8d8ea;
+  --pct-accent: #6c47ff;
+  --pct-accent2: #4a6cf7;
+  --pct-text: #1a1a2e;
+  --pct-muted: #6b6b8a;
+  --pct-muted2: #9090a8;
+  --pct-up: #2563eb;
+  --pct-down: #dc2626;
+  --pct-up-bg: rgba(37,99,235,0.1);
+  --pct-down-bg: rgba(220,38,38,0.1);
+  --pct-radius: 16px;
+  --pct-radius-sm: 10px;
+  position: relative;
+  z-index: 1;
+  max-width: 780px;
+  margin: 0 auto;
+  padding: 28px 20px 36px;
+  background: var(--pct-bg);
+  color: var(--pct-text);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 15px;
+  line-height: 1.6;
+  border-radius: var(--pct-radius);
+  overflow: hidden;
+  border: 1px solid var(--pct-border);
+  box-shadow: 0 10px 30px rgba(108, 71, 255, 0.08);
+}
+
+.pct-sales-app::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 80% 50% at 20% -10%, rgba(108, 71, 255, 0.07) 0%, transparent 60%),
+    radial-gradient(ellipse 60% 40% at 80% 110%, rgba(74, 108, 247, 0.06) 0%, transparent 60%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.pct-sales-app > * { position: relative; z-index: 1; }
+
+.pct-sales-app *,
+.pct-sales-app *::before,
+.pct-sales-app *::after { box-sizing: border-box; }
+
+/* Pestañas en filas agrupadas (píldoras); anula button{width:100%} de style.css */
+.pct-sales-app .pct-nav-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 8px;
+  margin: 0 0 24px;
+  padding: 0;
+  list-style: none;
+  animation: pct-fadeUp 0.6s 0.1s ease both;
+}
+
+.pct-sales-app .nav-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: auto !important;
+  max-width: 100%;
+  margin: 0 !important;
+  flex: 0 1 auto;
+  padding: 8px 16px;
+  border-radius: 999px;
+  border: 1px solid var(--pct-border2);
+  background: var(--pct-surface) !important;
+  color: var(--pct-muted);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: border-color 0.2s, background 0.2s, color 0.2s, box-shadow 0.2s;
+  letter-spacing: 0.01em;
+  line-height: 1.2;
+  white-space: nowrap;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.pct-sales-app .nav-btn:hover {
+  border-color: rgba(108, 71, 255, 0.35);
+  color: var(--pct-text);
+  background: rgba(108, 71, 255, 0.06) !important;
+}
+
+.pct-sales-app .nav-btn.active {
+  background: linear-gradient(135deg, #7b2ff7, #4a6cf7) !important;
+  border-color: transparent;
+  color: #fff !important;
+  font-weight: 600;
+  box-shadow: 0 4px 14px rgba(108, 71, 255, 0.25);
+}
+
+.pct-sales-app .panel { display: none; animation: pct-fadeUp 0.35s ease both; }
+.pct-sales-app .panel.active { display: block; }
+
+.pct-sales-app .card {
+  background: var(--pct-surface);
+  border: 1px solid var(--pct-border);
+  border-radius: var(--pct-radius);
+  padding: 36px;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 4px 24px rgba(108, 71, 255, 0.06);
+}
+
+.pct-sales-app .card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(108, 71, 255, 0.35), transparent);
+}
+
+.pct-sales-app .card-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  background: rgba(108, 71, 255, 0.08);
+  border: 1px solid rgba(108, 71, 255, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  margin-bottom: 20px;
+}
+
+.pct-sales-app .card h2 {
+  font-family: 'DM Serif Display', serif;
+  font-size: 24px;
+  font-weight: 400;
+  color: var(--pct-text);
+  margin-bottom: 6px;
+}
+
+.pct-sales-app .card-desc {
+  font-size: 14px;
+  color: var(--pct-muted);
+  margin-bottom: 32px;
+  line-height: 1.6;
+  max-width: 480px;
+}
+
+.pct-sales-app .fields {
+  display: grid;
+  gap: 16px;
+  margin-bottom: 28px;
+}
+
+.pct-sales-app .fields.col2 { grid-template-columns: 1fr 1fr; }
+.pct-sales-app .fields.col3 { grid-template-columns: 1fr 1fr 1fr; }
+
+.pct-sales-app .field { display: flex; flex-direction: column; gap: 8px; }
+
+.pct-sales-app .field label {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--pct-muted);
+}
+
+.pct-sales-app .field input {
+  background: var(--pct-surface2);
+  border: 1px solid var(--pct-border2);
+  border-radius: var(--pct-radius-sm);
+  padding: 12px 16px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 16px;
+  font-weight: 500;
+  color: var(--pct-text);
+  transition: all 0.2s;
+}
+
+.pct-sales-app .field input:focus {
+  outline: none;
+  border-color: rgba(108, 71, 255, 0.45);
+  background: #fff;
+  box-shadow: 0 0 0 3px rgba(108, 71, 255, 0.12);
+}
+
+.pct-sales-app .field input[readonly] {
+  opacity: 0.5;
+  cursor: default;
+  border-style: dashed;
+}
+
+.pct-sales-app .field input::placeholder { color: var(--pct-muted2); font-weight: 400; }
+
+.pct-sales-app .calc-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 13px 28px;
+  background: linear-gradient(135deg, #7b2ff7, #4a6cf7);
+  color: #fff;
+  border: none;
+  border-radius: 99px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+  letter-spacing: 0.02em;
+}
+
+.pct-sales-app .calc-btn:hover {
+  filter: brightness(1.05);
+  transform: translateY(-1px);
+  box-shadow: 0 8px 24px rgba(108, 71, 255, 0.35);
+}
+
+.pct-sales-app .calc-btn:active { transform: scale(0.98) translateY(0); }
+.pct-sales-app .calc-btn svg { width: 16px; height: 16px; }
+
+.pct-sales-app .pct-ov-secondary {
+  background: var(--pct-surface2) !important;
+  color: var(--pct-text) !important;
+  border: 1px solid var(--pct-border2) !important;
+  box-shadow: none !important;
+}
+.pct-sales-app .pct-ov-secondary:hover {
+  filter: none !important;
+  background: #f0f0f8 !important;
+  box-shadow: 0 2px 8px rgba(108, 71, 255, 0.12) !important;
+}
+.pct-sales-app .pct-ov-secondary.pct-ov-muted {
+  color: var(--pct-muted) !important;
+}
+
+.pct-sales-app .result {
+  display: none;
+  margin-top: 32px;
+  padding-top: 32px;
+  border-top: 1px solid var(--pct-border);
+  animation: pct-fadeUp 0.3s ease both;
+}
+
+.pct-sales-app .result.visible { display: block; }
+
+.pct-sales-app .result-hero {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 24px;
+  flex-wrap: wrap;
+}
+
+.pct-sales-app .result-number {
+  font-family: 'DM Serif Display', serif;
+  font-size: 52px;
+  font-weight: 400;
+  line-height: 1;
+  letter-spacing: -0.02em;
+  color: var(--pct-accent);
+}
+
+.pct-sales-app .result-meta { flex: 1; min-width: 180px; }
+
+.pct-sales-app .result-label {
+  font-size: 13px;
+  color: var(--pct-muted);
+  margin-top: 4px;
+}
+
+.pct-sales-app .badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 4px 12px;
+  border-radius: 99px;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+}
+
+.pct-sales-app .badge-up { background: var(--pct-up-bg); color: var(--pct-up); border: 1px solid rgba(37,99,235,0.25); }
+.pct-sales-app .badge-down { background: var(--pct-down-bg); color: var(--pct-down); border: 1px solid rgba(220,38,38,0.25); }
+.pct-sales-app .badge-neutral { background: #f0f0f8; color: var(--pct-muted); border: 1px solid var(--pct-border2); }
+
+.pct-sales-app .breakdown {
   display: flex;
   flex-direction: column;
-  gap: 2.5rem;
+  gap: 0;
+  background: var(--pct-surface2);
+  border-radius: var(--pct-radius-sm);
+  overflow: hidden;
 }
 
-@media (max-width: 600px) {
-  .cs .cgrid {
-    gap: 2rem;
+.pct-sales-app .breakdown-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 13px 18px;
+  border-bottom: 1px solid var(--pct-border);
+  font-size: 14px;
+  transition: background 0.15s;
+}
+
+.pct-sales-app .breakdown-row:last-child { border-bottom: none; }
+.pct-sales-app .breakdown-row:hover { background: rgba(108, 71, 255, 0.04); }
+.pct-sales-app .breakdown-row .k { color: var(--pct-muted); }
+.pct-sales-app .breakdown-row .v { font-weight: 600; color: var(--pct-text); font-variant-numeric: tabular-nums; }
+
+.pct-sales-app .pct-sales-foot {
+  margin-top: 48px;
+  text-align: center;
+  color: var(--pct-muted2);
+  font-size: 12px;
+  letter-spacing: 0.04em;
+  animation: pct-fadeUp 0.6s 0.3s ease both;
+}
+
+@keyframes pct-fadeUp {
+  from { opacity: 0; transform: translateY(16px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes pct-pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.5; transform: scale(0.85); }
+}
+
+@keyframes pct-shake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-6px); }
+  75% { transform: translateX(6px); }
+}
+
+@media (max-width: 560px) {
+  .pct-sales-app { padding: 20px 14px 28px; }
+  .pct-sales-app .card { padding: 24px 20px; }
+  .pct-sales-app .fields.col2, .pct-sales-app .fields.col3 { grid-template-columns: 1fr; }
+  .pct-sales-app .result-number { font-size: 40px; }
+  .pct-sales-app .pct-nav-tabs { gap: 6px; justify-content: center; }
+  .pct-sales-app .pct-nav-tabs .nav-btn {
+    padding: 8px 12px;
+    font-size: 12px;
   }
 }
 
-/* Resultados (.rb) — solo esta página; no altera style.css global */
-@keyframes rb-fade-in {
-  from {
-    opacity: 0;
-    transform: translateY(5px);
+@media (max-width: 380px) {
+  .pct-sales-app .pct-nav-tabs .nav-btn {
+    white-space: normal;
+    text-align: center;
+    max-width: 100%;
+    flex: 1 1 calc(50% - 4px);
+    min-width: 0;
   }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-.rb.on {
-  margin-top: 1.25rem;
-  margin-bottom: 1.25rem;
-  padding: 1rem 1.125rem;
-  background: linear-gradient(180deg, rgba(108, 71, 255, 0.06) 0%, #fafafa 55%);
-  border: 1px solid var(--border);
-  border-radius: 12px;
-  box-shadow: 0 2px 14px rgba(26, 26, 46, 0.07);
-  animation: rb-fade-in 0.38s ease-out;
-  font-size: clamp(1.2rem, 2.6vw, 1.55rem);
-  font-weight: 700;
-  line-height: 1.3;
-  color: var(--text);
-  font-variant-numeric: tabular-nums;
-}
-
-.rb.on b {
-  display: block;
-  font-size: 0.8125rem;
-  font-weight: 600;
-  color: var(--muted);
-  margin-bottom: 0.45rem;
-  letter-spacing: 0.01em;
 }
 </style>
 
@@ -109,79 +425,305 @@ crossorigin="anonymous"></script>
 
 <section class="cs wrap">
 
-<div class="cgrid">
+<div class="pct-sales-app" id="pct-sales-app">
 
-<!-- % de un número -->
-<div class="ccard">
+  <nav class="nav pct-nav-tabs" aria-label="Tipo de cálculo">
+    <button type="button" class="nav-btn active" onclick="pctShow('incremento', this)">Variación anual</button>
+    <button type="button" class="nav-btn" onclick="pctShow('parte', this)">% de un total</button>
+    <button type="button" class="nav-btn" onclick="pctShow('bruto', this)">Neto → Bruto</button>
+    <button type="button" class="nav-btn" onclick="pctShow('neto', this)">Bruto → Neto</button>
+    <button type="button" class="nav-btn" onclick="pctShow('margen', this)">Margen / markup</button>
+    <button type="button" class="nav-btn" onclick="pctShow('descuento', this)">Descuento</button>
+    <button type="button" class="nav-btn" onclick="pctShow('override', this)">Override</button>
+  </nav>
 
-<h2>¿Cuánto es X% de un número?</h2>
+  <div id="panel-incremento" class="panel active">
+    <div class="card">
+      <div class="card-icon">📈</div>
+      <h2>Variación entre periodos</h2>
+      <p class="card-desc">Calcula el porcentaje de incremento o descenso entre dos valores. Ideal para comparar facturación, ventas o cualquier cifra año a año.</p>
+      <div class="fields col2">
+        <div class="field">
+          <label>Valor inicial (€)</label>
+          <input id="inc-a" type="text" inputmode="decimal" autocomplete="off" placeholder="ej. 2.000" />
+        </div>
+        <div class="field">
+          <label>Valor final (€)</label>
+          <input id="inc-b" type="text" inputmode="decimal" autocomplete="off" placeholder="ej. 6.000" />
+        </div>
+      </div>
+      <button type="button" class="calc-btn" onclick="calcIncremento()">
+        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 8h12M9 3l5 5-5 5"/></svg>
+        Calcular
+      </button>
+      <div class="result" id="res-incremento">
+        <div class="result-hero">
+          <div class="result-number" id="ri-pct">—</div>
+          <div class="result-meta">
+            <div id="ri-badge"></div>
+            <div class="result-label" id="ri-label"></div>
+          </div>
+        </div>
+        <div class="breakdown" id="ri-rows"></div>
+      </div>
+    </div>
+  </div>
 
-<div class="fg">
-<label>Porcentaje (%)</label>
-<input id="p1" type="text" inputmode="decimal" autocomplete="off" value="20,00">
-</div>
+  <div id="panel-parte" class="panel">
+    <div class="card">
+      <div class="card-icon">🎯</div>
+      <h2>¿Qué % es X de un total?</h2>
+      <p class="card-desc">Descubre qué proporción representa una cifra sobre un total. Por ejemplo: ¿qué porcentaje es 590.000 € de 1.500.000 €?</p>
+      <div class="fields col2">
+        <div class="field">
+          <label>Parte (€)</label>
+          <input id="par-parte" type="text" inputmode="decimal" autocomplete="off" placeholder="ej. 590.000" />
+        </div>
+        <div class="field">
+          <label>Total (€)</label>
+          <input id="par-total" type="text" inputmode="decimal" autocomplete="off" placeholder="ej. 1.500.000" />
+        </div>
+      </div>
+      <button type="button" class="calc-btn" onclick="calcParte()">
+        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 8h12M9 3l5 5-5 5"/></svg>
+        Calcular
+      </button>
+      <div class="result" id="res-parte">
+        <div class="result-hero">
+          <div class="result-number" id="rp-pct">—</div>
+          <div class="result-meta">
+            <div class="result-label" id="rp-label"></div>
+          </div>
+        </div>
+        <div class="breakdown" id="rp-rows"></div>
+      </div>
+    </div>
+  </div>
 
-<div class="fg">
-<label>Número</label>
-<input id="n1" type="text" inputmode="decimal" autocomplete="off" value="200,00">
-</div>
+  <div id="panel-bruto" class="panel">
+    <div class="card">
+      <div class="card-icon">➕</div>
+      <h2>Precio neto → Precio bruto</h2>
+      <p class="card-desc">Añade IVA u otro impuesto a un precio base para obtener el precio final con impuestos incluidos.</p>
+      <div class="fields col3">
+        <div class="field">
+          <label>Precio neto (€)</label>
+          <input id="nb-neto" type="text" inputmode="decimal" autocomplete="off" placeholder="ej. 1.000" />
+        </div>
+        <div class="field">
+          <label>IVA / impuesto (%)</label>
+          <input id="nb-iva" type="text" inputmode="decimal" autocomplete="off" placeholder="ej. 21" value="21" />
+        </div>
+        <div class="field">
+          <label>Cuota IVA (€)</label>
+          <input id="nb-cuota" type="text" placeholder="—" readonly />
+        </div>
+      </div>
+      <button type="button" class="calc-btn" onclick="calcNeto2Bruto()">
+        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 8h12M9 3l5 5-5 5"/></svg>
+        Calcular
+      </button>
+      <div class="result" id="res-bruto">
+        <div class="result-hero">
+          <div class="result-number" id="rnb-val">—</div>
+          <div class="result-meta">
+            <div class="result-label">Precio bruto (IVA incluido)</div>
+          </div>
+        </div>
+        <div class="breakdown" id="rnb-rows"></div>
+      </div>
+    </div>
+  </div>
 
-<button class="btn bp bfw" onclick="calc1()">Calcular</button>
+  <div id="panel-neto" class="panel">
+    <div class="card">
+      <div class="card-icon">➖</div>
+      <h2>Precio bruto → Precio neto</h2>
+      <p class="card-desc">Extrae la base imponible de un precio que ya incluye IVA. Útil para facturas o tickets de compra.</p>
+      <div class="fields col2">
+        <div class="field">
+          <label>Precio bruto (€)</label>
+          <input id="bn-bruto" type="text" inputmode="decimal" autocomplete="off" placeholder="ej. 1.210" />
+        </div>
+        <div class="field">
+          <label>IVA / impuesto (%)</label>
+          <input id="bn-iva" type="text" inputmode="decimal" autocomplete="off" placeholder="ej. 21" value="21" />
+        </div>
+      </div>
+      <button type="button" class="calc-btn" onclick="calcBruto2Neto()">
+        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 8h12M9 3l5 5-5 5"/></svg>
+        Calcular
+      </button>
+      <div class="result" id="res-neto">
+        <div class="result-hero">
+          <div class="result-number" id="rbn-val">—</div>
+          <div class="result-meta">
+            <div class="result-label">Precio neto (sin IVA)</div>
+          </div>
+        </div>
+        <div class="breakdown" id="rbn-rows"></div>
+      </div>
+    </div>
+  </div>
 
-<div class="rb" id="r1"></div>
+  <div id="panel-margen" class="panel">
+    <div class="card">
+      <div class="card-icon">💹</div>
+      <h2>Margen y markup</h2>
+      <p class="card-desc">Calcula el margen bruto sobre precio de venta y el markup sobre coste. Son distintos — ¡mucha gente los confunde!</p>
+      <div class="fields col2">
+        <div class="field">
+          <label>Coste (€)</label>
+          <input id="mg-coste" type="text" inputmode="decimal" autocomplete="off" placeholder="ej. 400" />
+        </div>
+        <div class="field">
+          <label>Precio de venta (€)</label>
+          <input id="mg-pvp" type="text" inputmode="decimal" autocomplete="off" placeholder="ej. 600" />
+        </div>
+      </div>
+      <button type="button" class="calc-btn" onclick="calcMargen()">
+        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 8h12M9 3l5 5-5 5"/></svg>
+        Calcular
+      </button>
+      <div class="result" id="res-margen">
+        <div class="result-hero">
+          <div class="result-number" id="rmg-ben">—</div>
+          <div class="result-meta">
+            <div class="result-label">Beneficio bruto</div>
+          </div>
+        </div>
+        <div class="breakdown" id="rmg-rows"></div>
+      </div>
+    </div>
+  </div>
 
-<p>💰 Ver herramientas financieras útiles</p>
-<p><a class="btn bp bfw" href="#">Explorar calculadoras</a></p>
+  <div id="panel-descuento" class="panel">
+    <div class="card">
+      <div class="card-icon">🏷️</div>
+      <h2>Descuento sobre precio</h2>
+      <p class="card-desc">Calcula el precio final tras aplicar un porcentaje de descuento, y cuánto ahorra el cliente en euros.</p>
+      <div class="fields col3">
+        <div class="field">
+          <label>Precio original (€)</label>
+          <input id="dc-precio" type="text" inputmode="decimal" autocomplete="off" placeholder="ej. 850" />
+        </div>
+        <div class="field">
+          <label>Descuento (%)</label>
+          <input id="dc-pct" type="text" inputmode="decimal" autocomplete="off" placeholder="ej. 15" />
+        </div>
+        <div class="field">
+          <label>Ahorro (€)</label>
+          <input id="dc-ahorro" type="text" placeholder="—" readonly />
+        </div>
+      </div>
+      <button type="button" class="calc-btn" onclick="calcDescuento()">
+        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 8h12M9 3l5 5-5 5"/></svg>
+        Calcular
+      </button>
+      <div class="result" id="res-descuento">
+        <div class="result-hero">
+          <div class="result-number" id="rdc-val">—</div>
+          <div class="result-meta">
+            <div class="result-label">Precio final con descuento</div>
+          </div>
+        </div>
+        <div class="breakdown" id="rdc-rows"></div>
+      </div>
+    </div>
+  </div>
 
-</div>
+  <div id="panel-override" class="panel">
+    <div class="card">
+      <div class="card-icon">👥</div>
+      <h2>Cálculo de Override</h2>
+      <p class="card-desc">Calcula la comisión de override sobre las ventas del equipo. Elige entre un porcentaje fijo sobre el volumen total o un sistema escalonado por niveles.</p>
 
-<!-- qué porcentaje -->
-<div class="ccard">
+      <div class="fields" style="margin-bottom:20px">
+        <div class="field">
+          <label>Modo de cálculo</label>
+          <div style="display:flex;gap:8px;margin-top:4px">
+            <button type="button" class="nav-btn active" id="ov-mode-vol" onclick="setOverrideMode('volumen')" style="flex:1">% sobre volumen</button>
+            <button type="button" class="nav-btn" id="ov-mode-esc" onclick="setOverrideMode('escalonado')" style="flex:1">Escalonado</button>
+          </div>
+        </div>
+      </div>
 
-<h2>¿Qué porcentaje es?</h2>
+      <div id="ov-volumen">
+        <div class="fields col2">
+          <div class="field">
+            <label>Venta bruta del equipo (€)</label>
+            <input id="ov-venta" type="text" inputmode="decimal" autocomplete="off" placeholder="ej. 250.000" />
+          </div>
+          <div class="field">
+            <label>% Override</label>
+            <input id="ov-pct" type="text" inputmode="decimal" autocomplete="off" placeholder="ej. 3" />
+          </div>
+        </div>
+        <button type="button" class="calc-btn" onclick="calcOverrideVolumen()" style="margin-top:28px">
+          <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 8h12M9 3l5 5-5 5"/></svg>
+          Calcular Override
+        </button>
+      </div>
 
-<div class="fg">
-<label>Valor</label>
-<input id="p2" type="text" inputmode="decimal" autocomplete="off" value="50,00">
-</div>
+      <div id="ov-escalonado" style="display:none">
+        <div class="fields">
+          <div class="field">
+            <label>Venta bruta del equipo (€)</label>
+            <input id="ov-venta-esc" type="text" inputmode="decimal" autocomplete="off" placeholder="ej. 180.000" />
+          </div>
+        </div>
+        <div style="margin:16px 0 8px">
+          <label style="font-size:11px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:var(--pct-muted)">Niveles de override</label>
+        </div>
+        <div id="ov-niveles">
+          <div class="fields col2 ov-nivel-row" style="margin-bottom:8px">
+            <div class="field">
+              <label>Hasta (€)</label>
+              <input type="text" inputmode="decimal" autocomplete="off" class="ov-hasta" placeholder="ej. 100.000" value="100.000" />
+            </div>
+            <div class="field">
+              <label>% Override</label>
+              <input type="text" inputmode="decimal" autocomplete="off" class="ov-pct-esc" placeholder="ej. 2" value="2" />
+            </div>
+          </div>
+          <div class="fields col2 ov-nivel-row" style="margin-bottom:8px">
+            <div class="field">
+              <label>Hasta (€)</label>
+              <input type="text" inputmode="decimal" autocomplete="off" class="ov-hasta" placeholder="Sin límite" />
+            </div>
+            <div class="field">
+              <label>% Override</label>
+              <input type="text" inputmode="decimal" autocomplete="off" class="ov-pct-esc" placeholder="ej. 4" value="4" />
+            </div>
+          </div>
+        </div>
+        <div style="display:flex;gap:8px;margin-top:12px;margin-bottom:28px">
+          <button type="button" class="calc-btn pct-ov-secondary" onclick="addNivel()" style="font-size:13px;padding:9px 18px">
+            + Añadir nivel
+          </button>
+          <button type="button" class="calc-btn pct-ov-secondary pct-ov-muted" onclick="removeNivel()" style="font-size:13px;padding:9px 18px">
+            − Quitar nivel
+          </button>
+        </div>
+        <button type="button" class="calc-btn" onclick="calcOverrideEscalonado()">
+          <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 8h12M9 3l5 5-5 5"/></svg>
+          Calcular Override
+        </button>
+      </div>
 
-<div class="fg">
-<label>Total</label>
-<input id="n2" type="text" inputmode="decimal" autocomplete="off" value="200,00">
-</div>
+      <div class="result" id="res-override">
+        <div class="result-hero">
+          <div class="result-number" id="rov-val">—</div>
+          <div class="result-meta">
+            <div class="result-label" id="rov-label">Comisión de override</div>
+          </div>
+        </div>
+        <div class="breakdown" id="rov-rows"></div>
+      </div>
+    </div>
+  </div>
 
-<button class="btn bp bfw" onclick="calc2()">Calcular</button>
-
-<div class="rb" id="r2"></div>
-
-<p>💰 Ver herramientas financieras útiles</p>
-<p><a class="btn bp bfw" href="#">Explorar calculadoras</a></p>
-
-</div>
-
-<!-- aumento -->
-<div class="ccard">
-
-<h2>Aumento o descuento</h2>
-
-<div class="fg">
-<label>Valor inicial</label>
-<input id="p3" type="text" inputmode="decimal" autocomplete="off" value="100,00">
-</div>
-
-<div class="fg">
-<label>Porcentaje (%)</label>
-<input id="n3" type="text" inputmode="decimal" autocomplete="off" value="10,00">
-</div>
-
-<button class="btn bp bfw" onclick="calc3()">Calcular</button>
-
-<div class="rb" id="r3"></div>
-
-<p>💰 Ver herramientas financieras útiles</p>
-<p><a class="btn bp bfw" href="#">Explorar calculadoras</a></p>
-
-</div>
+  <p class="pct-sales-foot">Calculadora de porcentajes · Todos los cálculos se realizan en tu navegador</p>
 
 </div>
 
@@ -292,55 +834,321 @@ y, para variaciones anuales en % (por ejemplo <a href="#inflacion">inflación</a
 
 document.getElementById("year").textContent = new Date().getFullYear();
 
-function parseEsp(s) {
-  if (s == null) return NaN;
-  var t = String(s).trim();
-  if (t === "") return NaN;
-  t = t.replace(/\s/g, "").replace(/\./g, "").replace(",", ".");
-  var n = parseFloat(t);
-  return isFinite(n) ? n : NaN;
-}
-function fmt2(n) {
-  return n.toLocaleString("es-ES", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+// ─── Formato de millar (punto) y decimal (coma) — calculadora sales ─────────
+
+function parseInput(str) {
+  if (!str) return NaN;
+  const clean = str.replace(/\./g, '').replace(',', '.');
+  return parseFloat(clean);
 }
 
-function calc1(){
-  let p = parseEsp(document.getElementById("p1").value);
-  let n = parseEsp(document.getElementById("n1").value);
-  let r = (p*n)/100;
-  document.getElementById("r1").innerHTML = "<b>Resultado:</b> "+fmt2(r);
-  document.getElementById("r1").classList.add("on");
+function formatThousands(str) {
+  const parts = str.split(',');
+  const intPart = parts[0].replace(/\D/g, '');
+  const decPart = parts[1] !== undefined ? parts[1].replace(/\D/g, '') : null;
+  const intFormatted = intPart.replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+  if (decPart !== null) {
+    return intFormatted + ',' + decPart;
+  }
+  return intFormatted;
 }
 
-function calc2(){
-  let p = parseEsp(document.getElementById("p2").value);
-  let n = parseEsp(document.getElementById("n2").value);
-  let r = (p/n)*100;
-  document.getElementById("r2").innerHTML = "<b>Resultado:</b> "+fmt2(r)+"%";
-  document.getElementById("r2").classList.add("on");
-}
-
-function calc3(){
-  let p = parseEsp(document.getElementById("p3").value);
-  let n = parseEsp(document.getElementById("n3").value);
-  let r = p + (p*n/100);
-  document.getElementById("r3").innerHTML = "<b>Total:</b> "+fmt2(r);
-  document.getElementById("r3").classList.add("on");
-}
-
-["p1","n1","p2","n2","p3","n3"].forEach(function(id){
-  var el=document.getElementById(id);
-  if(!el)return;
-  el.addEventListener("blur",function(){
-    var v=parseEsp(el.value);
-    if(!isFinite(v))return;
-    el.value=fmt2(v);
+function initThousandsInput(el) {
+  if (el.readOnly) return;
+  el.addEventListener('input', function () {
+    const raw = this.value;
+    const cursor = this.selectionStart;
+    const oldLen = this.value.length;
+    let clean = raw.replace(/\./g, '');
+    const comaParts = clean.split(',');
+    if (comaParts.length > 2) {
+      clean = comaParts[0] + ',' + comaParts.slice(1).join('');
+    }
+    const formatted = formatThousands(clean);
+    this.value = formatted;
+    const newLen = this.value.length;
+    const diff = newLen - oldLen;
+    this.setSelectionRange(cursor + diff, cursor + diff);
   });
+}
+
+function pctInitInputs() {
+  var root = document.getElementById('pct-sales-app');
+  if (!root) return;
+  root.querySelectorAll('input[type="text"]:not([readonly])').forEach(initThousandsInput);
+}
+
+document.addEventListener('DOMContentLoaded', pctInitInputs);
+
+(function () {
+  var root = document.getElementById('pct-sales-app');
+  if (!root) return;
+  var observer = new MutationObserver(function (mutations) {
+    mutations.forEach(function (m) {
+      m.addedNodes.forEach(function (node) {
+        if (node.nodeType === 1) {
+          node.querySelectorAll('input[type="text"]:not([readonly])').forEach(initThousandsInput);
+        }
+      });
+    });
+  });
+  observer.observe(root, { childList: true, subtree: true });
+})();
+
+function pctShow(id, btn) {
+  var root = document.getElementById('pct-sales-app');
+  if (!root) return;
+  root.querySelectorAll('.panel').forEach(function (p) { p.classList.remove('active'); });
+  var mainNav = root.querySelector('.pct-nav-tabs');
+  if (mainNav) {
+    mainNav.querySelectorAll('.nav-btn').forEach(function (b) { b.classList.remove('active'); });
+  }
+  document.getElementById('panel-' + id).classList.add('active');
+  btn.classList.add('active');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function fmt(n, d) {
+  d = d === undefined ? 2 : d;
+  return new Intl.NumberFormat('es-ES', { minimumFractionDigits: d, maximumFractionDigits: d }).format(n);
+}
+function eur(n) {
+  return new Intl.NumberFormat('es-ES', { style: 'currency', currency: 'EUR' }).format(n);
+}
+function row(k, v) {
+  return '<div class="breakdown-row"><span class="k">' + k + '</span><span class="v">' + v + '</span></div>';
+}
+function showRes(id) {
+  document.getElementById(id).classList.add('visible');
+}
+function shake(id) {
+  var el = document.getElementById(id);
+  el.style.animation = 'none';
+  el.offsetHeight;
+  el.style.animation = 'pct-shake 0.3s ease';
+  setTimeout(function () { el.style.animation = ''; }, 400);
+}
+
+function val(id) {
+  return parseInput(document.getElementById(id).value);
+}
+
+function setReadonlyFormatted(id, n) {
+  document.getElementById(id).value = fmt(n);
+}
+
+function calcIncremento() {
+  var a = val('inc-a');
+  var b = val('inc-b');
+  if (isNaN(a) || isNaN(b) || a === 0) return shake('inc-a');
+  var pct = ((b - a) / Math.abs(a)) * 100;
+  var diff = b - a;
+  var up = pct >= 0;
+  document.getElementById('ri-pct').textContent = (up ? '+' : '') + fmt(pct) + '%';
+  document.getElementById('ri-badge').innerHTML = '<span class="badge ' + (up ? 'badge-up' : 'badge-down') + '">' + (up ? '▲' : '▼') + ' ' + (up ? 'Incremento' : 'Descenso') + '</span>';
+  document.getElementById('ri-label').textContent = 'De ' + eur(a) + ' a ' + eur(b);
+  document.getElementById('ri-rows').innerHTML =
+    row('Diferencia', (up ? '+' : '') + eur(diff)) +
+    row('Factor multiplicador', '×' + fmt(b / a)) +
+    row('Por cada 100€ iniciales', (up ? '+' : '') + fmt(pct) + '€');
+  showRes('res-incremento');
+}
+
+function calcParte() {
+  var parte = val('par-parte');
+  var total = val('par-total');
+  if (isNaN(parte) || isNaN(total) || total === 0) return shake('par-parte');
+  var pct = (parte / total) * 100;
+  document.getElementById('rp-pct').textContent = fmt(pct) + '%';
+  document.getElementById('rp-label').textContent = eur(parte) + ' de ' + eur(total);
+  document.getElementById('rp-rows').innerHTML =
+    row('Porcentaje representado', fmt(pct) + '%') +
+    row('Complementario (resto)', eur(total - parte) + ' (' + fmt(100 - pct) + '%)') +
+    row('Por cada 1.000€ del total', eur(parte / total * 1000)) +
+    row('Ratio', fmt(parte / total, 5));
+  showRes('res-parte');
+}
+
+function calcNeto2Bruto() {
+  var neto = val('nb-neto');
+  var iva = val('nb-iva');
+  if (isNaN(neto) || isNaN(iva)) return shake('nb-neto');
+  var cuota = neto * iva / 100;
+  var bruto = neto + cuota;
+  setReadonlyFormatted('nb-cuota', cuota);
+  document.getElementById('rnb-val').textContent = eur(bruto);
+  document.getElementById('rnb-rows').innerHTML =
+    row('Base imponible (neto)', eur(neto)) +
+    row('IVA ' + fmt(iva, 0) + '%', '+' + eur(cuota)) +
+    row('Total con IVA (bruto)', eur(bruto)) +
+    row('El IVA supone sobre el bruto', fmt(cuota / bruto * 100) + '%');
+  showRes('res-bruto');
+}
+
+function calcBruto2Neto() {
+  var bruto = val('bn-bruto');
+  var iva = val('bn-iva');
+  if (isNaN(bruto) || isNaN(iva)) return shake('bn-bruto');
+  var neto = bruto / (1 + iva / 100);
+  var cuota = bruto - neto;
+  document.getElementById('rbn-val').textContent = eur(neto);
+  document.getElementById('rbn-rows').innerHTML =
+    row('Precio bruto (con IVA)', eur(bruto)) +
+    row('Cuota IVA ' + fmt(iva, 0) + '% incluida', '−' + eur(cuota)) +
+    row('Base imponible (neto)', eur(neto));
+  showRes('res-neto');
+}
+
+function calcMargen() {
+  var coste = val('mg-coste');
+  var pvp = val('mg-pvp');
+  if (isNaN(coste) || isNaN(pvp) || coste === 0) return shake('mg-coste');
+  var ben = pvp - coste;
+  var margen = (ben / pvp) * 100;
+  var markup = (ben / coste) * 100;
+  var isPos = ben >= 0;
+  document.getElementById('rmg-ben').textContent = eur(ben);
+  document.getElementById('rmg-rows').innerHTML =
+    row('Margen bruto (sobre PVP)', '<span class="badge ' + (isPos ? 'badge-up' : 'badge-down') + '">' + fmt(margen) + '%</span>') +
+    row('Markup (sobre coste)', '<span class="badge ' + (isPos ? 'badge-up' : 'badge-down') + '">' + fmt(markup) + '%</span>') +
+    row('Ratio PVP / Coste', '×' + fmt(pvp / coste)) +
+    row('Coste como % del PVP', fmt(coste / pvp * 100) + '%');
+  showRes('res-margen');
+}
+
+function calcDescuento() {
+  var precio = val('dc-precio');
+  var pct = val('dc-pct');
+  if (isNaN(precio) || isNaN(pct)) return shake('dc-precio');
+  var ahorro = precio * pct / 100;
+  var final = precio - ahorro;
+  setReadonlyFormatted('dc-ahorro', ahorro);
+  document.getElementById('rdc-val').textContent = eur(final);
+  document.getElementById('rdc-rows').innerHTML =
+    row('Precio original', eur(precio)) +
+    row('Descuento ' + fmt(pct, 0) + '%', '−' + eur(ahorro)) +
+    row('Precio final', eur(final)) +
+    row('Ahorro real', fmt(ahorro / precio * 100) + '% del precio original');
+  showRes('res-descuento');
+}
+
+function setOverrideMode(mode) {
+  var vol = document.getElementById('ov-volumen');
+  var esc = document.getElementById('ov-escalonado');
+  var btnVol = document.getElementById('ov-mode-vol');
+  var btnEsc = document.getElementById('ov-mode-esc');
+  if (mode === 'volumen') {
+    vol.style.display = '';
+    esc.style.display = 'none';
+    btnVol.classList.add('active');
+    btnEsc.classList.remove('active');
+  } else {
+    vol.style.display = 'none';
+    esc.style.display = '';
+    btnEsc.classList.add('active');
+    btnVol.classList.remove('active');
+  }
+  document.getElementById('res-override').classList.remove('visible');
+}
+
+function addNivel() {
+  var container = document.getElementById('ov-niveles');
+  var div = document.createElement('div');
+  div.className = 'fields col2 ov-nivel-row';
+  div.style.marginBottom = '8px';
+  div.innerHTML =
+    '<div class="field">' +
+    '<label>Hasta (€)</label>' +
+    '<input type="text" inputmode="decimal" autocomplete="off" class="ov-hasta" placeholder="Sin límite" />' +
+    '</div>' +
+    '<div class="field">' +
+    '<label>% Override</label>' +
+    '<input type="text" inputmode="decimal" autocomplete="off" class="ov-pct-esc" placeholder="ej. 5" />' +
+    '</div>';
+  container.appendChild(div);
+}
+
+function removeNivel() {
+  var wrap = document.getElementById('ov-niveles');
+  if (!wrap) return;
+  var rows = wrap.querySelectorAll('.ov-nivel-row');
+  if (rows.length > 1) rows[rows.length - 1].remove();
+}
+
+function calcOverrideVolumen() {
+  var venta = parseInput(document.getElementById('ov-venta').value);
+  var pct = parseInput(document.getElementById('ov-pct').value);
+  if (isNaN(venta) || isNaN(pct)) return shake('ov-venta');
+  var override = venta * pct / 100;
+  document.getElementById('rov-val').textContent = eur(override);
+  document.getElementById('rov-label').textContent = 'Comisión de override (% sobre volumen)';
+  document.getElementById('rov-rows').innerHTML =
+    row('Venta bruta del equipo', eur(venta)) +
+    row('Porcentaje de override', fmt(pct) + '%') +
+    row('Fórmula', 'Venta × ' + fmt(pct) + '% = ' + eur(override)) +
+    row('Override mensual (÷12)', eur(override / 12));
+  showRes('res-override');
+}
+
+function calcOverrideEscalonado() {
+  var venta = parseInput(document.getElementById('ov-venta-esc').value);
+  if (isNaN(venta) || venta <= 0) return shake('ov-venta-esc');
+
+  var ovWrap = document.getElementById('ov-niveles');
+  if (!ovWrap) return;
+  var hastaEls = ovWrap.querySelectorAll('.ov-hasta');
+  var pctEls = ovWrap.querySelectorAll('.ov-pct-esc');
+  var niveles = [];
+
+  for (var i = 0; i < hastaEls.length; i++) {
+    var hasta = parseInput(hastaEls[i].value);
+    var p = parseInput(pctEls[i].value);
+    if (isNaN(p)) return;
+    niveles.push({ hasta: isNaN(hasta) ? Infinity : hasta, pct: p });
+  }
+  niveles.sort(function (a, b) { return a.hasta - b.hasta; });
+
+  var totalOverride = 0;
+  var prev = 0;
+  var detalleHTML = '';
+
+  for (var j = 0; j < niveles.length; j++) {
+    var n = niveles[j];
+    if (prev >= venta) break;
+    var tope = Math.min(n.hasta, venta);
+    var tramo = tope - prev;
+    var comision = tramo * n.pct / 100;
+    totalOverride += comision;
+    var hastaLabel = n.hasta === Infinity ? '∞' : eur(n.hasta);
+    detalleHTML += row(
+      'Tramo ' + eur(prev) + ' → ' + hastaLabel + ' (' + fmt(n.pct) + '%)',
+      eur(tramo) + ' × ' + fmt(n.pct) + '% = ' + eur(comision)
+    );
+    prev = tope;
+  }
+
+  var pctEfectivo = (totalOverride / venta) * 100;
+  document.getElementById('rov-val').textContent = eur(totalOverride);
+  document.getElementById('rov-label').textContent = 'Comisión de override (escalonado)';
+  document.getElementById('rov-rows').innerHTML =
+    row('Venta bruta del equipo', eur(venta)) +
+    detalleHTML +
+    row('% efectivo sobre el total', fmt(pctEfectivo) + '%') +
+    row('Override mensual (÷12)', eur(totalOverride / 12));
+  showRes('res-override');
+}
+
+document.addEventListener('keydown', function (e) {
+  if (e.key !== 'Enter') return;
+  var panel = document.querySelector('#pct-sales-app .panel.active');
+  if (!panel) return;
+  var btn = panel.querySelector('.calc-btn:not([onclick*="addNivel"]):not([onclick*="removeNivel"]):not([onclick*="setOverride"])');
+  if (btn) btn.click();
 });
 
-document.querySelectorAll(".fq").forEach(function (btn) {
+document.querySelectorAll('.fq').forEach(function (btn) {
   btn.onclick = function () {
-    btn.nextElementSibling.classList.toggle("on");
+    btn.nextElementSibling.classList.toggle('on');
   };
 });
 
