@@ -24,6 +24,84 @@
 crossorigin="anonymous"></script>
 
 <style>
+.cgrid{
+  display:grid;
+  grid-template-columns:1fr 1.02fr;
+  gap:28px;
+  max-width:1100px;
+  margin:0 auto;
+  padding:0 20px;
+  align-items:start;
+}
+@media(max-width:900px){
+  .cgrid{grid-template-columns:1fr}
+  .cgrid .ccard:last-child{position:static;top:auto}
+}
+.cgrid .ccard:last-child{position:sticky;top:20px}
+.ccard{
+  background:#fff;
+  border-radius:18px;
+  padding:1.75rem 1.5rem;
+  border:1px solid #e2e2f0;
+  box-shadow:0 8px 28px rgba(108,71,255,.07);
+  width:100%;
+  max-width:none;
+  margin:0;
+}
+.ccard h2{font-size:1.1rem;font-weight:800;margin-bottom:1.25rem;color:#1a1a2e}
+.fuel-input-stack .fg{margin-bottom:1.1rem}
+.fuel-input-stack .fg:last-of-type{margin-bottom:0}
+.trip-block{margin-bottom:1.25rem}
+.trip-block .trip-legend{display:block;font-weight:600;margin-bottom:8px;font-size:0.95rem;color:#1a1a2e}
+.trip-toggle{display:flex;flex-wrap:wrap;gap:10px}
+.trip-toggle label{
+  display:inline-flex;align-items:center;gap:8px;
+  padding:10px 14px;border-radius:12px;border:1px solid #e2e2f0;
+  background:#fafafa;font-weight:600;font-size:0.92rem;cursor:pointer;
+  transition:border-color .2s,background .2s;
+}
+.trip-toggle label:hover{border-color:#c4b5fd;background:#fafaff}
+.trip-toggle input{accent-color:#6c47ff;width:1rem;height:1rem;margin:0}
+.trip-toggle input:focus-visible{outline:2px solid #6c47ff;outline-offset:2px}
+.fg select{
+  width:100%;padding:10px;border-radius:10px;border:1px solid var(--border);
+  background:#fafafa;font-size:0.95rem;font-family:inherit;
+}
+.calc-actions{display:flex;flex-direction:column;gap:10px;margin-top:1.25rem}
+.calc-actions .btn{margin-top:0}
+.btn-ghost{
+  width:100%;padding:12px;border-radius:12px;border:2px solid #e2e2f0;
+  background:#fff;color:#1a1a2e;font-weight:700;cursor:pointer;font-family:inherit;
+}
+.btn-ghost:hover{background:#f8f8fc;border-color:#c4b5fd}
+.result-card{
+  border-radius:16px;
+  background:linear-gradient(165deg,#f8f6ff 0%,#fff 45%);
+  border:1px solid #e4dcff;
+  padding:1.5rem 1.35rem;
+  box-shadow:0 4px 24px rgba(108,71,255,.1);
+}
+.result-card h3{
+  font-size:0.95rem;font-weight:700;color:#5c5678;margin:0 0 0.35rem;
+  letter-spacing:0.02em;
+}
+.result-card .main-result{
+  font-size:clamp(1.85rem,4vw,2.35rem);font-weight:800;color:#1a1a2e;
+  line-height:1.15;margin:0 0 0.65rem;font-variant-numeric:tabular-nums;
+}
+.result-context{
+  font-size:0.88rem;color:#6b6b8a;line-height:1.45;margin:0 0 1.15rem;
+}
+.result-details{display:flex;flex-direction:column;gap:0.65rem}
+.result-row{
+  display:flex;justify-content:space-between;align-items:baseline;gap:12px;
+  font-size:0.9rem;padding-bottom:0.55rem;border-bottom:1px solid #ece8ff;
+}
+.result-row:last-child{border-bottom:none;padding-bottom:0}
+.result-row span:first-child{color:#6b6b8a;font-weight:600}
+.result-row span:last-child{color:#1a1a2e;font-weight:700;font-variant-numeric:tabular-nums;text-align:right}
+#resultado.rb{margin-top:0;padding:0}
+.fuel-result-col .result-card{min-height:140px}
 #scroll-top-btn{position:fixed;right:18px;bottom:22px;z-index:60;width:48px;height:48px;padding:0;border:none;border-radius:50%;background:linear-gradient(145deg,#4a00e0,#2563d4);color:#fff;cursor:pointer;box-shadow:0 4px 18px rgba(37,99,212,0.45);transition:opacity .25s ease,transform .2s ease;opacity:0;visibility:hidden;pointer-events:none;-webkit-tap-highlight-color:transparent}
 #scroll-top-btn.is-visible{opacity:1;visibility:visible;pointer-events:auto}
 #scroll-top-btn:hover{transform:translateY(-2px)}
@@ -60,33 +138,63 @@ crossorigin="anonymous"></script>
 
 <div class="cgrid">
 
-<div class="ccard">
+<div class="ccard fuel-form-col">
 
 <h2>Datos del viaje</h2>
 
+<div class="fuel-input-stack">
+
+<div class="fg trip-block">
+<span class="trip-legend" id="trip-legend">Tipo de trayecto</span>
+<div class="trip-toggle" role="group" aria-labelledby="trip-legend">
+<label><input type="radio" name="viaje" value="ida" id="viaje_ida" checked> Solo ida</label>
+<label><input type="radio" name="viaje" value="ida_vuelta" id="viaje_vuelta"> Ida y vuelta</label>
+</div>
+</div>
+
 <div class="fg">
-<label>Distancia (km)</label>
+<label for="km">Distancia (km)</label>
 <input id="km" type="text" inputmode="decimal" autocomplete="off" value="300,00">
 </div>
 
 <div class="fg">
-<label>Consumo (L/100km)</label>
+<label for="consumo">Consumo (L/100km)</label>
 <input id="consumo" type="text" inputmode="decimal" autocomplete="off" value="6,00">
 </div>
 
 <div class="fg">
-<label>Precio combustible (€)</label>
+<label for="precio">Precio combustible (€)</label>
 <input id="precio" type="text" inputmode="decimal" autocomplete="off" value="1,60">
 </div>
 
 <div class="fg">
-<label>Personas</label>
-<input id="personas" type="text" inputmode="numeric" autocomplete="off" value="2">
+<label for="personas">Personas</label>
+<select id="personas" autocomplete="off">
+<option value="1">1</option>
+<option value="2" selected>2</option>
+<option value="3">3</option>
+<option value="4">4</option>
+<option value="5">5</option>
+<option value="6">6</option>
+<option value="7">7</option>
+<option value="8">8</option>
+</select>
 </div>
 
-<button class="btn bp bfw" onclick="calc()">Calcular coste</button>
+</div>
 
+<div class="calc-actions">
+<button type="button" class="btn bp bfw" onclick="calc()">Recalcular</button>
+<button type="button" class="btn-ghost" id="btnResetGas" onclick="resetGasForm()">Volver a empezar</button>
+</div>
+
+</div>
+
+<div class="ccard fuel-result-col">
+
+<div class="result-card">
 <div class="rb" id="resultado"></div>
+</div>
 
 </div>
 
@@ -238,20 +346,42 @@ function fmtIn0(n) {
 
 function calc(){
 
-  let km = parseEsp(document.getElementById("km").value);
+  let kmIn = parseEsp(document.getElementById("km").value);
   let consumo = parseEsp(document.getElementById("consumo").value);
   let precio = parseEsp(document.getElementById("precio").value);
   let personas = parseEsp(document.getElementById("personas").value);
+
+  var viajeEl = document.querySelector('input[name="viaje"]:checked');
+  var factorViaje = (viajeEl && viajeEl.value === "ida_vuelta") ? 2 : 1;
+  let km = kmIn * factorViaje;
 
   let litros = (km * consumo) / 100;
   let coste = litros * precio;
   let porPersona = coste / personas;
 
   document.getElementById("resultado").innerHTML =
-    "<p><b>Coste total:</b> "+fmt2(coste)+" €</p>" +
-    "<p><b>Coste por persona:</b> "+fmt2(porPersona)+" €</p>";
+    "<h3>Gastarías en gasolina</h3>" +
+    '<div class="main-result">' + fmt2(coste) + " €</div>" +
+    '<p class="result-context">Este es el gasto estimado en gasolina de tu viaje</p>' +
+    '<div class="result-details">' +
+    '<div class="result-row"><span>Coste por persona</span><span>' + fmt2(porPersona) + " €</span></div>" +
+    '<div class="result-row"><span>Litros consumidos</span><span>' + fmt2(litros) + " L</span></div>" +
+    '<div class="result-row"><span>Distancia recorrida</span><span>' + fmt2(km) + " km</span></div>" +
+    '<div class="result-row"><span>Precio combustible</span><span>' + fmt2(precio) + " €/L</span></div>" +
+    "</div>";
 
   document.getElementById("resultado").classList.add("on");
+}
+
+function resetGasForm(){
+  document.getElementById("km").value = "300,00";
+  document.getElementById("consumo").value = "6,00";
+  document.getElementById("precio").value = "1,60";
+  document.getElementById("personas").value = "2";
+  var ida = document.getElementById("viaje_ida");
+  if (ida) ida.checked = true;
+  document.getElementById("resultado").innerHTML = "";
+  document.getElementById("resultado").classList.remove("on");
 }
 
 ["km","consumo","precio"].forEach(function(id){
@@ -266,11 +396,13 @@ function calc(){
 (function(){
   var el=document.getElementById("personas");
   if(!el)return;
-  el.addEventListener("blur",function(){
+  function syncPersonas(){
     var v=parseEsp(el.value);
     if(!isFinite(v))return;
     el.value=fmtIn0(v);
-  });
+  }
+  el.addEventListener("blur",syncPersonas);
+  el.addEventListener("change",syncPersonas);
 })();
 
 // FAQ toggle
