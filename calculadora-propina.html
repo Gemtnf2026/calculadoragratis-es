@@ -24,6 +24,14 @@
 crossorigin="anonymous"></script>
 
 <style>
+/* Propina — resultados (mismo patrón que calculadora-imc) */
+@keyframes rb-fade-in{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
+.rb{margin:0;padding:0;border:none;background:transparent;min-height:0}
+.rb.on{margin-top:1.75rem;padding:1.35rem 1.25rem 1.45rem;background:linear-gradient(180deg,rgba(108,71,255,0.08) 0%,#fafafa 52%);border:1px solid var(--border);border-radius:14px;box-shadow:0 4px 20px rgba(26,26,46,0.08);animation:rb-fade-in .4s ease-out}
+.imc-result{display:flex;flex-direction:column;align-items:center;gap:1.15rem;text-align:center}
+.imc-result-block{display:flex;flex-direction:column;align-items:center;gap:0.4rem;width:100%}
+.imc-result-label{font-size:0.72rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--muted)}
+.imc-result-value{font-size:clamp(2rem,6vw,2.65rem);font-weight:800;line-height:1.05;letter-spacing:-0.03em;color:#1a1a2e;font-variant-numeric:tabular-nums}
 #scroll-top-btn{position:fixed;right:18px;bottom:22px;z-index:60;width:48px;height:48px;padding:0;border:none;border-radius:50%;background:linear-gradient(145deg,#4a00e0,#2563d4);color:#fff;cursor:pointer;box-shadow:0 4px 18px rgba(37,99,212,0.45);transition:opacity .25s ease,transform .2s ease;opacity:0;visibility:hidden;pointer-events:none;-webkit-tap-highlight-color:transparent}
 #scroll-top-btn.is-visible{opacity:1;visibility:visible;pointer-events:auto}
 #scroll-top-btn:hover{transform:translateY(-2px)}
@@ -51,7 +59,7 @@ crossorigin="anonymous"></script>
 </header>
 <section class="hero wrap">
   <span class="badge">Utilidades</span>
-  <h1>Calculadora de propina y división de cuenta</h1>
+  <h1>Calculadora de propina y dividir cuenta entre varias personas</h1>
   <p>Calcula cuánto dejar de propina y cuánto paga cada persona fácilmente.</p>
 </section>
 
@@ -80,11 +88,72 @@ crossorigin="anonymous"></script>
 
 <button class="btn bp bfw" onclick="calc()">Calcular</button>
 
-<div class="rb" id="resultado"></div>
+<div class="rb" id="resultado" aria-live="polite" aria-atomic="true"></div>
+
+<p>💡 Calcula fácilmente cuánto pagar en grupo</p>
+<p><a href="index.html" class="btn bp bfw">Ver más calculadoras útiles</a></p>
 
 </div>
 
 </div>
+</section>
+
+<section class="cnt wrap">
+
+<h2>¿Cómo calcular la propina correctamente?</h2>
+
+<p>La propina es un importe que se añade al total de la cuenta en restaurantes y locales de hostelería; suele expresarse como un porcentaje del importe antes de pagar.</p>
+
+<p>El cálculo consiste en aplicar ese porcentaje al total: se multiplica el importe de la cuenta por el tanto por ciento (por ejemplo 10 % sobre 50 €) y el resultado es la propina en euros.</p>
+
+<p>Al pagar en grupo, el número de personas marca cuánto corresponde a cada uno: el total con propina se reparte entre los comensales. Si necesitas otros cálculos del día a día, puedes usar la <a href="calculadora-porcentajes.html">calculadora de porcentajes</a>, la <a href="calculadora-imc.html">calculadora de IMC</a>, la <a href="calculadora-consumo-electrico.html">calculadora de consumo eléctrico</a>, la <a href="calculadora-gasto-gasolina.html">calculadora de gasto de gasolina</a> y la <a href="calculadora-edad.html">calculadora de edad</a>.</p>
+
+<h3>Ejemplos de propina y reparto</h3>
+
+<ul>
+<li><strong>50 € y 10 %:</strong> propina 5,00 €, total 55,00 €, por persona (2) 27,50 €.</li>
+<li><strong>80 € y 12 %:</strong> propina 9,60 €, total 89,60 €, por persona (2) 44,80 €.</li>
+<li><strong>100 € y 15 %:</strong> propina 15,00 €, total 115,00 €, por persona (2) 57,50 €.</li>
+</ul>
+
+<table>
+<caption>Referencia de propina y total (orientativo)</caption>
+<thead>
+<tr>
+<th scope="col">Cuenta (€)</th>
+<th scope="col">Propina (%)</th>
+<th scope="col">Propina (€)</th>
+<th scope="col">Total (€)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>50,00</td>
+<td>10</td>
+<td>5,00</td>
+<td>55,00</td>
+</tr>
+<tr>
+<td>80,00</td>
+<td>12</td>
+<td>9,60</td>
+<td>89,60</td>
+</tr>
+<tr>
+<td>100,00</td>
+<td>15</td>
+<td>15,00</td>
+<td>115,00</td>
+</tr>
+<tr>
+<td>45,00</td>
+<td>8</td>
+<td>3,60</td>
+<td>48,60</td>
+</tr>
+</tbody>
+</table>
+
 </section>
 
 <p class="wrap pub-muted">Publicidad</p>
@@ -148,6 +217,12 @@ crossorigin="anonymous"></script>
 
 <p>Los resultados son <strong>orientativos</strong>; las costumbres sobre propina varían por país y establecimiento.</p>
 
+<p>La herramienta se basa en un cálculo porcentual directo sobre el total que introduces.</p>
+
+<p>El uso es orientativo: conviene contrastar con la norma local y el criterio del establecimiento.</p>
+
+<p>Es aplicable cuando quieres estimar la propina en restaurantes o repartir la cuenta en grupo.</p>
+
 </section>
 
 <p class="wrap pub-muted">Publicidad</p>
@@ -183,6 +258,16 @@ para otros cálculos rápidos.</p>
 <div class="fi">
 <button class="fq">¿Cómo dividir la cuenta?</button>
 <div class="fa"><p>Divide el total entre el número de personas incluyendo la propina.</p></div>
+</div>
+
+<div class="fi">
+<button class="fq">¿Cuánto se suele dejar de propina?</button>
+<div class="fa"><p>En muchos lugares suele situarse entre el 5% y el 15% según el servicio y la costumbre local; en otros contextos no es habitual dejar propina.</p></div>
+</div>
+
+<div class="fi">
+<button class="fq">¿Cómo dividir la cuenta entre varias personas?</button>
+<div class="fa"><p>Suma la propina al total de la cuenta y divide ese importe entre el número de comensales; esta calculadora muestra el importe por persona automáticamente.</p></div>
 </div>
 
 </section>
@@ -229,9 +314,20 @@ function calc(){
   let porPersona = totalFinal / personas;
 
   document.getElementById("resultado").innerHTML =
-    "<p><b>Propina:</b> "+fmt2(tip)+" €</p>" +
-    "<p><b>Total:</b> "+fmt2(totalFinal)+" €</p>" +
-    "<p><b>Por persona:</b> "+fmt2(porPersona)+" €</p>";
+    '<div class="imc-result">'+
+      '<div class="imc-result-block">'+
+        '<span class="imc-result-label">Propina</span>'+
+        '<span class="imc-result-value">'+fmt2(tip)+' €</span>'+
+      '</div>'+
+      '<div class="imc-result-block">'+
+        '<span class="imc-result-label">Total</span>'+
+        '<span class="imc-result-value">'+fmt2(totalFinal)+' €</span>'+
+      '</div>'+
+      '<div class="imc-result-block">'+
+        '<span class="imc-result-label">Por persona</span>'+
+        '<span class="imc-result-value">'+fmt2(porPersona)+' €</span>'+
+      '</div>'+
+    '</div>';
 
   document.getElementById("resultado").classList.add("on");
 }
@@ -284,6 +380,34 @@ document.querySelectorAll(".fq").forEach(btn=>{
    "acceptedAnswer": {
      "@type": "Answer",
      "text": "Normalmente entre el 5% y el 15% dependiendo del servicio."
+   }
+ }, {
+   "@type": "Question",
+   "name": "¿Es obligatorio dejar propina?",
+   "acceptedAnswer": {
+     "@type": "Answer",
+     "text": "No, es opcional y depende del país y el servicio."
+   }
+ }, {
+   "@type": "Question",
+   "name": "¿Cómo dividir la cuenta?",
+   "acceptedAnswer": {
+     "@type": "Answer",
+     "text": "Divide el total entre el número de personas incluyendo la propina."
+   }
+ }, {
+   "@type": "Question",
+   "name": "¿Cuánto se suele dejar de propina?",
+   "acceptedAnswer": {
+     "@type": "Answer",
+     "text": "En muchos lugares suele situarse entre el 5% y el 15% según el servicio y la costumbre local; en otros contextos no es habitual dejar propina."
+   }
+ }, {
+   "@type": "Question",
+   "name": "¿Cómo dividir la cuenta entre varias personas?",
+   "acceptedAnswer": {
+     "@type": "Answer",
+     "text": "Suma la propina al total de la cuenta y divide ese importe entre el número de comensales; esta calculadora muestra el importe por persona automáticamente."
    }
  }]
 }
