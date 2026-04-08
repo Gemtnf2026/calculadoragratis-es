@@ -8,7 +8,7 @@
 
 <title>Calculadora científica online: potencias y raíz cuadrada | CalculadoraGratis.es</title>
 
-<meta name="description" content="Calculadora científica online gratuita: suma, resta, multiplicación, división, potencias (x^y) y raíz cuadrada. Formato español, resultado al instante y panel de resultados. Uso educativo.">
+<meta name="description" content="Calculadora científica online gratuita: trigonometría (grados/radianes, inversas), logaritmos, potencias, raíces, memoria, paréntesis, π, e, factorial y más. Formato español (coma decimal). Uso educativo.">
 
 <link rel="canonical" href="https://www.calculadoragratis.es/calculadora-cientifica.html">
 
@@ -28,6 +28,31 @@
   .cs .cgrid {
     gap: 2rem;
   }
+}
+
+/* CTA bajo la calculadora: separado del teclado (despegue visual) */
+.cs .sci-cta-depegue {
+  margin-top: 2.75rem;
+  padding: 1.5rem 1.25rem 1.25rem;
+  border-top: 1px solid #e8eaed;
+  border-radius: 0 0 var(--radius, 14px) var(--radius, 14px);
+  text-align: center;
+  background: linear-gradient(180deg, rgba(241, 243, 244, 0.45) 0%, transparent 100%);
+}
+
+.cs .sci-cta-depegue .sci-cta-lead {
+  margin: 0 0 0.65rem;
+  font-size: 0.95rem;
+  color: var(--muted);
+}
+
+.cs .sci-cta-depegue .sci-cta-actions {
+  margin: 0;
+}
+
+.cs .sci-cta-depegue .sci-cta-actions .btn {
+  display: inline-block;
+  text-decoration: none;
 }
 
 /* Resultados (.rb) — solo esta página; no altera style.css global */
@@ -65,6 +90,188 @@
   color: var(--muted);
   margin-bottom: 0.45rem;
   letter-spacing: 0.01em;
+}
+
+/* Calculadora científica — panel estilo limpio (tipo buscador) */
+.sci-calc {
+  --sci-bg: #ffffff;
+  --sci-text: #202124;
+  --sci-fn: #e8f0fe;
+  --sci-fn-hover: #d2e3fc;
+  --sci-num: #f1f3f4;
+  --sci-num-hover: #e8eaed;
+  --sci-eq: #1a73e8;
+  --sci-eq-hover: #1557b0;
+  --sci-border: #dadce0;
+  --sci-radius: 22px;
+  --sci-key-radius: 18px;
+  max-width: 520px;
+  margin: 0 auto;
+  padding: 1.25rem 1.1rem 1.35rem;
+  background: var(--sci-bg);
+  border: 1px solid var(--sci-border);
+  border-radius: var(--sci-radius);
+  box-shadow: 0 1px 6px rgba(32, 33, 36, 0.08);
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+  color: var(--sci-text);
+}
+
+.sci-calc .sci-display-row {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  margin-bottom: 0.85rem;
+}
+
+.sci-calc .sci-history-btn {
+  flex-shrink: 0;
+  width: 44px;
+  height: 44px;
+  border: none;
+  border-radius: 50%;
+  background: var(--sci-num);
+  color: var(--sci-text);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.15s ease;
+}
+
+.sci-calc .sci-history-btn:hover {
+  background: var(--sci-num-hover);
+}
+
+.sci-calc .sci-history-btn:focus-visible {
+  outline: 2px solid var(--sci-eq);
+  outline-offset: 2px;
+}
+
+.sci-calc .sci-display-wrap {
+  flex: 1;
+  min-width: 0;
+}
+
+.sci-calc .sci-display-wrap label {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
+}
+
+.sci-calc #sci-display {
+  width: 100%;
+  padding: 0.85rem 1rem;
+  font-size: clamp(1.35rem, 4vw, 1.85rem);
+  font-weight: 500;
+  text-align: right;
+  border: 1px solid var(--sci-border);
+  border-radius: var(--sci-radius);
+  background: #fff;
+  color: var(--sci-text);
+  font-variant-numeric: tabular-nums;
+}
+
+.sci-calc .sci-modes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem 0.5rem;
+  margin-bottom: 0.65rem;
+  font-size: 0.75rem;
+  color: #5f6368;
+}
+
+.sci-calc .sci-modes span[data-on="1"] {
+  font-weight: 700;
+  color: var(--sci-eq);
+}
+
+.sci-calc #sci-pad {
+  display: grid;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+  gap: 0.4rem;
+}
+
+.sci-calc .sci-key {
+  min-height: 44px;
+  padding: 0.35rem 0.25rem;
+  border: none;
+  border-radius: var(--sci-key-radius);
+  font-size: 0.8125rem;
+  font-weight: 500;
+  color: var(--sci-text);
+  cursor: pointer;
+  transition: background 0.12s ease, box-shadow 0.12s ease;
+  -webkit-tap-highlight-color: transparent;
+  line-height: 1.15;
+}
+
+.sci-calc .sci-key:active {
+  transform: scale(0.98);
+}
+
+.sci-calc .sci-key-fn {
+  background: var(--sci-fn);
+}
+
+.sci-calc .sci-key-fn:hover {
+  background: var(--sci-fn-hover);
+}
+
+.sci-calc .sci-key-num {
+  background: var(--sci-num);
+}
+
+.sci-calc .sci-key-num:hover {
+  background: var(--sci-num-hover);
+}
+
+.sci-calc .sci-key-eq {
+  background: var(--sci-eq);
+  color: #fff;
+  font-weight: 600;
+}
+
+.sci-calc .sci-key-eq:hover {
+  background: var(--sci-eq-hover);
+  color: #fff;
+}
+
+.sci-calc .sci-key-toggle[data-active="1"] {
+  background: #d2e3fc;
+  box-shadow: inset 0 0 0 2px var(--sci-eq);
+  font-weight: 700;
+}
+
+.sci-calc .sci-key-wide {
+  grid-column: span 2;
+}
+
+@media (max-width: 480px) {
+  .sci-calc #sci-pad {
+    gap: 0.3rem;
+  }
+  .sci-calc .sci-key {
+    min-height: 40px;
+    font-size: 0.75rem;
+    padding: 0.28rem 0.15rem;
+  }
+}
+
+.sci-calc .visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
 }
 </style>
 
@@ -104,7 +311,7 @@ crossorigin="anonymous"></script>
 <section class="hero wrap">
   <span class="badge">Matemáticas</span>
   <h1>Calculadora científica online</h1>
-  <p>Operaciones básicas, potencias y raíz cuadrada en el navegador, con formato numérico español.</p>
+  <p>Trigonometría (grados y radianes), logaritmos, memoria, paréntesis, π, e, potencias y raíces — formato numérico español.</p>
 </section>
 
 <p class="wrap pub-muted">Publicidad</p>
@@ -124,45 +331,86 @@ data-ad-format="auto"></ins>
 
 <h2>Calculadora científica</h2>
 
-<div class="fg">
+<div class="sci-calc" aria-label="Calculadora científica">
+<div class="sci-display-row">
+<button type="button" class="sci-history-btn" id="sci-history-btn" title="Último resultado (Ans)" aria-label="Recordar último resultado Ans">
+<svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/></svg>
+</button>
+<div class="sci-display-wrap fg" style="margin:0">
 <label for="sci-display">Pantalla</label>
-<input id="sci-display" type="text" inputmode="decimal" readonly autocomplete="off" value="0" aria-live="polite" style="text-align:right;font-size:1.35rem;font-weight:700;font-variant-numeric:tabular-nums">
+<input id="sci-display" type="text" inputmode="decimal" readonly autocomplete="off" value="0" aria-live="polite">
 </div>
+</div>
+<p class="sci-modes" id="sci-modes" aria-live="polite"><span id="sci-mode-deg" data-on="1">Deg</span> · <span id="sci-mode-rad">Rad</span> · <span id="sci-mode-inv">Inv desactivado</span></p>
 
-<div class="fg">
-<label>Teclado</label>
-<div id="sci-pad" style="display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:0.5rem;max-width:420px">
-<button type="button" class="btn bp bfw" data-sci="ac">AC</button>
-<button type="button" class="btn bp bfw" data-sci="ce">CE</button>
-<button type="button" class="btn bp bfw" data-sci="sqrt">√</button>
-<button type="button" class="btn bp bfw" data-sci="op" data-op="/">÷</button>
+<div class="fg" style="margin-top:0">
+<label class="visually-hidden" for="sci-display">Teclado científico</label>
+<div id="sci-pad">
+<button type="button" class="sci-key sci-key-toggle sci-key-fn" data-sci="toggledrg" id="key-deg" data-active="1" title="Cambiar grados / radianes">Deg</button>
+<button type="button" class="sci-key sci-key-fn" data-sci="fact">x!</button>
+<button type="button" class="sci-key sci-key-fn" data-sci="lparen">(</button>
+<button type="button" class="sci-key sci-key-fn" data-sci="rparen">)</button>
+<button type="button" class="sci-key sci-key-fn" data-sci="pct">%</button>
+<button type="button" class="sci-key sci-key-fn" data-sci="ce">CE</button>
+<button type="button" class="sci-key sci-key-fn" data-sci="ac">AC</button>
 
-<button type="button" class="btn bp bfw" data-sci="d" data-d="7">7</button>
-<button type="button" class="btn bp bfw" data-sci="d" data-d="8">8</button>
-<button type="button" class="btn bp bfw" data-sci="d" data-d="9">9</button>
-<button type="button" class="btn bp bfw" data-sci="op" data-op="*">×</button>
+<button type="button" class="sci-key sci-key-toggle sci-key-fn" data-sci="inv" id="key-inv" data-active="0">Inv</button>
+<button type="button" class="sci-key sci-key-fn" data-sci="trig" data-trig="sin" id="key-sin">sin</button>
+<button type="button" class="sci-key sci-key-fn" data-sci="logfn" data-logfn="ln" id="key-ln">ln</button>
+<button type="button" class="sci-key sci-key-num" data-sci="d" data-d="7">7</button>
+<button type="button" class="sci-key sci-key-num" data-sci="d" data-d="8">8</button>
+<button type="button" class="sci-key sci-key-num" data-sci="d" data-d="9">9</button>
+<button type="button" class="sci-key sci-key-fn" data-sci="op" data-op="/">÷</button>
 
-<button type="button" class="btn bp bfw" data-sci="d" data-d="4">4</button>
-<button type="button" class="btn bp bfw" data-sci="d" data-d="5">5</button>
-<button type="button" class="btn bp bfw" data-sci="d" data-d="6">6</button>
-<button type="button" class="btn bp bfw" data-sci="op" data-op="-">−</button>
+<button type="button" class="sci-key sci-key-fn" data-sci="const" data-c="pi">π</button>
+<button type="button" class="sci-key sci-key-fn" data-sci="trig" data-trig="cos" id="key-cos">cos</button>
+<button type="button" class="sci-key sci-key-fn" data-sci="logfn" data-logfn="log" id="key-log">log</button>
+<button type="button" class="sci-key sci-key-num" data-sci="d" data-d="4">4</button>
+<button type="button" class="sci-key sci-key-num" data-sci="d" data-d="5">5</button>
+<button type="button" class="sci-key sci-key-num" data-sci="d" data-d="6">6</button>
+<button type="button" class="sci-key sci-key-fn" data-sci="op" data-op="*">×</button>
 
-<button type="button" class="btn bp bfw" data-sci="d" data-d="1">1</button>
-<button type="button" class="btn bp bfw" data-sci="d" data-d="2">2</button>
-<button type="button" class="btn bp bfw" data-sci="d" data-d="3">3</button>
-<button type="button" class="btn bp bfw" data-sci="op" data-op="+">+</button>
+<button type="button" class="sci-key sci-key-fn" data-sci="const" data-c="e">e</button>
+<button type="button" class="sci-key sci-key-fn" data-sci="trig" data-trig="tan" id="key-tan">tan</button>
+<button type="button" class="sci-key sci-key-fn" data-sci="sqrt">√</button>
+<button type="button" class="sci-key sci-key-num" data-sci="d" data-d="1">1</button>
+<button type="button" class="sci-key sci-key-num" data-sci="d" data-d="2">2</button>
+<button type="button" class="sci-key sci-key-num" data-sci="d" data-d="3">3</button>
+<button type="button" class="sci-key sci-key-fn" data-sci="op" data-op="-">−</button>
 
-<button type="button" class="btn bp bfw" data-sci="d" data-d="0">0</button>
-<button type="button" class="btn bp bfw" data-sci="comma">,</button>
-<button type="button" class="btn bp bfw" data-sci="op" data-op="^">x<sup>y</sup></button>
-<button type="button" class="btn bp bfw" data-sci="eq">=</button>
+<button type="button" class="sci-key sci-key-fn" data-sci="ans">Ans</button>
+<button type="button" class="sci-key sci-key-fn" data-sci="exp">EXP</button>
+<button type="button" class="sci-key sci-key-fn" data-sci="op" data-op="^">x<sup>y</sup></button>
+<button type="button" class="sci-key sci-key-num" data-sci="d" data-d="0">0</button>
+<button type="button" class="sci-key sci-key-num" data-sci="comma">,</button>
+<button type="button" class="sci-key sci-key-eq" data-sci="eq">=</button>
+<button type="button" class="sci-key sci-key-fn" data-sci="op" data-op="+">+</button>
+
+<button type="button" class="sci-key sci-key-fn" data-sci="mem" data-mem="mc">MC</button>
+<button type="button" class="sci-key sci-key-fn" data-sci="mem" data-mem="mr">MR</button>
+<button type="button" class="sci-key sci-key-fn" data-sci="mem" data-mem="mp">M+</button>
+<button type="button" class="sci-key sci-key-fn" data-sci="mem" data-mem="mm">M−</button>
+<button type="button" class="sci-key sci-key-fn" data-sci="pow2">x²</button>
+<button type="button" class="sci-key sci-key-fn" data-sci="pow3">x³</button>
+<button type="button" class="sci-key sci-key-fn" data-sci="cbrt">∛</button>
+
+<button type="button" class="sci-key sci-key-fn" data-sci="hyp" data-hyp="sinh" id="key-sinh">sinh</button>
+<button type="button" class="sci-key sci-key-fn" data-sci="hyp" data-hyp="cosh" id="key-cosh">cosh</button>
+<button type="button" class="sci-key sci-key-fn" data-sci="hyp" data-hyp="tanh" id="key-tanh">tanh</button>
+<button type="button" class="sci-key sci-key-fn" data-sci="op" data-op="logb">log<sub style="font-size:0.65em">n</sub></button>
+<button type="button" class="sci-key sci-key-fn" data-sci="nthroot"><span style="font-size:0.7em">n</span>√</button>
+<button type="button" class="sci-key sci-key-fn" data-sci="abs">|x|</button>
+<button type="button" class="sci-key sci-key-fn" data-sci="neg">±</button>
+</div>
 </div>
 </div>
 
 <div class="rb" id="sci-rb" role="status" aria-live="polite"></div>
 
-<p>💰 Ver herramientas financieras útiles</p>
-<p><a class="btn bp bfw" href="index.html#matematicas">Explorar calculadoras</a></p>
+<nav class="sci-cta-depegue" aria-label="Enlaces a más calculadoras">
+<p class="sci-cta-lead">💰 Ver herramientas financieras útiles</p>
+<p class="sci-cta-actions"><a class="btn bp bfw" href="index.html#finanzas">Explorar calculadoras</a></p>
+</nav>
 
 </div>
 
@@ -183,18 +431,19 @@ data-ad-format="auto"></ins>
 
 <h2>¿Qué es una calculadora científica online?</h2>
 
-<p>Una <strong>calculadora científica</strong> en la web te permite hacer operaciones matemáticas sin instalar programas. En esta página encontrarás suma, resta, multiplicación, división, <strong>potencias</strong> (x elevado a y) y <strong>raíz cuadrada</strong>, con números en <strong>formato español</strong> (coma decimal).</p>
+<p>Una <strong>calculadora científica</strong> en la web te permite hacer operaciones avanzadas sin instalar programas. Aquí tienes <strong>trigonometría</strong> en grados o radianes (con <strong>Inv</strong> para arcoseno, arcocoseno y arcotangente), <strong>funciones hiperbólicas</strong> e inversas, <strong>logaritmo neperiano y decimal</strong> (Inv da e<sup>x</sup> y 10<sup>x</sup>), <strong>log en base n</strong>, <strong>raíz n-ésima</strong>, <strong>memoria</strong> (MC, MR, M+, M−), <strong>paréntesis</strong>, constantes <strong>π</strong> y <strong>e</strong>, <strong>factorial</strong>, <strong>|x|</strong>, potencias rápidas (x², x³, ∛), <strong>Ans</strong>, <strong>EXP</strong> y operaciones básicas, con <strong>formato español</strong> (coma decimal).</p>
 
 <h2>¿Cómo usar esta calculadora?</h2>
 
-<p>Escribe números con el teclado en pantalla. Pulsa un <strong>operador</strong> (+, −, ×, ÷ o x<sup>y</sup> para potencia), introduce el segundo número y pulsa <strong>=</strong> para ver el resultado en la pantalla y en el <strong>panel de resultados</strong> debajo. <strong>√</strong> aplica la raíz cuadrada al valor mostrado. <strong>AC</strong> borra todo; <strong>CE</strong> borra solo lo que estás escribiendo ahora.</p>
+<p>Escribe números con el teclado. Los <strong>operadores</strong> (+, −, ×, ÷, x<sup>y</sup>, log<sub>n</sub>, <sup>n</sup>√) piden un segundo valor y <strong>=</strong>. Las teclas <strong>sin</strong>, <strong>cos</strong>, <strong>tan</strong>, <strong>ln</strong>, <strong>log</strong>, etc. actúan sobre el número en pantalla. Pulsa <strong>Inv</strong> para las funciones inversas (por ejemplo asin, e<sup>x</sup>). <strong>Deg / Rad</strong> cambia el modo de ángulo. <strong>AC</strong> reinicia todo; <strong>CE</strong> borra solo la entrada actual.</p>
 
 <h2>Fórmulas</h2>
 
 <div class="fml">
 a + b, &nbsp; a − b, &nbsp; a × b, &nbsp; a ÷ b (b ≠ 0)<br>
-a<sup>y</sup> = potencia de base a y exponente y<br>
-√a = raíz cuadrada de a (a ≥ 0)
+a<sup>y</sup>, &nbsp; √a, &nbsp; ∛a, &nbsp; ⁿ√a (índice n)<br>
+log<sub>b</sub> a = ln a / ln b &nbsp; (a &gt; 0, b &gt; 0, b ≠ 1)<br>
+sin, cos, tan y arcfunciones según modo Deg o Rad
 </div>
 
 <h2>Tabla de operaciones</h2>
@@ -238,6 +487,31 @@ a<sup>y</sup> = potencia de base a y exponente y<br>
 <td>Raíz cuadrada</td>
 <td>√</td>
 <td>Solo valores ≥ 0</td>
+</tr>
+<tr>
+<td>Raíz cúbica / n-ésima</td>
+<td>∛ / ⁿ√</td>
+<td>ⁿ√: primero radicando, luego índice n</td>
+</tr>
+<tr>
+<td>Logaritmo base n</td>
+<td>log<sub>n</sub></td>
+<td>Primero el argumento, luego la base</td>
+</tr>
+<tr>
+<td>Trigonometría</td>
+<td>sin, cos, tan</td>
+<td>Inv: asin, acos, atan; Deg o Rad</td>
+</tr>
+<tr>
+<td>Hiperbólicas</td>
+<td>sinh, cosh, tanh</td>
+<td>Inv: asinh, acosh, atanh</td>
+</tr>
+<tr>
+<td>Memoria</td>
+<td>MC, MR, M+, M−</td>
+<td>MR recupera el valor guardado</td>
 </tr>
 </tbody>
 </table>
@@ -294,18 +568,39 @@ document.getElementById("year").textContent = new Date().getFullYear();
   var disp = document.getElementById("sci-display");
   var rb = document.getElementById("sci-rb");
   var pad = document.getElementById("sci-pad");
+  var histBtn = document.getElementById("sci-history-btn");
+  var elDeg = document.getElementById("sci-mode-deg");
+  var elRad = document.getElementById("sci-mode-rad");
+  var elInv = document.getElementById("sci-mode-inv");
+  var keyDrg = document.getElementById("key-deg");
   if (!disp || !pad) return;
 
   var acc = null;
   var pendingOp = null;
   var newEntry = true;
+  var memory = 0;
+  var lastAns = 0;
+  var angleMode = "deg";
+  var invMode = false;
+  var parenStack = [];
+  var closeParenYield = false;
 
   function parseEsp(s) {
     if (s == null) return NaN;
-    var t = String(s).trim();
+    var t = String(s).trim().replace(/\s/g, "");
     if (t === "" || t === "-" || t === "-,") return NaN;
-    t = t.replace(/\s/g, "").replace(/\./g, "").replace(",", ".");
-    var n = parseFloat(t);
+    t = t.replace(/\./g, "");
+    var ei = t.search(/e/i);
+    var expSuf = "";
+    if (ei !== -1) {
+      var rest = t.slice(ei + 1);
+      if (!/^[+-]?\d+$/.test(rest)) return NaN;
+      expSuf = "e" + rest;
+      t = t.slice(0, ei);
+    }
+    t = t.replace(",", ".");
+    if (t === "" || t === "-" || t === ".") return NaN;
+    var n = parseFloat(t + expSuf);
     return isFinite(n) ? n : NaN;
   }
 
@@ -325,6 +620,29 @@ document.getElementById("year").textContent = new Date().getFullYear();
     else rb.removeAttribute("data-err");
   }
 
+  function toRad(a) {
+    return angleMode === "deg" ? (a * Math.PI) / 180 : a;
+  }
+
+  function fromRad(r) {
+    return angleMode === "deg" ? (r * 180) / Math.PI : r;
+  }
+
+  function nthRootReal(a, n) {
+    if (!isFinite(a) || !isFinite(n) || n === 0) return NaN;
+    if (a >= 0) return Math.pow(a, 1 / n);
+    if (Math.abs(n % 2) === 1) return -Math.pow(-a, 1 / n);
+    return NaN;
+  }
+
+  function factorialInt(n) {
+    if (!isFinite(n) || n < 0 || Math.floor(n) !== n) return NaN;
+    if (n > 170) return Infinity;
+    var r = 1;
+    for (var i = 2; i <= n; i++) r *= i;
+    return r;
+  }
+
   function applyOp(a, b, op) {
     if (op === "+") return a + b;
     if (op === "-") return a - b;
@@ -334,6 +652,11 @@ document.getElementById("year").textContent = new Date().getFullYear();
       return a / b;
     }
     if (op === "^") return Math.pow(a, b);
+    if (op === "logb") {
+      if (a <= 0 || b <= 0 || b === 1) return NaN;
+      return Math.log(a) / Math.log(b);
+    }
+    if (op === "nthroot") return nthRootReal(a, b);
     return NaN;
   }
 
@@ -343,7 +666,7 @@ document.getElementById("year").textContent = new Date().getFullYear();
     if (!isFinite(b)) return;
     var r = applyOp(acc, b, pendingOp);
     if (!isFinite(r)) {
-      setPanel("<b>Aviso:</b> operación no válida (por ejemplo división entre 0).", true);
+      setPanel("<b>Aviso:</b> operación no válida.", true);
       acc = null;
       pendingOp = null;
       newEntry = true;
@@ -351,6 +674,7 @@ document.getElementById("year").textContent = new Date().getFullYear();
       return;
     }
     acc = r;
+    pendingOp = null;
     disp.value = fmtSci(r);
     newEntry = true;
   }
@@ -371,24 +695,75 @@ document.getElementById("year").textContent = new Date().getFullYear();
     }
   }
 
+  function clearAfterUnary() {
+    acc = null;
+    pendingOp = null;
+    newEntry = true;
+    closeParenYield = false;
+  }
+
+  function showUnary(label, r) {
+    disp.value = fmtSci(r);
+    lastAns = r;
+    clearAfterUnary();
+    setPanel("<b>" + label + ":</b> " + fmtSci(r), false);
+  }
+
   function onDigit(d) {
+    closeParenYield = false;
     if (newEntry) {
       disp.value = d === "0" ? "0" : d;
       newEntry = false;
     } else {
-      if (disp.value === "0" && d !== "0") disp.value = d;
+      if (disp.value === "-0") disp.value = "-" + d;
+      else if (disp.value === "0" && d !== "0") disp.value = d;
       else if (disp.value === "0" && d === "0") return;
       else disp.value += d;
     }
   }
 
   function onComma() {
+    closeParenYield = false;
     if (newEntry) {
       disp.value = "0,";
       newEntry = false;
       return;
     }
+    if (/e/i.test(disp.value)) return;
     if (disp.value.indexOf(",") === -1) disp.value += ",";
+  }
+
+  function onExp() {
+    closeParenYield = false;
+    if (/e/i.test(disp.value)) return;
+    if (newEntry) {
+      disp.value = "1e";
+      newEntry = false;
+      return;
+    }
+    disp.value += "e";
+    newEntry = false;
+  }
+
+  function onNeg() {
+    closeParenYield = false;
+    if (newEntry) {
+      disp.value = "-0";
+      newEntry = false;
+      return;
+    }
+    var t = disp.value;
+    if (t.charAt(0) === "-") disp.value = t.slice(1) || "0";
+    else disp.value = "-" + t;
+  }
+
+  function onPct() {
+    var n = parseEsp(disp.value);
+    if (!isFinite(n)) {
+      setPanel("<b>Aviso:</b> número no válido.", true);
+      return;
+    }
+    showUnary("Resultado (%)", n / 100);
   }
 
   function onUnarySqrt() {
@@ -398,23 +773,204 @@ document.getElementById("year").textContent = new Date().getFullYear();
       return;
     }
     if (n < 0) {
-      setPanel("<b>Aviso:</b> la raíz cuadrada de un número negativo no es un resultado real en esta calculadora.", true);
+      setPanel("<b>Aviso:</b> √ de un negativo no es real aquí.", true);
       return;
     }
-    var r = Math.sqrt(n);
-    disp.value = fmtSci(r);
+    showUnary("Resultado (√)", Math.sqrt(n));
+  }
+
+  function onFact() {
+    var n = parseEsp(disp.value);
+    if (!isFinite(n)) {
+      setPanel("<b>Aviso:</b> número no válido.", true);
+      return;
+    }
+    var r = factorialInt(n);
+    if (!isFinite(r)) {
+      setPanel("<b>Aviso:</b> factorial solo para enteros ≥ 0 razonables.", true);
+      return;
+    }
+    showUnary("Resultado (x!)", r);
+  }
+
+  function onAbs() {
+    var n = parseEsp(disp.value);
+    if (!isFinite(n)) {
+      setPanel("<b>Aviso:</b> número no válido.", true);
+      return;
+    }
+    showUnary("Resultado (|x|)", Math.abs(n));
+  }
+
+  function onPow(k) {
+    var n = parseEsp(disp.value);
+    if (!isFinite(n)) {
+      setPanel("<b>Aviso:</b> número no válido.", true);
+      return;
+    }
+    showUnary("Resultado", Math.pow(n, k));
+  }
+
+  function onConst(c) {
+    closeParenYield = false;
+    var v = c === "pi" ? Math.PI : Math.E;
+    disp.value = fmtSci(v);
+    newEntry = true;
     acc = null;
     pendingOp = null;
+    setPanel("<b>Constante:</b> " + fmtSci(v), false);
+  }
+
+  function onAns() {
+    closeParenYield = false;
+    disp.value = fmtSci(lastAns);
     newEntry = true;
-    setPanel("<b>Resultado (√):</b> " + fmtSci(r), false);
+  }
+
+  function onTrig(name) {
+    var n = parseEsp(disp.value);
+    if (!isFinite(n)) {
+      setPanel("<b>Aviso:</b> número no válido.", true);
+      return;
+    }
+    var r;
+    if (!invMode) {
+      if (name === "sin") r = Math.sin(toRad(n));
+      else if (name === "cos") r = Math.cos(toRad(n));
+      else r = Math.tan(toRad(n));
+      if (!isFinite(r)) {
+        setPanel("<b>Aviso:</b> tangente no definida para ese ángulo.", true);
+        return;
+      }
+      showUnary("Resultado (" + name + ")", r);
+      return;
+    }
+    if (n < -1 || n > 1) {
+      if (name !== "tan") {
+        setPanel("<b>Aviso:</b> arco" + name + " solo para valores entre −1 y 1.", true);
+        return;
+      }
+    }
+    if (name === "sin") r = fromRad(Math.asin(n));
+    else if (name === "cos") r = fromRad(Math.acos(n));
+    else r = fromRad(Math.atan(n));
+    if (!isFinite(r)) {
+      setPanel("<b>Aviso:</b> resultado no válido.", true);
+      return;
+    }
+    showUnary("Resultado (a" + name + ")", r);
+  }
+
+  function onHyp(name) {
+    var n = parseEsp(disp.value);
+    if (!isFinite(n)) {
+      setPanel("<b>Aviso:</b> número no válido.", true);
+      return;
+    }
+    var r;
+    if (!invMode) {
+      if (name === "sinh") r = Math.sinh(n);
+      else if (name === "cosh") r = Math.cosh(n);
+      else r = Math.tanh(n);
+    } else {
+      if (name === "sinh") r = Math.asinh(n);
+      else if (name === "cosh") {
+        if (n < 1) {
+          setPanel("<b>Aviso:</b> acosh requiere argumento ≥ 1.", true);
+          return;
+        }
+        r = Math.acosh(n);
+      } else {
+        if (n <= -1 || n >= 1) {
+          setPanel("<b>Aviso:</b> atanh requiere |x| &lt; 1.", true);
+          return;
+        }
+        r = Math.atanh(n);
+      }
+    }
+    showUnary("Resultado (" + (invMode ? "a" : "") + name + ")", r);
+  }
+
+  function onLogFn(kind) {
+    var n = parseEsp(disp.value);
+    if (!isFinite(n)) {
+      setPanel("<b>Aviso:</b> número no válido.", true);
+      return;
+    }
+    var r;
+    if (kind === "ln") {
+      if (!invMode) {
+        if (n <= 0) {
+          setPanel("<b>Aviso:</b> ln solo para valores &gt; 0.", true);
+          return;
+        }
+        r = Math.log(n);
+      } else r = Math.exp(n);
+    } else {
+      if (!invMode) {
+        if (n <= 0) {
+          setPanel("<b>Aviso:</b> log solo para valores &gt; 0.", true);
+          return;
+        }
+        r = Math.log10(n);
+      } else r = Math.pow(10, n);
+    }
+    showUnary("Resultado (" + (invMode && kind === "ln" ? "e^x" : invMode ? "10^x" : kind) + ")", r);
+  }
+
+  function opLabel(op) {
+    var m = {
+      "+": "suma",
+      "-": "resta",
+      "*": "multiplicación",
+      "/": "división",
+      "^": "potencia (xʸ)",
+      logb: "logaritmo en base n",
+      nthroot: "raíz n-ésima (índice en pantalla)"
+    };
+    return m[op] || op;
+  }
+
+  function foldCloseParenChain() {
+    if (!closeParenYield || acc === null || pendingOp === null) return;
+    var b = parseEsp(disp.value);
+    if (!isFinite(b)) return;
+    var r = applyOp(acc, b, pendingOp);
+    if (!isFinite(r)) {
+      setPanel("<b>Aviso:</b> operación no válida.", true);
+      onAC();
+      return;
+    }
+    acc = r;
+    pendingOp = null;
+    disp.value = fmtSci(acc);
+    newEntry = true;
+    closeParenYield = false;
   }
 
   function onBinaryOp(op) {
+    foldCloseParenChain();
     foldPending();
+    /* Si ya había operador pendiente y no se escribió un segundo término nuevo,
+       se usa el número que sigue en pantalla (suele ser el primero) y se cierra la operación. */
+    if (pendingOp !== null && newEntry) {
+      var bFold = parseEsp(disp.value);
+      if (acc !== null && isFinite(bFold)) {
+        var rFold = applyOp(acc, bFold, pendingOp);
+        if (!isFinite(rFold)) {
+          setPanel("<b>Aviso:</b> operación no válida.", true);
+          onAC();
+          return;
+        }
+        acc = rFold;
+        pendingOp = null;
+        disp.value = fmtSci(acc);
+      }
+    }
     if (acc === null) {
-      var n = parseEsp(disp.value);
-      if (!isFinite(n)) n = 0;
-      acc = n;
+      var n0 = parseEsp(disp.value);
+      if (!isFinite(n0)) n0 = 0;
+      acc = n0;
     } else if (pendingOp !== null && newEntry) {
       /* keep acc */
     } else {
@@ -422,15 +978,23 @@ document.getElementById("year").textContent = new Date().getFullYear();
     }
     pendingOp = op;
     newEntry = true;
-    disp.value = "0";
-    var label = { "+": "suma", "-": "resta", "*": "multiplicación", "/": "división", "^": "potencia" }[op] || op;
-    setPanel("<b>Operación:</b> " + label + " — introduce el siguiente número y pulsa =.", false);
+    disp.value = acc !== null && isFinite(acc) ? fmtSci(acc) : "0";
+    setPanel("<b>Operación:</b> " + opLabel(op) + " — segundo valor (o pulsa = con el de la pantalla).", false);
   }
 
   function onEquals() {
+    var hadCloseYield = closeParenYield;
+    foldCloseParenChain();
     if (pendingOp === null) {
       var solo = parseEsp(disp.value);
-      if (isFinite(solo)) setPanel("<b>Valor en pantalla:</b> " + fmtSci(solo), false);
+      if (isFinite(solo)) {
+        if (hadCloseYield) {
+          lastAns = solo;
+          setPanel("<b>Resultado:</b> " + fmtSci(solo), false);
+        } else {
+          setPanel("<b>Valor en pantalla:</b> " + fmtSci(solo), false);
+        }
+      }
       return;
     }
     var b = parseEsp(disp.value);
@@ -441,25 +1005,29 @@ document.getElementById("year").textContent = new Date().getFullYear();
     if (acc === null) acc = b;
     var r = applyOp(acc, b, pendingOp);
     if (!isFinite(r)) {
-      setPanel("<b>Aviso:</b> operación no válida (por ejemplo división entre 0).", true);
+      setPanel("<b>Aviso:</b> operación no válida.", true);
       acc = null;
       pendingOp = null;
       newEntry = true;
       disp.value = "0";
       return;
     }
-    var sym = { "+": "+", "-": "−", "*": "×", "/": "÷", "^": "^" }[pendingOp] || pendingOp;
+    var sym = { "+": "+", "-": "−", "*": "×", "/": "÷", "^": "^", logb: "logₙ", nthroot: "ⁿ√" }[pendingOp] || pendingOp;
     setPanel("<b>Resultado:</b> " + fmtSci(acc) + " " + sym + " " + fmtSci(b) + " = " + fmtSci(r), false);
     disp.value = fmtSci(r);
+    lastAns = r;
     acc = null;
     pendingOp = null;
     newEntry = true;
+    closeParenYield = false;
   }
 
   function onAC() {
     acc = null;
     pendingOp = null;
     newEntry = true;
+    parenStack = [];
+    closeParenYield = false;
     disp.value = "0";
     rb.classList.remove("on");
     rb.innerHTML = "";
@@ -469,6 +1037,102 @@ document.getElementById("year").textContent = new Date().getFullYear();
   function onCE() {
     disp.value = "0";
     newEntry = true;
+  }
+
+  function onLParen() {
+    foldPending();
+    parenStack.push({ acc: acc, pendingOp: pendingOp });
+    acc = null;
+    pendingOp = null;
+    newEntry = true;
+    disp.value = "0";
+    closeParenYield = false;
+    setPanel("<b>Paréntesis:</b> calcula dentro de ( … ) y cierra con ).", false);
+  }
+
+  function onRParen() {
+    foldPending();
+    var n = parseEsp(disp.value);
+    if (!isFinite(n)) {
+      setPanel("<b>Aviso:</b> número no válido antes de ).", true);
+      return;
+    }
+    if (!parenStack.length) {
+      setPanel("<b>Aviso:</b> no hay ( abierto.", true);
+      return;
+    }
+    var ctx = parenStack.pop();
+    acc = ctx.acc;
+    pendingOp = ctx.pendingOp;
+    disp.value = fmtSci(n);
+    newEntry = true;
+    closeParenYield = true;
+    setPanel("<b>Paréntesis cerrado.</b> Pulsa = u otro operador.", false);
+  }
+
+  function onMem(act) {
+    var n = parseEsp(disp.value);
+    if (act === "mc") {
+      memory = 0;
+      setPanel("<b>Memoria:</b> borrada (MC).", false);
+      return;
+    }
+    if (act === "mr") {
+      if (!isFinite(memory)) {
+        setPanel("<b>Aviso:</b> memoria no válida.", true);
+        return;
+      }
+      disp.value = fmtSci(memory);
+      newEntry = true;
+      setPanel("<b>Memoria (MR):</b> " + fmtSci(memory), false);
+      return;
+    }
+    if (!isFinite(n)) {
+      setPanel("<b>Aviso:</b> número no válido para memoria.", true);
+      return;
+    }
+    if (act === "mp") memory += n;
+    else memory -= n;
+    setPanel("<b>Memoria:</b> " + fmtSci(memory) + " (" + (act === "mp" ? "M+" : "M−") + ")", false);
+  }
+
+  function syncAngleUi() {
+    if (keyDrg) {
+      keyDrg.textContent = angleMode === "deg" ? "Deg" : "Rad";
+      keyDrg.setAttribute("data-active", "1");
+    }
+    if (elDeg) elDeg.setAttribute("data-on", angleMode === "deg" ? "1" : "0");
+    if (elRad) elRad.setAttribute("data-on", angleMode === "rad" ? "1" : "0");
+  }
+
+  function toggleDrg() {
+    angleMode = angleMode === "deg" ? "rad" : "deg";
+    syncAngleUi();
+  }
+
+  function toggleInv() {
+    invMode = !invMode;
+    var invBtn = document.getElementById("key-inv");
+    if (invBtn) invBtn.setAttribute("data-active", invMode ? "1" : "0");
+    if (elInv) {
+      elInv.textContent = invMode ? "Inv activo" : "Inv desactivado";
+      elInv.setAttribute("data-on", invMode ? "1" : "0");
+    }
+    var mapTrig = { sin: ["sin", "asin"], cos: ["cos", "acos"], tan: ["tan", "atan"] };
+    var mapHyp = { sinh: ["sinh", "asinh"], cosh: ["cosh", "acosh"], tanh: ["tanh", "atanh"] };
+    var mapLog = { ln: ["ln", "e^x"], log: ["log", "10^x"] };
+    Object.keys(mapTrig).forEach(function (k) {
+      var el = document.getElementById("key-" + k);
+      if (el) el.textContent = invMode ? mapTrig[k][1] : mapTrig[k][0];
+    });
+    Object.keys(mapHyp).forEach(function (k) {
+      var el = document.getElementById("key-" + k);
+      if (el) el.textContent = invMode ? mapHyp[k][1] : mapHyp[k][0];
+    });
+    var elLn = document.getElementById("key-ln");
+    var elLog = document.getElementById("key-log");
+    if (elLn) elLn.textContent = invMode ? "e^x" : "ln";
+    if (elLog) elLog.textContent = invMode ? "10^x" : "log";
   }
 
   pad.addEventListener("click", function (e) {
@@ -482,7 +1146,36 @@ document.getElementById("year").textContent = new Date().getFullYear();
     else if (kind === "eq") onEquals();
     else if (kind === "ac") onAC();
     else if (kind === "ce") onCE();
+    else if (kind === "fact") onFact();
+    else if (kind === "pct") onPct();
+    else if (kind === "exp") onExp();
+    else if (kind === "neg") onNeg();
+    else if (kind === "abs") onAbs();
+    else if (kind === "pow2") onPow(2);
+    else if (kind === "pow3") onPow(3);
+    else if (kind === "cbrt") {
+      var x = parseEsp(disp.value);
+      if (!isFinite(x)) {
+        setPanel("<b>Aviso:</b> número no válido.", true);
+        return;
+      }
+      showUnary("Resultado (∛)", nthRootReal(x, 3));
+    }
+    else if (kind === "const") onConst(t.getAttribute("data-c"));
+    else if (kind === "ans") onAns();
+    else if (kind === "trig") onTrig(t.getAttribute("data-trig"));
+    else if (kind === "hyp") onHyp(t.getAttribute("data-hyp"));
+    else if (kind === "logfn") onLogFn(t.getAttribute("data-logfn"));
+    else if (kind === "lparen") onLParen();
+    else if (kind === "rparen") onRParen();
+    else if (kind === "mem") onMem(t.getAttribute("data-mem"));
+    else if (kind === "toggledrg") toggleDrg();
+    else if (kind === "inv") toggleInv();
   });
+
+  if (histBtn) histBtn.addEventListener("click", onAns);
+
+  syncAngleUi();
 })();
 
 document.querySelectorAll(".fq").forEach(function (btn) {
