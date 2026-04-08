@@ -79,6 +79,24 @@ body {
   opacity: 0.85;
 }
 
+/* Hero interior (calculadoras): mismo título que calculadora-irpf-espana.html */
+.hero.wrap {
+  padding-top: 2.5rem;
+  padding-bottom: 1rem;
+}
+
+.hero h1 {
+  font-size: clamp(1.8rem, 3.5vw, 2.5rem);
+  font-weight: 800;
+  margin-bottom: 0.5rem;
+  color: var(--text);
+}
+
+.hero p {
+  color: #6b6b8a;
+  font-size: 1.05rem;
+}
+
 /* ===== GRID ===== */
 .grid-cards {
   display: grid;
@@ -311,9 +329,10 @@ main {
 }
 
 main h1 {
-  font-size: 2rem;
+  font-size: clamp(1.8rem, 3.5vw, 2.5rem);
   font-weight: 800;
-  margin-bottom: 12px;
+  margin-bottom: 0.5rem;
+  color: var(--text);
 }
 
 main h2 {
