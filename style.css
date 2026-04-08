@@ -262,6 +262,26 @@ body.home .hero-top {
   font-size: 1.05rem;
 }
 
+/* Etiqueta de categoría / subpágina (encima del h1 en hero) */
+.badge {
+  display: inline-block;
+  background: rgba(108, 71, 255, 0.1);
+  color: #6c47ff;
+  font-size: 0.78rem;
+  font-weight: 700;
+  padding: 4px 12px;
+  border-radius: 20px;
+  margin-bottom: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.hero-top .badge {
+  background: rgba(238, 242, 255, 0.96);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12);
+  margin-bottom: 0.85rem;
+}
+
 /* ===== GRID ===== */
 .grid-cards {
   display: grid;
