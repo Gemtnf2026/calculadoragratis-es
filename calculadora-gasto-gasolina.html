@@ -49,9 +49,11 @@ crossorigin="anonymous"></script>
   margin:0;
 }
 .ccard h2{font-size:1.1rem;font-weight:800;margin-bottom:1.25rem;color:#1a1a2e}
-.fuel-input-stack .fg{margin-bottom:1.1rem}
-.fuel-input-stack .fg:last-of-type{margin-bottom:0}
-.trip-block{margin-bottom:1.25rem}
+.fuel-input-stack .fg{margin-bottom:0.95rem}
+.fuel-input-stack .fuel-group .fg:last-child{margin-bottom:0}
+.fuel-group{margin-bottom:1.4rem}
+.fuel-group:last-child{margin-bottom:0}
+.trip-block{margin-bottom:0}
 .trip-block .trip-legend{display:block;font-weight:600;margin-bottom:8px;font-size:0.95rem;color:#1a1a2e}
 .trip-toggle{display:flex;flex-wrap:wrap;gap:10px}
 .trip-toggle label{
@@ -67,8 +69,11 @@ crossorigin="anonymous"></script>
   width:100%;padding:10px;border-radius:10px;border:1px solid var(--border);
   background:#fafafa;font-size:0.95rem;font-family:inherit;
 }
-.calc-actions{display:flex;flex-direction:column;gap:10px;margin-top:1.25rem}
-.calc-actions .btn{margin-top:0}
+.calc-actions{display:flex;flex-direction:column;margin-top:1.25rem}
+.calc-actions-primary{width:100%}
+.calc-actions-primary .btn{margin-top:0}
+.calc-actions-secondary{width:100%;margin-top:0.75rem;padding-top:0.75rem;border-top:1px solid #ece8ff}
+.calc-actions-secondary .btn-ghost{margin-top:0}
 .btn-ghost{
   width:100%;padding:12px;border-radius:12px;border:2px solid #e2e2f0;
   background:#fff;color:#1a1a2e;font-weight:700;cursor:pointer;font-family:inherit;
@@ -82,17 +87,28 @@ crossorigin="anonymous"></script>
   box-shadow:0 4px 24px rgba(108,71,255,.1);
 }
 .result-card h3{
-  font-size:0.95rem;font-weight:700;color:#5c5678;margin:0 0 0.35rem;
-  letter-spacing:0.02em;
+  font-size:0.92rem;font-weight:700;color:#5c5678;margin:0 0 0.5rem;
+  letter-spacing:0.03em;text-transform:none;
+}
+.result-primary{margin-bottom:0}
+.result-primary .result-context{
+  font-size:0.88rem;color:#6b6b8a;line-height:1.5;margin:0 0 0.85rem;
 }
 .result-card .main-result{
-  font-size:clamp(1.85rem,4vw,2.35rem);font-weight:800;color:#1a1a2e;
-  line-height:1.15;margin:0 0 0.65rem;font-variant-numeric:tabular-nums;
+  font-size:clamp(2.05rem,4.8vw,2.75rem);font-weight:800;color:#0f172a;
+  line-height:1.08;margin:0;font-variant-numeric:tabular-nums;
+  letter-spacing:-0.02em;
 }
-.result-context{
-  font-size:0.88rem;color:#6b6b8a;line-height:1.45;margin:0 0 1.15rem;
+.result-divider{
+  height:0;border:none;border-top:1px solid #e4dcff;margin:1.05rem 0 1.1rem;
+  background:transparent;
 }
-.result-details{display:flex;flex-direction:column;gap:0.65rem}
+.result-secondary{padding-top:0.1rem}
+.result-empty{
+  margin:0;text-align:center;font-size:0.92rem;color:#7a7694;line-height:1.55;
+  padding:1.35rem 0.75rem;font-weight:500;
+}
+.result-details{display:flex;flex-direction:column;gap:0.7rem}
 .result-row{
   display:flex;justify-content:space-between;align-items:baseline;gap:12px;
   font-size:0.9rem;padding-bottom:0.55rem;border-bottom:1px solid #ece8ff;
@@ -101,7 +117,7 @@ crossorigin="anonymous"></script>
 .result-row span:first-child{color:#6b6b8a;font-weight:600}
 .result-row span:last-child{color:#1a1a2e;font-weight:700;font-variant-numeric:tabular-nums;text-align:right}
 #resultado.rb{margin-top:0;padding:0}
-.fuel-result-col .result-card{min-height:140px}
+.fuel-result-col .result-card{min-height:148px}
 #scroll-top-btn{position:fixed;right:18px;bottom:22px;z-index:60;width:48px;height:48px;padding:0;border:none;border-radius:50%;background:linear-gradient(145deg,#4a00e0,#2563d4);color:#fff;cursor:pointer;box-shadow:0 4px 18px rgba(37,99,212,0.45);transition:opacity .25s ease,transform .2s ease;opacity:0;visibility:hidden;pointer-events:none;-webkit-tap-highlight-color:transparent}
 #scroll-top-btn.is-visible{opacity:1;visibility:visible;pointer-events:auto}
 #scroll-top-btn:hover{transform:translateY(-2px)}
@@ -144,6 +160,7 @@ crossorigin="anonymous"></script>
 
 <div class="fuel-input-stack">
 
+<div class="fuel-group fuel-group-trip">
 <div class="fg trip-block">
 <span class="trip-legend" id="trip-legend">Tipo de trayecto</span>
 <div class="trip-toggle" role="group" aria-labelledby="trip-legend">
@@ -151,7 +168,9 @@ crossorigin="anonymous"></script>
 <label><input type="radio" name="viaje" value="ida_vuelta" id="viaje_vuelta"> Ida y vuelta</label>
 </div>
 </div>
+</div>
 
+<div class="fuel-group fuel-group-route">
 <div class="fg">
 <label for="km">Distancia (km)</label>
 <input id="km" type="text" inputmode="decimal" autocomplete="off" value="300,00">
@@ -166,7 +185,9 @@ crossorigin="anonymous"></script>
 <label for="precio">Precio combustible (€)</label>
 <input id="precio" type="text" inputmode="decimal" autocomplete="off" value="1,60">
 </div>
+</div>
 
+<div class="fuel-group fuel-group-passengers">
 <div class="fg">
 <label for="personas">Personas</label>
 <select id="personas" autocomplete="off">
@@ -180,12 +201,17 @@ crossorigin="anonymous"></script>
 <option value="8">8</option>
 </select>
 </div>
+</div>
 
 </div>
 
 <div class="calc-actions">
+<div class="calc-actions-primary">
 <button type="button" class="btn bp bfw" onclick="calc()">Recalcular</button>
+</div>
+<div class="calc-actions-secondary">
 <button type="button" class="btn-ghost" id="btnResetGas" onclick="resetGasForm()">Volver a empezar</button>
+</div>
 </div>
 
 </div>
@@ -193,7 +219,7 @@ crossorigin="anonymous"></script>
 <div class="ccard fuel-result-col">
 
 <div class="result-card">
-<div class="rb" id="resultado"></div>
+<div class="rb" id="resultado"><p class="result-empty" role="status">Introduce los datos para ver el coste del viaje</p></div>
 </div>
 
 </div>
@@ -360,15 +386,19 @@ function calc(){
   let porPersona = coste / personas;
 
   document.getElementById("resultado").innerHTML =
+    '<div class="result-primary">' +
     "<h3>Gastarías en gasolina</h3>" +
-    '<div class="main-result">' + fmt2(coste) + " €</div>" +
     '<p class="result-context">Este es el gasto estimado en gasolina de tu viaje</p>' +
+    '<div class="main-result">' + fmt2(coste) + " €</div>" +
+    "</div>" +
+    '<hr class="result-divider" role="presentation">' +
+    '<div class="result-secondary">' +
     '<div class="result-details">' +
     '<div class="result-row"><span>Coste por persona</span><span>' + fmt2(porPersona) + " €</span></div>" +
     '<div class="result-row"><span>Litros consumidos</span><span>' + fmt2(litros) + " L</span></div>" +
-    '<div class="result-row"><span>Distancia recorrida</span><span>' + fmt2(km) + " km</span></div>" +
-    '<div class="result-row"><span>Precio combustible</span><span>' + fmt2(precio) + " €/L</span></div>" +
-    "</div>";
+    '<div class="result-row"><span>Distancia total</span><span>' + fmt2(km) + " km</span></div>" +
+    '<div class="result-row"><span>Precio del combustible</span><span>' + fmt2(precio) + " €/L</span></div>" +
+    "</div></div>";
 
   document.getElementById("resultado").classList.add("on");
 }
@@ -380,7 +410,7 @@ function resetGasForm(){
   document.getElementById("personas").value = "2";
   var ida = document.getElementById("viaje_ida");
   if (ida) ida.checked = true;
-  document.getElementById("resultado").innerHTML = "";
+  document.getElementById("resultado").innerHTML = '<p class="result-empty" role="status">Introduce los datos para ver el coste del viaje</p>';
   document.getElementById("resultado").classList.remove("on");
 }
 
