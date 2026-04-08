@@ -24,10 +24,49 @@
 crossorigin="anonymous"></script>
 
 <style>
+/* Resultados — mismo patrón que calculadora-imc.html */
+@keyframes rb-fade-in{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
+.rb{margin:0;padding:0;border:none;background:transparent;min-height:0}
+.rb.on{margin-top:1.75rem;padding:1.35rem 1.25rem 1.45rem;background:linear-gradient(180deg,rgba(108,71,255,0.08) 0%,#fafafa 52%);border:1px solid var(--border);border-radius:14px;box-shadow:0 4px 20px rgba(26,26,46,0.08);animation:rb-fade-in .4s ease-out}
+.imc-result{display:flex;flex-direction:column;align-items:center;gap:1.15rem;text-align:center}
+.imc-result-block{display:flex;flex-direction:column;align-items:center;gap:0.4rem;width:100%}
+.imc-result-label{font-size:0.72rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--muted)}
+.imc-result-value{font-size:clamp(2rem,6vw,2.65rem);font-weight:800;line-height:1.05;letter-spacing:-0.03em;color:#1a1a2e;font-variant-numeric:tabular-nums}
+.imc-estado-badge{display:inline-flex;align-items:center;justify-content:center;padding:0.45rem 1.1rem;border-radius:999px;font-size:0.95rem;font-weight:700;line-height:1.2;max-width:100%}
+.imc-estado--bajo{background:#dbeafe;color:#1d4ed8}
+.imc-estado--normal{background:#dcfce7;color:#15803d}
+.imc-estado--sobrepeso{background:#ffedd5;color:#c2410c}
+.imc-estado--obesidad{background:#fee2e2;color:#b91c1c}
 #scroll-top-btn{position:fixed;right:18px;bottom:22px;z-index:60;width:48px;height:48px;padding:0;border:none;border-radius:50%;background:linear-gradient(145deg,#4a00e0,#2563d4);color:#fff;cursor:pointer;box-shadow:0 4px 18px rgba(37,99,212,0.45);transition:opacity .25s ease,transform .2s ease;opacity:0;visibility:hidden;pointer-events:none;-webkit-tap-highlight-color:transparent}
 #scroll-top-btn.is-visible{opacity:1;visibility:visible;pointer-events:auto}
 #scroll-top-btn:hover{transform:translateY(-2px)}
 #scroll-top-btn:focus-visible{outline:2px solid #fff;outline-offset:3px}
+/* Añadir nota: acción secundaria (no competir con Calcular media) */
+.btn-notas-add{
+  margin-bottom:0.65rem;
+  background:#fff;
+  color:#5b21b6;
+  border:2px solid #c4b5fd;
+  font-weight:600;
+  box-shadow:0 1px 2px rgba(91,33,182,0.06);
+  transition:background .2s ease,border-color .2s ease,color .2s ease,box-shadow .2s ease;
+}
+.btn-notas-add:hover{
+  background:#f5f3ff;
+  border-color:#8b5cf6;
+  color:#4c1d95;
+  box-shadow:0 2px 8px rgba(91,33,182,0.12);
+}
+.btn-notas-add:focus-visible{
+  outline:2px solid #7c3aed;
+  outline-offset:2px;
+}
+/* Separar las dos calculadoras (Media / Nota necesaria) */
+.cs.wrap .cgrid{
+  display:flex;
+  flex-direction:column;
+  gap:clamp(2rem,5vw,3rem);
+}
 </style>
 
 </head>
@@ -72,10 +111,10 @@ crossorigin="anonymous"></script>
 
 <div id="notas"></div>
 
-<button class="btn bp" onclick="addNota()">Añadir nota</button>
-<button class="btn bs" onclick="calcMedia()">Calcular media</button>
+<button type="button" class="btn btn-notas-add" onclick="addNota()">Añadir nota</button>
+<button type="button" class="btn" onclick="calcMedia()">Calcular media</button>
 
-<div class="rb" id="r1"></div>
+<div class="rb" id="r1" aria-live="polite" aria-atomic="true"></div>
 
 </div>
 
@@ -101,7 +140,7 @@ crossorigin="anonymous"></script>
 
 <button class="btn bp bfw" onclick="calcNecesaria()">Calcular</button>
 
-<div class="rb" id="r2"></div>
+<div class="rb" id="r2" aria-live="polite" aria-atomic="true"></div>
 
 </div>
 
@@ -117,6 +156,8 @@ crossorigin="anonymous"></script>
 <h2>¿Cómo interpretar la media y la nota necesaria?</h2>
 
 <p>La <strong>media aritmética</strong> resume varias calificaciones en un solo valor. La <strong>nota necesaria</strong> ayuda a estimar qué resultado hace falta en una parte del curso (con un peso en %) para alcanzar una media u objetivo.</p>
+
+<p>La <strong>clasificación numérica estándar</strong> en España (escala 0 a 10) suele ser: <strong>0–4,9</strong> suspenso (SS), <strong>5–6,9</strong> aprobado (AP), <strong>7–8,9</strong> notable (NT) y <strong>9–10</strong> sobresaliente (SB).</p>
 
 <p>Enlaza con la <a href="calculadora-porcentajes.html">calculadora de porcentajes</a>, la <a href="calculadora-regla-de-tres.html">regla de tres</a>, la <a href="calculadora-imc.html">calculadora de IMC</a>, la <a href="calculadora-metabolismo-basal.html">calculadora de metabolismo basal</a> y la <a href="calculadora-edad.html">calculadora de edad</a>.</p>
 
@@ -223,6 +264,24 @@ function fmt2(n) {
   return n.toLocaleString("es-ES", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
 }
 
+/** Clasificación numérica estándar (España), escala 0–10 */
+function clasificacionNotaEspana(n) {
+  if (!isFinite(n)) {
+    return { texto: "—", clase: "imc-estado--sobrepeso" };
+  }
+  var r = Math.round(n * 100) / 100;
+  if (r < 5) {
+    return { texto: "Suspenso (SS)", clase: "imc-estado--obesidad" };
+  }
+  if (r < 7) {
+    return { texto: "Aprobado (AP)", clase: "imc-estado--normal" };
+  }
+  if (r < 9) {
+    return { texto: "Notable (NT)", clase: "imc-estado--bajo" };
+  }
+  return { texto: "Sobresaliente (SB)", clase: "imc-estado--sobrepeso" };
+}
+
 function addNota(){
   let div = document.createElement("div");
   div.className="fg";
@@ -248,9 +307,19 @@ function calcMedia(){
   });
 
   let media = total / notas.length;
+  var cat = clasificacionNotaEspana(media);
 
   document.getElementById("r1").innerHTML =
-    "<p><b>Media:</b> "+fmt2(media)+"</p>";
+    '<div class="imc-result">'+
+      '<div class="imc-result-block">'+
+        '<span class="imc-result-label">Promedio</span>'+
+        '<span class="imc-result-value">'+fmt2(media)+'</span>'+
+      '</div>'+
+      '<div class="imc-result-block">'+
+        '<span class="imc-result-label">Calificación</span>'+
+        '<span class="imc-estado-badge '+cat.clase+'">'+cat.texto+'</span>'+
+      '</div>'+
+    '</div>';
 
   document.getElementById("r1").classList.add("on");
 }
@@ -258,15 +327,59 @@ function calcMedia(){
 function calcNecesaria(){
 
   let actual = parseEsp(document.getElementById("actual").value);
-  let peso = parseEsp(document.getElementById("peso").value)/100;
+  let pesoPct = parseEsp(document.getElementById("peso").value);
+  let peso = pesoPct / 100;
   let objetivo = parseEsp(document.getElementById("objetivo").value);
 
-  let necesaria = (objetivo - actual*(1-peso))/peso;
+  var r2 = document.getElementById("r2");
+  if (!isFinite(actual) || !isFinite(pesoPct) || !isFinite(objetivo) || peso <= 0 || peso > 1) {
+    r2.innerHTML =
+      '<div class="imc-result">'+
+        '<div class="imc-result-block">'+
+          '<span class="imc-result-label">Nota necesaria</span>'+
+          '<span class="imc-result-value">—</span>'+
+        '</div>'+
+        '<div class="imc-result-block">'+
+          '<span class="imc-result-label">Calificación</span>'+
+          '<span class="imc-estado-badge imc-estado--sobrepeso">Revisa los datos</span>'+
+        '</div>'+
+      '</div>';
+    r2.classList.add("on");
+    return;
+  }
 
-  document.getElementById("r2").innerHTML =
-    "<p><b>Necesitas:</b> "+fmt2(necesaria)+"</p>";
+  let necesaria = (objetivo - actual * (1 - peso)) / peso;
+  var valorTxt = isFinite(necesaria) ? fmt2(necesaria) : "—";
+  var estadoClass;
+  var estadoTexto;
+  if (!isFinite(necesaria)) {
+    estadoClass = "imc-estado--sobrepeso";
+    estadoTexto = "Revisa los datos";
+  } else if (necesaria > 10) {
+    estadoClass = "imc-estado--obesidad";
+    estadoTexto = "Superior a 10";
+  } else if (necesaria < 0) {
+    estadoClass = "imc-estado--bajo";
+    estadoTexto = "Por debajo de 0";
+  } else {
+    var catN = clasificacionNotaEspana(necesaria);
+    estadoClass = catN.clase;
+    estadoTexto = catN.texto;
+  }
 
-  document.getElementById("r2").classList.add("on");
+  r2.innerHTML =
+    '<div class="imc-result">'+
+      '<div class="imc-result-block">'+
+        '<span class="imc-result-label">Nota necesaria</span>'+
+        '<span class="imc-result-value">'+valorTxt+'</span>'+
+      '</div>'+
+      '<div class="imc-result-block">'+
+        '<span class="imc-result-label">Calificación</span>'+
+        '<span class="imc-estado-badge '+estadoClass+'">'+estadoTexto+'</span>'+
+      '</div>'+
+    '</div>';
+
+  r2.classList.add("on");
 }
 
 ["actual","peso","objetivo"].forEach(function(id){
