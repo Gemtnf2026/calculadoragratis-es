@@ -647,3 +647,23 @@ body:has(.hero-top) .hero-top {
   }
 }
 
+/* Hero home: menos padding vertical en móvil (mantiene 62px bajo el header sticky) */
+@media (max-width: 640px) {
+  .hero-top {
+    padding-top: 1.8rem !important;
+    padding-bottom: 2.2rem !important;
+  }
+
+  body.home .hero-top {
+    padding-top: calc(62px + 1.8rem) !important;
+  }
+
+  .hero-title {
+    margin-top: 0 !important;
+  }
+
+  .hero-icon {
+    margin-top: 0 !important;
+  }
+}
+
