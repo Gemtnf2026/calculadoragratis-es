@@ -304,7 +304,10 @@ body.home .hero-top {
 
 /* ===== CARDS ===== */
 .lc {
-  display: block;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
   background: var(--card);
   border-radius: 16px;
   padding: 20px;
@@ -330,6 +333,7 @@ body.home .hero-top {
   font-weight: 700;
   margin-bottom: 6px;
   display: block;
+  width: 100%;
 }
 
 .ld {
@@ -337,11 +341,14 @@ body.home .hero-top {
   color: var(--muted);
   margin-bottom: 10px;
   display: block;
+  width: 100%;
 }
 
 .la {
   color: var(--primary);
   font-weight: 600;
+  display: block;
+  width: 100%;
 }
 
 /* ===== SECTIONS ===== */
