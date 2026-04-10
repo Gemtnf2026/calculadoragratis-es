@@ -4,16 +4,16 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Calculadora IRPF España 2026 — Salario neto, retenciones y tramos al instante</title>
-<meta name="description" content="Calcula tu IRPF 2026 en España: salario neto, retención mensual, tipo medio y desglose por tramos según tu comunidad autónoma. Gratis, rápido y sin registro.">
+<title>Calcular salario neto 2026 en España | Bruto a neto y nómina | CalculadoraGratis</title>
+<meta name="description" content="Calcula tu salario neto desde el bruto: cuánto cobras al mes, retención en nómina y sueldo según tu comunidad autónoma. Incluye cotizaciones e IRPF 2026. Gratis, rápido y sin registro.">
 <link rel="canonical" href="https://www.calculadoragratis.es/calculadora-irpf-espana.html">
 <meta name="robots" content="index,follow">
 <link rel="stylesheet" href="style.css">
 <link rel="preconnect" href="https://api.fontshare.com">
 <link href="https://api.fontshare.com/v2/css?f[]=satoshi@400,500,700,800&display=swap" rel="stylesheet">
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=TU_ID" crossorigin="anonymous"></script>
-<meta property="og:title" content="Calculadora IRPF España 2026 | CalculadoraGratis">
-<meta property="og:description" content="Calcula tu IRPF, salario neto, retención mensual y desglose por tramos según tu comunidad autónoma.">
+<meta property="og:title" content="Calcular salario neto en España | CalculadoraGratis">
+<meta property="og:description" content="Salario neto desde el bruto: sueldo mensual, retenciones y nómina por comunidad. Cotizaciones e IRPF 2026 incluidos.">
 <meta property="og:url" content="https://www.calculadoragratis.es/calculadora-irpf-espana.html">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="es_ES">
@@ -60,18 +60,42 @@
 .result-panel.on{display:block}
 .result-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:1.2rem}
 @media(max-width:480px){.result-grid{grid-template-columns:1fr}}
-.res-box{background:#f5f3ff;border-radius:12px;padding:1rem 1.2rem;border-left:3px solid #6c47ff}
-.res-box.green{background:#f0fdf4;border-left-color:#16a34a}
-.res-box.orange{background:#fff7ed;border-left-color:#f97316}
-.res-box.blue{background:#eff6ff;border-left-color:#3b82f6}
+.result-hero{margin-bottom:12px}
+.result-grid-secondary{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:1.2rem}
+@media(max-width:720px){.result-grid-secondary{grid-template-columns:1fr}}
+/* Resultados: tarjetas neutras + acentos azul (misma familia que el botón) */
+.res-box{
+  background:#fff;
+  border-radius:14px;
+  padding:1.05rem 1.2rem;
+  border:1px solid #e2e8f0;
+  box-shadow:0 2px 14px rgba(15,23,42,.06);
+  border-left:4px solid #cbd5e1;
+}
+.res-box.green{border-left-color:#2563eb;background:linear-gradient(180deg,#fff 0%,#f8fafc 100%)}
+.res-box.orange{border-left-color:#0e7490;background:linear-gradient(180deg,#fff 0%,#f8fafc 100%)}
+.res-box.blue{background:linear-gradient(180deg,#fff 0%,#f8fafc 100%);border-left-color:#4a6cf7}
+.res-box:not(.green):not(.orange):not(.blue):not(.res-box-featured){border-left-color:#6366f1}
+.res-box-featured{
+  text-align:center;
+  padding:1.5rem 1.35rem;
+  border-radius:18px;
+  border:1px solid #cbd5e1;
+  border-left:1px solid #cbd5e1;
+  background:radial-gradient(ellipse 90% 55% at 50% -30%,rgba(74,108,247,.14),transparent 55%),linear-gradient(180deg,#f8fafc 0%,#eef2f7 100%);
+  box-shadow:0 10px 32px rgba(30,58,138,.1),inset 0 3px 0 0 #4a6cf7;
+}
+.res-box-featured .res-label{color:#1e3a8a;margin-bottom:8px}
+.res-box-featured .res-value{font-size:clamp(1.55rem,4vw,2.1rem);letter-spacing:-.03em;color:#0f172a}
+.res-box-featured .res-sub{font-size:.86rem;margin-top:6px;color:#64748b}
 .res-label{font-size:.75rem;font-weight:700;color:#6b6b8a;text-transform:uppercase;letter-spacing:.04em;margin-bottom:4px}
-.res-value{font-size:1.3rem;font-weight:800;color:#1a1a2e}
+.res-value{font-size:1.3rem;font-weight:800;color:#1a1a2e;white-space:nowrap}
 .res-sub{font-size:.78rem;color:#6b6b8a;margin-top:2px}
 .tramos-title{font-size:.88rem;font-weight:700;color:#1a1a2e;margin:1.2rem 0 8px}
 .tramo-row{display:flex;justify-content:space-between;align-items:center;padding:7px 10px;border-radius:8px;font-size:.83rem;margin-bottom:4px;background:#f8f7ff}
 .tramo-row:nth-child(even){background:#f0f0ff}
 .tramo-label{color:#555}
-.tramo-val{font-weight:700;color:#6c47ff}
+.tramo-val{font-weight:700;color:#6c47ff;white-space:nowrap}
 .cta-link{display:block;margin-top:1.2rem;padding:.75rem;background:linear-gradient(135deg,#7b2ff7,#4a6cf7);color:#fff;border-radius:10px;text-align:center;font-weight:700;font-size:.92rem;text-decoration:none}
 .cta-link:hover{opacity:.9}
 .tramos-table{width:100%;border-collapse:collapse;font-size:.9rem;margin:1rem 0}
@@ -82,14 +106,15 @@
 .info-box{background:#fffbeb;border:1px solid #fbbf24;border-radius:12px;padding:1rem 1.2rem;font-size:.92rem;color:#92400e;margin:1rem 0}
 .bar-wrap{margin-top:12px}
 .bar-row{display:flex;gap:4px;margin:6px 0 4px;height:14px;border-radius:6px;overflow:hidden}
-.bar-neto{background:#16a34a;transition:width .5s}
-.bar-ss{background:#f97316;transition:width .5s}
-.bar-irpf{background:#6c47ff;transition:width .5s}
+/* Neto = azul (salario); IRPF = violeta intenso (impuesto) — tonos claramente distintos */
+.bar-neto{background:linear-gradient(90deg,#4a6cf7,#2563eb);transition:width .5s}
+.bar-ss{background:linear-gradient(90deg,#22c55e,#16a34a);transition:width .5s}
+.bar-irpf{background:linear-gradient(90deg,#7b2ff7,#9333ea);transition:width .5s}
 .bar-legend{display:flex;gap:12px;font-size:.75rem;color:#6b6b8a;flex-wrap:wrap;align-items:center}
 .legend-dot{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:6px;vertical-align:middle}
-.legend-neto{background:#16a34a}
-.legend-ss{background:#f97316}
-.legend-irpf{background:#6c47ff}
+.legend-neto{background:linear-gradient(135deg,#4a6cf7,#2563eb)}
+.legend-ss{background:linear-gradient(135deg,#22c55e,#16a34a)}
+.legend-irpf{background:linear-gradient(135deg,#7b2ff7,#9333ea)}
 </style>
 <style>
 #scroll-top-btn{position:fixed;right:18px;bottom:22px;z-index:60;width:48px;height:48px;padding:0;border:none;border-radius:50%;background:linear-gradient(145deg,#4a00e0,#2563d4);color:#fff;cursor:pointer;box-shadow:0 4px 18px rgba(37,99,212,0.45);transition:opacity .25s ease,transform .2s ease;opacity:0;visibility:hidden;pointer-events:none;-webkit-tap-highlight-color:transparent}
@@ -122,10 +147,10 @@
 </header>
 
 <section class="hero wrap">
-  <p class="breadcrumb"><a href="index.html">Inicio</a> › <a href="index.html#finanzas">Finanzas</a> › Calculadora IRPF</p>
-  <span class="badge">Finanzas · IRPF 2026</span>
-  <h1>Calculadora IRPF España 2026</h1>
-  <p>Calcula tu salario neto, retención mensual y desglose exacto por tramos según tu comunidad autónoma.</p>
+  <p class="breadcrumb"><a href="index.html">Inicio</a> › <a href="index.html#finanzas">Finanzas</a> › Salario neto</p>
+  <span class="badge">Finanzas · Salario neto 2026</span>
+  <h1>Calcula tu salario neto</h1>
+  <p>Obtén tu sueldo neto desde el bruto: paga mensual, retenciones y nómina según tu comunidad; incluye tramos e IRPF 2026.</p>
 </section>
 
 <div class="calc-layout">
@@ -193,29 +218,31 @@
       </select>
     </div>
 
-    <button class="btn-calc" onclick="calcIRPF()">Calcular IRPF 2026</button>
+    <button class="btn-calc" onclick="calcIRPF()">Calcular salario</button>
   </div>
 
   <!-- RESULTADOS -->
   <div class="ccard">
-    <h2>Tu resultado</h2>
+    <h2>Calcula tu salario</h2>
 
     <div id="resultado-vacio" style="text-align:center;padding:2.5rem 0;color:#bbb;">
-      <p style="font-size:.9rem;line-height:1.6;">Introduce tus datos y pulsa<br><strong style="color:#6c47ff">Calcular IRPF 2026</strong><br>para ver tu resultado.</p>
+      <p style="font-size:.9rem;line-height:1.6;">Introduce tus datos y pulsa<br><strong style="color:#6c47ff">Calcular salario</strong><br>para ver tu resultado.</p>
     </div>
 
     <div class="result-panel" id="result-panel">
 
-      <div class="result-grid">
+      <div class="result-hero">
+        <div class="res-box blue res-box-featured">
+          <div class="res-label">Salario neto mensual</div>
+          <div class="res-value" id="r-neto-mes">—</div>
+          <div class="res-sub" id="r-pagas-label">En 12 pagas</div>
+        </div>
+      </div>
+      <div class="result-grid-secondary">
         <div class="res-box green">
           <div class="res-label">Salario neto anual</div>
           <div class="res-value" id="r-neto-anual">—</div>
           <div class="res-sub">Lo que cobras realmente</div>
-        </div>
-        <div class="res-box blue">
-          <div class="res-label">Neto por paga</div>
-          <div class="res-value" id="r-neto-mes">—</div>
-          <div class="res-sub" id="r-pagas-label">En 12 pagas</div>
         </div>
         <div class="res-box">
           <div class="res-label">IRPF anual total</div>
@@ -249,14 +276,14 @@
       <div class="tramo-row"><span class="tramo-label">Contingencias comunes (4,70%)</span><span class="tramo-val" id="r-ss-cc">—</span></div>
       <div class="tramo-row"><span class="tramo-label">Desempleo (1,55%)</span><span class="tramo-val" id="r-ss-d">—</span></div>
       <div class="tramo-row"><span class="tramo-label">Formación + MEI (0,10%)</span><span class="tramo-val" id="r-ss-mei">—</span></div>
-      <div class="tramo-row" style="background:#fff7ed;"><span class="tramo-label"><strong>Total Seguridad Social</strong></span><span class="tramo-val" id="r-ss-total">—</span></div>
+      <div class="tramo-row" style="background:#f1f5f9;"><span class="tramo-label"><strong>Total Seguridad Social</strong></span><span class="tramo-val" id="r-ss-total">—</span></div>
 
       <!-- Mínimos -->
       <div class="tramos-title">Mínimos personales y familiares</div>
       <div class="tramo-row"><span class="tramo-label">Mínimo del contribuyente</span><span class="tramo-val" id="r-min-personal">—</span></div>
       <div class="tramo-row" id="row-min-hijos" style="display:none"><span class="tramo-label">Mínimo por descendientes</span><span class="tramo-val" id="r-min-hijos">—</span></div>
       <div class="tramo-row" id="row-min-disc" style="display:none"><span class="tramo-label">Mínimo por discapacidad</span><span class="tramo-val" id="r-min-disc">—</span></div>
-      <div class="tramo-row" style="background:#f5f3ff;"><span class="tramo-label"><strong>Total mínimos (exentos)</strong></span><span class="tramo-val" id="r-min-total">—</span></div>
+      <div class="tramo-row" style="background:#eef2ff;"><span class="tramo-label"><strong>Total mínimos (exentos)</strong></span><span class="tramo-val" id="r-min-total">—</span></div>
 
       <!-- Desglose IRPF tramos -->
       <div class="tramos-title">Desglose IRPF por tramos (estatal + autonómico)</div>
@@ -525,8 +552,12 @@ const ESTATAL_L = [12450, 20200, 35200, 60000, 300000];
 const ESTATAL_T = [9.50, 12.00, 15.00, 18.50, 22.50, 24.50];
 const MIN_HIJOS = [0, 2400, 5100, 9100, 13600];
 
+var fmtEur = new Intl.NumberFormat("es-ES",{minimumFractionDigits:2,maximumFractionDigits:2,useGrouping:true});
+function fmtPlain(n){
+  return fmtEur.format(n);
+}
 function fmt(n){
-  return n.toLocaleString("es-ES",{minimumFractionDigits:2,maximumFractionDigits:2})+" €";
+  return fmtPlain(n)+"\u00A0€";
 }
 
 function parseEsp(s){
@@ -539,7 +570,7 @@ function parseEsp(s){
 }
 function fmtIn2(n){
   if(!isFinite(n))return"";
-  return n.toLocaleString("es-ES",{minimumFractionDigits:2,maximumFractionDigits:2});
+  return fmtPlain(n);
 }
 
 function calcTramos(base, limites, tipos){
@@ -608,9 +639,9 @@ function calcIRPF(){
   document.getElementById("r-neto-mes").textContent      = fmt(netoPaga);
   document.getElementById("r-pagas-label").textContent   = `En ${pagas} pagas`;
   document.getElementById("r-irpf").textContent          = fmt(irpfTotal);
-  document.getElementById("r-tipo-medio").textContent    = `Tipo efectivo: ${tipoEfectivo.toLocaleString("es-ES",{minimumFractionDigits:2,maximumFractionDigits:2})}%`;
+  document.getElementById("r-tipo-medio").textContent    = `Tipo efectivo: ${fmtPlain(tipoEfectivo)}%`;
   document.getElementById("r-retencion-mes").textContent = fmt(retMes);
-  document.getElementById("r-tipo-retencion").textContent= `${retPct.toLocaleString("es-ES",{minimumFractionDigits:2,maximumFractionDigits:2})}% s/ bruto`;
+  document.getElementById("r-tipo-retencion").textContent= `${fmtPlain(retPct)}% s/ bruto`;
 
   // SS
   document.getElementById("r-ss-cc").textContent    = fmt(ssCC);
@@ -635,8 +666,8 @@ function calcIRPF(){
   document.getElementById("bar-neto").style.width  = pN+"%";
   document.getElementById("bar-ss").style.width    = pS+"%";
   document.getElementById("bar-irpf").style.width  = pI+"%";
-  document.getElementById("bar-ss-pct").textContent  = pS.toLocaleString("es-ES",{minimumFractionDigits:1,maximumFractionDigits:1});
-  document.getElementById("bar-irpf-pct").textContent = pI.toLocaleString("es-ES",{minimumFractionDigits:1,maximumFractionDigits:1});
+  document.getElementById("bar-ss-pct").textContent  = new Intl.NumberFormat("es-ES",{minimumFractionDigits:1,maximumFractionDigits:1,useGrouping:true}).format(pS);
+  document.getElementById("bar-irpf-pct").textContent = new Intl.NumberFormat("es-ES",{minimumFractionDigits:1,maximumFractionDigits:1,useGrouping:true}).format(pI);
 
   // Desglose por tramos
   const el = document.getElementById("tramos-desglose");
@@ -654,12 +685,12 @@ function calcIRPF(){
     const baseT  = (e||a).base;
     const div = document.createElement("div");
     div.className="tramo-row";
-    div.innerHTML=`<span class="tramo-label">${desde.toLocaleString("es-ES",{minimumFractionDigits:2,maximumFractionDigits:2})}–${hasta.toLocaleString("es-ES",{minimumFractionDigits:2,maximumFractionDigits:2})} € &nbsp;<small style="color:#aaa">(${tipoE}+${tipoA}%=${tipoE+tipoA}%)</small></span><span class="tramo-val">${fmt(cuotaT)}</span>`;
+    div.innerHTML=`<span class="tramo-label">${fmtPlain(desde)}–${fmtPlain(hasta)} € &nbsp;<small style="color:#aaa">(${tipoE}+${tipoA}%=${tipoE+tipoA}%)</small></span><span class="tramo-val">${fmt(cuotaT)}</span>`;
     el.appendChild(div);
   }
   const tot=document.createElement("div");
   tot.className="tramo-row";
-  tot.style.background="#f5f3ff";
+  tot.style.background="#eef2ff";
   tot.innerHTML=`<span class="tramo-label"><strong>IRPF total (estatal + autonómico)</strong></span><span class="tramo-val"><strong>${fmt(irpfTotal)}</strong></span>`;
   el.appendChild(tot);
 }
@@ -684,9 +715,9 @@ function toggleFaq(btn){
 {
   "@context": "https://schema.org",
   "@type": "WebApplication",
-  "name": "Calculadora de IRPF España 2026",
+  "name": "Calcular salario neto España",
   "url": "https://www.calculadoragratis.es/calculadora-irpf-espana.html",
-  "description": "Calcula tu IRPF 2026, salario neto, tipo efectivo y retención mensual con desglose por tramos estatales y autonómicos.",
+  "description": "Calculadora de salario neto desde el bruto: sueldo mensual, retención en nómina y desglose por comunidad autónoma, con IRPF y cotizaciones 2026.",
   "applicationCategory": "FinanceApplication",
   "operatingSystem": "Web",
   "offers": { "@type": "Offer", "price": "0", "priceCurrency": "EUR" },
