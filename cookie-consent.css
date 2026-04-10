@@ -1,0 +1,162 @@
+/* Banner RGPD / Consent Mode — CalculadoraGratis.es */
+.cg-cookie-banner {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 9999;
+  padding: 16px;
+  box-sizing: border-box;
+  font-size: 0.9375rem;
+  line-height: 1.5;
+  color: #1a1a2e;
+  pointer-events: none;
+}
+
+.cg-cookie-banner * {
+  box-sizing: border-box;
+}
+
+.cg-cookie-inner {
+  pointer-events: auto;
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 1.15rem 1.25rem 1.25rem;
+  border-radius: 14px 14px 0 0;
+  background: #fff;
+  border: 1px solid rgba(74, 0, 224, 0.12);
+  box-shadow: 0 -8px 40px rgba(26, 26, 46, 0.12), 0 4px 24px rgba(74, 0, 224, 0.08);
+}
+
+@media (min-width: 640px) {
+  .cg-cookie-inner {
+    border-radius: 14px;
+    margin-bottom: 12px;
+  }
+}
+
+.cg-cookie-title {
+  margin: 0 0 0.5rem;
+  font-size: 1.05rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  color: #1a1a2e;
+}
+
+.cg-cookie-text {
+  margin: 0 0 1rem;
+  font-size: 0.9rem;
+  line-height: 1.55;
+  color: #3f3f5c;
+}
+
+.cg-cookie-text a {
+  color: #4a00e0;
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.cg-cookie-text a:hover {
+  color: #2563d4;
+}
+
+.cg-cookie-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.cg-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 42px;
+  padding: 0 1rem;
+  border-radius: 10px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  border: none;
+  font-family: inherit;
+  transition: background 0.2s ease, box-shadow 0.2s ease, transform 0.15s ease;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.cg-btn:focus-visible {
+  outline: 2px solid #4a00e0;
+  outline-offset: 2px;
+}
+
+.cg-btn-primary {
+  background: linear-gradient(145deg, #4a00e0, #2563d4);
+  color: #fff;
+  box-shadow: 0 2px 12px rgba(74, 0, 224, 0.35);
+}
+
+.cg-btn-primary:hover {
+  box-shadow: 0 4px 18px rgba(37, 99, 212, 0.45);
+  transform: translateY(-1px);
+}
+
+.cg-btn-secondary {
+  background: #f1f0fb;
+  color: #1a1a2e;
+  border: 1px solid #e2dff5;
+}
+
+.cg-btn-secondary:hover {
+  background: #e8e4fc;
+}
+
+.cg-btn-ghost {
+  background: transparent;
+  color: #4a00e0;
+  border: 1px solid rgba(74, 0, 224, 0.35);
+}
+
+.cg-btn-ghost:hover {
+  background: rgba(74, 0, 224, 0.06);
+}
+
+.cg-btn-block {
+  width: 100%;
+  margin-top: 0.35rem;
+}
+
+.cg-cookie-panel {
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid #eceaf7;
+}
+
+.cg-check {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  margin-bottom: 0.65rem;
+  font-size: 0.88rem;
+  line-height: 1.45;
+  color: #2d2d44;
+  cursor: pointer;
+}
+
+.cg-check input {
+  margin-top: 3px;
+  width: 1.05rem;
+  height: 1.05rem;
+  accent-color: #4a00e0;
+  flex-shrink: 0;
+}
+
+body.cg-cookie-open #scroll-top-btn {
+  bottom: max(22px, env(safe-area-inset-bottom, 0px));
+}
+
+@media (min-width: 480px) {
+  body.cg-cookie-open #scroll-top-btn {
+    bottom: 200px;
+  }
+}

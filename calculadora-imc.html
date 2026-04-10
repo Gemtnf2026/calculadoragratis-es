@@ -2,15 +2,27 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
+<!-- Consent Mode v2 (RGPD / CMP) — antes de Google tag y AdSense -->
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('consent', 'default', {
+  'ad_storage': 'denied',
+  'ad_user_data': 'denied',
+  'ad_personalization': 'denied',
+  'analytics_storage': 'denied',
+  'functionality_storage': 'granted',
+  'security_storage': 'granted',
+  'wait_for_update': 500
+});
+</script>
 <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-G7RFPVXL2P"></script>
 <script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
-
-  gtag('config', 'G-G7RFPVXL2P');
+  gtag('config', 'G-G7RFPVXL2P', { 'anonymize_ip': true });
 </script>
+<link rel="stylesheet" href="cookie-consent.css?v=1">
 
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -343,5 +355,6 @@ function calc(){
 
 <script src="ad-block.js" defer></script>
 <script src="seo.js"></script>
+<script src="cookie-consent.js?v=1" defer></script>
 </body>
 </html>
