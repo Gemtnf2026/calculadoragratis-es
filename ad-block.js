@@ -2,6 +2,8 @@
 (function () {
   if (!window.customElements || customElements.get("ad-block")) return;
 
+  var DEFAULT_AD_CLIENT = "ca-pub-3169679880917158";
+
   function ensureMobileHideStyle() {
     if (document.getElementById("ad-block-on-mobile-hide")) return;
     var st = document.createElement("style");
@@ -21,6 +23,24 @@
     document.head.appendChild(st);
   }
 
+  function scheduleAdsensePush(insEl) {
+    function doPush() {
+      if (insEl.dataset.adsbygooglePushed === "1") return;
+      insEl.dataset.adsbygooglePushed = "1";
+      try {
+        (window.adsbygoogle = window.adsbygoogle || []).push({});
+      } catch (e) {}
+    }
+    if (document.readyState === "loading") {
+      document.addEventListener("DOMContentLoaded", function once() {
+        document.removeEventListener("DOMContentLoaded", once);
+        setTimeout(doPush, 0);
+      });
+    } else {
+      setTimeout(doPush, 0);
+    }
+  }
+
   class AdBlock extends HTMLElement {
     connectedCallback() {
       if (this.dataset.adBlockInit) return;
@@ -33,7 +53,7 @@
       var defaultSlot =
         variant === "bottom" ? "333" : variant === "sidebar" ? "111" : "222";
       var slot = this.getAttribute("data-ad-slot") || defaultSlot;
-      var client = this.getAttribute("data-ad-client") || "TU_ID";
+      var client = this.getAttribute("data-ad-client") || DEFAULT_AD_CLIENT;
 
       var ins = document.createElement("ins");
       ins.className = "adsbygoogle";
@@ -41,12 +61,7 @@
       ins.setAttribute("data-ad-client", client);
       ins.setAttribute("data-ad-slot", slot);
       ins.setAttribute("data-ad-format", "auto");
-      if (
-        this.hasAttribute("data-full-width-responsive") ||
-        this.hasAttribute("data-fwr")
-      ) {
-        ins.setAttribute("data-full-width-responsive", "true");
-      }
+      ins.setAttribute("data-full-width-responsive", "true");
 
       var insOnly =
         this.hasAttribute("ins-only") || this.hasAttribute("data-ins-only");
@@ -73,13 +88,7 @@
         this.appendChild(wrap);
       }
 
-      function push() {
-        try {
-          (window.adsbygoogle = window.adsbygoogle || []).push({});
-        } catch (e) {}
-      }
-      if (document.readyState === "complete") setTimeout(push, 0);
-      else window.addEventListener("load", push);
+      scheduleAdsensePush(ins);
     }
   }
 
